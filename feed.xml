@@ -1,80 +1,54 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="andrasnovoszath.com/feed.xml" rel="self" type="application/atom+xml" /><link href="andrasnovoszath.com/" rel="alternate" type="text/html" /><updated>2020-09-15T01:02:14-05:00</updated><id>andrasnovoszath.com/feed.xml</id><title type="html">Tada!</title><subtitle>Data Science Technical Content</subtitle><entry><title type="html">Technology evaluation</title><link href="andrasnovoszath.com/technology/valuation/2020/09/15/technnology_evaluation_experimentation.html" rel="alternate" type="text/html" title="Technology evaluation" /><published>2020-09-15T00:00:00-05:00</published><updated>2020-09-15T00:00:00-05:00</updated><id>andrasnovoszath.com/technology/valuation/2020/09/15/technnology_evaluation_experimentation</id><content type="html" xml:base="andrasnovoszath.com/technology/valuation/2020/09/15/technnology_evaluation_experimentation.html">&lt;h1 id=&quot;technology-evaluation&quot;&gt;Technology evaluation&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="andrasnovoszath.com/feed.xml" rel="self" type="application/atom+xml" /><link href="andrasnovoszath.com/" rel="alternate" type="text/html" /><updated>2020-09-15T01:06:42-05:00</updated><id>andrasnovoszath.com/feed.xml</id><title type="html">Tada!</title><subtitle>Data Science Technical Content</subtitle><entry><title type="html">Valuation technology experimentation</title><link href="andrasnovoszath.com/technology/valuation/experimentation/2020/09/15/technnology_valuation_experimentation.html" rel="alternate" type="text/html" title="Valuation technology experimentation" /><published>2020-09-15T00:00:00-05:00</published><updated>2020-09-15T00:00:00-05:00</updated><id>andrasnovoszath.com/technology/valuation/experimentation/2020/09/15/technnology_valuation_experimentation</id><content type="html" xml:base="andrasnovoszath.com/technology/valuation/experimentation/2020/09/15/technnology_valuation_experimentation.html">&lt;h1 id=&quot;valuation-technology-experimentation&quot;&gt;Valuation technology experimentation&lt;/h1&gt;
 
-&lt;p&gt;This is just an idea about the usefulness of technological innovation for experimenting with different evaluation methods.
-It might be useful and promising to experiment with technologies of valuation and evaluati&lt;/p&gt;
+&lt;p&gt;It might be useful and promising to experiment with technologies of valuation.&lt;/p&gt;
 
-&lt;h2 id=&quot;how-does-evaluation-happen-now-and-how-does-technology-play-a-role-in-it&quot;&gt;How does evaluation happen now and how does technology play a role in it?&lt;/h2&gt;
-&lt;h2 id=&quot;examples-of-the-use-of-technology-in-evaluation-and-some-trends&quot;&gt;Examples of the use of technology in evaluation and some trends&lt;/h2&gt;
+&lt;h2 id=&quot;how-does-valuation-happen-now-and-how-does-technology-play-a-role-in-it&quot;&gt;How does valuation happen now, and how does technology play a role in it?&lt;/h2&gt;
+
+&lt;p&gt;Current technologies of valuation are in place because of different reasons. However, implementers rarely take into account the way the given technology plays a role in valuing things.&lt;/p&gt;
+
+&lt;h2 id=&quot;examples-of-the-use-of-technology-in-valuation-and-some-trends&quot;&gt;Examples of the use of technology in valuation and some trends&lt;/h2&gt;
+
+&lt;p&gt;Money is arguably the most prominent example. Probably this is not independent of that most of us still do not really understand all its effects.&lt;/p&gt;
+
+&lt;p&gt;Other examples are in accountancy, trade, work management, economic metrics, environmental management.&lt;/p&gt;
+
+&lt;p&gt;An obvious note is that, of course, other, not strictly technological components, like language, moral values, physical factors, etc., also have critial roles.&lt;/p&gt;
+
 &lt;h2 id=&quot;think-about-and-experiment-with-different-technologies-to-generate-new-valuation-situations&quot;&gt;Think about and experiment with different technologies to generate new valuation situations&lt;/h2&gt;
-&lt;h2 id=&quot;the-process-of-valuation-technology-experiments-and-its-main-challenges&quot;&gt;The process of valuation technology experiments and its main challenges&lt;/h2&gt;
-&lt;h2 id=&quot;current-action-possibilities-and-possible-future-directions&quot;&gt;Current action possibilities and possible future directions&lt;/h2&gt;
 
-&lt;h1 id=&quot;process&quot;&gt;Process&lt;/h1&gt;
-&lt;ul class=&quot;task-list&quot;&gt;
-  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;outline: 5 min&lt;/li&gt;
-  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;write: 10 min&lt;/li&gt;
-  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;grammar and edit: 10 min&lt;/li&gt;
-  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;formatting: 5 min
-    &lt;ul class=&quot;task-list&quot;&gt;
-      &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;parameters&lt;/li&gt;
-      &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;links&lt;/li&gt;
-      &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;rich formats&lt;/li&gt;
-      &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;name&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
+&lt;p&gt;Accordingly, it might be beneficial to try out technologies with explicit valuation functions in mind.&lt;/p&gt;
+
+&lt;p&gt;For the most part, and especially in early stages, this is concept-driven (i.e., we are looking for a particular effect to emerge). However, an uncertain but promising benefit would be discovering ‘unthought’ features due to things’ specific and idiosyncratic character.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-process-of-valuation-technology-experiments-and-its-main-challenges&quot;&gt;The process of valuation technology experiments and its main challenges&lt;/h2&gt;
+
+&lt;p&gt;Most of the time, we cannot implement large scale infrastructures for the sake of experimentation.&lt;/p&gt;
+
+&lt;p&gt;Instead, we can try other paths:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Implementation of a small-scale but very focused version&lt;/li&gt;
+  &lt;li&gt;Scenario building&lt;/li&gt;
+  &lt;li&gt;Simulation&lt;/li&gt;
+  &lt;li&gt;Game development&lt;/li&gt;
+  &lt;li&gt;The empirical analysis of similar processes&lt;/li&gt;
+  &lt;li&gt;The empirical analysis of current technologies’ edge cases&lt;/li&gt;
+  &lt;li&gt;Speculation&lt;/li&gt;
+  &lt;li&gt;Incremental implementation&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h1 id=&quot;formatting&quot;&gt;Formatting&lt;/h1&gt;
-&lt;p&gt;You can use &lt;em&gt;italics&lt;/em&gt;, &lt;strong&gt;bold&lt;/strong&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;code font text&lt;/code&gt;, and create &lt;a href=&quot;https://www.markdownguide.org/cheat-sheet/&quot;&gt;links&lt;/a&gt;. Here’s a footnote &lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;. Here’s a horizontal rule:&lt;/p&gt;
+&lt;h2 id=&quot;current-action-possibilities-and-possible-future-directions&quot;&gt;Current action possibilities and possible future directions&lt;/h2&gt;
 
-&lt;hr /&gt;
+&lt;p&gt;As, currently, I this all is very high level and conceptual, and I am also mostly interested in discovery activities:&lt;/p&gt;
 
-&lt;h2 id=&quot;images&quot;&gt;Images&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Collecting ideas&lt;/li&gt;
+  &lt;li&gt;Conceptual exploration of background ideas&lt;/li&gt;
+  &lt;li&gt;Case study analysis&lt;/li&gt;
+  &lt;li&gt;Code experimentations&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/logo.png&quot; alt=&quot;&quot; title=&quot;fast.ai's logo&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;code&quot;&gt;Code&lt;/h2&gt;
-
-&lt;p&gt;You can format text and code per usual&lt;/p&gt;
-
-&lt;p&gt;General preformatted text:&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# Do a thing
-do_thing()
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;tables&quot;&gt;Tables&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Column 1&lt;/th&gt;
-      &lt;th&gt;Column 2&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;A thing&lt;/td&gt;
-      &lt;td&gt;Another thing&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&quot;tweetcards&quot;&gt;Tweetcards&lt;/h2&gt;
-
-&lt;div class=&quot;jekyll-twitter-plugin&quot;&gt;&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;Altair 4.0 is released! &lt;a href=&quot;https://t.co/PCyrIOTcvv&quot;&gt;https://t.co/PCyrIOTcvv&lt;/a&gt;&lt;br /&gt;Try it with:&lt;br /&gt;&lt;br /&gt;  pip install -U altair&lt;br /&gt;&lt;br /&gt;The full list of changes is at &lt;a href=&quot;https://t.co/roXmzcsT58&quot;&gt;https://t.co/roXmzcsT58&lt;/a&gt; ...read on for some highlights. &lt;a href=&quot;https://t.co/vWJ0ZveKbZ&quot;&gt;pic.twitter.com/vWJ0ZveKbZ&lt;/a&gt;&lt;/p&gt;&amp;mdash; Jake VanderPlas (@jakevdp) &lt;a href=&quot;https://twitter.com/jakevdp/status/1204765621767901185?ref_src=twsrc%5Etfw&quot;&gt;December 11, 2019&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;footnotes&quot;&gt;Footnotes&lt;/h2&gt;
-
-&lt;div class=&quot;footnotes&quot; role=&quot;doc-endnotes&quot;&gt;
-  &lt;ol&gt;
-    &lt;li id=&quot;fn:1&quot; role=&quot;doc-endnote&quot;&gt;
-      &lt;p&gt;This is the footnote. &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot; role=&quot;doc-backlink&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
-    &lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/div&gt;</content><author><name></name></author><summary type="html">Technology evaluation</summary></entry><entry><title type="html">Note-taking obsessions</title><link href="andrasnovoszath.com/note-taking/2020/09/14/note-taking-obsessions.html" rel="alternate" type="text/html" title="Note-taking obsessions" /><published>2020-09-14T00:00:00-05:00</published><updated>2020-09-14T00:00:00-05:00</updated><id>andrasnovoszath.com/note-taking/2020/09/14/note-taking-obsessions</id><content type="html" xml:base="andrasnovoszath.com/note-taking/2020/09/14/note-taking-obsessions.html">&lt;h1 id=&quot;note-taking-obsessions&quot;&gt;Note-taking obsessions&lt;/h1&gt;
+&lt;p&gt;In the future, I might be able to focus it down and branch out toward more serious development work.&lt;/p&gt;</content><author><name></name></author><summary type="html">Valuation technology experimentation</summary></entry><entry><title type="html">Note-taking obsessions</title><link href="andrasnovoszath.com/note-taking/2020/09/14/note-taking-obsessions.html" rel="alternate" type="text/html" title="Note-taking obsessions" /><published>2020-09-14T00:00:00-05:00</published><updated>2020-09-14T00:00:00-05:00</updated><id>andrasnovoszath.com/note-taking/2020/09/14/note-taking-obsessions</id><content type="html" xml:base="andrasnovoszath.com/note-taking/2020/09/14/note-taking-obsessions.html">&lt;h1 id=&quot;note-taking-obsessions&quot;&gt;Note-taking obsessions&lt;/h1&gt;
 &lt;p&gt;I have an obsession with the process of note-taking.&lt;/p&gt;
 
 &lt;p&gt;I often write down my ideas in the form of notes or tasks. I do this through multiple channels. Then I spend a considerable amount of time organizing them.&lt;/p&gt;
