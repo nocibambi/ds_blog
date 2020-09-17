@@ -1,4 +1,54 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="andrasnovoszath.com/feed.xml" rel="self" type="application/atom+xml" /><link href="andrasnovoszath.com/" rel="alternate" type="text/html" /><updated>2020-09-17T04:47:09-05:00</updated><id>andrasnovoszath.com/feed.xml</id><title type="html">Tada!</title><subtitle>Data Science Technical Content</subtitle><entry><title type="html">The specific you</title><link href="andrasnovoszath.com/self-knowledge/specialization/2020/09/16/specific-you.html" rel="alternate" type="text/html" title="The specific you" /><published>2020-09-16T00:00:00-05:00</published><updated>2020-09-16T00:00:00-05:00</updated><id>andrasnovoszath.com/self-knowledge/specialization/2020/09/16/specific-you</id><content type="html" xml:base="andrasnovoszath.com/self-knowledge/specialization/2020/09/16/specific-you.html">&lt;h1 id=&quot;the-specific-you&quot;&gt;The specific you&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="andrasnovoszath.com/feed.xml" rel="self" type="application/atom+xml" /><link href="andrasnovoszath.com/" rel="alternate" type="text/html" /><updated>2020-09-17T05:46:10-05:00</updated><id>andrasnovoszath.com/feed.xml</id><title type="html">Tada!</title><subtitle>Data Science Technical Content</subtitle><entry><title type="html">Finance Zero Sum</title><link href="andrasnovoszath.com/finance/zero-sum/valuation/2020/09/17/finance-zero-sum.html" rel="alternate" type="text/html" title="Finance Zero Sum" /><published>2020-09-17T00:00:00-05:00</published><updated>2020-09-17T00:00:00-05:00</updated><id>andrasnovoszath.com/finance/zero-sum/valuation/2020/09/17/finance-zero-sum</id><content type="html" xml:base="andrasnovoszath.com/finance/zero-sum/valuation/2020/09/17/finance-zero-sum.html">&lt;h1 id=&quot;is-finance-a-zero-sum-activity&quot;&gt;Is finance a zero-sum activity?&lt;/h1&gt;
+
+&lt;p&gt;I recently thought about finance and whether it is a purely zero-sum game or has some value-add to it. I would like to know this to see if it is worthy of support either as a personal wealth source or as a social institution.&lt;/p&gt;
+
+&lt;p&gt;I did not have time to read academic papers, so I simply did a google search (1-2 hours) and reviewed the top results.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-i-found&quot;&gt;What I found&lt;/h2&gt;
+
+&lt;p&gt;Just based on this short research, I barely found any substantial arguments against the zero-sum claim.&lt;/p&gt;
+
+&lt;p&gt;What counterarguments I found were acknowledged that some forms,  like forex or short-term trading, are zero-sum.  They argued that, compared to the former types, ‘real’ stock trading can bring about benefits for both parties. Most of these were conflating terminology and concepts (like ‘luck’, or ‘value growth’).&lt;/p&gt;
+
+&lt;p&gt;There are probably more substantial arguments in academic literature. Also, probably, there is the additional question of the social usefulness of financial markets for overall capital allocation, but that’s a separate thing.&lt;/p&gt;
+
+&lt;h2 id=&quot;how-i-see-it-now&quot;&gt;How I see it now&lt;/h2&gt;
+
+&lt;p&gt;Of course, as I started to dive into the topic, I quickly realized that is is a bit more complex than I thought.&lt;/p&gt;
+
+&lt;p&gt;So let’s break up the question to the following cases:&lt;/p&gt;
+
+&lt;p&gt;pure commercial relationship
+trading of goods
+finance&lt;/p&gt;
+
+&lt;h2 id=&quot;pure-commercial-transaction&quot;&gt;Pure commercial transaction&lt;/h2&gt;
+
+&lt;p&gt;When two people get into a commercial relationship, one is a ‘seller’, and the other is a ‘buyer’. Regarding the price, they have opposite aims. One’s income is another’s cost.&lt;/p&gt;
+
+&lt;p&gt;So, in this sense, every commercial transaction is zero-sum.&lt;/p&gt;
+
+&lt;h2 id=&quot;trade-of-comparatively-advantageous-goods&quot;&gt;Trade of ‘comparatively advantageous’ goods&lt;/h2&gt;
+
+&lt;p&gt;When the seller gives away something they cannot use, but the buyer can, the exchange might benefit both. There is still the issue of the price for which they exchange the good, but the buyer’s benefit &lt;em&gt;from possessing the good&lt;/em&gt; might surpass its price.&lt;/p&gt;
+
+&lt;p&gt;So, here we can imagine a non-zero-sum relationship.&lt;/p&gt;
+
+&lt;h2 id=&quot;finance&quot;&gt;Finance&lt;/h2&gt;
+
+&lt;p&gt;Most of the people who trade and invest mostly want to get the most payoff for their buck. So this primarily seems zero-sum.&lt;/p&gt;
+
+&lt;p&gt;The mutual benefit might come about when their relationship to their asset is more complex than just trying to get the highest price difference.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Again, I can see that I could think and write about this topic for a long time. Some ideas&lt;/p&gt;
+
+&lt;p&gt;How do we measure and compare ‘comparatively advantages’?
+What are examples of not purely ‘buy low, sell high’ uses of finance?
+How to measure the utility ‘ratio’ between price gain/loss and usability of the result of a buy event?
+Is the social benefit of efficient capital distribution via financial markets a fluke, or has empirical evidence behind it?
+Can we replace financial markets with an AI and delegate human creativity to more productive things?&lt;/p&gt;</content><author><name></name></author><summary type="html">Is finance a zero-sum activity?</summary></entry><entry><title type="html">The specific you</title><link href="andrasnovoszath.com/self-knowledge/specialization/2020/09/16/specific-you.html" rel="alternate" type="text/html" title="The specific you" /><published>2020-09-16T00:00:00-05:00</published><updated>2020-09-16T00:00:00-05:00</updated><id>andrasnovoszath.com/self-knowledge/specialization/2020/09/16/specific-you</id><content type="html" xml:base="andrasnovoszath.com/self-knowledge/specialization/2020/09/16/specific-you.html">&lt;h1 id=&quot;the-specific-you&quot;&gt;The specific you&lt;/h1&gt;
 
 &lt;p&gt;When you are thinking about what business area to pursue, it is useful to focus on your specific situation and circumstance.&lt;/p&gt;
 
