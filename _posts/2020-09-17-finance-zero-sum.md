@@ -25,9 +25,9 @@ Of course, as I started to dive into the topic, I quickly realized that is is a 
 
 So let's break up the question to the following cases:
 
-pure commercial relationship
-trading of goods
-finance
+- Pure commercial relationship
+- Trading of goods
+- Finance
 
 ## Pure commercial transaction
 
@@ -51,10 +51,10 @@ The mutual benefit might come about when their relationship to their asset is mo
 
 Again, I can see that I could think and write about this topic for a long time. Some ideas
 
-How do we measure and compare 'comparatively advantages'?
-What are examples of not purely 'buy low, sell high' uses of finance?
-How to measure the utility 'ratio' between price gain/loss and usability of the result of a buy event?
-Is the social benefit of efficient capital distribution via financial markets a fluke, or has empirical evidence behind it?
-Can we replace financial markets with an AI and delegate human creativity to more productive things?
+- How do we measure and compare 'comparatively advantages'?
+- What are examples of not purely 'buy low, sell high' uses of finance?
+- How to measure the utility 'ratio' between price gain/loss and usability of the result of a buy event?
+- Is the social benefit of efficient capital distribution via financial markets a fluke, or has empirical evidence behind it?
+- Can we replace financial markets with an AI and delegate human creativity to more productive things?
 
 
