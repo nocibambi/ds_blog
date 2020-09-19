@@ -8,7 +8,7 @@ title: The sum of stock trading
 ---
 I thought further about my previous position on whether stock trading is a zero-sum game. Now I see a bigger space for it not to be one.
 
-## Trading growth stocks
+# Trading growth stocks
 
 The situation I am thinking about is an argument I found during my google search.
 
@@ -22,7 +22,7 @@ This is the same hope the sellers have for the time when they want to realize th
 
 This seems more positive-sum for me. However, this view works if we strip away the 'speculative' (?), arbitrage-seeking trading aspect of security trading. In this view, stock trading seems to resemble the trade of a good tool one does not need anymore.
 
-## Remaining questions
+# Remaining questions
 
 There are, of course, a number of issues still unclear for me.
 

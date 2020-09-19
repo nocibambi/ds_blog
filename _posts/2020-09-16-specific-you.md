@@ -5,11 +5,9 @@ description: Why are your specific traits important and how to find them?
 categories: [self-knowledge, specialization]
 title: The specific you
 ---
-# The specific you
-
 When you are thinking about what business area to pursue, it is useful to focus on your specific situation and circumstance. 
 
-## Why is it useful to find a specialization?
+# Why is it useful to find a specialization?
 
 When you do not look at your own specificities, you basically do not use knowledge and skills that others could use but cannot.
 
@@ -19,7 +17,7 @@ However, there are a few problems which maybe you are the only one who can solve
 
 This is not about 'finding your passion' but rather to find out your skills, knowledge, approach, etc. These are actually quite tangible.
 
-## How to know your specificities?
+# How to know your specificities?
 
 To see yourself better, write down your characteristics in as many dimensions as possible.
 

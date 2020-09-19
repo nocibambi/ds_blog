@@ -5,7 +5,6 @@ description: One of my core frustration with note taking
 categories: [note-taking]
 title: Note-taking obsessions
 ---
-# Note-taking obsessions
 I have an obsession with the process of note-taking.
 
 I often write down my ideas in the form of notes or tasks. I do this through multiple channels. Then I spend a considerable amount of time organizing them.
