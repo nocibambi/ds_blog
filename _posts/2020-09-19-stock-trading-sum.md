@@ -2,7 +2,7 @@
 toc: false
 layout: post
 description: Stock trading might not always be a zero sum game
-categories: [stock trading, zero sum]
+categories: [stock trading, zero-sum, finance, valuation]
 title: The sum of stock trading
 
 ---
