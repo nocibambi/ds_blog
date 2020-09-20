@@ -1,4 +1,33 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="andrasnovoszath.com/feed.xml" rel="self" type="application/atom+xml" /><link href="andrasnovoszath.com/" rel="alternate" type="text/html" /><updated>2020-09-19T04:33:04-05:00</updated><id>andrasnovoszath.com/feed.xml</id><title type="html">Value this</title><subtitle>This is not another blog about bitcoin.</subtitle><entry><title type="html">The sum of stock trading</title><link href="andrasnovoszath.com/stock%20trading/zero-sum/finance/valuation/2020/09/19/stock-trading-sum.html" rel="alternate" type="text/html" title="The sum of stock trading" /><published>2020-09-19T00:00:00-05:00</published><updated>2020-09-19T00:00:00-05:00</updated><id>andrasnovoszath.com/stock%20trading/zero-sum/finance/valuation/2020/09/19/stock-trading-sum</id><content type="html" xml:base="andrasnovoszath.com/stock%20trading/zero-sum/finance/valuation/2020/09/19/stock-trading-sum.html">&lt;p&gt;I thought further about my previous position on whether stock trading is a zero-sum game. Now I see a bigger space for it not to be one.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="andrasnovoszath.com/feed.xml" rel="self" type="application/atom+xml" /><link href="andrasnovoszath.com/" rel="alternate" type="text/html" /><updated>2020-09-20T03:35:26-05:00</updated><id>andrasnovoszath.com/feed.xml</id><title type="html">Value this</title><subtitle>This is not another blog about bitcoin.</subtitle><entry><title type="html">How to categorize your notes?</title><link href="andrasnovoszath.com/note-taking/categorization/hierarchies/concept%20drift/chaos%20&%20order/2020/09/20/note-categorization-pain.html" rel="alternate" type="text/html" title="How to categorize your notes?" /><published>2020-09-20T00:00:00-05:00</published><updated>2020-09-20T00:00:00-05:00</updated><id>andrasnovoszath.com/note-taking/categorization/hierarchies/concept%20drift/chaos%20&amp;%20order/2020/09/20/note-categorization-pain</id><content type="html" xml:base="andrasnovoszath.com/note-taking/categorization/hierarchies/concept%20drift/chaos%20&amp;%20order/2020/09/20/note-categorization-pain.html">&lt;h1 id=&quot;i-take-notes&quot;&gt;I take notes&lt;/h1&gt;
+
+&lt;p&gt;I take lots of notes. Many of them are ideas to research, explore, and think about, while others are rather tasks or possible projects.&lt;/p&gt;
+
+&lt;p&gt;As I collect them continuously, their number grows. After a while, it becomes hard to look through them and prioritize for action.&lt;/p&gt;
+
+&lt;p&gt;The obvious way to do this, of course, is to categorize them under topics or themes.&lt;/p&gt;
+
+&lt;h1 id=&quot;concept-hierarchies&quot;&gt;Concept hierarchies&lt;/h1&gt;
+
+&lt;p&gt;This produces a hierarchical tree-like structure. There a few problems with this:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;There always be some idea or task which does not belong to a single category alone but under multiple ones.&lt;/li&gt;
+  &lt;li&gt;As the number of notes and, therefore, the number of categories and sub-categories becomes high, you need to dig very deep to find some notes. If the hierarchies are obvious, this is not really a problem. However, as the number of hierarchy levels and branches grow, the previous issue (i.e., notes belonging under multiple categories) become even more prominent.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;concept-drift&quot;&gt;Concept drift&lt;/h1&gt;
+
+&lt;p&gt;There is also the problem of concept drift. While we refer to a particular thing or category with a specific term, later on, we start to refer to it with a related but different one. Similarly, we do the same with categories.&lt;/p&gt;
+
+&lt;p&gt;This shift can happen for multiple reasons, but the most obvious ones are terminological shifts or our changing ‘use’ of the original idea or category.&lt;/p&gt;
+
+&lt;p&gt;Concept drift, deep hierarchies, and the overlapping category boundaries can lead to the ‘forgetting’ of notes. They can also lead to making multiple, ‘almost similar’ but ‘slightly different’ versions of them at different places of the hierarchy.&lt;/p&gt;
+
+&lt;p&gt;And, even whether the relationship between two ideas should be hierarchical or not also can change from use case to use case.&lt;/p&gt;
+
+&lt;h1 id=&quot;chaos-everywhere&quot;&gt;Chaos everywhere&lt;/h1&gt;
+
+&lt;p&gt;And note-taking is just the most obvious example for me. I had the same experience with software development (both as writing code and managing versions), technical writing, academic research, work organization, file organization, etc.&lt;/p&gt;</content><author><name></name></author><summary type="html">I take notes</summary></entry><entry><title type="html">The sum of stock trading</title><link href="andrasnovoszath.com/stock%20trading/zero-sum/finance/valuation/2020/09/19/stock-trading-sum.html" rel="alternate" type="text/html" title="The sum of stock trading" /><published>2020-09-19T00:00:00-05:00</published><updated>2020-09-19T00:00:00-05:00</updated><id>andrasnovoszath.com/stock%20trading/zero-sum/finance/valuation/2020/09/19/stock-trading-sum</id><content type="html" xml:base="andrasnovoszath.com/stock%20trading/zero-sum/finance/valuation/2020/09/19/stock-trading-sum.html">&lt;p&gt;I thought further about my previous position on whether stock trading is a zero-sum game. Now I see a bigger space for it not to be one.&lt;/p&gt;
 
 &lt;h1 id=&quot;trading-growth-stocks&quot;&gt;Trading growth stocks&lt;/h1&gt;
 
