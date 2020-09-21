@@ -119,6 +119,40 @@ layout: notebook
 </div>
     {% endraw %}
 
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">alt</span><span class="o">.</span><span class="n">renderers</span>
+<span class="c1"># alt.renderers.enable(&#39;notebook&#39;)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>RendererRegistry(active=&#39;default&#39;, registered=[&#39;colab&#39;, &#39;default&#39;, &#39;html&#39;, &#39;json&#39;, &#39;jupyterlab&#39;, &#39;kaggle&#39;, &#39;mimetype&#39;, &#39;notebook&#39;, &#39;nteract&#39;, &#39;png&#39;, &#39;svg&#39;, &#39;zeppelin&#39;])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>put a <code>#collapse-show</code> flag at the top of any cell if you want to <strong>show</strong> that cell by default, but give the reader the option to hide it:</p>
@@ -203,12 +237,12 @@ layout: notebook
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
-<div id="altair-viz-85f6823a5053479994324f0197bbb342"></div>
+<div id="altair-viz-3b8a8ba04ee243de839f6e5a189b21cb"></div>
 <script type="text/javascript">
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-85f6823a5053479994324f0197bbb342") {
-      outputDiv = document.getElementById("altair-viz-85f6823a5053479994324f0197bbb342");
+    if (outputDiv.id !== "altair-viz-3b8a8ba04ee243de839f6e5a189b21cb") {
+      outputDiv = document.getElementById("altair-viz-3b8a8ba04ee243de839f6e5a189b21cb");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -300,12 +334,12 @@ layout: notebook
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
-<div id="altair-viz-4143e5264f7f4076ae57d8ae39059768"></div>
+<div id="altair-viz-ab4a7e30d8b54a2087b8f82b64612b8a"></div>
 <script type="text/javascript">
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-4143e5264f7f4076ae57d8ae39059768") {
-      outputDiv = document.getElementById("altair-viz-4143e5264f7f4076ae57d8ae39059768");
+    if (outputDiv.id !== "altair-viz-ab4a7e30d8b54a2087b8f82b64612b8a") {
+      outputDiv = document.getElementById("altair-viz-ab4a7e30d8b54a2087b8f82b64612b8a");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -429,12 +463,12 @@ layout: notebook
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
-<div id="altair-viz-f8621fc8bdb246bf93bd83b2fa9a926a"></div>
+<div id="altair-viz-8ef3f80c128e4df690f209b2b0aa1a41"></div>
 <script type="text/javascript">
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-f8621fc8bdb246bf93bd83b2fa9a926a") {
-      outputDiv = document.getElementById("altair-viz-f8621fc8bdb246bf93bd83b2fa9a926a");
+    if (outputDiv.id !== "altair-viz-8ef3f80c128e4df690f209b2b0aa1a41") {
+      outputDiv = document.getElementById("altair-viz-8ef3f80c128e4df690f209b2b0aa1a41");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
