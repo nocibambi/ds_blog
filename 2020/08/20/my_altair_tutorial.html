@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>How to use Altair for data visualization in Python? | Value this</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="How to use Altair for data visualization in Python?" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This is not another blog about bitcoin." />
+<meta property="og:description" content="This is not another blog about bitcoin." />
+<link rel="canonical" href="andrasnovoszath.com/2020/08/20/my_altair_tutorial.html" />
+<meta property="og:url" content="andrasnovoszath.com/2020/08/20/my_altair_tutorial.html" />
+<meta property="og:site_name" content="Value this" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-08-20T00:00:00-05:00" />
+<script type="application/ld+json">
+{"headline":"How to use Altair for data visualization in Python?","description":"This is not another blog about bitcoin.","datePublished":"2020-08-20T00:00:00-05:00","dateModified":"2020-08-20T00:00:00-05:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"andrasnovoszath.com/2020/08/20/my_altair_tutorial.html"},"url":"andrasnovoszath.com/2020/08/20/my_altair_tutorial.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="andrasnovoszath.com/feed.xml" title="Value this" /><link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>How to use Altair for data visualization in Python? | Value this</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="How to use Altair for data visualization in Python?" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This is not another blog about bitcoin." />
+<meta property="og:description" content="This is not another blog about bitcoin." />
+<link rel="canonical" href="andrasnovoszath.com/2020/08/20/my_altair_tutorial.html" />
+<meta property="og:url" content="andrasnovoszath.com/2020/08/20/my_altair_tutorial.html" />
+<meta property="og:site_name" content="Value this" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-08-20T00:00:00-05:00" />
+<script type="application/ld+json">
+{"headline":"How to use Altair for data visualization in Python?","description":"This is not another blog about bitcoin.","datePublished":"2020-08-20T00:00:00-05:00","dateModified":"2020-08-20T00:00:00-05:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"andrasnovoszath.com/2020/08/20/my_altair_tutorial.html"},"url":"andrasnovoszath.com/2020/08/20/my_altair_tutorial.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="andrasnovoszath.com/feed.xml" title="Value this" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head><body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Value this</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/search/">Search</a><a class="page-link" href="/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">How to use Altair for data visualization in Python?</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-08-20T00:00:00-05:00" itemprop="datePublished">
+        Aug 20, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      2 min read
+    
+</span></p>
+
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/nocibambi/ds_blog/tree/master/_notebooks/my_altair_tutorial.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/nocibambi/ds_blog/master?filepath=_notebooks%2Fmy_altair_tutorial.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/nocibambi/ds_blog/blob/master/_notebooks/my_altair_tutorial.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/my_altair_tutorial.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>For the notebook I use the following packages.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+3.8.5 (default, Aug  5 2020, 08:36:46) 
+[GCC 7.3.0]
+pandas: 1.1.0
+altair: 3.2.0
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We load the 'flights' example dataset</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<details class="description" open="">
+      <summary class="btn btn-sm" data-open="Hide Code" data-close="Show Code"></summary>
+        <p><div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># collapse_show</span>
+<span class="n">flights</span> <span class="o">=</span> <span class="s2">&quot;https://vega.github.io/vega-datasets/data/flights-5k.json&quot;</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+</p>
+    </details>
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_flights</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="n">flights</span><span class="p">)</span>
+<span class="n">origins</span> <span class="o">=</span> <span class="n">df_flights</span><span class="p">[</span><span class="s2">&quot;origin&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">destinations</span> <span class="o">=</span> <span class="n">df_flights</span><span class="p">[</span><span class="s2">&quot;destination&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Origin locations</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">origins</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>SAT	SNA	SJC	SMF	OKC	PHX	BHM	MDW	TUL	MSY	LAS	BUF	DTW	HRL	MCO	RNO	OAK	JAX	MCI	SAN	BNA	STL	FLL	TPA	HOU	LAX	BWI	AUS	ELP	ONT	PBI	ABQ	IND	PDX	DAL	CLE	MHT	AMA	SLC	PVD	SEA	BOI	ISP	OMA	LBB	CRP	RDU	SDF	BUR	MAF	LIT	TUS	BDL	GEG	SFO	JAN	IAH	ALB	CMH
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Destination locations</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">destinations</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>HOU	OAK	SAN	PHX	RNO	STL	SDF	OMA	DAL	SJC	BWI	MDW	FLL	SEA	BHM	PDX	SLC	BNA	BOI	TUS	LAX	ONT	MCI	CMH	BDL	LAS	ISP	TPA	ABQ	SAT	MAF	TUL	ELP	MCO	SMF	MHT	MSY	AUS	PVD	GEG	BUR	CRP	JAN	LIT	SFO	SNA	OKC	CLE	IND	HRL	BUF	JAX	RDU	AMA	DTW	PBI	LBB	ALB	IAH
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Altair single-value selection</span>
+
+<span class="n">selection</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">selection_single</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Select&quot;</span><span class="p">,</span>
+    <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;origin&quot;</span><span class="p">,</span> <span class="s2">&quot;destination&quot;</span><span class="p">],</span>
+    <span class="n">bind</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;origin&quot;</span><span class="p">:</span> <span class="n">alt</span><span class="o">.</span><span class="n">binding_select</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="n">origins</span><span class="p">),</span>
+        <span class="s2">&quot;destination&quot;</span><span class="p">:</span> <span class="n">alt</span><span class="o">.</span><span class="n">binding_select</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="n">destinations</span><span class="p">),</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Scatter plot</span>
+
+<span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">df_flights</span><span class="p">)</span><span class="o">.</span><span class="n">mark_circle</span><span class="p">()</span><span class="o">.</span><span class="n">add_selection</span><span class="p">(</span>
+    <span class="n">selection</span>
+<span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="s1">&#39;distance&#39;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s1">&#39;delay&#39;</span><span class="p">,</span>
+    <span class="n">tooltip</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">,</span>
+    <span class="n">opacity</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">condition</span><span class="p">(</span><span class="n">selection</span><span class="p">,</span> <span class="n">alt</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="o">.</span><span class="mi">75</span><span class="p">),</span> <span class="n">alt</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="o">.</span><span class="mi">05</span><span class="p">))</span>
+<span class="p">)</span>
+
+
+<span class="c1"># alt.Chart(movies).mark_circle().add_selection(</span>
+<span class="c1">#     selection</span>
+<span class="c1"># ).encode(</span>
+<span class="c1">#     x=&#39;Rotten Tomatoes Rating:Q&#39;,</span>
+<span class="c1">#     y=&#39;IMDB Rating:Q&#39;,</span>
+<span class="c1">#     tooltip=&#39;Title:N&#39;,</span>
+<span class="c1">#     opacity=alt.condition(selection, alt.value(0.75), alt.value(0.05))</span>
+<span class="c1"># )</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;VegaLite 3 object&gt;
+
+If you see this message, it means the renderer has not been properly enabled
+for the frontend that you are using. For more information, see
+https://altair-viz.github.io/user_guide/troubleshooting.html
+</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Altair-tutorial-introduction">Altair tutorial introduction<a class="anchor-link" href="#Altair-tutorial-introduction"> </a></h1>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">vega_datasets</span> <span class="kn">import</span> <span class="n">data</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># hide_collapse</span>
+<span class="c1"># load more datasets</span>
+<span class="n">population</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">population</span><span class="p">()</span>
+<span class="n">jobs</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">jobs</span><span class="p">()</span>
+<span class="n">countries</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">countries</span><span class="p">()</span>
+<span class="n">budget</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">budget</span><span class="p">()</span>
+<span class="n">unemployment_industries</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">unemployment_across_industries</span><span class="p">()</span>
+<span class="n">employment</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">us_employment</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">employment</span> <span class="o">=</span> <span class="n">employment</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;level_1&#39;</span><span class="p">:</span> <span class="s1">&#39;sector&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;employment&#39;</span><span class="p">})</span>
+<span class="n">employment</span> <span class="o">=</span> <span class="n">employment</span><span class="p">[</span><span class="n">employment</span><span class="p">[</span><span class="s1">&#39;sector&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;nonfarm_change&#39;</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">employment</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>month</th>
+      <th>sector</th>
+      <th>employment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2006-01-01</td>
+      <td>nonfarm</td>
+      <td>135450.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2006-01-01</td>
+      <td>private</td>
+      <td>113603.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2006-01-01</td>
+      <td>goods_producing</td>
+      <td>22467.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2006-01-01</td>
+      <td>service_providing</td>
+      <td>112983.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2006-01-01</td>
+      <td>private_service_providing</td>
+      <td>91136.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2754</th>
+      <td>2015-12-01</td>
+      <td>professional_and_business_services</td>
+      <td>19892.0</td>
+    </tr>
+    <tr>
+      <th>2755</th>
+      <td>2015-12-01</td>
+      <td>education_and_health_services</td>
+      <td>22318.0</td>
+    </tr>
+    <tr>
+      <th>2756</th>
+      <td>2015-12-01</td>
+      <td>leisure_and_hospitality</td>
+      <td>15408.0</td>
+    </tr>
+    <tr>
+      <th>2757</th>
+      <td>2015-12-01</td>
+      <td>other_services</td>
+      <td>5652.0</td>
+    </tr>
+    <tr>
+      <th>2758</th>
+      <td>2015-12-01</td>
+      <td>government</td>
+      <td>22100.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>2640 rows × 3 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">employment</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;sector&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;employment&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>employment</th>
+    </tr>
+    <tr>
+      <th>sector</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>utilities</th>
+      <td>553.744167</td>
+    </tr>
+    <tr>
+      <th>mining_and_logging</th>
+      <td>777.400000</td>
+    </tr>
+    <tr>
+      <th>information</th>
+      <td>2809.400000</td>
+    </tr>
+    <tr>
+      <th>transportation_and_warehousing</th>
+      <td>4469.073333</td>
+    </tr>
+    <tr>
+      <th>nondurable_goods</th>
+      <td>4667.816667</td>
+    </tr>
+    <tr>
+      <th>other_services</th>
+      <td>5460.333333</td>
+    </tr>
+    <tr>
+      <th>wholesale_trade</th>
+      <td>5751.100000</td>
+    </tr>
+    <tr>
+      <th>construction</th>
+      <td>6365.475000</td>
+    </tr>
+    <tr>
+      <th>durable_goods</th>
+      <td>7832.866667</td>
+    </tr>
+    <tr>
+      <th>financial_activities</th>
+      <td>7991.691667</td>
+    </tr>
+    <tr>
+      <th>manufacturing</th>
+      <td>12500.683333</td>
+    </tr>
+    <tr>
+      <th>leisure_and_hospitality</th>
+      <td>13731.416667</td>
+    </tr>
+    <tr>
+      <th>retail_trade</th>
+      <td>15066.603333</td>
+    </tr>
+    <tr>
+      <th>professional_and_business_services</th>
+      <td>17902.258333</td>
+    </tr>
+    <tr>
+      <th>goods_producing</th>
+      <td>19643.558333</td>
+    </tr>
+    <tr>
+      <th>education_and_health_services</th>
+      <td>20129.216667</td>
+    </tr>
+    <tr>
+      <th>government</th>
+      <td>22150.125000</td>
+    </tr>
+    <tr>
+      <th>trade_transportation_utilties</th>
+      <td>25840.566667</td>
+    </tr>
+    <tr>
+      <th>private_service_providing</th>
+      <td>93864.883333</td>
+    </tr>
+    <tr>
+      <th>private</th>
+      <td>113508.441667</td>
+    </tr>
+    <tr>
+      <th>service_providing</th>
+      <td>116015.008333</td>
+    </tr>
+    <tr>
+      <th>nonfarm</th>
+      <td>135658.566667</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">employment_chart</span><span class="o">.</span><span class="n">mark_point</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;VegaLite 3 object&gt;
+
+If you see this message, it means the renderer has not been properly enabled
+for the frontend that you are using. For more information, see
+https://altair-viz.github.io/user_guide/troubleshooting.html
+</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">employment_chart</span><span class="o">.</span><span class="n">mark_point</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="s1">&#39;month:T&#39;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s1">&#39;employment_number:Q&#39;</span>
+<span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;VegaLite 3 object&gt;
+
+If you see this message, it means the renderer has not been properly enabled
+for the frontend that you are using. For more information, see
+https://altair-viz.github.io/user_guide/troubleshooting.html
+</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div><a class="u-url" href="/2020/08/20/my_altair_tutorial.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>This is not another blog about bitcoin.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/nocibambi" title="nocibambi"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
