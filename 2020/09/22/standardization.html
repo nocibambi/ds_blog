@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>How does data standardization work? | Value this</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="How does data standardization work?" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This is not another blog about bitcoin." />
+<meta property="og:description" content="This is not another blog about bitcoin." />
+<link rel="canonical" href="andrasnovoszath.com/2020/09/22/standardization.html" />
+<meta property="og:url" content="andrasnovoszath.com/2020/09/22/standardization.html" />
+<meta property="og:site_name" content="Value this" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-09-22T00:00:00-05:00" />
+<script type="application/ld+json">
+{"headline":"How does data standardization work?","dateModified":"2020-09-22T00:00:00-05:00","datePublished":"2020-09-22T00:00:00-05:00","description":"This is not another blog about bitcoin.","mainEntityOfPage":{"@type":"WebPage","@id":"andrasnovoszath.com/2020/09/22/standardization.html"},"@type":"BlogPosting","url":"andrasnovoszath.com/2020/09/22/standardization.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="andrasnovoszath.com/feed.xml" title="Value this" /><!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-153115211-3','auto');ga('require','displayfeatures');ga('send','pageview');</script>
+
+<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>How does data standardization work? | Value this</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="How does data standardization work?" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This is not another blog about bitcoin." />
+<meta property="og:description" content="This is not another blog about bitcoin." />
+<link rel="canonical" href="andrasnovoszath.com/2020/09/22/standardization.html" />
+<meta property="og:url" content="andrasnovoszath.com/2020/09/22/standardization.html" />
+<meta property="og:site_name" content="Value this" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-09-22T00:00:00-05:00" />
+<script type="application/ld+json">
+{"headline":"How does data standardization work?","dateModified":"2020-09-22T00:00:00-05:00","datePublished":"2020-09-22T00:00:00-05:00","description":"This is not another blog about bitcoin.","mainEntityOfPage":{"@type":"WebPage","@id":"andrasnovoszath.com/2020/09/22/standardization.html"},"@type":"BlogPosting","url":"andrasnovoszath.com/2020/09/22/standardization.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="andrasnovoszath.com/feed.xml" title="Value this" /><!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-153115211-3','auto');ga('require','displayfeatures');ga('send','pageview');</script>
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head><body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Value this</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/search/">Search</a><a class="page-link" href="/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">How does data standardization work?</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-09-22T00:00:00-05:00" itemprop="datePublished">
+        Sep 22, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      1 min read
+    
+</span></p>
+
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/nocibambi/ds_blog/tree/master/_notebooks/2020-09-22-standardization.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/nocibambi/ds_blog/master?filepath=_notebooks%2F2020-09-22-standardization.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/nocibambi/ds_blog/blob/master/_notebooks/2020-09-22-standardization.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-09-22-standardization.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>With standardization, we transform the data so its distribution's center will become 0 and its standard deviation will become 1.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">altair</span> <span class="k">as</span> <span class="nn">alt</span>
+<span class="kn">from</span> <span class="nn">vega_datasets</span> <span class="kn">import</span> <span class="n">data</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>For this demo, we use the sp500 price index.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sp500</span> <span class="o">=</span> <span class="n">data</span><span class="p">(</span><span class="s1">&#39;sp500&#39;</span><span class="p">)</span>
+<span class="n">sp500</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>date</th>
+      <th>price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2000-01-01</td>
+      <td>1394.46</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2000-02-01</td>
+      <td>1366.42</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2000-03-01</td>
+      <td>1498.58</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2000-04-01</td>
+      <td>1452.43</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2000-05-01</td>
+      <td>1420.60</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">sp500</span><span class="p">)</span><span class="o">.</span><span class="n">mark_line</span><span class="p">(</span><span class="n">point</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">strokeWidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s1">&#39;date:T&#39;</span><span class="p">),</span> <span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s1">&#39;price&#39;</span><span class="p">),</span> <span class="n">alt</span><span class="o">.</span><span class="n">Tooltip</span><span class="p">(</span><span class="s1">&#39;price&#39;</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">configure_point</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+
+<div id="altair-viz-f733b3270e224a6fa76ca12791d12d75"></div>
+<script type="text/javascript">
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-f733b3270e224a6fa76ca12791d12d75") {
+      outputDiv = document.getElementById("altair-viz-f733b3270e224a6fa76ca12791d12d75");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@4.8.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
+    };
+
+    function loadScript(lib) {
+      return new Promise(function(resolve, reject) {
+        var s = document.createElement('script');
+        s.src = paths[lib];
+        s.async = true;
+        s.onload = () => resolve(paths[lib]);
+        s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+        document.getElementsByTagName("head")[0].appendChild(s);
+      });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else if (typeof vegaEmbed === "function") {
+      displayChart(vegaEmbed);
+    } else {
+      loadScript("vega")
+        .then(() => loadScript("vega-lite"))
+        .then(() => loadScript("vega-embed"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}, "point": {"size": 10}}, "data": {"name": "data-776d9ed0e2795915ad0b63d5871c999b"}, "mark": {"type": "line", "point": true, "strokeWidth": 1}, "encoding": {"tooltip": {"type": "quantitative", "field": "price"}, "x": {"type": "temporal", "field": "date"}, "y": {"type": "quantitative", "field": "price"}}, "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json", "datasets": {"data-776d9ed0e2795915ad0b63d5871c999b": [{"date": "2000-01-01T00:00:00", "price": 1394.46}, {"date": "2000-02-01T00:00:00", "price": 1366.42}, {"date": "2000-03-01T00:00:00", "price": 1498.58}, {"date": "2000-04-01T00:00:00", "price": 1452.43}, {"date": "2000-05-01T00:00:00", "price": 1420.6}, {"date": "2000-06-01T00:00:00", "price": 1454.6}, {"date": "2000-07-01T00:00:00", "price": 1430.83}, {"date": "2000-08-01T00:00:00", "price": 1517.68}, {"date": "2000-09-01T00:00:00", "price": 1436.51}, {"date": "2000-10-01T00:00:00", "price": 1429.4}, {"date": "2000-11-01T00:00:00", "price": 1314.95}, {"date": "2000-12-01T00:00:00", "price": 1320.28}, {"date": "2001-01-01T00:00:00", "price": 1366.01}, {"date": "2001-02-01T00:00:00", "price": 1239.94}, {"date": "2001-03-01T00:00:00", "price": 1160.33}, {"date": "2001-04-01T00:00:00", "price": 1249.46}, {"date": "2001-05-01T00:00:00", "price": 1255.82}, {"date": "2001-06-01T00:00:00", "price": 1224.38}, {"date": "2001-07-01T00:00:00", "price": 1211.23}, {"date": "2001-08-01T00:00:00", "price": 1133.58}, {"date": "2001-09-01T00:00:00", "price": 1040.94}, {"date": "2001-10-01T00:00:00", "price": 1059.78}, {"date": "2001-11-01T00:00:00", "price": 1139.45}, {"date": "2001-12-01T00:00:00", "price": 1148.08}, {"date": "2002-01-01T00:00:00", "price": 1130.2}, {"date": "2002-02-01T00:00:00", "price": 1106.73}, {"date": "2002-03-01T00:00:00", "price": 1147.39}, {"date": "2002-04-01T00:00:00", "price": 1076.92}, {"date": "2002-05-01T00:00:00", "price": 1067.14}, {"date": "2002-06-01T00:00:00", "price": 989.82}, {"date": "2002-07-01T00:00:00", "price": 911.62}, {"date": "2002-08-01T00:00:00", "price": 916.07}, {"date": "2002-09-01T00:00:00", "price": 815.28}, {"date": "2002-10-01T00:00:00", "price": 885.76}, {"date": "2002-11-01T00:00:00", "price": 936.31}, {"date": "2002-12-01T00:00:00", "price": 879.82}, {"date": "2003-01-01T00:00:00", "price": 855.7}, {"date": "2003-02-01T00:00:00", "price": 841.15}, {"date": "2003-03-01T00:00:00", "price": 848.18}, {"date": "2003-04-01T00:00:00", "price": 916.92}, {"date": "2003-05-01T00:00:00", "price": 963.59}, {"date": "2003-06-01T00:00:00", "price": 974.5}, {"date": "2003-07-01T00:00:00", "price": 990.31}, {"date": "2003-08-01T00:00:00", "price": 1008.01}, {"date": "2003-09-01T00:00:00", "price": 995.97}, {"date": "2003-10-01T00:00:00", "price": 1050.71}, {"date": "2003-11-01T00:00:00", "price": 1058.2}, {"date": "2003-12-01T00:00:00", "price": 1111.92}, {"date": "2004-01-01T00:00:00", "price": 1131.13}, {"date": "2004-02-01T00:00:00", "price": 1144.94}, {"date": "2004-03-01T00:00:00", "price": 1126.21}, {"date": "2004-04-01T00:00:00", "price": 1107.3}, {"date": "2004-05-01T00:00:00", "price": 1120.68}, {"date": "2004-06-01T00:00:00", "price": 1140.84}, {"date": "2004-07-01T00:00:00", "price": 1101.72}, {"date": "2004-08-01T00:00:00", "price": 1104.24}, {"date": "2004-09-01T00:00:00", "price": 1114.58}, {"date": "2004-10-01T00:00:00", "price": 1130.2}, {"date": "2004-11-01T00:00:00", "price": 1173.82}, {"date": "2004-12-01T00:00:00", "price": 1211.92}, {"date": "2005-01-01T00:00:00", "price": 1181.27}, {"date": "2005-02-01T00:00:00", "price": 1203.6}, {"date": "2005-03-01T00:00:00", "price": 1180.59}, {"date": "2005-04-01T00:00:00", "price": 1156.85}, {"date": "2005-05-01T00:00:00", "price": 1191.5}, {"date": "2005-06-01T00:00:00", "price": 1191.33}, {"date": "2005-07-01T00:00:00", "price": 1234.18}, {"date": "2005-08-01T00:00:00", "price": 1220.33}, {"date": "2005-09-01T00:00:00", "price": 1228.81}, {"date": "2005-10-01T00:00:00", "price": 1207.01}, {"date": "2005-11-01T00:00:00", "price": 1249.48}, {"date": "2005-12-01T00:00:00", "price": 1248.29}, {"date": "2006-01-01T00:00:00", "price": 1280.08}, {"date": "2006-02-01T00:00:00", "price": 1280.66}, {"date": "2006-03-01T00:00:00", "price": 1294.87}, {"date": "2006-04-01T00:00:00", "price": 1310.61}, {"date": "2006-05-01T00:00:00", "price": 1270.09}, {"date": "2006-06-01T00:00:00", "price": 1270.2}, {"date": "2006-07-01T00:00:00", "price": 1276.66}, {"date": "2006-08-01T00:00:00", "price": 1303.82}, {"date": "2006-09-01T00:00:00", "price": 1335.85}, {"date": "2006-10-01T00:00:00", "price": 1377.94}, {"date": "2006-11-01T00:00:00", "price": 1400.63}, {"date": "2006-12-01T00:00:00", "price": 1418.3}, {"date": "2007-01-01T00:00:00", "price": 1438.24}, {"date": "2007-02-01T00:00:00", "price": 1406.82}, {"date": "2007-03-01T00:00:00", "price": 1420.86}, {"date": "2007-04-01T00:00:00", "price": 1482.37}, {"date": "2007-05-01T00:00:00", "price": 1530.62}, {"date": "2007-06-01T00:00:00", "price": 1503.35}, {"date": "2007-07-01T00:00:00", "price": 1455.27}, {"date": "2007-08-01T00:00:00", "price": 1473.99}, {"date": "2007-09-01T00:00:00", "price": 1526.75}, {"date": "2007-10-01T00:00:00", "price": 1549.38}, {"date": "2007-11-01T00:00:00", "price": 1481.14}, {"date": "2007-12-01T00:00:00", "price": 1468.36}, {"date": "2008-01-01T00:00:00", "price": 1378.55}, {"date": "2008-02-01T00:00:00", "price": 1330.63}, {"date": "2008-03-01T00:00:00", "price": 1322.7}, {"date": "2008-04-01T00:00:00", "price": 1385.59}, {"date": "2008-05-01T00:00:00", "price": 1400.38}, {"date": "2008-06-01T00:00:00", "price": 1280.0}, {"date": "2008-07-01T00:00:00", "price": 1267.38}, {"date": "2008-08-01T00:00:00", "price": 1282.83}, {"date": "2008-09-01T00:00:00", "price": 1166.36}, {"date": "2008-10-01T00:00:00", "price": 968.75}, {"date": "2008-11-01T00:00:00", "price": 896.24}, {"date": "2008-12-01T00:00:00", "price": 903.25}, {"date": "2009-01-01T00:00:00", "price": 825.88}, {"date": "2009-02-01T00:00:00", "price": 735.09}, {"date": "2009-03-01T00:00:00", "price": 797.87}, {"date": "2009-04-01T00:00:00", "price": 872.81}, {"date": "2009-05-01T00:00:00", "price": 919.14}, {"date": "2009-06-01T00:00:00", "price": 919.32}, {"date": "2009-07-01T00:00:00", "price": 987.48}, {"date": "2009-08-01T00:00:00", "price": 1020.62}, {"date": "2009-09-01T00:00:00", "price": 1057.08}, {"date": "2009-10-01T00:00:00", "price": 1036.19}, {"date": "2009-11-01T00:00:00", "price": 1095.63}, {"date": "2009-12-01T00:00:00", "price": 1115.1}, {"date": "2010-01-01T00:00:00", "price": 1073.87}, {"date": "2010-02-01T00:00:00", "price": 1104.49}, {"date": "2010-03-01T00:00:00", "price": 1140.45}]}}, {"mode": "vega-lite"});
+</script>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The original distribution of prices.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">sp500</span><span class="p">)</span><span class="o">.</span><span class="n">mark_bar</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s1">&#39;price:Q&#39;</span><span class="p">,</span> <span class="nb">bin</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">BinParams</span><span class="p">(</span><span class="n">maxbins</span><span class="o">=</span><span class="mi">20</span><span class="p">)),</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s1">&#39;count()&#39;</span><span class="p">),</span> <span class="n">tooltip</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Tooltip</span><span class="p">([</span><span class="s1">&#39;count()&#39;</span><span class="p">])</span>
+<span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+
+<div id="altair-viz-a77a2da439d3453a99d33b0a4b25869b"></div>
+<script type="text/javascript">
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-a77a2da439d3453a99d33b0a4b25869b") {
+      outputDiv = document.getElementById("altair-viz-a77a2da439d3453a99d33b0a4b25869b");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@4.8.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
+    };
+
+    function loadScript(lib) {
+      return new Promise(function(resolve, reject) {
+        var s = document.createElement('script');
+        s.src = paths[lib];
+        s.async = true;
+        s.onload = () => resolve(paths[lib]);
+        s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+        document.getElementsByTagName("head")[0].appendChild(s);
+      });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else if (typeof vegaEmbed === "function") {
+      displayChart(vegaEmbed);
+    } else {
+      loadScript("vega")
+        .then(() => loadScript("vega-lite"))
+        .then(() => loadScript("vega-embed"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-776d9ed0e2795915ad0b63d5871c999b"}, "mark": "bar", "encoding": {"tooltip": [{"type": "quantitative", "aggregate": "count"}], "x": {"type": "quantitative", "bin": {"maxbins": 20}, "field": "price"}, "y": {"type": "quantitative", "aggregate": "count"}}, "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json", "datasets": {"data-776d9ed0e2795915ad0b63d5871c999b": [{"date": "2000-01-01T00:00:00", "price": 1394.46}, {"date": "2000-02-01T00:00:00", "price": 1366.42}, {"date": "2000-03-01T00:00:00", "price": 1498.58}, {"date": "2000-04-01T00:00:00", "price": 1452.43}, {"date": "2000-05-01T00:00:00", "price": 1420.6}, {"date": "2000-06-01T00:00:00", "price": 1454.6}, {"date": "2000-07-01T00:00:00", "price": 1430.83}, {"date": "2000-08-01T00:00:00", "price": 1517.68}, {"date": "2000-09-01T00:00:00", "price": 1436.51}, {"date": "2000-10-01T00:00:00", "price": 1429.4}, {"date": "2000-11-01T00:00:00", "price": 1314.95}, {"date": "2000-12-01T00:00:00", "price": 1320.28}, {"date": "2001-01-01T00:00:00", "price": 1366.01}, {"date": "2001-02-01T00:00:00", "price": 1239.94}, {"date": "2001-03-01T00:00:00", "price": 1160.33}, {"date": "2001-04-01T00:00:00", "price": 1249.46}, {"date": "2001-05-01T00:00:00", "price": 1255.82}, {"date": "2001-06-01T00:00:00", "price": 1224.38}, {"date": "2001-07-01T00:00:00", "price": 1211.23}, {"date": "2001-08-01T00:00:00", "price": 1133.58}, {"date": "2001-09-01T00:00:00", "price": 1040.94}, {"date": "2001-10-01T00:00:00", "price": 1059.78}, {"date": "2001-11-01T00:00:00", "price": 1139.45}, {"date": "2001-12-01T00:00:00", "price": 1148.08}, {"date": "2002-01-01T00:00:00", "price": 1130.2}, {"date": "2002-02-01T00:00:00", "price": 1106.73}, {"date": "2002-03-01T00:00:00", "price": 1147.39}, {"date": "2002-04-01T00:00:00", "price": 1076.92}, {"date": "2002-05-01T00:00:00", "price": 1067.14}, {"date": "2002-06-01T00:00:00", "price": 989.82}, {"date": "2002-07-01T00:00:00", "price": 911.62}, {"date": "2002-08-01T00:00:00", "price": 916.07}, {"date": "2002-09-01T00:00:00", "price": 815.28}, {"date": "2002-10-01T00:00:00", "price": 885.76}, {"date": "2002-11-01T00:00:00", "price": 936.31}, {"date": "2002-12-01T00:00:00", "price": 879.82}, {"date": "2003-01-01T00:00:00", "price": 855.7}, {"date": "2003-02-01T00:00:00", "price": 841.15}, {"date": "2003-03-01T00:00:00", "price": 848.18}, {"date": "2003-04-01T00:00:00", "price": 916.92}, {"date": "2003-05-01T00:00:00", "price": 963.59}, {"date": "2003-06-01T00:00:00", "price": 974.5}, {"date": "2003-07-01T00:00:00", "price": 990.31}, {"date": "2003-08-01T00:00:00", "price": 1008.01}, {"date": "2003-09-01T00:00:00", "price": 995.97}, {"date": "2003-10-01T00:00:00", "price": 1050.71}, {"date": "2003-11-01T00:00:00", "price": 1058.2}, {"date": "2003-12-01T00:00:00", "price": 1111.92}, {"date": "2004-01-01T00:00:00", "price": 1131.13}, {"date": "2004-02-01T00:00:00", "price": 1144.94}, {"date": "2004-03-01T00:00:00", "price": 1126.21}, {"date": "2004-04-01T00:00:00", "price": 1107.3}, {"date": "2004-05-01T00:00:00", "price": 1120.68}, {"date": "2004-06-01T00:00:00", "price": 1140.84}, {"date": "2004-07-01T00:00:00", "price": 1101.72}, {"date": "2004-08-01T00:00:00", "price": 1104.24}, {"date": "2004-09-01T00:00:00", "price": 1114.58}, {"date": "2004-10-01T00:00:00", "price": 1130.2}, {"date": "2004-11-01T00:00:00", "price": 1173.82}, {"date": "2004-12-01T00:00:00", "price": 1211.92}, {"date": "2005-01-01T00:00:00", "price": 1181.27}, {"date": "2005-02-01T00:00:00", "price": 1203.6}, {"date": "2005-03-01T00:00:00", "price": 1180.59}, {"date": "2005-04-01T00:00:00", "price": 1156.85}, {"date": "2005-05-01T00:00:00", "price": 1191.5}, {"date": "2005-06-01T00:00:00", "price": 1191.33}, {"date": "2005-07-01T00:00:00", "price": 1234.18}, {"date": "2005-08-01T00:00:00", "price": 1220.33}, {"date": "2005-09-01T00:00:00", "price": 1228.81}, {"date": "2005-10-01T00:00:00", "price": 1207.01}, {"date": "2005-11-01T00:00:00", "price": 1249.48}, {"date": "2005-12-01T00:00:00", "price": 1248.29}, {"date": "2006-01-01T00:00:00", "price": 1280.08}, {"date": "2006-02-01T00:00:00", "price": 1280.66}, {"date": "2006-03-01T00:00:00", "price": 1294.87}, {"date": "2006-04-01T00:00:00", "price": 1310.61}, {"date": "2006-05-01T00:00:00", "price": 1270.09}, {"date": "2006-06-01T00:00:00", "price": 1270.2}, {"date": "2006-07-01T00:00:00", "price": 1276.66}, {"date": "2006-08-01T00:00:00", "price": 1303.82}, {"date": "2006-09-01T00:00:00", "price": 1335.85}, {"date": "2006-10-01T00:00:00", "price": 1377.94}, {"date": "2006-11-01T00:00:00", "price": 1400.63}, {"date": "2006-12-01T00:00:00", "price": 1418.3}, {"date": "2007-01-01T00:00:00", "price": 1438.24}, {"date": "2007-02-01T00:00:00", "price": 1406.82}, {"date": "2007-03-01T00:00:00", "price": 1420.86}, {"date": "2007-04-01T00:00:00", "price": 1482.37}, {"date": "2007-05-01T00:00:00", "price": 1530.62}, {"date": "2007-06-01T00:00:00", "price": 1503.35}, {"date": "2007-07-01T00:00:00", "price": 1455.27}, {"date": "2007-08-01T00:00:00", "price": 1473.99}, {"date": "2007-09-01T00:00:00", "price": 1526.75}, {"date": "2007-10-01T00:00:00", "price": 1549.38}, {"date": "2007-11-01T00:00:00", "price": 1481.14}, {"date": "2007-12-01T00:00:00", "price": 1468.36}, {"date": "2008-01-01T00:00:00", "price": 1378.55}, {"date": "2008-02-01T00:00:00", "price": 1330.63}, {"date": "2008-03-01T00:00:00", "price": 1322.7}, {"date": "2008-04-01T00:00:00", "price": 1385.59}, {"date": "2008-05-01T00:00:00", "price": 1400.38}, {"date": "2008-06-01T00:00:00", "price": 1280.0}, {"date": "2008-07-01T00:00:00", "price": 1267.38}, {"date": "2008-08-01T00:00:00", "price": 1282.83}, {"date": "2008-09-01T00:00:00", "price": 1166.36}, {"date": "2008-10-01T00:00:00", "price": 968.75}, {"date": "2008-11-01T00:00:00", "price": 896.24}, {"date": "2008-12-01T00:00:00", "price": 903.25}, {"date": "2009-01-01T00:00:00", "price": 825.88}, {"date": "2009-02-01T00:00:00", "price": 735.09}, {"date": "2009-03-01T00:00:00", "price": 797.87}, {"date": "2009-04-01T00:00:00", "price": 872.81}, {"date": "2009-05-01T00:00:00", "price": 919.14}, {"date": "2009-06-01T00:00:00", "price": 919.32}, {"date": "2009-07-01T00:00:00", "price": 987.48}, {"date": "2009-08-01T00:00:00", "price": 1020.62}, {"date": "2009-09-01T00:00:00", "price": 1057.08}, {"date": "2009-10-01T00:00:00", "price": 1036.19}, {"date": "2009-11-01T00:00:00", "price": 1095.63}, {"date": "2009-12-01T00:00:00", "price": 1115.1}, {"date": "2010-01-01T00:00:00", "price": 1073.87}, {"date": "2010-02-01T00:00:00", "price": 1104.49}, {"date": "2010-03-01T00:00:00", "price": 1140.45}]}}, {"mode": "vega-lite"});
+</script>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We get the standardized value by dividing the values' difference from the mean by the standard deviation.</p>
+<p>$ \text{standardized value} = \frac { \text{value} - \text{mean}} {\text{standard deviation}} $</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The mean and standard deviation of the prices</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">mean: </span><span class="si">{</span><span class="n">sp500</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"></span>
+<span class="s2">std: </span><span class="si">{</span><span class="n">sp500</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"></span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+mean: 1184.43
+std: 195.41
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We standardize the data set.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">standardized_prices</span> <span class="o">=</span> <span class="n">sp500</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">standardized_prices</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">sp500</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">sp500</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">/</span> <span class="n">sp500</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<span class="n">standardized_prices</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>date</th>
+      <th>price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2000-01-01</td>
+      <td>1.074812</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2000-02-01</td>
+      <td>0.931317</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2000-03-01</td>
+      <td>1.607646</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2000-04-01</td>
+      <td>1.371473</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2000-05-01</td>
+      <td>1.208583</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>118</th>
+      <td>2009-11-01</td>
+      <td>-0.454452</td>
+    </tr>
+    <tr>
+      <th>119</th>
+      <td>2009-12-01</td>
+      <td>-0.354814</td>
+    </tr>
+    <tr>
+      <th>120</th>
+      <td>2010-01-01</td>
+      <td>-0.565809</td>
+    </tr>
+    <tr>
+      <th>121</th>
+      <td>2010-02-01</td>
+      <td>-0.409111</td>
+    </tr>
+    <tr>
+      <th>122</th>
+      <td>2010-03-01</td>
+      <td>-0.225086</td>
+    </tr>
+  </tbody>
+</table>
+<p>123 rows × 2 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">standardized_prices</span><span class="p">)</span><span class="o">.</span><span class="n">mark_bar</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s1">&#39;price:Q&#39;</span><span class="p">,</span> <span class="nb">bin</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">BinParams</span><span class="p">(</span><span class="n">maxbins</span><span class="o">=</span><span class="mi">20</span><span class="p">)),</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s1">&#39;count()&#39;</span><span class="p">),</span> <span class="n">tooltip</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Tooltip</span><span class="p">([</span><span class="s1">&#39;count()&#39;</span><span class="p">])</span>
+<span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+
+<div id="altair-viz-c9130414ff354bf39b02637530e5282e"></div>
+<script type="text/javascript">
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-c9130414ff354bf39b02637530e5282e") {
+      outputDiv = document.getElementById("altair-viz-c9130414ff354bf39b02637530e5282e");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@4.8.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
+    };
+
+    function loadScript(lib) {
+      return new Promise(function(resolve, reject) {
+        var s = document.createElement('script');
+        s.src = paths[lib];
+        s.async = true;
+        s.onload = () => resolve(paths[lib]);
+        s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+        document.getElementsByTagName("head")[0].appendChild(s);
+      });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else if (typeof vegaEmbed === "function") {
+      displayChart(vegaEmbed);
+    } else {
+      loadScript("vega")
+        .then(() => loadScript("vega-lite"))
+        .then(() => loadScript("vega-embed"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-fd0ed95555efecbeec45d95260c94f8c"}, "mark": "bar", "encoding": {"tooltip": [{"type": "quantitative", "aggregate": "count"}], "x": {"type": "quantitative", "bin": {"maxbins": 20}, "field": "price"}, "y": {"type": "quantitative", "aggregate": "count"}}, "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json", "datasets": {"data-fd0ed95555efecbeec45d95260c94f8c": [{"date": "2000-01-01T00:00:00", "price": 1.0748115732150199}, {"date": "2000-02-01T00:00:00", "price": 0.931316747897087}, {"date": "2000-03-01T00:00:00", "price": 1.6076461385539347}, {"date": "2000-04-01T00:00:00", "price": 1.3714733072977796}, {"date": "2000-05-01T00:00:00", "price": 1.2085831400413662}, {"date": "2000-06-01T00:00:00", "price": 1.3825782919960639}, {"date": "2000-07-01T00:00:00", "price": 1.2609352107618532}, {"date": "2000-08-01T00:00:00", "price": 1.7053904739167214}, {"date": "2000-09-01T00:00:00", "price": 1.2900026361472265}, {"date": "2000-10-01T00:00:00", "price": 1.2536171793708182}, {"date": "2000-11-01T00:00:00", "price": 0.6679187928644901}, {"date": "2000-12-01T00:00:00", "price": 0.6951950916856232}, {"date": "2001-01-01T00:00:00", "price": 0.9292185710646917}, {"date": "2001-02-01T00:00:00", "price": 0.2840547826256115}, {"date": "2001-03-01T00:00:00", "price": -0.1233497481718445}, {"date": "2001-04-01T00:00:00", "price": 0.3327734251729268}, {"date": "2001-05-01T00:00:00", "price": 0.36532075359739324}, {"date": "2001-06-01T00:00:00", "price": 0.20442641308399132}, {"date": "2001-07-01T00:00:00", "price": 0.1371312293132769}, {"date": "2001-08-01T00:00:00", "price": -0.2602429927244375}, {"date": "2001-09-01T00:00:00", "price": -0.7343286067562955}, {"date": "2001-10-01T00:00:00", "price": -0.6379148225555163}, {"date": "2001-11-01T00:00:00", "price": -0.23020324148990529}, {"date": "2001-12-01T00:00:00", "price": -0.18603917792022823}, {"date": "2002-01-01T00:00:00", "price": -0.2775401578305216}, {"date": "2002-02-01T00:00:00", "price": -0.39764798772395565}, {"date": "2002-03-01T00:00:00", "price": -0.18957025600401387}, {"date": "2002-04-01T00:00:00", "price": -0.5502007959524712}, {"date": "2002-05-01T00:00:00", "price": -0.600249989661793}, {"date": "2002-06-01T00:00:00", "price": -0.9959354352246528}, {"date": "2002-07-01T00:00:00", "price": -1.3961242847204576}, {"date": "2002-08-01T00:00:00", "price": -1.3733513898322691}, {"date": "2002-09-01T00:00:00", "price": -1.889144665288563}, {"date": "2002-10-01T00:00:00", "price": -1.528462950295413}, {"date": "2002-11-01T00:00:00", "price": -1.269773099374532}, {"date": "2002-12-01T00:00:00", "price": -1.5588609268427924}, {"date": "2003-01-01T00:00:00", "price": -1.6822951346412427}, {"date": "2003-02-01T00:00:00", "price": -1.756754824668915}, {"date": "2003-03-01T00:00:00", "price": -1.7207787682500468}, {"date": "2003-04-01T00:00:00", "price": -1.3690015110334022}, {"date": "2003-05-01T00:00:00", "price": -1.130167577453233}, {"date": "2003-06-01T00:00:00", "price": -1.074335603693652}, {"date": "2003-07-01T00:00:00", "price": -0.9934278580347179}, {"date": "2003-08-01T00:00:00", "price": -0.9028480289288898}, {"date": "2003-09-01T00:00:00", "price": -0.9644627827387297}, {"date": "2003-10-01T00:00:00", "price": -0.6843305880916662}, {"date": "2003-11-01T00:00:00", "price": -0.6460004796169402}, {"date": "2003-12-01T00:00:00", "price": -0.3710881395285177}, {"date": "2004-01-01T00:00:00", "price": -0.2727808786741133}, {"date": "2004-02-01T00:00:00", "price": -0.20210814195369084}, {"date": "2004-03-01T00:00:00", "price": -0.2979590006628523}, {"date": "2004-04-01T00:00:00", "price": -0.3947310101764802}, {"date": "2004-05-01T00:00:00", "price": -0.32625880037783683}, {"date": "2004-06-01T00:00:00", "price": -0.22308991027764036}, {"date": "2004-07-01T00:00:00", "price": -0.4232866851149273}, {"date": "2004-08-01T00:00:00", "price": -0.4103905738524027}, {"date": "2004-09-01T00:00:00", "price": -0.357475577640298}, {"date": "2004-10-01T00:00:00", "price": -0.2775401578305216}, {"date": "2004-11-01T00:00:00", "price": -0.05431461288158353}, {"date": "2004-12-01T00:00:00", "price": 0.1406623073970637}, {"date": "2005-01-01T00:00:00", "price": -0.016189204585627476}, {"date": "2005-02-01T00:00:00", "price": 0.09808467021285448}, {"date": "2005-03-01T00:00:00", "price": -0.019669107624721755}, {"date": "2005-04-01T00:00:00", "price": -0.14115866372485483}, {"date": "2005-05-01T00:00:00", "price": 0.0361628661348596}, {"date": "2005-06-01T00:00:00", "price": 0.035292890375085734}, {"date": "2005-07-01T00:00:00", "price": 0.2545779568826981}, {"date": "2005-08-01T00:00:00", "price": 0.18370051998350434}, {"date": "2005-09-01T00:00:00", "price": 0.22709695788279374}, {"date": "2005-10-01T00:00:00", "price": 0.11553536045301722}, {"date": "2005-11-01T00:00:00", "price": 0.3328757752623118}, {"date": "2005-12-01T00:00:00", "price": 0.3267859449438971}, {"date": "2006-01-01T00:00:00", "price": 0.48947141202153926}, {"date": "2006-02-01T00:00:00", "price": 0.4924395646137084}, {"date": "2006-03-01T00:00:00", "price": 0.5651593031218326}, {"date": "2006-04-01T00:00:00", "price": 0.6457088234679191}, {"date": "2006-05-01T00:00:00", "price": 0.4383475423736736}, {"date": "2006-06-01T00:00:00", "price": 0.4389104678652924}, {"date": "2006-07-01T00:00:00", "price": 0.4719695467366852}, {"date": "2006-08-01T00:00:00", "price": 0.6109609681216723}, {"date": "2006-09-01T00:00:00", "price": 0.7748746362719359}, {"date": "2006-10-01T00:00:00", "price": 0.9902703993829138}, {"date": "2006-11-01T00:00:00", "price": 1.1063865757903286}, {"date": "2006-12-01T00:00:00", "price": 1.196812879762078}, {"date": "2007-01-01T00:00:00", "price": 1.2988559188790392}, {"date": "2007-02-01T00:00:00", "price": 1.1380639284550211}, {"date": "2007-03-01T00:00:00", "price": 1.2099136912033726}, {"date": "2007-04-01T00:00:00", "price": 1.5246913911072977}, {"date": "2007-05-01T00:00:00", "price": 1.7716109817488908}, {"date": "2007-06-01T00:00:00", "price": 1.6320566348722847}, {"date": "2007-07-01T00:00:00", "price": 1.3860070199904657}, {"date": "2007-08-01T00:00:00", "price": 1.4818067036549345}, {"date": "2007-09-01T00:00:00", "price": 1.7518062394528713}, {"date": "2007-10-01T00:00:00", "price": 1.867615365592131}, {"date": "2007-11-01T00:00:00", "price": 1.5183968606101141}, {"date": "2007-12-01T00:00:00", "price": 1.4529951534930239}, {"date": "2008-01-01T00:00:00", "price": 0.9933920771091594}, {"date": "2008-02-01T00:00:00", "price": 0.7481612629424216}, {"date": "2008-03-01T00:00:00", "price": 0.7075794525012227}, {"date": "2008-04-01T00:00:00", "price": 1.0294193085727201}, {"date": "2008-05-01T00:00:00", "price": 1.1051071996730146}, {"date": "2008-06-01T00:00:00", "price": 0.48906201166399915}, {"date": "2008-07-01T00:00:00", "price": 0.42447910526199134}, {"date": "2008-08-01T00:00:00", "price": 0.5035445493119928}, {"date": "2008-09-01T00:00:00", "price": -0.09249119622223208}, {"date": "2008-10-01T00:00:00", "price": -1.1037612543918731}, {"date": "2008-11-01T00:00:00", "price": -1.474831503457612}, {"date": "2008-12-01T00:00:00", "price": -1.4389577971281289}, {"date": "2009-01-01T00:00:00", "price": -1.8348991179144511}, {"date": "2009-02-01T00:00:00", "price": -2.2995173486781866}, {"date": "2009-03-01T00:00:00", "price": -1.9782404180983066}, {"date": "2009-04-01T00:00:00", "price": -1.594734633172276}, {"date": "2009-05-01T00:00:00", "price": -1.357640651111654}, {"date": "2009-06-01T00:00:00", "price": -1.3567195003071877}, {"date": "2009-07-01T00:00:00", "price": -1.0079103956827116}, {"date": "2009-08-01T00:00:00", "price": -0.8383162975715739}, {"date": "2009-09-01T00:00:00", "price": -0.6517320846225073}, {"date": "2009-10-01T00:00:00", "price": -0.7586367529852607}, {"date": "2009-11-01T00:00:00", "price": -0.45445228733269477}, {"date": "2009-12-01T00:00:00", "price": -0.35481447531628507}, {"date": "2010-01-01T00:00:00", "price": -0.5658091845837024}, {"date": "2010-02-01T00:00:00", "price": -0.40911119773508875}, {"date": "2010-03-01T00:00:00", "price": -0.2250857370206495}]}}, {"mode": "vega-lite"});
+</script>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The new mean and standard deviation</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">mean: </span><span class="si">{</span><span class="n">standardized_prices</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"></span>
+<span class="s2">std: </span><span class="si">{</span><span class="n">standardized_prices</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"></span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+mean: -0.00
+std: 1.00
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>When plotted on the dates, it provides a similar graph as before, but now with a value domain around 0.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">standardized_prices</span><span class="p">)</span><span class="o">.</span><span class="n">mark_line</span><span class="p">(</span><span class="n">point</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">strokeWidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s1">&#39;date:T&#39;</span><span class="p">),</span> <span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s1">&#39;price&#39;</span><span class="p">),</span> <span class="n">alt</span><span class="o">.</span><span class="n">Tooltip</span><span class="p">(</span><span class="s1">&#39;price&#39;</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">configure_point</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+
+<div id="altair-viz-58eec349f3db4bcba3b94d04858feebb"></div>
+<script type="text/javascript">
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-58eec349f3db4bcba3b94d04858feebb") {
+      outputDiv = document.getElementById("altair-viz-58eec349f3db4bcba3b94d04858feebb");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@4.8.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
+    };
+
+    function loadScript(lib) {
+      return new Promise(function(resolve, reject) {
+        var s = document.createElement('script');
+        s.src = paths[lib];
+        s.async = true;
+        s.onload = () => resolve(paths[lib]);
+        s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+        document.getElementsByTagName("head")[0].appendChild(s);
+      });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else if (typeof vegaEmbed === "function") {
+      displayChart(vegaEmbed);
+    } else {
+      loadScript("vega")
+        .then(() => loadScript("vega-lite"))
+        .then(() => loadScript("vega-embed"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}, "point": {"size": 10}}, "data": {"name": "data-fd0ed95555efecbeec45d95260c94f8c"}, "mark": {"type": "line", "point": true, "strokeWidth": 1}, "encoding": {"tooltip": {"type": "quantitative", "field": "price"}, "x": {"type": "temporal", "field": "date"}, "y": {"type": "quantitative", "field": "price"}}, "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json", "datasets": {"data-fd0ed95555efecbeec45d95260c94f8c": [{"date": "2000-01-01T00:00:00", "price": 1.0748115732150199}, {"date": "2000-02-01T00:00:00", "price": 0.931316747897087}, {"date": "2000-03-01T00:00:00", "price": 1.6076461385539347}, {"date": "2000-04-01T00:00:00", "price": 1.3714733072977796}, {"date": "2000-05-01T00:00:00", "price": 1.2085831400413662}, {"date": "2000-06-01T00:00:00", "price": 1.3825782919960639}, {"date": "2000-07-01T00:00:00", "price": 1.2609352107618532}, {"date": "2000-08-01T00:00:00", "price": 1.7053904739167214}, {"date": "2000-09-01T00:00:00", "price": 1.2900026361472265}, {"date": "2000-10-01T00:00:00", "price": 1.2536171793708182}, {"date": "2000-11-01T00:00:00", "price": 0.6679187928644901}, {"date": "2000-12-01T00:00:00", "price": 0.6951950916856232}, {"date": "2001-01-01T00:00:00", "price": 0.9292185710646917}, {"date": "2001-02-01T00:00:00", "price": 0.2840547826256115}, {"date": "2001-03-01T00:00:00", "price": -0.1233497481718445}, {"date": "2001-04-01T00:00:00", "price": 0.3327734251729268}, {"date": "2001-05-01T00:00:00", "price": 0.36532075359739324}, {"date": "2001-06-01T00:00:00", "price": 0.20442641308399132}, {"date": "2001-07-01T00:00:00", "price": 0.1371312293132769}, {"date": "2001-08-01T00:00:00", "price": -0.2602429927244375}, {"date": "2001-09-01T00:00:00", "price": -0.7343286067562955}, {"date": "2001-10-01T00:00:00", "price": -0.6379148225555163}, {"date": "2001-11-01T00:00:00", "price": -0.23020324148990529}, {"date": "2001-12-01T00:00:00", "price": -0.18603917792022823}, {"date": "2002-01-01T00:00:00", "price": -0.2775401578305216}, {"date": "2002-02-01T00:00:00", "price": -0.39764798772395565}, {"date": "2002-03-01T00:00:00", "price": -0.18957025600401387}, {"date": "2002-04-01T00:00:00", "price": -0.5502007959524712}, {"date": "2002-05-01T00:00:00", "price": -0.600249989661793}, {"date": "2002-06-01T00:00:00", "price": -0.9959354352246528}, {"date": "2002-07-01T00:00:00", "price": -1.3961242847204576}, {"date": "2002-08-01T00:00:00", "price": -1.3733513898322691}, {"date": "2002-09-01T00:00:00", "price": -1.889144665288563}, {"date": "2002-10-01T00:00:00", "price": -1.528462950295413}, {"date": "2002-11-01T00:00:00", "price": -1.269773099374532}, {"date": "2002-12-01T00:00:00", "price": -1.5588609268427924}, {"date": "2003-01-01T00:00:00", "price": -1.6822951346412427}, {"date": "2003-02-01T00:00:00", "price": -1.756754824668915}, {"date": "2003-03-01T00:00:00", "price": -1.7207787682500468}, {"date": "2003-04-01T00:00:00", "price": -1.3690015110334022}, {"date": "2003-05-01T00:00:00", "price": -1.130167577453233}, {"date": "2003-06-01T00:00:00", "price": -1.074335603693652}, {"date": "2003-07-01T00:00:00", "price": -0.9934278580347179}, {"date": "2003-08-01T00:00:00", "price": -0.9028480289288898}, {"date": "2003-09-01T00:00:00", "price": -0.9644627827387297}, {"date": "2003-10-01T00:00:00", "price": -0.6843305880916662}, {"date": "2003-11-01T00:00:00", "price": -0.6460004796169402}, {"date": "2003-12-01T00:00:00", "price": -0.3710881395285177}, {"date": "2004-01-01T00:00:00", "price": -0.2727808786741133}, {"date": "2004-02-01T00:00:00", "price": -0.20210814195369084}, {"date": "2004-03-01T00:00:00", "price": -0.2979590006628523}, {"date": "2004-04-01T00:00:00", "price": -0.3947310101764802}, {"date": "2004-05-01T00:00:00", "price": -0.32625880037783683}, {"date": "2004-06-01T00:00:00", "price": -0.22308991027764036}, {"date": "2004-07-01T00:00:00", "price": -0.4232866851149273}, {"date": "2004-08-01T00:00:00", "price": -0.4103905738524027}, {"date": "2004-09-01T00:00:00", "price": -0.357475577640298}, {"date": "2004-10-01T00:00:00", "price": -0.2775401578305216}, {"date": "2004-11-01T00:00:00", "price": -0.05431461288158353}, {"date": "2004-12-01T00:00:00", "price": 0.1406623073970637}, {"date": "2005-01-01T00:00:00", "price": -0.016189204585627476}, {"date": "2005-02-01T00:00:00", "price": 0.09808467021285448}, {"date": "2005-03-01T00:00:00", "price": -0.019669107624721755}, {"date": "2005-04-01T00:00:00", "price": -0.14115866372485483}, {"date": "2005-05-01T00:00:00", "price": 0.0361628661348596}, {"date": "2005-06-01T00:00:00", "price": 0.035292890375085734}, {"date": "2005-07-01T00:00:00", "price": 0.2545779568826981}, {"date": "2005-08-01T00:00:00", "price": 0.18370051998350434}, {"date": "2005-09-01T00:00:00", "price": 0.22709695788279374}, {"date": "2005-10-01T00:00:00", "price": 0.11553536045301722}, {"date": "2005-11-01T00:00:00", "price": 0.3328757752623118}, {"date": "2005-12-01T00:00:00", "price": 0.3267859449438971}, {"date": "2006-01-01T00:00:00", "price": 0.48947141202153926}, {"date": "2006-02-01T00:00:00", "price": 0.4924395646137084}, {"date": "2006-03-01T00:00:00", "price": 0.5651593031218326}, {"date": "2006-04-01T00:00:00", "price": 0.6457088234679191}, {"date": "2006-05-01T00:00:00", "price": 0.4383475423736736}, {"date": "2006-06-01T00:00:00", "price": 0.4389104678652924}, {"date": "2006-07-01T00:00:00", "price": 0.4719695467366852}, {"date": "2006-08-01T00:00:00", "price": 0.6109609681216723}, {"date": "2006-09-01T00:00:00", "price": 0.7748746362719359}, {"date": "2006-10-01T00:00:00", "price": 0.9902703993829138}, {"date": "2006-11-01T00:00:00", "price": 1.1063865757903286}, {"date": "2006-12-01T00:00:00", "price": 1.196812879762078}, {"date": "2007-01-01T00:00:00", "price": 1.2988559188790392}, {"date": "2007-02-01T00:00:00", "price": 1.1380639284550211}, {"date": "2007-03-01T00:00:00", "price": 1.2099136912033726}, {"date": "2007-04-01T00:00:00", "price": 1.5246913911072977}, {"date": "2007-05-01T00:00:00", "price": 1.7716109817488908}, {"date": "2007-06-01T00:00:00", "price": 1.6320566348722847}, {"date": "2007-07-01T00:00:00", "price": 1.3860070199904657}, {"date": "2007-08-01T00:00:00", "price": 1.4818067036549345}, {"date": "2007-09-01T00:00:00", "price": 1.7518062394528713}, {"date": "2007-10-01T00:00:00", "price": 1.867615365592131}, {"date": "2007-11-01T00:00:00", "price": 1.5183968606101141}, {"date": "2007-12-01T00:00:00", "price": 1.4529951534930239}, {"date": "2008-01-01T00:00:00", "price": 0.9933920771091594}, {"date": "2008-02-01T00:00:00", "price": 0.7481612629424216}, {"date": "2008-03-01T00:00:00", "price": 0.7075794525012227}, {"date": "2008-04-01T00:00:00", "price": 1.0294193085727201}, {"date": "2008-05-01T00:00:00", "price": 1.1051071996730146}, {"date": "2008-06-01T00:00:00", "price": 0.48906201166399915}, {"date": "2008-07-01T00:00:00", "price": 0.42447910526199134}, {"date": "2008-08-01T00:00:00", "price": 0.5035445493119928}, {"date": "2008-09-01T00:00:00", "price": -0.09249119622223208}, {"date": "2008-10-01T00:00:00", "price": -1.1037612543918731}, {"date": "2008-11-01T00:00:00", "price": -1.474831503457612}, {"date": "2008-12-01T00:00:00", "price": -1.4389577971281289}, {"date": "2009-01-01T00:00:00", "price": -1.8348991179144511}, {"date": "2009-02-01T00:00:00", "price": -2.2995173486781866}, {"date": "2009-03-01T00:00:00", "price": -1.9782404180983066}, {"date": "2009-04-01T00:00:00", "price": -1.594734633172276}, {"date": "2009-05-01T00:00:00", "price": -1.357640651111654}, {"date": "2009-06-01T00:00:00", "price": -1.3567195003071877}, {"date": "2009-07-01T00:00:00", "price": -1.0079103956827116}, {"date": "2009-08-01T00:00:00", "price": -0.8383162975715739}, {"date": "2009-09-01T00:00:00", "price": -0.6517320846225073}, {"date": "2009-10-01T00:00:00", "price": -0.7586367529852607}, {"date": "2009-11-01T00:00:00", "price": -0.45445228733269477}, {"date": "2009-12-01T00:00:00", "price": -0.35481447531628507}, {"date": "2010-01-01T00:00:00", "price": -0.5658091845837024}, {"date": "2010-02-01T00:00:00", "price": -0.40911119773508875}, {"date": "2010-03-01T00:00:00", "price": -0.2250857370206495}]}}, {"mode": "vega-lite"});
+</script>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div><a class="u-url" href="/2020/09/22/standardization.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>This is not another blog about bitcoin.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/nocibambi" title="nocibambi"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
