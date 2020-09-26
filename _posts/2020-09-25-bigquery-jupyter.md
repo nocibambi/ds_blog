@@ -57,7 +57,7 @@ layout: notebook
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;GOOGLE_APPLICATION_CREDENTIALS&quot;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;/home/andras/.credentials/Notebook bigquery-c422e406404b.json&quot;</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;GOOGLE_APPLICATION_CREDENTIALS&quot;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;path/to/credentials.json&quot;</span>
 </pre></div>
 
     </div>
