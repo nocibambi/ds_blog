@@ -57,7 +57,7 @@ layout: notebook
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;GOOGLE_APPLICATION_CREDENTIALS&quot;</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;~/.credentials/Notebook bigquery-c422e406404b.json&quot;</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;GOOGLE_APPLICATION_CREDENTIALS&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/.credentials/Notebook bigquery-c422e406404b.json&quot;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -311,12 +311,12 @@ ORDER BY date DESC
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
-<div id="altair-viz-392d2e711e3c4d20a1c797a6d6c78a00"></div>
+<div id="altair-viz-95e15ac9f3ca4a4782fddc9239a3070d"></div>
 <script type="text/javascript">
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-392d2e711e3c4d20a1c797a6d6c78a00") {
-      outputDiv = document.getElementById("altair-viz-392d2e711e3c4d20a1c797a6d6c78a00");
+    if (outputDiv.id !== "altair-viz-95e15ac9f3ca4a4782fddc9239a3070d") {
+      outputDiv = document.getElementById("altair-viz-95e15ac9f3ca4a4782fddc9239a3070d");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -596,12 +596,12 @@ ORDER BY date DESC
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
-<div id="altair-viz-ab847b677a154936837af82bec3e1a93"></div>
+<div id="altair-viz-1136ba25a5d74c5694463e36631bd12b"></div>
 <script type="text/javascript">
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-ab847b677a154936837af82bec3e1a93") {
-      outputDiv = document.getElementById("altair-viz-ab847b677a154936837af82bec3e1a93");
+    if (outputDiv.id !== "altair-viz-1136ba25a5d74c5694463e36631bd12b") {
+      outputDiv = document.getElementById("altair-viz-1136ba25a5d74c5694463e36631bd12b");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
