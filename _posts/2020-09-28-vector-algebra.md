@@ -1,6 +1,6 @@
 ---
 keywords: fastai
-title: Vector Algebra "from scratch" with type annotations
+title: Vector Algebra 'from scratch" with type annotations
 nb_path: _notebooks/2020-09-28-vector-algebra.ipynb
 layout: notebook
 ---
