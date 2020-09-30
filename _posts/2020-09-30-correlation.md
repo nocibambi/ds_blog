@@ -21,6 +21,28 @@ layout: notebook
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In this post we examine covariance and a correlation a bit closer.</p>
+<p>We will use them to examine the relationship between Ethereum transaction value and gas price.</p>
+<p>Again, most of the time, we break down the steps into standard Python data types and operations (i.e. we use numpy mostly for verification of our results).</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Libraries-and-data-load">Libraries and data load<a class="anchor-link" href="#Libraries-and-data-load"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We pull the data from Google's public datasets with BigQuery, use pandas and numpy to manipulate it, and altair to plot their relationship.</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -82,8 +104,8 @@ layout: notebook
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">values</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">query</span><span class="p">)</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">(</span><span class="n">dtypes</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="s1">&#39;gas_price&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">},</span> <span class="n">date_as_object</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">values</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">transactions</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">query</span><span class="p">)</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">(</span><span class="n">dtypes</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="s1">&#39;gas_price&#39;</span><span class="p">:</span> <span class="nb">float</span><span class="p">},</span> <span class="n">date_as_object</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">transactions</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -164,6 +186,173 @@ layout: notebook
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>There are a few days when the gas prices were outstandingly high so we remove values beyond three standard deviation from the mean.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Outliers">Outliers<a class="anchor-link" href="#Outliers"> </a></h2>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">labelx</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">selection_single</span><span class="p">(</span>
+    <span class="n">encodings</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span>
+    <span class="n">on</span><span class="o">=</span><span class="s1">&#39;mouseover&#39;</span><span class="p">,</span>
+    <span class="n">empty</span><span class="o">=</span><span class="s1">&#39;none&#39;</span>
+<span class="p">)</span>
+
+<span class="n">labely</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">selection_single</span><span class="p">(</span>
+    <span class="n">encodings</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">],</span>
+    <span class="n">on</span><span class="o">=</span><span class="s1">&#39;mouseover&#39;</span><span class="p">,</span>
+    <span class="n">empty</span><span class="o">=</span><span class="s1">&#39;none&#39;</span>
+<span class="p">)</span>
+
+<span class="n">ruler</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">()</span><span class="o">.</span><span class="n">mark_rule</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkgray&#39;</span><span class="p">)</span>
+
+<span class="n">chart</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">()</span><span class="o">.</span><span class="n">mark_point</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Axis</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;,.2e&#39;</span><span class="p">))),</span>
+    <span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s1">&#39;gas_price&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Axis</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;,.2e&#39;</span><span class="p">))),</span>
+    <span class="n">alt</span><span class="o">.</span><span class="n">Tooltip</span><span class="p">([</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;gas_price&#39;</span><span class="p">,</span> <span class="s1">&#39;date&#39;</span><span class="p">])</span>
+<span class="p">)</span><span class="o">.</span><span class="n">properties</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Trasaction values and gas prices&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">add_selection</span><span class="p">(</span><span class="n">labelx</span><span class="p">)</span><span class="o">.</span><span class="n">add_selection</span><span class="p">(</span><span class="n">labely</span><span class="p">)</span>
+
+<span class="n">alt</span><span class="o">.</span><span class="n">layer</span><span class="p">(</span>
+    <span class="n">chart</span><span class="p">,</span>
+    <span class="n">ruler</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;value:Q&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">transform_filter</span><span class="p">(</span><span class="n">labelx</span><span class="p">),</span>
+    <span class="n">ruler</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;gas_price:Q&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">transform_filter</span><span class="p">(</span><span class="n">labely</span><span class="p">),</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">transactions</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+
+<div id="altair-viz-f44b7bdd4baf45c19d74cbd9eaa5a8d1"></div>
+<script type="text/javascript">
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-f44b7bdd4baf45c19d74cbd9eaa5a8d1") {
+      outputDiv = document.getElementById("altair-viz-f44b7bdd4baf45c19d74cbd9eaa5a8d1");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@4.8.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
+    };
+
+    function loadScript(lib) {
+      return new Promise(function(resolve, reject) {
+        var s = document.createElement('script');
+        s.src = paths[lib];
+        s.async = true;
+        s.onload = () => resolve(paths[lib]);
+        s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+        document.getElementsByTagName("head")[0].appendChild(s);
+      });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else if (typeof vegaEmbed === "function") {
+      displayChart(vegaEmbed);
+    } else {
+      loadScript("vega")
+        .then(() => loadScript("vega-lite"))
+        .then(() => loadScript("vega-embed"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "layer": [{"mark": "point", "encoding": {"tooltip": [{"type": "quantitative", "field": "value"}, {"type": "quantitative", "field": "gas_price"}, {"type": "temporal", "field": "date"}], "x": {"type": "quantitative", "axis": {"format": ",.2e"}, "field": "value"}, "y": {"type": "quantitative", "axis": {"format": ",.2e"}, "field": "gas_price"}}, "height": 400, "selection": {"selector001": {"type": "single", "encodings": ["x"], "on": "mouseover", "empty": "none"}, "selector002": {"type": "single", "encodings": ["y"], "on": "mouseover", "empty": "none"}, "selector003": {"type": "interval", "bind": "scales", "encodings": ["x", "y"]}}, "title": "Trasaction values and gas prices", "width": 600}, {"mark": {"type": "rule", "color": "darkgray"}, "encoding": {"x": {"type": "quantitative", "field": "value"}}, "transform": [{"filter": {"selection": "selector001"}}]}, {"mark": {"type": "rule", "color": "darkgray"}, "encoding": {"y": {"type": "quantitative", "field": "gas_price"}}, "transform": [{"filter": {"selection": "selector002"}}]}], "data": {"name": "data-4742d3161c32f6b800c48c8df3eea09c"}, "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json", "datasets": {"data-4742d3161c32f6b800c48c8df3eea09c": [{"date": "2019-01-01T00:00:00", "value": 3.7191031386510116e+18, "gas_price": 14315142889.145943}, {"date": "2019-01-02T00:00:00", "value": 4.649915033918199e+18, "gas_price": 13499521218.479685}, {"date": "2019-01-03T00:00:00", "value": 4.1887805927758065e+18, "gas_price": 12695043341.144863}, {"date": "2019-01-04T00:00:00", "value": 6.958367853199849e+18, "gas_price": 14181969584.39591}, {"date": "2019-01-05T00:00:00", "value": 8.16759042879222e+18, "gas_price": 24104750527.720737}, {"date": "2019-01-06T00:00:00", "value": 4.936073253896834e+18, "gas_price": 13415788989.912727}, {"date": "2019-01-07T00:00:00", "value": 4.771181332207826e+18, "gas_price": 15720058234.205006}, {"date": "2019-01-08T00:00:00", "value": 4.2343928699236316e+18, "gas_price": 13657909933.728014}, {"date": "2019-01-09T00:00:00", "value": 3.9280124856905334e+18, "gas_price": 13513810184.239502}, {"date": "2019-01-10T00:00:00", "value": 5.418797721055823e+18, "gas_price": 15353317537.891487}, {"date": "2019-01-11T00:00:00", "value": 7.17317116403804e+18, "gas_price": 13623596488.87948}, {"date": "2019-01-12T00:00:00", "value": 3.2841578919215903e+18, "gas_price": 12173815219.40442}, {"date": "2019-01-13T00:00:00", "value": 3.6892991447123656e+18, "gas_price": 12292233182.47961}, {"date": "2019-01-14T00:00:00", "value": 5.995585241716469e+18, "gas_price": 19170497164.09862}, {"date": "2019-01-15T00:00:00", "value": 4.420265309154737e+18, "gas_price": 18382479128.083447}, {"date": "2019-01-16T00:00:00", "value": 5.219496318721308e+18, "gas_price": 20583948506.261314}, {"date": "2019-01-17T00:00:00", "value": 4.174059420495908e+18, "gas_price": 13577368389.678377}, {"date": "2019-01-18T00:00:00", "value": 3.282350096456219e+18, "gas_price": 14354716512.804844}, {"date": "2019-01-19T00:00:00", "value": 2.7099343180405663e+18, "gas_price": 12391011086.775784}, {"date": "2019-01-20T00:00:00", "value": 3.201189607350696e+18, "gas_price": 12337688742.512108}, {"date": "2019-01-21T00:00:00", "value": 3.153552034977962e+18, "gas_price": 13502669872.581282}, {"date": "2019-01-22T00:00:00", "value": 3.0389102625213645e+18, "gas_price": 18531220647.97098}, {"date": "2019-01-23T00:00:00", "value": 3.7027316476936924e+18, "gas_price": 13263803398.196943}, {"date": "2019-01-24T00:00:00", "value": 4.5705240349461453e+18, "gas_price": 14353232108.046131}, {"date": "2019-01-25T00:00:00", "value": 3.897714636774361e+18, "gas_price": 13840439478.527985}, {"date": "2019-01-26T00:00:00", "value": 2.777561192618015e+18, "gas_price": 12589133944.202158}, {"date": "2019-01-27T00:00:00", "value": 3.8221638713472364e+18, "gas_price": 11769278879.409578}, {"date": "2019-01-28T00:00:00", "value": 5.71821622642347e+18, "gas_price": 15188267293.277246}, {"date": "2019-01-29T00:00:00", "value": 4.0336159449500155e+18, "gas_price": 12419605789.641191}, {"date": "2019-01-30T00:00:00", "value": 4.270924078953638e+18, "gas_price": 13039594019.551449}, {"date": "2019-01-31T00:00:00", "value": 4.556618331901688e+18, "gas_price": 14185099542.783363}, {"date": "2019-02-01T00:00:00", "value": 3.920012586437483e+18, "gas_price": 13213020381.671923}, {"date": "2019-02-02T00:00:00", "value": 2.710136679553453e+18, "gas_price": 11945272141.662292}, {"date": "2019-02-03T00:00:00", "value": 3.0603522852938655e+18, "gas_price": 11599425759.446758}, {"date": "2019-02-04T00:00:00", "value": 2.468694336806275e+18, "gas_price": 12038176843.991419}, {"date": "2019-02-05T00:00:00", "value": 2.3832249548219453e+18, "gas_price": 12551502885.032118}, {"date": "2019-02-06T00:00:00", "value": 4.1004230018075177e+18, "gas_price": 12572180915.256405}, {"date": "2019-02-07T00:00:00", "value": 3.3787437118656896e+18, "gas_price": 14024837996.980894}, {"date": "2019-02-08T00:00:00", "value": 4.563018677709715e+18, "gas_price": 13284437647.547201}, {"date": "2019-02-09T00:00:00", "value": 2.776719827316741e+18, "gas_price": 12363600588.758627}, {"date": "2019-02-10T00:00:00", "value": 3.8033581810633503e+18, "gas_price": 12843661007.019697}, {"date": "2019-02-11T00:00:00", "value": 4.4536846212256845e+18, "gas_price": 13943920200.235804}, {"date": "2019-02-12T00:00:00", "value": 3.514261256823808e+18, "gas_price": 12998438367.625889}, {"date": "2019-02-13T00:00:00", "value": 3.673940057768626e+18, "gas_price": 13681955215.749994}, {"date": "2019-02-14T00:00:00", "value": 3.5136642699652746e+18, "gas_price": 19107069178.142746}, {"date": "2019-02-15T00:00:00", "value": 3.391254387749253e+18, "gas_price": 14732468819.567251}, {"date": "2019-02-16T00:00:00", "value": 2.3790042654861496e+18, "gas_price": 13479449377.505962}, {"date": "2019-02-17T00:00:00", "value": 3.9180492901317284e+18, "gas_price": 13729254463.139553}, {"date": "2019-02-18T00:00:00", "value": 5.87006442810387e+18, "gas_price": 17066345359.55928}, {"date": "2019-02-20T00:00:00", "value": 4.220271937873619e+18, "gas_price": 16071353124.481653}, {"date": "2019-02-21T00:00:00", "value": 3.94245006073694e+18, "gas_price": 15301279312.013311}, {"date": "2019-02-22T00:00:00", "value": 3.978712492365391e+18, "gas_price": 14906500367.376968}, {"date": "2019-02-23T00:00:00", "value": 3.217993180339984e+18, "gas_price": 14038665092.719246}, {"date": "2019-02-24T00:00:00", "value": 5.334970336608362e+18, "gas_price": 16250710476.300611}, {"date": "2019-02-25T00:00:00", "value": 6.495866621194738e+18, "gas_price": 17016748385.490389}, {"date": "2019-02-26T00:00:00", "value": 3.4014737763433226e+18, "gas_price": 17411522198.505695}, {"date": "2019-02-27T00:00:00", "value": 5.420943598677181e+18, "gas_price": 16333133968.050844}, {"date": "2019-02-28T00:00:00", "value": 4.356574747457577e+18, "gas_price": 18828795385.196796}, {"date": "2019-03-01T00:00:00", "value": 3.3924199744293786e+18, "gas_price": 12927381010.813858}, {"date": "2019-03-02T00:00:00", "value": 2.821746262346659e+18, "gas_price": 12055153413.57115}, {"date": "2019-03-03T00:00:00", "value": 3.4520003910002263e+18, "gas_price": 11963576046.21506}, {"date": "2019-03-04T00:00:00", "value": 4.0486305383658716e+18, "gas_price": 12586925298.775534}, {"date": "2019-03-05T00:00:00", "value": 3.9106458799157775e+18, "gas_price": 13416451614.20132}, {"date": "2019-03-06T00:00:00", "value": 3.812177038813532e+18, "gas_price": 13941269746.353466}, {"date": "2019-03-07T00:00:00", "value": 3.7211262929676923e+18, "gas_price": 13606205052.058552}, {"date": "2019-03-08T00:00:00", "value": 4.288633561969286e+18, "gas_price": 13375275525.359518}, {"date": "2019-03-09T00:00:00", "value": 3.286776410530723e+18, "gas_price": 11860783671.243021}, {"date": "2019-03-10T00:00:00", "value": 3.5564201563985275e+18, "gas_price": 11983551088.385302}, {"date": "2019-03-11T00:00:00", "value": 4.609613195306102e+18, "gas_price": 12399324152.554485}, {"date": "2019-03-12T00:00:00", "value": 4.196329062407143e+18, "gas_price": 12158684765.006546}, {"date": "2019-03-13T00:00:00", "value": 3.6077533042482176e+18, "gas_price": 11624837408.300169}, {"date": "2019-03-14T00:00:00", "value": 3.9855916454348493e+18, "gas_price": 10989696263.509779}, {"date": "2019-03-15T00:00:00", "value": 3.9594720375054607e+18, "gas_price": 10940212075.542826}, {"date": "2019-03-16T00:00:00", "value": 3.824098230375535e+18, "gas_price": 10309274810.279844}, {"date": "2019-03-17T00:00:00", "value": 3.541447374846547e+18, "gas_price": 14443740238.441362}, {"date": "2019-03-19T00:00:00", "value": 2.992385555610869e+18, "gas_price": 13048876404.340824}, {"date": "2019-03-20T00:00:00", "value": 4.592320035256717e+18, "gas_price": 12113517345.709997}, {"date": "2019-03-21T00:00:00", "value": 4.038386432447969e+18, "gas_price": 13795593836.984797}, {"date": "2019-03-22T00:00:00", "value": 3.3069192936444713e+18, "gas_price": 12524493040.65563}, {"date": "2019-03-23T00:00:00", "value": 4.565842152984212e+18, "gas_price": 10946080954.559103}, {"date": "2019-03-24T00:00:00", "value": 3.251556631011996e+18, "gas_price": 10956875286.327505}, {"date": "2019-03-25T00:00:00", "value": 4.4342556779707146e+18, "gas_price": 12489367039.117603}, {"date": "2019-03-26T00:00:00", "value": 4.0592124769098583e+18, "gas_price": 13016325389.375248}, {"date": "2019-03-27T00:00:00", "value": 3.6737682254278794e+18, "gas_price": 13538110998.516697}, {"date": "2019-03-28T00:00:00", "value": 3.6807986092980393e+18, "gas_price": 12169523606.319317}, {"date": "2019-03-29T00:00:00", "value": 4.051446813099793e+18, "gas_price": 12522004706.028831}, {"date": "2019-03-30T00:00:00", "value": 3.780686533191628e+18, "gas_price": 10372174778.038227}, {"date": "2019-03-31T00:00:00", "value": 3.3530107407583795e+18, "gas_price": 10506785000.666502}, {"date": "2019-04-01T00:00:00", "value": 3.5636439615909996e+18, "gas_price": 12504161043.854633}, {"date": "2019-04-02T00:00:00", "value": 5.426225423859744e+18, "gas_price": 13831753794.218987}, {"date": "2019-04-03T00:00:00", "value": 5.583318475243887e+18, "gas_price": 16724789805.634813}, {"date": "2019-04-04T00:00:00", "value": 4.3241381902044385e+18, "gas_price": 13670289736.210403}, {"date": "2019-04-05T00:00:00", "value": 4.3342069981006147e+18, "gas_price": 11802153034.062923}, {"date": "2019-04-06T00:00:00", "value": 3.3488621141503386e+18, "gas_price": 10710997658.490343}, {"date": "2019-04-07T00:00:00", "value": 4.2033933437111956e+18, "gas_price": 11287108181.417034}, {"date": "2019-04-08T00:00:00", "value": 5.68567605796837e+18, "gas_price": 12491420245.660002}, {"date": "2019-04-09T00:00:00", "value": 5.10763303146288e+18, "gas_price": 11997807262.885752}, {"date": "2019-04-10T00:00:00", "value": 4.227450319520092e+18, "gas_price": 15176978195.08451}, {"date": "2019-04-11T00:00:00", "value": 4.0392800655112796e+18, "gas_price": 12460278246.548168}, {"date": "2019-04-12T00:00:00", "value": 3.621704477044426e+18, "gas_price": 11627414484.56955}, {"date": "2019-04-13T00:00:00", "value": 2.525201640843593e+18, "gas_price": 10598198089.885382}, {"date": "2019-04-14T00:00:00", "value": 3.139626047101844e+18, "gas_price": 10321563354.917921}, {"date": "2019-04-15T00:00:00", "value": 4.1080964671405696e+18, "gas_price": 10545604318.815344}, {"date": "2019-04-16T00:00:00", "value": 3.382430544100825e+18, "gas_price": 10722255078.780825}, {"date": "2019-04-17T00:00:00", "value": 3.2791404902821934e+18, "gas_price": 11247466001.906633}, {"date": "2019-04-18T00:00:00", "value": 3.77716759854624e+18, "gas_price": 11899445742.906096}, {"date": "2019-04-19T00:00:00", "value": 3.3351353518430305e+18, "gas_price": 11015536488.938826}, {"date": "2019-04-20T00:00:00", "value": 2.7378823914384266e+18, "gas_price": 8972528637.82742}, {"date": "2019-04-21T00:00:00", "value": 3.1833191389529416e+18, "gas_price": 9475838125.425066}, {"date": "2019-04-22T00:00:00", "value": 3.3499047786513587e+18, "gas_price": 10727955034.444277}, {"date": "2019-04-23T00:00:00", "value": 3.772310195787072e+18, "gas_price": 11214008798.863558}, {"date": "2019-04-24T00:00:00", "value": 5.212137933949661e+18, "gas_price": 12100633453.267256}, {"date": "2019-04-25T00:00:00", "value": 4.641515397029786e+18, "gas_price": 10495381232.645422}, {"date": "2019-04-26T00:00:00", "value": 6.850154931398893e+18, "gas_price": 12053019099.709557}, {"date": "2019-04-27T00:00:00", "value": 3.407998451958375e+18, "gas_price": 9606611204.372013}, {"date": "2019-04-28T00:00:00", "value": 3.9328396358690714e+18, "gas_price": 9363974399.108189}, {"date": "2019-04-29T00:00:00", "value": 4.90158190009566e+18, "gas_price": 10299621089.87885}, {"date": "2019-04-30T00:00:00", "value": 4.196617730464181e+18, "gas_price": 10086150999.263308}, {"date": "2019-05-01T00:00:00", "value": 3.722230763703136e+18, "gas_price": 9759507361.48863}, {"date": "2019-05-02T00:00:00", "value": 3.366214454795245e+18, "gas_price": 40341264571.365524}, {"date": "2019-05-03T00:00:00", "value": 3.7697816252324695e+18, "gas_price": 10976179677.857414}, {"date": "2019-05-04T00:00:00", "value": 3.18336960657242e+18, "gas_price": 10066498232.23989}, {"date": "2019-05-05T00:00:00", "value": 2.935955240886408e+18, "gas_price": 9671345585.629208}, {"date": "2019-05-06T00:00:00", "value": 4.244694703920189e+18, "gas_price": 10575197237.092169}, {"date": "2019-05-07T00:00:00", "value": 5.147911690497958e+18, "gas_price": 12553479114.672457}, {"date": "2019-05-08T00:00:00", "value": 4.554383747852326e+18, "gas_price": 10961776250.894297}, {"date": "2019-05-09T00:00:00", "value": 3.949729030486554e+18, "gas_price": 10629145315.85879}, {"date": "2019-05-10T00:00:00", "value": 3.876530827808876e+18, "gas_price": 11358309468.6713}, {"date": "2019-05-11T00:00:00", "value": 6.067908068595171e+18, "gas_price": 10883175280.97874}, {"date": "2019-05-12T00:00:00", "value": 4.0181165126238674e+18, "gas_price": 10808762189.401594}, {"date": "2019-05-13T00:00:00", "value": 5.220408734944186e+18, "gas_price": 13655220194.331926}, {"date": "2019-05-14T00:00:00", "value": 4.24473962122163e+18, "gas_price": 13324170896.80431}, {"date": "2019-05-15T00:00:00", "value": 5.179463233107708e+18, "gas_price": 16256626442.958456}, {"date": "2019-05-16T00:00:00", "value": 7.764293107100943e+18, "gas_price": 20964198058.343056}, {"date": "2019-05-17T00:00:00", "value": 5.687793546475265e+18, "gas_price": 18176034249.59134}, {"date": "2019-05-18T00:00:00", "value": 3.1033512713670943e+18, "gas_price": 14695791113.283972}, {"date": "2019-05-19T00:00:00", "value": 3.1708496886480497e+18, "gas_price": 14010637942.158304}, {"date": "2019-05-20T00:00:00", "value": 3.6686745037138893e+18, "gas_price": 15506866617.056934}, {"date": "2019-05-21T00:00:00", "value": 3.491195556753291e+18, "gas_price": 12938880344.252508}, {"date": "2019-05-22T00:00:00", "value": 3.303900809816065e+18, "gas_price": 16397753342.687696}, {"date": "2019-05-23T00:00:00", "value": 3.6404066799447173e+18, "gas_price": 14454854613.574865}, {"date": "2019-05-24T00:00:00", "value": 2.7478287663198305e+18, "gas_price": 15042266916.414429}, {"date": "2019-05-25T00:00:00", "value": 2.2167860046100677e+18, "gas_price": 12097498199.299076}, {"date": "2019-05-26T00:00:00", "value": 3.191594031335855e+18, "gas_price": 10765444798.979704}, {"date": "2019-05-27T00:00:00", "value": 3.469225345208953e+18, "gas_price": 14692533800.325842}, {"date": "2019-05-28T00:00:00", "value": 2.810169323974955e+18, "gas_price": 15107046576.578012}, {"date": "2019-05-29T00:00:00", "value": 4.0486932704811377e+18, "gas_price": 16588407345.780476}, {"date": "2019-05-30T00:00:00", "value": 4.095707514664304e+18, "gas_price": 17350696740.681927}, {"date": "2019-05-31T00:00:00", "value": 4.011401483753156e+18, "gas_price": 15858668907.4599}, {"date": "2019-06-01T00:00:00", "value": 1.9552997991991677e+18, "gas_price": 13486479705.99864}, {"date": "2019-06-02T00:00:00", "value": 1.7835241951293501e+18, "gas_price": 10826467027.30326}, {"date": "2019-06-03T00:00:00", "value": 3.235724632380692e+18, "gas_price": 13621925373.57894}, {"date": "2019-06-04T00:00:00", "value": 3.6825965304289746e+18, "gas_price": 14314676697.94552}, {"date": "2019-06-05T00:00:00", "value": 4.2822715566501187e+18, "gas_price": 14714206624.414236}, {"date": "2019-06-06T00:00:00", "value": 2.472187591222998e+18, "gas_price": 12763037622.556751}, {"date": "2019-06-07T00:00:00", "value": 2.6952787522590285e+18, "gas_price": 13536408978.823763}, {"date": "2019-06-08T00:00:00", "value": 1.2736350317751076e+18, "gas_price": 17833977397.409077}, {"date": "2019-06-09T00:00:00", "value": 2.519698555337036e+18, "gas_price": 11736547597.631672}, {"date": "2019-06-10T00:00:00", "value": 2.58928291215051e+18, "gas_price": 18736590066.33598}, {"date": "2019-06-11T00:00:00", "value": 2.3630065185578486e+18, "gas_price": 15286063573.323198}, {"date": "2019-06-12T00:00:00", "value": 2.843150839427114e+18, "gas_price": 10687904409.14468}, {"date": "2019-06-13T00:00:00", "value": 3.634526682313528e+18, "gas_price": 12462441565.499758}, {"date": "2019-06-14T00:00:00", "value": 3.2994463528492324e+18, "gas_price": 14488656180.24607}, {"date": "2019-06-15T00:00:00", "value": 3.852627696532757e+18, "gas_price": 16621128283.843412}, {"date": "2019-06-16T00:00:00", "value": 3.2842339535304274e+18, "gas_price": 11723471543.086685}, {"date": "2019-06-17T00:00:00", "value": 2.48139742816816e+18, "gas_price": 18012948405.273632}, {"date": "2019-06-18T00:00:00", "value": 3.3891951259830216e+18, "gas_price": 14123788706.207716}, {"date": "2019-06-19T00:00:00", "value": 3.382764966288696e+18, "gas_price": 15123969502.831335}, {"date": "2019-06-20T00:00:00", "value": 2.377239210370424e+18, "gas_price": 19142666832.55753}, {"date": "2019-06-21T00:00:00", "value": 3.898172414582902e+18, "gas_price": 13116500533.454165}, {"date": "2019-06-22T00:00:00", "value": 3.719163733014582e+18, "gas_price": 13053354853.989662}, {"date": "2019-06-23T00:00:00", "value": 2.7672720233764495e+18, "gas_price": 12864071155.826109}, {"date": "2019-06-24T00:00:00", "value": 3.120655688127023e+18, "gas_price": 14320705395.91457}, {"date": "2019-06-25T00:00:00", "value": 3.088753046853533e+18, "gas_price": 18393913181.896328}, {"date": "2019-06-26T00:00:00", "value": 4.3916117722730424e+18, "gas_price": 18216041457.002922}, {"date": "2019-06-27T00:00:00", "value": 4.544713815132738e+18, "gas_price": 20523146772.8367}, {"date": "2019-06-28T00:00:00", "value": 2.6833167603724774e+18, "gas_price": 17825750475.81638}, {"date": "2019-06-29T00:00:00", "value": 3.5026612611522693e+18, "gas_price": 14940918163.38419}, {"date": "2019-06-30T00:00:00", "value": 2.86698491396828e+18, "gas_price": 16104017148.185862}, {"date": "2019-07-01T00:00:00", "value": 2.5698074651949076e+18, "gas_price": 19495480701.714096}, {"date": "2019-07-02T00:00:00", "value": 2.577644392928265e+18, "gas_price": 15707401801.979269}, {"date": "2019-07-03T00:00:00", "value": 2.7435285003031926e+18, "gas_price": 13421011843.617744}, {"date": "2019-07-04T00:00:00", "value": 2.3360333587008543e+18, "gas_price": 12332431760.11959}, {"date": "2019-07-05T00:00:00", "value": 1.9246235890281247e+18, "gas_price": 14966418456.74494}, {"date": "2019-07-06T00:00:00", "value": 1.5179965516187474e+18, "gas_price": 14105736513.629091}, {"date": "2019-07-07T00:00:00", "value": 2.4604951576684534e+18, "gas_price": 11104776037.97307}, {"date": "2019-07-08T00:00:00", "value": 2.1911818754063432e+18, "gas_price": 15357671729.064627}, {"date": "2019-07-09T00:00:00", "value": 5.512743623572779e+18, "gas_price": 13354434732.006521}, {"date": "2019-07-10T00:00:00", "value": 3.370019732695106e+18, "gas_price": 12311263459.138468}, {"date": "2019-07-11T00:00:00", "value": 3.818064023903752e+18, "gas_price": 17659604203.620167}, {"date": "2019-07-12T00:00:00", "value": 2.556132408332085e+18, "gas_price": 13858375813.898067}, {"date": "2019-07-13T00:00:00", "value": 1.7634617198330458e+18, "gas_price": 11648504712.711386}, {"date": "2019-07-14T00:00:00", "value": 3.599049110814661e+18, "gas_price": 14549904866.125637}, {"date": "2019-07-15T00:00:00", "value": 4.0986733722873467e+18, "gas_price": 14391823350.859928}, {"date": "2019-07-16T00:00:00", "value": 2.546962828400854e+18, "gas_price": 22086081173.105663}, {"date": "2019-07-17T00:00:00", "value": 3.5093482398461706e+18, "gas_price": 19039577901.73461}, {"date": "2019-07-18T00:00:00", "value": 3.5867520880826726e+18, "gas_price": 13146043766.110455}, {"date": "2019-07-19T00:00:00", "value": 2.4264782742341786e+18, "gas_price": 17313501866.343327}, {"date": "2019-07-20T00:00:00", "value": 2.363056084153489e+18, "gas_price": 11810805732.136753}, {"date": "2019-07-21T00:00:00", "value": 2.131020629733168e+18, "gas_price": 12415064190.04344}, {"date": "2019-07-22T00:00:00", "value": 2.565694590474416e+18, "gas_price": 12068997937.863482}, {"date": "2019-07-23T00:00:00", "value": 2.583899027219347e+18, "gas_price": 13393372879.434504}, {"date": "2019-07-24T00:00:00", "value": 1.7255547284099023e+18, "gas_price": 18739975652.7801}, {"date": "2019-07-25T00:00:00", "value": 1.7400484352820055e+18, "gas_price": 17913721825.6357}, {"date": "2019-07-26T00:00:00", "value": 3.9875716911777137e+18, "gas_price": 12793416890.2739}, {"date": "2019-07-27T00:00:00", "value": 1.9934579746466842e+18, "gas_price": 11902985197.889536}, {"date": "2019-07-28T00:00:00", "value": 1.7039498888357734e+18, "gas_price": 10821896262.927036}, {"date": "2019-07-29T00:00:00", "value": 2.532261528180864e+18, "gas_price": 12353159145.726198}, {"date": "2019-07-30T00:00:00", "value": 2.402456180030106e+18, "gas_price": 12961176518.002071}, {"date": "2019-07-31T00:00:00", "value": 2.4487176809838904e+18, "gas_price": 13082037369.675957}, {"date": "2019-08-01T00:00:00", "value": 3.3222011015779937e+18, "gas_price": 18280321204.77691}, {"date": "2019-08-02T00:00:00", "value": 2.4948828561762524e+18, "gas_price": 14792415477.555885}, {"date": "2019-08-03T00:00:00", "value": 1.6066849375343043e+18, "gas_price": 17574013265.751602}, {"date": "2019-08-04T00:00:00", "value": 1.7054249754585574e+18, "gas_price": 10388113968.01078}, {"date": "2019-08-05T00:00:00", "value": 3.9381946325929605e+18, "gas_price": 12187870498.771694}, {"date": "2019-08-06T00:00:00", "value": 3.110608613881811e+18, "gas_price": 12139358648.336273}, {"date": "2019-08-07T00:00:00", "value": 2.3976476150630866e+18, "gas_price": 11717497891.19727}, {"date": "2019-08-08T00:00:00", "value": 3.1137589767661957e+18, "gas_price": 12938718897.003216}, {"date": "2019-08-09T00:00:00", "value": 2.589131022107938e+18, "gas_price": 13260251621.328356}, {"date": "2019-08-10T00:00:00", "value": 2.1724433640553577e+18, "gas_price": 12172213257.774445}, {"date": "2019-08-11T00:00:00", "value": 2.0381889099696538e+18, "gas_price": 11564609919.233292}, {"date": "2019-08-12T00:00:00", "value": 2.1263800711204987e+18, "gas_price": 12868397974.671618}, {"date": "2019-08-13T00:00:00", "value": 2.360206692653113e+18, "gas_price": 18838946735.008232}, {"date": "2019-08-14T00:00:00", "value": 3.0866858769904205e+18, "gas_price": 12123110518.761435}, {"date": "2019-08-15T00:00:00", "value": 3.7942932154669425e+18, "gas_price": 14148150753.593416}, {"date": "2019-08-16T00:00:00", "value": 2.8600695775585454e+18, "gas_price": 12114359150.300108}, {"date": "2019-08-17T00:00:00", "value": 1.9184231856925025e+18, "gas_price": 10563371318.20903}, {"date": "2019-08-18T00:00:00", "value": 1.974994088307244e+18, "gas_price": 11034062177.674665}, {"date": "2019-08-19T00:00:00", "value": 2.374271046751171e+18, "gas_price": 13796809850.16007}, {"date": "2019-08-20T00:00:00", "value": 3.290711305400837e+18, "gas_price": 13718778876.038692}, {"date": "2019-08-21T00:00:00", "value": 2.4360268309317074e+18, "gas_price": 16114389266.714102}, {"date": "2019-08-22T00:00:00", "value": 2.4378033372431273e+18, "gas_price": 14723959421.29444}, {"date": "2019-08-23T00:00:00", "value": 2.463657398716897e+18, "gas_price": 13873813418.871763}, {"date": "2019-08-24T00:00:00", "value": 1.8362280124856745e+18, "gas_price": 12920227453.232563}, {"date": "2019-08-25T00:00:00", "value": 1.8226125181842486e+18, "gas_price": 13821837015.355513}, {"date": "2019-08-26T00:00:00", "value": 2.4931784435930875e+18, "gas_price": 17088918181.935698}, {"date": "2019-08-27T00:00:00", "value": 2.148631502500093e+18, "gas_price": 14634259687.98456}, {"date": "2019-08-28T00:00:00", "value": 2.640683534645419e+18, "gas_price": 14683870414.689789}, {"date": "2019-08-29T00:00:00", "value": 2.7939995160413097e+18, "gas_price": 14960110915.98668}, {"date": "2019-08-30T00:00:00", "value": 2.849767800498064e+18, "gas_price": 14677822912.066103}, {"date": "2019-08-31T00:00:00", "value": 3.626461367888934e+18, "gas_price": 14071247778.68958}, {"date": "2019-09-01T00:00:00", "value": 1.765865093941173e+18, "gas_price": 14732668912.951118}, {"date": "2019-09-02T00:00:00", "value": 2.355224333230331e+18, "gas_price": 15922512329.470194}, {"date": "2019-09-03T00:00:00", "value": 3.4492410433444383e+18, "gas_price": 14921310953.544798}, {"date": "2019-09-04T00:00:00", "value": 2.6861682954521713e+18, "gas_price": 14791560414.225723}, {"date": "2019-09-05T00:00:00", "value": 2.1920422210802813e+18, "gas_price": 18530078952.53841}, {"date": "2019-09-06T00:00:00", "value": 2.3678639482895124e+18, "gas_price": 18496725304.965233}, {"date": "2019-09-07T00:00:00", "value": 2.804167129389481e+18, "gas_price": 17632530479.305798}, {"date": "2019-09-08T00:00:00", "value": 2.2964840550463908e+18, "gas_price": 18511810107.514267}, {"date": "2019-09-09T00:00:00", "value": 2.568076501575218e+18, "gas_price": 20485600367.528507}, {"date": "2019-09-10T00:00:00", "value": 2.1433120223104049e+18, "gas_price": 21893562544.670563}, {"date": "2019-09-11T00:00:00", "value": 2.638640462737857e+18, "gas_price": 21338785474.113106}, {"date": "2019-09-12T00:00:00", "value": 2.1470925382223951e+18, "gas_price": 22871476411.199093}, {"date": "2019-09-13T00:00:00", "value": 3.134028188958865e+18, "gas_price": 21988452520.57916}, {"date": "2019-09-14T00:00:00", "value": 1.882299136369365e+18, "gas_price": 22834967681.785786}, {"date": "2019-09-15T00:00:00", "value": 2.0894565217957555e+18, "gas_price": 22236047670.604507}, {"date": "2019-09-16T00:00:00", "value": 3.191490891832715e+18, "gas_price": 22817267228.20903}, {"date": "2019-09-17T00:00:00", "value": 3.538965120533706e+18, "gas_price": 26399503002.216927}, {"date": "2019-09-18T00:00:00", "value": 3.6912292846699284e+18, "gas_price": 28365773094.483418}, {"date": "2019-09-19T00:00:00", "value": 2.8101469735950976e+18, "gas_price": 29777963294.17413}, {"date": "2019-09-20T00:00:00", "value": 2.6113863566711537e+18, "gas_price": 28526250719.641983}, {"date": "2019-09-21T00:00:00", "value": 1.7640164931872166e+18, "gas_price": 23140282797.509495}, {"date": "2019-09-22T00:00:00", "value": 1.832673581844741e+18, "gas_price": 20590632022.558315}, {"date": "2019-09-23T00:00:00", "value": 2.800976610318855e+18, "gas_price": 25255801042.599834}, {"date": "2019-09-24T00:00:00", "value": 4.699113229226066e+18, "gas_price": 28995093148.55359}, {"date": "2019-09-25T00:00:00", "value": 4.0913698500058967e+18, "gas_price": 34505552333.84905}, {"date": "2019-09-26T00:00:00", "value": 4.1987579949211674e+18, "gas_price": 24831091092.37379}, {"date": "2019-09-27T00:00:00", "value": 3.491228311804789e+18, "gas_price": 25298724391.555347}, {"date": "2019-09-28T00:00:00", "value": 2.629685499211151e+18, "gas_price": 22560249320.503246}, {"date": "2019-09-29T00:00:00", "value": 2.1592478587512748e+18, "gas_price": 23500550119.6079}, {"date": "2019-09-30T00:00:00", "value": 3.843824708566502e+18, "gas_price": 21684520866.035156}, {"date": "2019-10-01T00:00:00", "value": 2.631720961148082e+18, "gas_price": 14781049721.21979}, {"date": "2019-10-02T00:00:00", "value": 1.98700559851004e+18, "gas_price": 14772438926.092075}, {"date": "2019-10-03T00:00:00", "value": 1.6310160823006254e+18, "gas_price": 16407408336.671663}, {"date": "2019-10-04T00:00:00", "value": 1.9037780580490166e+18, "gas_price": 16613882216.84208}, {"date": "2019-10-05T00:00:00", "value": 1.446176816188999e+18, "gas_price": 15294772837.044483}, {"date": "2019-10-06T00:00:00", "value": 1.6761155218939187e+18, "gas_price": 13847522631.574123}, {"date": "2019-10-07T00:00:00", "value": 2.2564329063511662e+18, "gas_price": 14662439610.036695}, {"date": "2019-10-08T00:00:00", "value": 2.3156564391297644e+18, "gas_price": 14780478594.538527}, {"date": "2019-10-09T00:00:00", "value": 2.4641736936521375e+18, "gas_price": 16931636429.056364}, {"date": "2019-10-10T00:00:00", "value": 2.0645306334179617e+18, "gas_price": 15830259492.878628}, {"date": "2019-10-11T00:00:00", "value": 2.0957205805470195e+18, "gas_price": 15347748040.868813}, {"date": "2019-10-12T00:00:00", "value": 1.923697112943321e+18, "gas_price": 14521288688.047262}, {"date": "2019-10-13T00:00:00", "value": 1.4375871314313728e+18, "gas_price": 15205496605.485388}, {"date": "2019-10-14T00:00:00", "value": 3.2001933395677425e+18, "gas_price": 15193558342.53717}, {"date": "2019-10-15T00:00:00", "value": 1.9413472224782991e+18, "gas_price": 15078048201.27983}, {"date": "2019-10-16T00:00:00", "value": 2.133300840832757e+18, "gas_price": 14442536505.862288}, {"date": "2019-10-17T00:00:00", "value": 1.7081001052140928e+18, "gas_price": 14085367410.135777}, {"date": "2019-10-18T00:00:00", "value": 2.312682386309827e+18, "gas_price": 14274341744.28422}, {"date": "2019-10-19T00:00:00", "value": 1.3231664630832899e+18, "gas_price": 14160476025.259829}, {"date": "2019-10-20T00:00:00", "value": 1.9597331603089838e+18, "gas_price": 15559116072.132044}, {"date": "2019-10-21T00:00:00", "value": 2.0035677425839084e+18, "gas_price": 15266270346.563036}, {"date": "2019-10-22T00:00:00", "value": 1.8485311087760886e+18, "gas_price": 16331757175.08962}, {"date": "2019-10-23T00:00:00", "value": 3.4700681881171686e+18, "gas_price": 18813665909.726673}, {"date": "2019-10-24T00:00:00", "value": 3.409218888815867e+18, "gas_price": 15227776777.778873}, {"date": "2019-10-25T00:00:00", "value": 2.6642668977176535e+18, "gas_price": 16002570283.002058}, {"date": "2019-10-26T00:00:00", "value": 3.231578283070025e+18, "gas_price": 15991853518.35314}, {"date": "2019-10-27T00:00:00", "value": 1.886228475109038e+18, "gas_price": 14655154975.752813}, {"date": "2019-10-28T00:00:00", "value": 4.337450698551754e+18, "gas_price": 16046758542.702173}, {"date": "2019-10-29T00:00:00", "value": 2.7988685157697833e+18, "gas_price": 16274384920.84929}, {"date": "2019-10-30T00:00:00", "value": 2.4233090081326597e+18, "gas_price": 16141508326.649279}, {"date": "2019-10-31T00:00:00", "value": 2.307252821182176e+18, "gas_price": 15961552606.427937}, {"date": "2019-11-01T00:00:00", "value": 1.9872475128973476e+18, "gas_price": 15321987417.572718}, {"date": "2019-11-02T00:00:00", "value": 1.586100770750332e+18, "gas_price": 14224241993.929321}, {"date": "2019-11-03T00:00:00", "value": 1.8490823854556413e+18, "gas_price": 14550149168.317661}, {"date": "2019-11-04T00:00:00", "value": 2.670419209793083e+18, "gas_price": 15052772930.521759}, {"date": "2019-11-05T00:00:00", "value": 3.042596176985546e+18, "gas_price": 14465881627.174042}, {"date": "2019-11-06T00:00:00", "value": 1.9101433884615503e+18, "gas_price": 13845995029.108974}, {"date": "2019-11-07T00:00:00", "value": 1.4120560288459505e+18, "gas_price": 17177221542.859785}, {"date": "2019-11-08T00:00:00", "value": 2.0666180841540956e+18, "gas_price": 14127759344.071516}, {"date": "2019-11-09T00:00:00", "value": 1.3968707552066243e+18, "gas_price": 14300394285.133938}, {"date": "2019-11-10T00:00:00", "value": 1.320278879164144e+18, "gas_price": 13850949717.7438}, {"date": "2019-11-11T00:00:00", "value": 1.7449498685125655e+18, "gas_price": 14747036207.396698}, {"date": "2019-11-12T00:00:00", "value": 2.367962121372464e+18, "gas_price": 14518867195.81945}, {"date": "2019-11-13T00:00:00", "value": 1.8172298740540014e+18, "gas_price": 14931341099.758415}, {"date": "2019-11-14T00:00:00", "value": 1.6616898684121523e+18, "gas_price": 15963193058.319746}, {"date": "2019-11-15T00:00:00", "value": 2.1798820720899313e+18, "gas_price": 14416136367.862843}, {"date": "2019-11-16T00:00:00", "value": 1.4256747138192067e+18, "gas_price": 13075206899.323515}, {"date": "2019-11-17T00:00:00", "value": 1.322898287875243e+18, "gas_price": 13579132571.024006}, {"date": "2019-11-18T00:00:00", "value": 1.8915393436275377e+18, "gas_price": 21587135502.504177}, {"date": "2019-11-19T00:00:00", "value": 1.9843140740638257e+18, "gas_price": 14256562237.51926}, {"date": "2019-11-20T00:00:00", "value": 1.9261561062314102e+18, "gas_price": 15019514150.590528}, {"date": "2019-11-21T00:00:00", "value": 2.5290840780183286e+18, "gas_price": 17806076490.97582}, {"date": "2019-11-22T00:00:00", "value": 4.22562856516946e+18, "gas_price": 23860020478.02895}, {"date": "2019-11-23T00:00:00", "value": 1.9571712779895444e+18, "gas_price": 13460039572.623714}, {"date": "2019-11-24T00:00:00", "value": 1.7731507314663217e+18, "gas_price": 13754131455.100632}, {"date": "2019-11-25T00:00:00", "value": 3.8204757642600023e+18, "gas_price": 20117940341.82736}, {"date": "2019-11-26T00:00:00", "value": 1.982765100256466e+18, "gas_price": 16313983190.967009}, {"date": "2019-11-27T00:00:00", "value": 3.333558628160482e+18, "gas_price": 14455380894.50836}, {"date": "2019-11-28T00:00:00", "value": 3.298604390391843e+18, "gas_price": 14607340826.229788}, {"date": "2019-11-29T00:00:00", "value": 2.0684843244083656e+18, "gas_price": 13447918522.453352}, {"date": "2019-11-30T00:00:00", "value": 2.2355051049866954e+18, "gas_price": 13159635313.623148}, {"date": "2019-12-01T00:00:00", "value": 1.3587464812880858e+18, "gas_price": 16143356637.321142}, {"date": "2019-12-02T00:00:00", "value": 2.516169330777418e+18, "gas_price": 15202735292.441095}, {"date": "2019-12-03T00:00:00", "value": 2.0833169791470804e+18, "gas_price": 13974400140.088074}, {"date": "2019-12-04T00:00:00", "value": 2.1125294069010488e+18, "gas_price": 13985771861.293497}, {"date": "2019-12-05T00:00:00", "value": 2.234907330629277e+18, "gas_price": 13288101213.021933}, {"date": "2019-12-06T00:00:00", "value": 2.4581689100041933e+18, "gas_price": 13462023783.082895}, {"date": "2019-12-07T00:00:00", "value": 1.5455936670610076e+18, "gas_price": 12136209109.727436}, {"date": "2019-12-08T00:00:00", "value": 1.265751648165639e+18, "gas_price": 9616107817.826738}, {"date": "2019-12-09T00:00:00", "value": 1.817483638933649e+18, "gas_price": 11583325488.288395}, {"date": "2019-12-10T00:00:00", "value": 2.46704682941322e+18, "gas_price": 12193590221.443087}, {"date": "2019-12-11T00:00:00", "value": 1.426164583743636e+18, "gas_price": 13178906108.727484}, {"date": "2019-12-12T00:00:00", "value": 1.859511738525255e+18, "gas_price": 12084892087.33682}, {"date": "2019-12-13T00:00:00", "value": 1.7592463827843087e+18, "gas_price": 12012144513.820158}, {"date": "2019-12-14T00:00:00", "value": 1.4494036791679327e+18, "gas_price": 11628995251.5801}, {"date": "2019-12-15T00:00:00", "value": 1.2361024618873894e+18, "gas_price": 12351635009.503233}, {"date": "2019-12-16T00:00:00", "value": 2.454906052144991e+18, "gas_price": 13510950391.636923}, {"date": "2019-12-17T00:00:00", "value": 4.1270697861794284e+18, "gas_price": 15385205487.200768}, {"date": "2019-12-18T00:00:00", "value": 4.635068525689874e+18, "gas_price": 16472648521.39225}, {"date": "2019-12-19T00:00:00", "value": 5.272246458637808e+18, "gas_price": 12734043476.553686}, {"date": "2019-12-20T00:00:00", "value": 2.2278495210797852e+18, "gas_price": 12975504495.38009}, {"date": "2019-12-21T00:00:00", "value": 1.5523464212301504e+18, "gas_price": 11564292445.088812}, {"date": "2019-12-22T00:00:00", "value": 1.5242615392466004e+18, "gas_price": 11027415250.106451}, {"date": "2019-12-23T00:00:00", "value": 2.8719164010171745e+18, "gas_price": 12717961964.828913}, {"date": "2019-12-24T00:00:00", "value": 2.0118622725876454e+18, "gas_price": 11734131588.454784}, {"date": "2019-12-25T00:00:00", "value": 2.583618640155643e+18, "gas_price": 11906752772.223349}, {"date": "2019-12-26T00:00:00", "value": 1.9897521547667466e+18, "gas_price": 11923552524.528252}, {"date": "2019-12-27T00:00:00", "value": 2.1696288322907791e+18, "gas_price": 12089403345.747084}, {"date": "2019-12-28T00:00:00", "value": 1.913944660272912e+18, "gas_price": 11799263252.668003}, {"date": "2019-12-29T00:00:00", "value": 2.123193841200704e+18, "gas_price": 11237678855.096022}, {"date": "2019-12-30T00:00:00", "value": 2.507600549730761e+18, "gas_price": 11976381560.49635}, {"date": "2019-12-31T00:00:00", "value": 3.743596645683661e+18, "gas_price": 14012024992.610601}]}}, {"mode": "vega-lite"});
+</script>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">transactions</span> <span class="o">=</span> <span class="n">transactions</span><span class="p">[</span><span class="o">~</span><span class="p">(</span><span class="n">transactions</span><span class="p">[</span><span class="s1">&#39;gas_price&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">transactions</span><span class="p">[</span><span class="s1">&#39;gas_price&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">transactions</span><span class="p">[</span><span class="s1">&#39;gas_price&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">())]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">values</span> <span class="o">=</span> <span class="n">transactions</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span>
+<span class="n">gas_prices</span> <span class="o">=</span> <span class="n">transactions</span><span class="p">[</span><span class="s1">&#39;gas_price&#39;</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As we emphasize standard operations, we use a few helper functions in the steps leading to covariance and correlation.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Helper-functions">Helper functions<a class="anchor-link" href="#Helper-functions"> </a></h2>
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -195,47 +384,70 @@ layout: notebook
 
     <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">v1</span> <span class="o">*</span> <span class="n">v2</span> <span class="k">for</span> <span class="n">v1</span><span class="p">,</span> <span class="n">v2</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">vector1</span><span class="p">,</span> <span class="n">vector2</span><span class="p">))</span>
 
-
 <span class="k">assert</span> <span class="n">dot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span> <span class="o">==</span> <span class="mi">32</span>
-</pre></div>
 
-    </div>
-</div>
-</div>
 
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">mean</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">Vector</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">mean</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">Vector</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
     <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-</pre></div>
 
-    </div>
-</div>
-</div>
+<span class="k">assert</span> <span class="n">mean</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span> <span class="o">==</span> <span class="mf">2.5</span>
 
-</div>
-    {% endraw %}
 
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">de_mean</span><span class="p">(</span><span class="n">xs</span><span class="p">:</span> <span class="n">Vector</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Vector</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">de_mean</span><span class="p">(</span><span class="n">xs</span><span class="p">:</span> <span class="n">Vector</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Vector</span><span class="p">:</span>
     <span class="n">x_mean</span> <span class="o">=</span> <span class="n">mean</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
     <span class="k">return</span> <span class="p">[</span><span class="n">x</span> <span class="o">-</span> <span class="n">x_mean</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">]</span>
 
-<span class="k">def</span> <span class="nf">covariance</span><span class="p">(</span><span class="n">xs</span><span class="p">:</span> <span class="n">Vector</span><span class="p">,</span> <span class="n">ys</span><span class="p">:</span> <span class="n">Vector</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="k">assert</span> <span class="n">de_mean</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span> <span class="o">==</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">sum_of_squares</span><span class="p">(</span><span class="n">xs</span><span class="p">:</span> <span class="n">Vector</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">dot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">xs</span><span class="p">)</span>
+
+<span class="k">assert</span> <span class="n">sum_of_squares</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span> <span class="o">==</span> <span class="mi">14</span>
+
+<span class="k">def</span> <span class="nf">variance</span><span class="p">(</span><span class="n">xs</span><span class="p">:</span> <span class="n">Vector</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">sum_of_squares</span><span class="p">(</span><span class="n">de_mean</span><span class="p">(</span><span class="n">xs</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="k">assert</span> <span class="n">variance</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span>
+
+<span class="kn">import</span> <span class="nn">math</span> <span class="k">as</span> <span class="nn">m</span>
+
+<span class="k">def</span> <span class="nf">standard_deviation</span><span class="p">(</span><span class="n">xs</span><span class="p">:</span> <span class="n">Vector</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">variance</span><span class="p">(</span><span class="n">xs</span><span class="p">))</span>
+
+<span class="k">assert</span> <span class="n">standard_deviation</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Covariance looks at the degree two variables 'move together'.</p>
+<p>For this, first, it multiplies the variables' deviation from their respective means. This produces a series of values which are very high for those observations where both variables deviate a lot. Furthermore, when the two variables deviate to the same direction these values are positive, otherwise they are negative.</p>
+<p>Then, it calculates the mean of these multiplied deviation values. However, because we are calculating the sample covariance, we divide their sum by $n + 1$ (where $n$ is the number of observations)</p>
+<p>$ \text{Cov} = \frac { \sum_{i=1}^n (x-\bar{x}) (y-\bar{y})} {n - 1} $</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Covariance">Covariance<a class="anchor-link" href="#Covariance"> </a></h2>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">covariance</span><span class="p">(</span><span class="n">xs</span><span class="p">:</span> <span class="n">Vector</span><span class="p">,</span> <span class="n">ys</span><span class="p">:</span> <span class="n">Vector</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
     <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">ys</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">dot</span><span class="p">(</span><span class="n">de_mean</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span> <span class="n">de_mean</span><span class="p">(</span><span class="n">ys</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
@@ -244,6 +456,49 @@ layout: notebook
 </pre></div>
 
     </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>There is also an alternate way to calculate covariance, using the variables' expected values (which here are the means):</p>
+<p>$ \text{Cov} = E[\vec{x}\vec{y}] - E[\vec{x}]E[\vec{y}] $</p>
+<p>This is a much simpler version. However, again, as we are dealing with sample data, so we need to adjust for that:</p>
+<p>$ \text{Cov}_s = \frac {n} {n - 1} (E[\vec{x}\vec{y}] - E[\vec{x}]E[\vec{y}])  $</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">covariance</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">gas_prices</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>1.5856518696847875e+26</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -271,6 +526,13 @@ layout: notebook
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We also verify our method with numpy.</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -278,86 +540,7 @@ layout: notebook
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">sum_of_squares</span><span class="p">(</span><span class="n">xs</span><span class="p">:</span> <span class="n">Vector</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">dot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">xs</span><span class="p">)</span>
-
-<span class="k">assert</span> <span class="n">sum_of_squares</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span> <span class="o">==</span> <span class="mi">14</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">variance</span><span class="p">(</span><span class="n">xs</span><span class="p">:</span> <span class="n">Vector</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">sum_of_squares</span><span class="p">(</span><span class="n">de_mean</span><span class="p">(</span><span class="n">xs</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-
-<span class="k">assert</span> <span class="n">variance</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">math</span> <span class="k">as</span> <span class="nn">m</span>
-
-<span class="k">def</span> <span class="nf">standard_deviation</span><span class="p">(</span><span class="n">xs</span><span class="p">:</span> <span class="n">Vector</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">variance</span><span class="p">(</span><span class="n">xs</span><span class="p">))</span>
-
-<span class="k">assert</span> <span class="n">standard_deviation</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">standard_deviation</span><span class="p">(</span><span class="n">vs</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">gas_prices</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 </pre></div>
 
     </div>
@@ -372,7 +555,161 @@ layout: notebook
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>1.1776191009703913e+18</pre>
+<pre>1.5856518696847882e+26</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">covariance_2</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">gas_prices</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>1.585651869684888e+26</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Because the value of covariance really depends on the units of the variables, it is often hard to interpret and also to compare it with other covariences.</p>
+<p>This is why correlation is an often preferred method as it adjusts the covariance by the variables' standard deviation values. As a result, it bounds the end result into the $[-1, 1]$ domain making it comparable with other correlation values.</p>
+<p>$ \text{Corr(x, y)} = \frac { \text{Cov(x, y)} } {\text{Std(x)} \text{Std(y)}} $</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Correlation">Correlation<a class="anchor-link" href="#Correlation"> </a></h2>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">correlation</span><span class="p">([</span><span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="o">.</span><span class="mi">2</span><span class="p">,</span> <span class="o">.</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">400</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">600</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>1.0</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">correlation</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">gas_prices</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0.035069533929694634</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Finally, we verify the result with numpy.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">values</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">gas_prices</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>0.03506953392969465</pre>
 </div>
 
 </div>
@@ -391,7 +728,10 @@ layout: notebook
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">correlation</span><span class="p">(</span><span class="n">xs</span><span class="p">:</span> <span class="n">Vector</span><span class="p">,</span> <span class="n">ys</span><span class="p">:</span> <span class="n">Vector</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-    
+    <span class="k">return</span> <span class="n">covariance</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">standard_deviation</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span> <span class="o">*</span> <span class="n">standard_deviation</span><span class="p">(</span><span class="n">ys</span><span class="p">))</span>
+
+
+<span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">correlation</span><span class="p">([</span><span class="o">.</span><span class="mi">1</span><span class="p">,</span> <span class="o">.</span><span class="mi">2</span><span class="p">,</span> <span class="o">.</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">400</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">600</span><span class="p">]),</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
 
     </div>
