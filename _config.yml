@@ -35,7 +35,8 @@ url: "andrasnovoszath.com"
 #
 # 3. You must replace the parameter `baseurl` in _action_files/settings.ini with the same value as you set here but WITHOUT QUOTES.
 #
-baseurl: "" # "/" #"/ds_blog" # the subpath of your site, e.g. "/blog".
+# "/" #"/ds_blog" # the subpath of your site, e.g. "/blog".
+baseurl: ""
 
 # Github and twitter are optional:
 minima:
