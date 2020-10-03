@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Central Limit Theorem on the binomial distribution from scratch with Python | Value this</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Central Limit Theorem on the binomial distribution from scratch with Python" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This is not another blog about bitcoin." />
+<meta property="og:description" content="This is not another blog about bitcoin." />
+<link rel="canonical" href="andrasnovoszath.com/2020/10/03/central-limit-theorem.html" />
+<meta property="og:url" content="andrasnovoszath.com/2020/10/03/central-limit-theorem.html" />
+<meta property="og:site_name" content="Value this" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-10-03T00:00:00-05:00" />
+<script type="application/ld+json">
+{"headline":"Central Limit Theorem on the binomial distribution from scratch with Python","dateModified":"2020-10-03T00:00:00-05:00","datePublished":"2020-10-03T00:00:00-05:00","description":"This is not another blog about bitcoin.","mainEntityOfPage":{"@type":"WebPage","@id":"andrasnovoszath.com/2020/10/03/central-limit-theorem.html"},"@type":"BlogPosting","url":"andrasnovoszath.com/2020/10/03/central-limit-theorem.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="andrasnovoszath.com/feed.xml" title="Value this" /><!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-178880214-1','auto');ga('require','displayfeatures');ga('send','pageview');</script>
+
+<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Central Limit Theorem on the binomial distribution from scratch with Python | Value this</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Central Limit Theorem on the binomial distribution from scratch with Python" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This is not another blog about bitcoin." />
+<meta property="og:description" content="This is not another blog about bitcoin." />
+<link rel="canonical" href="andrasnovoszath.com/2020/10/03/central-limit-theorem.html" />
+<meta property="og:url" content="andrasnovoszath.com/2020/10/03/central-limit-theorem.html" />
+<meta property="og:site_name" content="Value this" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-10-03T00:00:00-05:00" />
+<script type="application/ld+json">
+{"headline":"Central Limit Theorem on the binomial distribution from scratch with Python","dateModified":"2020-10-03T00:00:00-05:00","datePublished":"2020-10-03T00:00:00-05:00","description":"This is not another blog about bitcoin.","mainEntityOfPage":{"@type":"WebPage","@id":"andrasnovoszath.com/2020/10/03/central-limit-theorem.html"},"@type":"BlogPosting","url":"andrasnovoszath.com/2020/10/03/central-limit-theorem.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="andrasnovoszath.com/feed.xml" title="Value this" /><!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-178880214-1','auto');ga('require','displayfeatures');ga('send','pageview');</script>
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head><body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Value this</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/search/">Search</a><a class="page-link" href="/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Central Limit Theorem on the binomial distribution from scratch with Python</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-10-03T00:00:00-05:00" itemprop="datePublished">
+        Oct 3, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      9 min read
+    
+</span></p>
+
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/nocibambi/ds_blog/tree/master/_notebooks/2020-10-03-central-limit-theorem.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/nocibambi/ds_blog/master?filepath=_notebooks%2F2020-10-03-central-limit-theorem.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/nocibambi/ds_blog/blob/master/_notebooks/2020-10-03-central-limit-theorem.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-10-03-central-limit-theorem.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here I am playing with the Central Limit Theorem.</p>
+<p>I am running bernoulli trials to generate binomial distributions.</p>
+<p>I was interested in how the results approximate the normal distribution, so I labelled their status at particular iteration rounds and plotted the result.</p>
+<p>The code is based upon the respective example from <a href="https://www.oreilly.com/library/view/data-science-from/9781492041122/">Data Science from Scratch</a>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Libraries">Libraries<a class="anchor-link" href="#Libraries"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">altair</span> <span class="k">as</span> <span class="nn">alt</span>
+<span class="kn">import</span> <span class="nn">math</span> <span class="k">as</span> <span class="nn">m</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Parameters">Parameters<a class="anchor-link" href="#Parameters"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="o">.</span><span class="mi">35</span>
+<span class="n">binomial_trials</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">total_rounds</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">step</span> <span class="o">=</span> <span class="mi">100</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Bernoulli-Trials">Bernoulli Trials<a class="anchor-link" href="#Bernoulli-Trials"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">bernoulli_trial</span><span class="p">(</span><span class="n">p</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">p</span> <span class="k">else</span> <span class="mi">0</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's run the trials many times.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">trials</span> <span class="o">=</span>  <span class="p">[]</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">binomial_trials</span><span class="p">):</span>
+    <span class="n">trials</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bernoulli_trial</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First thousand trials:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">trials</span><span class="p">[:</span><span class="mi">1000</span><span class="p">]]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Ones: </span><span class="si">{</span><span class="nb">sum</span><span class="p">([</span><span class="n">t</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">trials</span><span class="p">])</span><span class="si">}</span><span class="s2">, Zeros: </span><span class="si">{</span><span class="nb">sum</span><span class="p">([</span><span class="n">t</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">trials</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Mean value of &#39;success&#39; (ones):&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">trials</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>First thousand trials:
+0 0 0 0 1 0 1 0 1 1 0 1 0 0 0 0 0 0 0 1 0 1 1 1 0 0 0 0 0 0 1 0 1 1 1 0 0 1 1 0 0 0 0 1 0 1 0 1 1 1 0 1 0 0 0 0 0 1 1 1 1 0 0 0 1 0 1 1 0 0 0 0 0 0 1 0 0 1 0 0 1 0 0 0 0 1 0 0 0 1 0 1 0 0 1 0 0 0 0 0 0 0 0 0 1 1 0 0 1 1 1 1 0 1 1 0 0 1 1 1 0 0 0 1 0 0 1 0 1 0 1 0 0 0 0 0 1 0 0 1 0 1 0 1 0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 1 0 1 0 0 1 0 0 1 0 1 1 1 1 0 0 1 0 1 0 0 0 0 0 0 0 0 0 1 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 0 0 1 0 1 0 0 0 0 0 1 1 1 0 1 0 1 1 1 0 0 1 1 1 1 1 0 0 0 0 0 1 0 0 1 0 0 1 0 0 1 0 1 0 1 0 0 1 0 1 0 0 1 0 0 0 1 1 1 0 1 0 1 0 1 0 0 1 1 0 1 0 0 1 0 0 1 0 0 1 0 1 1 1 0 0 0 0 1 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 1 1 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 1 0 0 1 0 0 0 0 0 0 1 0 0 1 0 0 0 1 0 1 0 1 0 1 0 0 0 0 0 0 0 0 1 0 0 0 1 0 1 1 0 0 1 1 1 0 0 0 1 1 0 0 1 0 1 0 1 0 1 1 1 1 0 0 1 1 0 0 0 0 0 0 1 1 1 0 0 1 0 1 1 0 0 1 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 1 1 0 1 0 1 0 1 0 1 1 0 1 1 1 1 0 0 0 0 0 1 0 0 1 0 0 0 1 0 1 0 0 1 1 0 1 0 0 1 0 0 0 0 0 1 0 1 1 1 0 1 0 1 1 1 1 0 1 0 0 0 0 1 0 0 0 1 0 0 0 1 1 0 1 1 1 1 0 1 0 0 1 1 0 1 1 0 1 0 1 0 0 0 0 1 0 0 0 0 1 1 0 0 0 0 0 1 1 1 0 0 0 0 1 0 1 0 0 0 0 1 0 1 0 1 0 1 0 0 0 1 0 0 0 1 0 0 0 1 1 0 1 1 0 0 0 0 1 1 0 0 1 1 1 1 0 0 0 1 0 0 1 0 0 0 0 0 0 0 1 1 1 0 0 0 0 0 0 1 1 0 1 0 0 0 1 0 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 1 0 0 0 0 0 1 0 1 1 0 0 1 1 1 1 0 0 1 1 0 1 0 0 1 1 1 1 0 0 1 1 0 0 0 1 0 0 0 0 1 0 1 0 1 0 0 0 0 1 1 0 0 0 0 0 0 1 0 1 1 1 0 0 0 0 0 1 1 1 1 0 0 1 0 0 1 0 0 0 0 1 0 1 1 0 0 0 0 0 1 1 0 0 1 0 1 1 0 1 0 0 1 1 0 0 1 0 0 1 0 0 0 0 1 1 0 1 1 0 0 1 0 0 1 0 1 0 0 0 1 1 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 0 1 1 0 0 1 0 0 0 1 0 1 0 0 0 0 0 0 1 1 0 1 1 0 0 0 1 0 0 0 1 0 0 0 0 1 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 1 0 0 1 0 1 1 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 1 0 1 1 0 1 0 0 0 1 1 0 0 0 1 0 1 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 1 0 1 0 0 0 1 0 0 0 0 1 1 1 1 1 1 0 1 1 1 0 0 0 0 0 1 0 0 1 0 1 0 1 1 0 0 0 0 1 1 1 0 0 0 0 1 1 1 0 0 0 0 0 0 1 1 0 0
+
+Ones: 3571, Zeros: 6429
+
+Mean value of &amp;#39;success&amp;#39; (ones): 0.3571
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">binomial</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">bernoulli_trial</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+
+<span class="n">trials</span> <span class="o">=</span> <span class="n">binomial</span><span class="p">(</span><span class="n">binomial_trials</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="n">trials</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>3515</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Iterating-the-binomial">Iterating the binomial<a class="anchor-link" href="#Iterating-the-binomial"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">iterate_binomial</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">num_points</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">binomial</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_points</span><span class="p">)]</span>
+
+<span class="n">simulations</span> <span class="o">=</span> <span class="n">iterate_binomial</span><span class="p">(</span><span class="n">binomial_trials</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">total_rounds</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First hunded values:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">results</span><span class="p">)</span> <span class="k">for</span> <span class="n">results</span> <span class="ow">in</span> <span class="n">simulations</span><span class="p">[:</span><span class="mi">100</span><span class="p">]]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Mean:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">simulations</span><span class="p">),</span> <span class="s2">&quot;Standard deviation:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">simulations</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>First hunded values:
+3465 3511 3479 3486 3475 3427 3558 3516 3439 3421 3494 3524 3527 3509 3465 3464 3489 3559 3452 3486 3501 3511 3571 3405 3618 3468 3397 3473 3501 3429 3519 3503 3559 3504 3500 3502 3499 3516 3505 3481 3480 3510 3548 3535 3539 3404 3498 3538 3515 3535 3397 3424 3470 3404 3475 3506 3464 3453 3548 3470 3503 3460 3516 3450 3486 3455 3598 3498 3445 3567 3437 3462 3520 3518 3446 3486 3549 3514 3590 3583 3461 3671 3463 3465 3451 3566 3458 3491 3599 3554 3470 3432 3517 3465 3621 3620 3552 3549 3482 3463
+
+Mean: 3499.354 Standard deviation: 48.451921365411295
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As we are interested in the intermediate states, we add new rounds iteratively and labeling them in the way.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">add_iterations</span><span class="p">(</span><span class="n">probability</span><span class="p">,</span> <span class="n">trials</span><span class="p">,</span> <span class="n">total_rounds</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
+    <span class="n">iteration_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="nb">round</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">total_rounds</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
+        <span class="n">simulations</span> <span class="o">=</span> <span class="n">iterate_binomial</span><span class="p">(</span><span class="n">trials</span><span class="p">,</span> <span class="n">probability</span><span class="p">,</span> <span class="nb">round</span><span class="p">)</span>
+
+        <span class="n">counts</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">simulations</span><span class="p">)</span>
+        <span class="n">iteration_results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">iteration_results</span><span class="p">,</span>
+                <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;count&#39;</span><span class="p">:</span> <span class="n">counts</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="n">counts</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="s1">&#39;iterations&#39;</span><span class="p">:</span> <span class="nb">round</span><span class="p">})</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">iteration_results</span>
+
+
+<span class="n">iteration_results</span> <span class="o">=</span> <span class="n">add_iterations</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">binomial_trials</span><span class="p">,</span> <span class="n">total_rounds</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+<span class="n">iteration_results</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>value</th>
+      <th>iterations</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>3</td>
+      <td>3493</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>3</td>
+      <td>3483</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>3565</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>3445</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>3500</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>210</th>
+      <td>1</td>
+      <td>3388</td>
+      <td>1000</td>
+    </tr>
+    <tr>
+      <th>211</th>
+      <td>1</td>
+      <td>3619</td>
+      <td>1000</td>
+    </tr>
+    <tr>
+      <th>212</th>
+      <td>1</td>
+      <td>3626</td>
+      <td>1000</td>
+    </tr>
+    <tr>
+      <th>213</th>
+      <td>1</td>
+      <td>3603</td>
+      <td>1000</td>
+    </tr>
+    <tr>
+      <th>214</th>
+      <td>1</td>
+      <td>3379</td>
+      <td>1000</td>
+    </tr>
+  </tbody>
+</table>
+<p>1711 rows × 3 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As we are interested in the total counts at each step we need to cumulatively add the value counts together over the iteration rounds.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">sum_counts</span><span class="p">(</span><span class="n">value_df</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">value_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;iterations&#39;</span><span class="p">)[</span><span class="s1">&#39;count&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+
+<span class="n">iteration_results</span> <span class="o">=</span> <span class="n">iteration_results</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;iterations&#39;</span><span class="p">])</span>
+
+<span class="n">iteration_results</span><span class="p">[</span><span class="s1">&#39;cumulative count&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">iteration_results</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">sum_counts</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+
+<span class="n">iteration_results</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>count</th>
+      <th>value</th>
+      <th>iterations</th>
+      <th>cumulative count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>121</th>
+      <td>1</td>
+      <td>3342</td>
+      <td>200</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>187</th>
+      <td>1</td>
+      <td>3349</td>
+      <td>900</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>206</th>
+      <td>1</td>
+      <td>3353</td>
+      <td>800</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>74</th>
+      <td>1</td>
+      <td>3354</td>
+      <td>800</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>161</th>
+      <td>1</td>
+      <td>3356</td>
+      <td>500</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>160</th>
+      <td>1</td>
+      <td>3641</td>
+      <td>700</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>137</th>
+      <td>1</td>
+      <td>3647</td>
+      <td>900</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>192</th>
+      <td>1</td>
+      <td>3647</td>
+      <td>1000</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>117</th>
+      <td>1</td>
+      <td>3651</td>
+      <td>500</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>112</th>
+      <td>1</td>
+      <td>3665</td>
+      <td>600</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+<p>1711 rows × 4 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Normal-distributions">Normal distributions<a class="anchor-link" href="#Normal-distributions"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We also generate a normal distribution for reference</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">calc_normal_cdf</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">mu</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">m</span><span class="o">.</span><span class="n">erf</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">mu</span><span class="p">)</span> <span class="o">/</span> <span class="n">m</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">sigma</span><span class="p">))</span> <span class="o">/</span><span class="mi">2</span>
+
+<span class="k">def</span> <span class="nf">calc_normal_pdf</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">mu</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">m</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">mu</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">sigma</span> <span class="o">**</span><span class="mi">2</span><span class="p">))</span> <span class="o">*</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">m</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">*</span> <span class="n">sigma</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="n">binomial_trials</span>
+
+<span class="n">mu</span> <span class="o">=</span> <span class="n">p</span> <span class="o">*</span> <span class="n">n</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">p</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">))</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">iteration_results</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">iteration_results</span><span class="p">[</span><span class="s1">&#39;iterations&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">iteration_results</span><span class="p">[</span><span class="s1">&#39;iterations&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="s1">&#39;value&#39;</span><span class="p">]</span>
+
+<span class="n">xs</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">ys</span> <span class="o">=</span> <span class="p">[</span><span class="n">calc_normal_cdf</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span> <span class="o">-</span> <span class="n">calc_normal_cdf</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">]</span>
+
+<span class="n">normal_dist</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">xs</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="n">ys</span><span class="p">})</span>
+<span class="n">normal_dist</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>x</th>
+      <th>y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>3364</td>
+      <td>0.000144</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>3365</td>
+      <td>0.000152</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3366</td>
+      <td>0.000162</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3367</td>
+      <td>0.000171</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>3368</td>
+      <td>0.000182</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>279</th>
+      <td>3643</td>
+      <td>0.000093</td>
+    </tr>
+    <tr>
+      <th>280</th>
+      <td>3644</td>
+      <td>0.000088</td>
+    </tr>
+    <tr>
+      <th>281</th>
+      <td>3645</td>
+      <td>0.000082</td>
+    </tr>
+    <tr>
+      <th>282</th>
+      <td>3646</td>
+      <td>0.000077</td>
+    </tr>
+    <tr>
+      <th>283</th>
+      <td>3647</td>
+      <td>0.000072</td>
+    </tr>
+  </tbody>
+</table>
+<p>284 rows × 2 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Visualization">Visualization<a class="anchor-link" href="#Visualization"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>With the slider you can see the intermediate results at each iteration.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">label</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">selection_single</span><span class="p">(</span>
+    <span class="n">encodings</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;mouseover&#39;</span><span class="p">,</span> <span class="n">nearest</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">empty</span><span class="o">=</span><span class="s1">&#39;none&#39;</span>
+<span class="p">)</span>
+
+
+<span class="n">iteration_bounds</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">binding_range</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="n">iteration_results</span><span class="p">[</span><span class="s1">&#39;iterations&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="nb">max</span><span class="o">=</span><span class="n">iteration_results</span><span class="p">[</span><span class="s1">&#39;iterations&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">)</span>
+<span class="n">iteration_slider</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">selection_single</span><span class="p">(</span><span class="n">bind</span><span class="o">=</span><span class="n">iteration_bounds</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;iterations&#39;</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Iteration&#39;</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;iterations&#39;</span><span class="p">:</span> <span class="n">iteration_results</span><span class="p">[</span><span class="s1">&#39;iterations&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">()})</span>
+
+<span class="n">bar_chart</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">iteration_results</span><span class="p">)</span><span class="o">.</span><span class="n">mark_bar</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s1">&#39;value:Q&#39;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="n">domain</span><span class="o">=</span><span class="p">(</span><span class="n">iteration_results</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">iteration_results</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()))),</span>
+    <span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s1">&#39;cumulative count:Q&#39;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="n">domain</span><span class="o">=</span><span class="p">(</span><span class="n">iteration_results</span><span class="p">[</span><span class="s1">&#39;cumulative count&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">iteration_results</span><span class="p">[</span><span class="s1">&#39;cumulative count&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()))),</span>
+    <span class="n">opacity</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span>
+<span class="p">)</span>
+
+
+<span class="n">line_chart</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">normal_dist</span><span class="p">)</span><span class="o">.</span><span class="n">mark_line</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
+    <span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">),</span> <span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,),</span><span class="n">color</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="s1">&#39;darkred&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">bar_chart</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">layer</span><span class="p">(</span>
+    <span class="n">bar_chart</span><span class="o">.</span><span class="n">add_selection</span><span class="p">(</span><span class="n">iteration_slider</span><span class="p">)</span><span class="o">.</span><span class="n">transform_filter</span><span class="p">(</span><span class="n">iteration_slider</span><span class="p">),</span>
+    <span class="n">bar_chart</span><span class="o">.</span><span class="n">mark_circle</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">opacity</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">condition</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">alt</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">alt</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="mi">0</span><span class="p">)))</span><span class="o">.</span><span class="n">add_selection</span><span class="p">(</span><span class="n">label</span><span class="p">)</span><span class="o">.</span><span class="n">transform_filter</span><span class="p">(</span><span class="n">iteration_slider</span><span class="p">),</span>
+    <span class="n">bar_chart</span><span class="o">.</span><span class="n">mark_text</span><span class="p">(</span><span class="n">dx</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">dy</span><span class="o">=-</span><span class="mi">5</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">strokeWidth</span><span class="o">=.</span><span class="mi">5</span><span class="p">,</span> <span class="n">stroke</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="s1">&#39;cumulative count:Q&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">transform_filter</span><span class="p">(</span><span class="n">label</span><span class="p">)</span><span class="o">.</span><span class="n">transform_filter</span><span class="p">(</span><span class="n">iteration_slider</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">alt</span><span class="o">.</span><span class="n">layer</span><span class="p">(</span>
+    <span class="n">bar_chart</span><span class="p">,</span>
+    <span class="n">line_chart</span><span class="p">,</span>    
+<span class="p">)</span><span class="o">.</span><span class="n">resolve_scale</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s1">&#39;independent&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">properties</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+
+<div id="altair-viz-5342bd574ef2447ba86d46cd2357ae8b"></div>
+<script type="text/javascript">
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-5342bd574ef2447ba86d46cd2357ae8b") {
+      outputDiv = document.getElementById("altair-viz-5342bd574ef2447ba86d46cd2357ae8b");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@4.8.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
+    };
+
+    function loadScript(lib) {
+      return new Promise(function(resolve, reject) {
+        var s = document.createElement('script');
+        s.src = paths[lib];
+        s.async = true;
+        s.onload = () => resolve(paths[lib]);
+        s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+        document.getElementsByTagName("head")[0].appendChild(s);
+      });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else if (typeof vegaEmbed === "function") {
+      displayChart(vegaEmbed);
+    } else {
+      loadScript("vega")
+        .then(() => loadScript("vega-lite"))
+        .then(() => loadScript("vega-embed"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "layer": [{"layer": [{"mark": "bar", "encoding": {"opacity": {"value": 0.75}, "x": {"type": "quantitative", "field": "value", "scale": {"domain": [3342.0, 3665.0]}}, "y": {"type": "quantitative", "field": "cumulative count", "scale": {"domain": [1.0, 61.0]}}}, "selection": {"Iteration": {"type": "single", "bind": {"input": "range", "max": 1000.0, "min": 100.0, "step": 100}, "fields": ["iterations"], "init": {"iterations": 600.0}}}, "transform": [{"filter": {"selection": "Iteration"}}]}, {"mark": "circle", "encoding": {"opacity": {"condition": {"value": 1, "selection": "selector001"}, "value": 0}, "x": {"type": "quantitative", "field": "value", "scale": {"domain": [3342.0, 3665.0]}}, "y": {"type": "quantitative", "field": "cumulative count", "scale": {"domain": [1.0, 61.0]}}}, "selection": {"selector001": {"type": "single", "encodings": ["x"], "on": "mouseover", "nearest": true, "empty": "none"}}, "transform": [{"filter": {"selection": "Iteration"}}]}, {"mark": {"type": "text", "align": "left", "dx": 5, "dy": -5, "stroke": "black", "strokeWidth": 0.5}, "encoding": {"opacity": {"value": 0.75}, "text": {"type": "quantitative", "field": "cumulative count"}, "x": {"type": "quantitative", "field": "value", "scale": {"domain": [3342.0, 3665.0]}}, "y": {"type": "quantitative", "field": "cumulative count", "scale": {"domain": [1.0, 61.0]}}}, "transform": [{"filter": {"selection": "selector001"}}, {"filter": {"selection": "Iteration"}}]}], "data": {"name": "data-0ced62deac026eb59a4e664f36e2a8e7"}}, {"data": {"name": "data-a29b52121bc89933f4067828879d1110"}, "mark": "line", "encoding": {"color": {"value": "darkred"}, "x": {"type": "quantitative", "field": "x"}, "y": {"type": "quantitative", "field": "y"}}}], "resolve": {"scale": {"y": "independent"}}, "width": 800, "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json", "datasets": {"data-0ced62deac026eb59a4e664f36e2a8e7": [{"count": 1, "value": 3342, "iterations": 200, "cumulative count": 1}, {"count": 1, "value": 3349, "iterations": 900, "cumulative count": 1}, {"count": 1, "value": 3353, "iterations": 800, "cumulative count": 1}, {"count": 1, "value": 3354, "iterations": 800, "cumulative count": 1}, {"count": 1, "value": 3356, "iterations": 500, "cumulative count": 1}, {"count": 1, "value": 3359, "iterations": 600, "cumulative count": 1}, {"count": 1, "value": 3359, "iterations": 700, "cumulative count": 2}, {"count": 1, "value": 3364, "iterations": 1000, "cumulative count": 1}, {"count": 1, "value": 3365, "iterations": 600, "cumulative count": 1}, {"count": 1, "value": 3366, "iterations": 700, "cumulative count": 1}, {"count": 1, "value": 3367, "iterations": 600, "cumulative count": 1}, {"count": 1, "value": 3369, "iterations": 700, "cumulative count": 1}, {"count": 1, "value": 3369, "iterations": 900, "cumulative count": 2}, {"count": 2, "value": 3371, "iterations": 800, "cumulative count": 2}, {"count": 1, "value": 3372, "iterations": 700, "cumulative count": 1}, {"count": 1, "value": 3373, "iterations": 300, "cumulative count": 1}, {"count": 1, "value": 3374, "iterations": 700, "cumulative count": 1}, {"count": 1, "value": 3375, "iterations": 300, "cumulative count": 1}, {"count": 1, "value": 3375, "iterations": 900, "cumulative count": 2}, {"count": 1, "value": 3375, "iterations": 1000, "cumulative count": 3}, {"count": 1, "value": 3376, "iterations": 700, "cumulative count": 1}, {"count": 1, "value": 3377, "iterations": 1000, "cumulative count": 1}, {"count": 2, "value": 3378, "iterations": 1000, "cumulative count": 2}, {"count": 1, "value": 3379, "iterations": 600, "cumulative count": 1}, {"count": 1, "value": 3379, "iterations": 1000, "cumulative count": 2}, {"count": 1, "value": 3380, "iterations": 600, "cumulative count": 1}, {"count": 1, "value": 3380, "iterations": 900, "cumulative count": 2}, {"count": 1, "value": 3380, "iterations": 1000, "cumulative count": 3}, {"count": 1, "value": 3381, "iterations": 400, "cumulative count": 1}, {"count": 1, "value": 3381, "iterations": 800, "cumulative count": 2}, {"count": 1, "value": 3382, "iterations": 400, "cumulative count": 1}, {"count": 1, "value": 3384, "iterations": 800, "cumulative count": 1}, {"count": 1, "value": 3384, "iterations": 1000, "cumulative count": 2}, {"count": 1, "value": 3385, "iterations": 600, "cumulative count": 1}, {"count": 1, "value": 3385, "iterations": 900, "cumulative count": 2}, {"count": 1, "value": 3386, "iterations": 700, "cumulative count": 1}, {"count": 2, "value": 3386, "iterations": 1000, "cumulative count": 3}, {"count": 1, "value": 3387, "iterations": 500, "cumulative count": 1}, {"count": 2, "value": 3387, "iterations": 800, "cumulative count": 3}, {"count": 1, "value": 3387, "iterations": 900, "cumulative count": 4}, {"count": 2, "value": 3388, "iterations": 800, "cumulative count": 2}, {"count": 1, "value": 3388, "iterations": 900, "cumulative count": 3}, {"count": 1, "value": 3388, "iterations": 1000, "cumulative count": 4}, {"count": 1, "value": 3389, "iterations": 600, "cumulative count": 1}, {"count": 1, "value": 3389, "iterations": 800, "cumulative count": 2}, {"count": 1, "value": 3390, "iterations": 500, "cumulative count": 1}, {"count": 1, "value": 3390, "iterations": 600, "cumulative count": 2}, {"count": 2, "value": 3390, "iterations": 800, "cumulative count": 4}, {"count": 1, "value": 3390, "iterations": 1000, "cumulative count": 5}, {"count": 1, "value": 3391, "iterations": 300, "cumulative count": 1}, {"count": 1, "value": 3391, "iterations": 500, "cumulative count": 2}, {"count": 2, "value": 3391, "iterations": 700, "cumulative count": 4}, {"count": 1, "value": 3391, "iterations": 800, "cumulative count": 5}, {"count": 2, "value": 3391, "iterations": 900, "cumulative count": 7}, {"count": 1, "value": 3391, "iterations": 1000, "cumulative count": 8}, {"count": 1, "value": 3392, "iterations": 1000, "cumulative count": 1}, {"count": 1, "value": 3393, "iterations": 400, "cumulative count": 1}, {"count": 1, "value": 3393, "iterations": 500, "cumulative count": 2}, {"count": 1, "value": 3393, "iterations": 700, "cumulative count": 3}, {"count": 2, "value": 3393, "iterations": 900, "cumulative count": 5}, {"count": 1, "value": 3394, "iterations": 500, "cumulative count": 1}, {"count": 2, "value": 3394, "iterations": 700, "cumulative count": 3}, {"count": 1, "value": 3394, "iterations": 900, "cumulative count": 4}, {"count": 1, "value": 3394, "iterations": 1000, "cumulative count": 5}, {"count": 1, "value": 3395, "iterations": 400, "cumulative count": 1}, {"count": 1, "value": 3395, "iterations": 1000, "cumulative count": 2}, {"count": 1, "value": 3396, "iterations": 500, "cumulative count": 1}, {"count": 1, "value": 3396, "iterations": 900, "cumulative count": 2}, {"count": 2, "value": 3396, "iterations": 1000, "cumulative count": 4}, {"count": 1, "value": 3397, "iterations": 300, "cumulative count": 1}, {"count": 2, "value": 3397, "iterations": 500, "cumulative count": 3}, {"count": 1, "value": 3397, "iterations": 600, "cumulative count": 4}, {"count": 1, "value": 3397, "iterations": 800, "cumulative count": 5}, {"count": 1, "value": 3397, "iterations": 1000, "cumulative count": 6}, {"count": 1, "value": 3398, "iterations": 200, "cumulative count": 1}, {"count": 2, "value": 3398, "iterations": 600, "cumulative count": 3}, {"count": 2, "value": 3398, "iterations": 700, "cumulative count": 5}, {"count": 1, "value": 3398, "iterations": 1000, "cumulative count": 6}, {"count": 1, "value": 3399, "iterations": 600, "cumulative count": 1}, {"count": 1, "value": 3399, "iterations": 700, "cumulative count": 2}, {"count": 1, "value": 3400, "iterations": 200, "cumulative count": 1}, {"count": 1, "value": 3400, "iterations": 500, "cumulative count": 2}, {"count": 2, "value": 3400, "iterations": 800, "cumulative count": 4}, {"count": 1, "value": 3400, "iterations": 900, "cumulative count": 5}, {"count": 1, "value": 3400, "iterations": 1000, "cumulative count": 6}, {"count": 1, "value": 3401, "iterations": 600, "cumulative count": 1}, {"count": 1, "value": 3401, "iterations": 700, "cumulative count": 2}, {"count": 1, "value": 3401, "iterations": 900, "cumulative count": 3}, {"count": 1, "value": 3402, "iterations": 400, "cumulative count": 1}, {"count": 2, "value": 3402, "iterations": 600, "cumulative count": 3}, {"count": 1, "value": 3402, "iterations": 800, "cumulative count": 4}, {"count": 1, "value": 3402, "iterations": 900, "cumulative count": 5}, {"count": 1, "value": 3403, "iterations": 300, "cumulative count": 1}, {"count": 1, "value": 3403, "iterations": 500, "cumulative count": 2}, {"count": 1, "value": 3403, "iterations": 800, "cumulative count": 3}, {"count": 1, "value": 3403, "iterations": 900, "cumulative count": 4}, {"count": 2, "value": 3403, "iterations": 1000, "cumulative count": 6}, {"count": 1, "value": 3404, "iterations": 200, "cumulative count": 1}, {"count": 1, "value": 3404, "iterations": 400, "cumulative count": 2}, {"count": 1, "value": 3404, "iterations": 500, "cumulative count": 3}, {"count": 1, "value": 3404, "iterations": 600, "cumulative count": 4}, {"count": 1, "value": 3404, "iterations": 700, "cumulative count": 5}, {"count": 1, "value": 3405, "iterations": 500, "cumulative count": 1}, {"count": 1, "value": 3405, "iterations": 600, "cumulative count": 2}, {"count": 2, "value": 3405, "iterations": 800, "cumulative count": 4}, {"count": 1, "value": 3405, "iterations": 900, "cumulative count": 5}, {"count": 1, "value": 3405, "iterations": 1000, "cumulative count": 6}, {"count": 1, "value": 3406, "iterations": 400, "cumulative count": 1}, {"count": 1, "value": 3406, "iterations": 700, "cumulative count": 2}, {"count": 3, "value": 3406, "iterations": 800, "cumulative count": 5}, {"count": 1, "value": 3407, "iterations": 300, "cumulative count": 1}, {"count": 1, "value": 3407, "iterations": 400, "cumulative count": 2}, {"count": 2, "value": 3407, "iterations": 700, "cumulative count": 4}, {"count": 2, "value": 3407, "iterations": 800, "cumulative count": 6}, {"count": 1, "value": 3407, "iterations": 900, "cumulative count": 7}, {"count": 1, "value": 3408, "iterations": 100, "cumulative count": 1}, {"count": 1, "value": 3408, "iterations": 500, "cumulative count": 2}, {"count": 2, "value": 3408, "iterations": 700, "cumulative count": 4}, {"count": 1, "value": 3408, "iterations": 800, "cumulative count": 5}, {"count": 1, "value": 3408, "iterations": 900, "cumulative count": 6}, {"count": 1, "value": 3408, "iterations": 1000, "cumulative count": 7}, {"count": 1, "value": 3409, "iterations": 400, "cumulative count": 1}, {"count": 1, "value": 3409, "iterations": 800, "cumulative count": 2}, {"count": 1, "value": 3409, "iterations": 900, "cumulative count": 3}, {"count": 3, "value": 3409, "iterations": 1000, "cumulative count": 6}, {"count": 1, "value": 3410, "iterations": 400, "cumulative count": 1}, {"count": 1, "value": 3410, "iterations": 500, "cumulative count": 2}, {"count": 1, "value": 3410, "iterations": 600, "cumulative count": 3}, {"count": 1, "value": 3410, "iterations": 800, "cumulative count": 4}, {"count": 1, "value": 3410, "iterations": 900, "cumulative count": 5}, {"count": 2, "value": 3410, "iterations": 1000, "cumulative count": 7}, {"count": 1, "value": 3411, "iterations": 400, "cumulative count": 1}, {"count": 1, "value": 3411, "iterations": 500, "cumulative count": 2}, {"count": 1, "value": 3411, "iterations": 600, "cumulative count": 3}, {"count": 1, "value": 3411, "iterations": 700, "cumulative count": 4}, {"count": 1, "value": 3411, "iterations": 800, "cumulative count": 5}, {"count": 4, "value": 3411, "iterations": 900, "cumulative count": 9}, {"count": 1, "value": 3411, "iterations": 1000, "cumulative count": 10}, {"count": 1, "value": 3412, "iterations": 100, "cumulative count": 1}, {"count": 1, "value": 3412, "iterations": 400, "cumulative count": 2}, {"count": 1, "value": 3412, "iterations": 700, "cumulative count": 3}, {"count": 1, "value": 3412, "iterations": 800, "cumulative count": 4}, {"count": 1, "value": 3412, "iterations": 900, "cumulative count": 5}, {"count": 1, "value": 3412, "iterations": 1000, "cumulative count": 6}, {"count": 1, "value": 3413, "iterations": 400, "cumulative count": 1}, {"count": 2, "value": 3413, "iterations": 500, "cumulative count": 3}, {"count": 2, "value": 3413, "iterations": 600, "cumulative count": 5}, {"count": 2, "value": 3413, "iterations": 800, "cumulative count": 7}, {"count": 3, "value": 3413, "iterations": 900, "cumulative count": 10}, {"count": 1, "value": 3414, "iterations": 100, "cumulative count": 1}, {"count": 1, "value": 3414, "iterations": 200, "cumulative count": 2}, {"count": 1, "value": 3414, "iterations": 300, "cumulative count": 3}, {"count": 1, "value": 3414, "iterations": 500, "cumulative count": 4}, {"count": 1, "value": 3414, "iterations": 600, "cumulative count": 5}, {"count": 2, "value": 3414, "iterations": 700, "cumulative count": 7}, {"count": 2, "value": 3414, "iterations": 800, "cumulative count": 9}, {"count": 1, "value": 3415, "iterations": 200, "cumulative count": 1}, {"count": 1, "value": 3415, "iterations": 700, "cumulative count": 2}, {"count": 1, "value": 3415, "iterations": 800, "cumulative count": 3}, {"count": 1, "value": 3415, "iterations": 1000, "cumulative count": 4}, {"count": 1, "value": 3416, "iterations": 300, "cumulative count": 1}, {"count": 1, "value": 3416, "iterations": 400, "cumulative count": 2}, {"count": 1, "value": 3416, "iterations": 500, "cumulative count": 3}, {"count": 1, "value": 3416, "iterations": 700, "cumulative count": 4}, {"count": 2, "value": 3416, "iterations": 900, "cumulative count": 6}, {"count": 2, "value": 3416, "iterations": 1000, "cumulative count": 8}, {"count": 1, "value": 3417, "iterations": 200, "cumulative count": 1}, {"count": 1, "value": 3417, "iterations": 400, "cumulative count": 2}, {"count": 2, "value": 3417, "iterations": 500, "cumulative count": 4}, {"count": 1, "value": 3417, "iterations": 700, "cumulative count": 5}, {"count": 3, "value": 3417, "iterations": 800, "cumulative count": 8}, {"count": 1, "value": 3417, "iterations": 900, "cumulative count": 9}, {"count": 1, "value": 3418, "iterations": 200, "cumulative count": 1}, {"count": 3, "value": 3418, "iterations": 300, "cumulative count": 4}, {"count": 1, "value": 3418, "iterations": 400, "cumulative count": 5}, {"count": 2, "value": 3418, "iterations": 500, "cumulative count": 7}, {"count": 2, "value": 3418, "iterations": 700, "cumulative count": 9}, {"count": 2, "value": 3418, "iterations": 900, "cumulative count": 11}, {"count": 3, "value": 3418, "iterations": 1000, "cumulative count": 14}, {"count": 1, "value": 3419, "iterations": 100, "cumulative count": 1}, {"count": 1, "value": 3419, "iterations": 200, "cumulative count": 2}, {"count": 2, "value": 3419, "iterations": 500, "cumulative count": 4}, {"count": 1, "value": 3419, "iterations": 600, "cumulative count": 5}, {"count": 2, "value": 3419, "iterations": 800, "cumulative count": 7}, {"count": 3, "value": 3419, "iterations": 900, "cumulative count": 10}, {"count": 2, "value": 3419, "iterations": 1000, "cumulative count": 12}, {"count": 1, "value": 3420, "iterations": 200, "cumulative count": 1}, {"count": 2, "value": 3420, "iterations": 600, "cumulative count": 3}, {"count": 1, "value": 3420, "iterations": 1000, "cumulative count": 4}, {"count": 1, "value": 3421, "iterations": 300, "cumulative count": 1}, {"count": 1, "value": 3421, "iterations": 400, "cumulative count": 2}, {"count": 2, "value": 3421, "iterations": 500, "cumulative count": 4}, {"count": 2, "value": 3421, "iterations": 600, "cumulative count": 6}, {"count": 4, "value": 3421, "iterations": 700, "cumulative count": 10}, {"count": 1, "value": 3421, "iterations": 800, "cumulative count": 11}, {"count": 2, "value": 3421, "iterations": 900, "cumulative count": 13}, {"count": 2, "value": 3421, "iterations": 1000, "cumulative count": 15}, {"count": 1, "value": 3422, "iterations": 100, "cumulative count": 1}, {"count": 1, "value": 3422, "iterations": 300, "cumulative count": 2}, {"count": 1, "value": 3422, "iterations": 600, "cumulative count": 3}, {"count": 3, "value": 3422, "iterations": 700, "cumulative count": 6}, {"count": 1, "value": 3422, "iterations": 800, "cumulative count": 7}, {"count": 1, "value": 3422, "iterations": 900, "cumulative count": 8}, {"count": 3, "value": 3422, "iterations": 1000, "cumulative count": 11}, {"count": 2, "value": 3423, "iterations": 300, "cumulative count": 2}, {"count": 1, "value": 3423, "iterations": 500, "cumulative count": 3}, {"count": 3, "value": 3423, "iterations": 600, "cumulative count": 6}, {"count": 1, "value": 3423, "iterations": 700, "cumulative count": 7}, {"count": 1, "value": 3423, "iterations": 800, "cumulative count": 8}, {"count": 3, "value": 3423, "iterations": 900, "cumulative count": 11}, {"count": 1, "value": 3423, "iterations": 1000, "cumulative count": 12}, {"count": 2, "value": 3424, "iterations": 400, "cumulative count": 2}, {"count": 1, "value": 3424, "iterations": 500, "cumulative count": 3}, {"count": 1, "value": 3424, "iterations": 600, "cumulative count": 4}, {"count": 1, "value": 3424, "iterations": 700, "cumulative count": 5}, {"count": 1, "value": 3424, "iterations": 800, "cumulative count": 6}, {"count": 4, "value": 3424, "iterations": 900, "cumulative count": 10}, {"count": 5, "value": 3424, "iterations": 1000, "cumulative count": 15}, {"count": 2, "value": 3425, "iterations": 300, "cumulative count": 2}, {"count": 1, "value": 3425, "iterations": 400, "cumulative count": 3}, {"count": 1, "value": 3425, "iterations": 500, "cumulative count": 4}, {"count": 3, "value": 3425, "iterations": 800, "cumulative count": 7}, {"count": 2, "value": 3425, "iterations": 900, "cumulative count": 9}, {"count": 3, "value": 3425, "iterations": 1000, "cumulative count": 12}, {"count": 1, "value": 3426, "iterations": 200, "cumulative count": 1}, {"count": 2, "value": 3426, "iterations": 500, "cumulative count": 3}, {"count": 2, "value": 3426, "iterations": 600, "cumulative count": 5}, {"count": 3, "value": 3426, "iterations": 700, "cumulative count": 8}, {"count": 4, "value": 3426, "iterations": 800, "cumulative count": 12}, {"count": 4, "value": 3426, "iterations": 900, "cumulative count": 16}, {"count": 2, "value": 3426, "iterations": 1000, "cumulative count": 18}, {"count": 1, "value": 3427, "iterations": 300, "cumulative count": 1}, {"count": 2, "value": 3427, "iterations": 500, "cumulative count": 3}, {"count": 1, "value": 3427, "iterations": 600, "cumulative count": 4}, {"count": 1, "value": 3427, "iterations": 700, "cumulative count": 5}, {"count": 1, "value": 3427, "iterations": 800, "cumulative count": 6}, {"count": 1, "value": 3427, "iterations": 900, "cumulative count": 7}, {"count": 1, "value": 3427, "iterations": 1000, "cumulative count": 8}, {"count": 1, "value": 3428, "iterations": 200, "cumulative count": 1}, {"count": 1, "value": 3428, "iterations": 400, "cumulative count": 2}, {"count": 1, "value": 3428, "iterations": 500, "cumulative count": 3}, {"count": 1, "value": 3428, "iterations": 600, "cumulative count": 4}, {"count": 1, "value": 3428, "iterations": 700, "cumulative count": 5}, {"count": 5, "value": 3428, "iterations": 800, "cumulative count": 10}, {"count": 2, "value": 3428, "iterations": 900, "cumulative count": 12}, {"count": 3, "value": 3428, "iterations": 1000, "cumulative count": 15}, {"count": 2, "value": 3429, "iterations": 200, "cumulative count": 2}, {"count": 1, "value": 3429, "iterations": 500, "cumulative count": 3}, {"count": 1, "value": 3429, "iterations": 600, "cumulative count": 4}, {"count": 4, "value": 3429, "iterations": 800, "cumulative count": 8}, {"count": 4, "value": 3429, "iterations": 900, "cumulative count": 12}, {"count": 5, "value": 3429, "iterations": 1000, "cumulative count": 17}, {"count": 1, "value": 3430, "iterations": 400, "cumulative count": 1}, {"count": 1, "value": 3430, "iterations": 500, "cumulative count": 2}, {"count": 1, "value": 3430, "iterations": 600, "cumulative count": 3}, {"count": 4, "value": 3430, "iterations": 800, "cumulative count": 7}, {"count": 4, "value": 3430, "iterations": 1000, "cumulative count": 11}, {"count": 1, "value": 3431, "iterations": 200, "cumulative count": 1}, {"count": 1, "value": 3431, "iterations": 400, "cumulative count": 2}, {"count": 1, "value": 3431, "iterations": 500, "cumulative count": 3}, {"count": 1, "value": 3431, "iterations": 600, "cumulative count": 4}, {"count": 2, "value": 3431, "iterations": 700, "cumulative count": 6}, {"count": 1, "value": 3431, "iterations": 800, "cumulative count": 7}, {"count": 1, "value": 3431, "iterations": 900, "cumulative count": 8}, {"count": 1, "value": 3431, "iterations": 1000, "cumulative count": 9}, {"count": 1, "value": 3432, "iterations": 200, "cumulative count": 1}, {"count": 1, "value": 3432, "iterations": 300, "cumulative count": 2}, {"count": 1, "value": 3432, "iterations": 400, "cumulative count": 3}, {"count": 2, "value": 3432, "iterations": 500, "cumulative count": 5}, {"count": 4, "value": 3432, "iterations": 600, "cumulative count": 9}, {"count": 3, "value": 3432, "iterations": 700, "cumulative count": 12}, {"count": 5, "value": 3432, "iterations": 800, "cumulative count": 17}, {"count": 3, "value": 3432, "iterations": 900, "cumulative count": 20}, {"count": 1, "value": 3432, "iterations": 1000, "cumulative count": 21}, {"count": 2, "value": 3433, "iterations": 100, "cumulative count": 2}, {"count": 1, "value": 3433, "iterations": 200, "cumulative count": 3}, {"count": 2, "value": 3433, "iterations": 500, "cumulative count": 5}, {"count": 2, "value": 3433, "iterations": 700, "cumulative count": 7}, {"count": 5, "value": 3433, "iterations": 800, "cumulative count": 12}, {"count": 2, "value": 3433, "iterations": 900, "cumulative count": 14}, {"count": 3, "value": 3433, "iterations": 1000, "cumulative count": 17}, {"count": 1, "value": 3434, "iterations": 200, "cumulative count": 1}, {"count": 1, "value": 3434, "iterations": 400, "cumulative count": 2}, {"count": 2, "value": 3434, "iterations": 500, "cumulative count": 4}, {"count": 2, "value": 3434, "iterations": 600, "cumulative count": 6}, {"count": 3, "value": 3434, "iterations": 700, "cumulative count": 9}, {"count": 3, "value": 3434, "iterations": 800, "cumulative count": 12}, {"count": 4, "value": 3434, "iterations": 900, "cumulative count": 16}, {"count": 1, "value": 3434, "iterations": 1000, "cumulative count": 17}, {"count": 2, "value": 3435, "iterations": 300, "cumulative count": 2}, {"count": 2, "value": 3435, "iterations": 500, "cumulative count": 4}, {"count": 4, "value": 3435, "iterations": 600, "cumulative count": 8}, {"count": 2, "value": 3435, "iterations": 700, "cumulative count": 10}, {"count": 2, "value": 3435, "iterations": 800, "cumulative count": 12}, {"count": 3, "value": 3435, "iterations": 900, "cumulative count": 15}, {"count": 4, "value": 3435, "iterations": 1000, "cumulative count": 19}, {"count": 1, "value": 3436, "iterations": 300, "cumulative count": 1}, {"count": 5, "value": 3436, "iterations": 500, "cumulative count": 6}, {"count": 2, "value": 3436, "iterations": 600, "cumulative count": 8}, {"count": 2, "value": 3436, "iterations": 700, "cumulative count": 10}, {"count": 1, "value": 3436, "iterations": 800, "cumulative count": 11}, {"count": 2, "value": 3436, "iterations": 900, "cumulative count": 13}, {"count": 3, "value": 3436, "iterations": 1000, "cumulative count": 16}, {"count": 1, "value": 3437, "iterations": 200, "cumulative count": 1}, {"count": 1, "value": 3437, "iterations": 300, "cumulative count": 2}, {"count": 1, "value": 3437, "iterations": 400, "cumulative count": 3}, {"count": 2, "value": 3437, "iterations": 500, "cumulative count": 5}, {"count": 3, "value": 3437, "iterations": 600, "cumulative count": 8}, {"count": 1, "value": 3437, "iterations": 700, "cumulative count": 9}, {"count": 2, "value": 3437, "iterations": 800, "cumulative count": 11}, {"count": 8, "value": 3437, "iterations": 900, "cumulative count": 19}, {"count": 9, "value": 3437, "iterations": 1000, "cumulative count": 28}, {"count": 1, "value": 3438, "iterations": 300, "cumulative count": 1}, {"count": 3, "value": 3438, "iterations": 400, "cumulative count": 4}, {"count": 3, "value": 3438, "iterations": 600, "cumulative count": 7}, {"count": 2, "value": 3438, "iterations": 700, "cumulative count": 9}, {"count": 2, "value": 3438, "iterations": 800, "cumulative count": 11}, {"count": 5, "value": 3438, "iterations": 900, "cumulative count": 16}, {"count": 3, "value": 3438, "iterations": 1000, "cumulative count": 19}, {"count": 1, "value": 3439, "iterations": 400, "cumulative count": 1}, {"count": 2, "value": 3439, "iterations": 500, "cumulative count": 3}, {"count": 1, "value": 3439, "iterations": 600, "cumulative count": 4}, {"count": 6, "value": 3439, "iterations": 700, "cumulative count": 10}, {"count": 4, "value": 3439, "iterations": 800, "cumulative count": 14}, {"count": 4, "value": 3439, "iterations": 900, "cumulative count": 18}, {"count": 5, "value": 3439, "iterations": 1000, "cumulative count": 23}, {"count": 1, "value": 3440, "iterations": 100, "cumulative count": 1}, {"count": 1, "value": 3440, "iterations": 200, "cumulative count": 2}, {"count": 1, "value": 3440, "iterations": 300, "cumulative count": 3}, {"count": 1, "value": 3440, "iterations": 500, "cumulative count": 4}, {"count": 4, "value": 3440, "iterations": 600, "cumulative count": 8}, {"count": 3, "value": 3440, "iterations": 700, "cumulative count": 11}, {"count": 4, "value": 3440, "iterations": 900, "cumulative count": 15}, {"count": 7, "value": 3440, "iterations": 1000, "cumulative count": 22}, {"count": 2, "value": 3441, "iterations": 300, "cumulative count": 2}, {"count": 2, "value": 3441, "iterations": 400, "cumulative count": 4}, {"count": 2, "value": 3441, "iterations": 600, "cumulative count": 6}, {"count": 1, "value": 3441, "iterations": 700, "cumulative count": 7}, {"count": 3, "value": 3441, "iterations": 800, "cumulative count": 10}, {"count": 4, "value": 3441, "iterations": 900, "cumulative count": 14}, {"count": 3, "value": 3441, "iterations": 1000, "cumulative count": 17}, {"count": 1, "value": 3442, "iterations": 200, "cumulative count": 1}, {"count": 1, "value": 3442, "iterations": 400, "cumulative count": 2}, {"count": 2, "value": 3442, "iterations": 500, "cumulative count": 4}, {"count": 1, "value": 3442, "iterations": 600, "cumulative count": 5}, {"count": 3, "value": 3442, "iterations": 700, "cumulative count": 8}, {"count": 5, "value": 3442, "iterations": 800, "cumulative count": 13}, {"count": 1, "value": 3442, "iterations": 900, "cumulative count": 14}, {"count": 8, "value": 3442, "iterations": 1000, "cumulative count": 22}, {"count": 1, "value": 3443, "iterations": 200, "cumulative count": 1}, {"count": 1, "value": 3443, "iterations": 300, "cumulative count": 2}, {"count": 1, "value": 3443, "iterations": 400, "cumulative count": 3}, {"count": 6, "value": 3443, "iterations": 500, "cumulative count": 9}, {"count": 2, "value": 3443, "iterations": 600, "cumulative count": 11}, {"count": 4, "value": 3443, "iterations": 700, "cumulative count": 15}, {"count": 1, "value": 3443, "iterations": 800, "cumulative count": 16}, {"count": 2, "value": 3443, "iterations": 900, "cumulative count": 18}, {"count": 3, "value": 3443, "iterations": 1000, "cumulative count": 21}, {"count": 1, "value": 3444, "iterations": 100, "cumulative count": 1}, {"count": 1, "value": 3444, "iterations": 200, "cumulative count": 2}, {"count": 1, "value": 3444, "iterations": 300, "cumulative count": 3}, {"count": 1, "value": 3444, "iterations": 400, "cumulative count": 4}, {"count": 2, "value": 3444, "iterations": 500, "cumulative count": 6}, {"count": 2, "value": 3444, "iterations": 600, "cumulative count": 8}, {"count": 2, "value": 3444, "iterations": 700, "cumulative count": 10}, {"count": 2, "value": 3444, "iterations": 800, "cumulative count": 12}, {"count": 6, "value": 3444, "iterations": 900, "cumulative count": 18}, {"count": 4, "value": 3444, "iterations": 1000, "cumulative count": 22}, {"count": 3, "value": 3445, "iterations": 100, "cumulative count": 3}, {"count": 1, "value": 3445, "iterations": 300, "cumulative count": 4}, {"count": 3, "value": 3445, "iterations": 400, "cumulative count": 7}, {"count": 1, "value": 3445, "iterations": 500, "cumulative count": 8}, {"count": 4, "value": 3445, "iterations": 600, "cumulative count": 12}, {"count": 3, "value": 3445, "iterations": 800, "cumulative count": 15}, {"count": 1, "value": 3445, "iterations": 900, "cumulative count": 16}, {"count": 3, "value": 3445, "iterations": 1000, "cumulative count": 19}, {"count": 2, "value": 3446, "iterations": 300, "cumulative count": 2}, {"count": 1, "value": 3446, "iterations": 400, "cumulative count": 3}, {"count": 1, "value": 3446, "iterations": 500, "cumulative count": 4}, {"count": 3, "value": 3446, "iterations": 600, "cumulative count": 7}, {"count": 2, "value": 3446, "iterations": 700, "cumulative count": 9}, {"count": 3, "value": 3446, "iterations": 800, "cumulative count": 12}, {"count": 6, "value": 3446, "iterations": 900, "cumulative count": 18}, {"count": 5, "value": 3446, "iterations": 1000, "cumulative count": 23}, {"count": 1, "value": 3447, "iterations": 100, "cumulative count": 1}, {"count": 1, "value": 3447, "iterations": 200, "cumulative count": 2}, {"count": 1, "value": 3447, "iterations": 400, "cumulative count": 3}, {"count": 2, "value": 3447, "iterations": 500, "cumulative count": 5}, {"count": 2, "value": 3447, "iterations": 600, "cumulative count": 7}, {"count": 2, "value": 3447, "iterations": 700, "cumulative count": 9}, {"count": 6, "value": 3447, "iterations": 800, "cumulative count": 15}, {"count": 4, "value": 3447, "iterations": 900, "cumulative count": 19}, {"count": 2, "value": 3447, "iterations": 1000, "cumulative count": 21}, {"count": 1, "value": 3448, "iterations": 100, "cumulative count": 1}, {"count": 1, "value": 3448, "iterations": 200, "cumulative count": 2}, {"count": 2, "value": 3448, "iterations": 300, "cumulative count": 4}, {"count": 2, "value": 3448, "iterations": 400, "cumulative count": 6}, {"count": 3, "value": 3448, "iterations": 500, "cumulative count": 9}, {"count": 3, "value": 3448, "iterations": 600, "cumulative count": 12}, {"count": 2, "value": 3448, "iterations": 700, "cumulative count": 14}, {"count": 3, "value": 3448, "iterations": 800, "cumulative count": 17}, {"count": 6, "value": 3448, "iterations": 900, "cumulative count": 23}, {"count": 10, "value": 3448, "iterations": 1000, "cumulative count": 33}, {"count": 1, "value": 3449, "iterations": 200, "cumulative count": 1}, {"count": 1, "value": 3449, "iterations": 300, "cumulative count": 2}, {"count": 6, "value": 3449, "iterations": 400, "cumulative count": 8}, {"count": 2, "value": 3449, "iterations": 500, "cumulative count": 10}, {"count": 5, "value": 3449, "iterations": 600, "cumulative count": 15}, {"count": 5, "value": 3449, "iterations": 700, "cumulative count": 20}, {"count": 4, "value": 3449, "iterations": 800, "cumulative count": 24}, {"count": 2, "value": 3449, "iterations": 900, "cumulative count": 26}, {"count": 2, "value": 3449, "iterations": 1000, "cumulative count": 28}, {"count": 1, "value": 3450, "iterations": 100, "cumulative count": 1}, {"count": 1, "value": 3450, "iterations": 200, "cumulative count": 2}, {"count": 5, "value": 3450, "iterations": 300, "cumulative count": 7}, {"count": 1, "value": 3450, "iterations": 500, "cumulative count": 8}, {"count": 1, "value": 3450, "iterations": 600, "cumulative count": 9}, {"count": 4, "value": 3450, "iterations": 700, "cumulative count": 13}, {"count": 1, "value": 3450, "iterations": 800, "cumulative count": 14}, {"count": 6, "value": 3450, "iterations": 900, "cumulative count": 20}, {"count": 6, "value": 3450, "iterations": 1000, "cumulative count": 26}, {"count": 2, "value": 3451, "iterations": 300, "cumulative count": 2}, {"count": 3, "value": 3451, "iterations": 500, "cumulative count": 5}, {"count": 2, "value": 3451, "iterations": 600, "cumulative count": 7}, {"count": 2, "value": 3451, "iterations": 700, "cumulative count": 9}, {"count": 5, "value": 3451, "iterations": 800, "cumulative count": 14}, {"count": 4, "value": 3451, "iterations": 900, "cumulative count": 18}, {"count": 8, "value": 3451, "iterations": 1000, "cumulative count": 26}, {"count": 1, "value": 3452, "iterations": 100, "cumulative count": 1}, {"count": 3, "value": 3452, "iterations": 200, "cumulative count": 4}, {"count": 1, "value": 3452, "iterations": 300, "cumulative count": 5}, {"count": 3, "value": 3452, "iterations": 400, "cumulative count": 8}, {"count": 2, "value": 3452, "iterations": 500, "cumulative count": 10}, {"count": 4, "value": 3452, "iterations": 600, "cumulative count": 14}, {"count": 3, "value": 3452, "iterations": 700, "cumulative count": 17}, {"count": 5, "value": 3452, "iterations": 800, "cumulative count": 22}, {"count": 2, "value": 3452, "iterations": 900, "cumulative count": 24}, {"count": 6, "value": 3452, "iterations": 1000, "cumulative count": 30}, {"count": 1, "value": 3453, "iterations": 100, "cumulative count": 1}, {"count": 1, "value": 3453, "iterations": 400, "cumulative count": 2}, {"count": 4, "value": 3453, "iterations": 500, "cumulative count": 6}, {"count": 4, "value": 3453, "iterations": 600, "cumulative count": 10}, {"count": 2, "value": 3453, "iterations": 700, "cumulative count": 12}, {"count": 2, "value": 3453, "iterations": 800, "cumulative count": 14}, {"count": 6, "value": 3453, "iterations": 900, "cumulative count": 20}, {"count": 7, "value": 3453, "iterations": 1000, "cumulative count": 27}, {"count": 1, "value": 3454, "iterations": 200, "cumulative count": 1}, {"count": 2, "value": 3454, "iterations": 300, "cumulative count": 3}, {"count": 1, "value": 3454, "iterations": 400, "cumulative count": 4}, {"count": 2, "value": 3454, "iterations": 500, "cumulative count": 6}, {"count": 2, "value": 3454, "iterations": 600, "cumulative count": 8}, {"count": 2, "value": 3454, "iterations": 700, "cumulative count": 10}, {"count": 7, "value": 3454, "iterations": 800, "cumulative count": 17}, {"count": 4, "value": 3454, "iterations": 900, "cumulative count": 21}, {"count": 8, "value": 3454, "iterations": 1000, "cumulative count": 29}, {"count": 1, "value": 3455, "iterations": 100, "cumulative count": 1}, {"count": 2, "value": 3455, "iterations": 400, "cumulative count": 3}, {"count": 5, "value": 3455, "iterations": 500, "cumulative count": 8}, {"count": 4, "value": 3455, "iterations": 600, "cumulative count": 12}, {"count": 4, "value": 3455, "iterations": 700, "cumulative count": 16}, {"count": 5, "value": 3455, "iterations": 800, "cumulative count": 21}, {"count": 4, "value": 3455, "iterations": 900, "cumulative count": 25}, {"count": 5, "value": 3455, "iterations": 1000, "cumulative count": 30}, {"count": 1, "value": 3456, "iterations": 100, "cumulative count": 1}, {"count": 3, "value": 3456, "iterations": 300, "cumulative count": 4}, {"count": 2, "value": 3456, "iterations": 400, "cumulative count": 6}, {"count": 1, "value": 3456, "iterations": 500, "cumulative count": 7}, {"count": 3, "value": 3456, "iterations": 600, "cumulative count": 10}, {"count": 1, "value": 3456, "iterations": 700, "cumulative count": 11}, {"count": 5, "value": 3456, "iterations": 800, "cumulative count": 16}, {"count": 3, "value": 3456, "iterations": 900, "cumulative count": 19}, {"count": 2, "value": 3456, "iterations": 1000, "cumulative count": 21}, {"count": 1, "value": 3457, "iterations": 100, "cumulative count": 1}, {"count": 2, "value": 3457, "iterations": 200, "cumulative count": 3}, {"count": 1, "value": 3457, "iterations": 300, "cumulative count": 4}, {"count": 6, "value": 3457, "iterations": 400, "cumulative count": 10}, {"count": 2, "value": 3457, "iterations": 600, "cumulative count": 12}, {"count": 3, "value": 3457, "iterations": 700, "cumulative count": 15}, {"count": 6, "value": 3457, "iterations": 800, "cumulative count": 21}, {"count": 4, "value": 3457, "iterations": 900, "cumulative count": 25}, {"count": 8, "value": 3457, "iterations": 1000, "cumulative count": 33}, {"count": 1, "value": 3458, "iterations": 200, "cumulative count": 1}, {"count": 2, "value": 3458, "iterations": 300, "cumulative count": 3}, {"count": 1, "value": 3458, "iterations": 400, "cumulative count": 4}, {"count": 3, "value": 3458, "iterations": 500, "cumulative count": 7}, {"count": 1, "value": 3458, "iterations": 700, "cumulative count": 8}, {"count": 6, "value": 3458, "iterations": 800, "cumulative count": 14}, {"count": 4, "value": 3458, "iterations": 900, "cumulative count": 18}, {"count": 8, "value": 3458, "iterations": 1000, "cumulative count": 26}, {"count": 2, "value": 3459, "iterations": 200, "cumulative count": 2}, {"count": 2, "value": 3459, "iterations": 400, "cumulative count": 4}, {"count": 1, "value": 3459, "iterations": 500, "cumulative count": 5}, {"count": 5, "value": 3459, "iterations": 600, "cumulative count": 10}, {"count": 4, "value": 3459, "iterations": 700, "cumulative count": 14}, {"count": 5, "value": 3459, "iterations": 800, "cumulative count": 19}, {"count": 5, "value": 3459, "iterations": 900, "cumulative count": 24}, {"count": 9, "value": 3459, "iterations": 1000, "cumulative count": 33}, {"count": 2, "value": 3460, "iterations": 200, "cumulative count": 2}, {"count": 1, "value": 3460, "iterations": 300, "cumulative count": 3}, {"count": 6, "value": 3460, "iterations": 400, "cumulative count": 9}, {"count": 4, "value": 3460, "iterations": 500, "cumulative count": 13}, {"count": 2, "value": 3460, "iterations": 600, "cumulative count": 15}, {"count": 4, "value": 3460, "iterations": 700, "cumulative count": 19}, {"count": 3, "value": 3460, "iterations": 800, "cumulative count": 22}, {"count": 2, "value": 3460, "iterations": 900, "cumulative count": 24}, {"count": 1, "value": 3461, "iterations": 100, "cumulative count": 1}, {"count": 2, "value": 3461, "iterations": 300, "cumulative count": 3}, {"count": 2, "value": 3461, "iterations": 400, "cumulative count": 5}, {"count": 3, "value": 3461, "iterations": 500, "cumulative count": 8}, {"count": 2, "value": 3461, "iterations": 600, "cumulative count": 10}, {"count": 2, "value": 3461, "iterations": 700, "cumulative count": 12}, {"count": 3, "value": 3461, "iterations": 800, "cumulative count": 15}, {"count": 7, "value": 3461, "iterations": 900, "cumulative count": 22}, {"count": 3, "value": 3461, "iterations": 1000, "cumulative count": 25}, {"count": 2, "value": 3462, "iterations": 300, "cumulative count": 2}, {"count": 3, "value": 3462, "iterations": 400, "cumulative count": 5}, {"count": 10, "value": 3462, "iterations": 500, "cumulative count": 15}, {"count": 3, "value": 3462, "iterations": 600, "cumulative count": 18}, {"count": 5, "value": 3462, "iterations": 700, "cumulative count": 23}, {"count": 4, "value": 3462, "iterations": 800, "cumulative count": 27}, {"count": 11, "value": 3462, "iterations": 900, "cumulative count": 38}, {"count": 6, "value": 3462, "iterations": 1000, "cumulative count": 44}, {"count": 2, "value": 3463, "iterations": 200, "cumulative count": 2}, {"count": 5, "value": 3463, "iterations": 300, "cumulative count": 7}, {"count": 3, "value": 3463, "iterations": 400, "cumulative count": 10}, {"count": 3, "value": 3463, "iterations": 500, "cumulative count": 13}, {"count": 5, "value": 3463, "iterations": 600, "cumulative count": 18}, {"count": 7, "value": 3463, "iterations": 700, "cumulative count": 25}, {"count": 6, "value": 3463, "iterations": 800, "cumulative count": 31}, {"count": 6, "value": 3463, "iterations": 900, "cumulative count": 37}, {"count": 7, "value": 3463, "iterations": 1000, "cumulative count": 44}, {"count": 1, "value": 3464, "iterations": 100, "cumulative count": 1}, {"count": 2, "value": 3464, "iterations": 200, "cumulative count": 3}, {"count": 2, "value": 3464, "iterations": 300, "cumulative count": 5}, {"count": 3, "value": 3464, "iterations": 400, "cumulative count": 8}, {"count": 2, "value": 3464, "iterations": 500, "cumulative count": 10}, {"count": 7, "value": 3464, "iterations": 600, "cumulative count": 17}, {"count": 8, "value": 3464, "iterations": 700, "cumulative count": 25}, {"count": 8, "value": 3464, "iterations": 800, "cumulative count": 33}, {"count": 5, "value": 3464, "iterations": 900, "cumulative count": 38}, {"count": 4, "value": 3464, "iterations": 1000, "cumulative count": 42}, {"count": 1, "value": 3465, "iterations": 200, "cumulative count": 1}, {"count": 1, "value": 3465, "iterations": 300, "cumulative count": 2}, {"count": 1, "value": 3465, "iterations": 400, "cumulative count": 3}, {"count": 3, "value": 3465, "iterations": 500, "cumulative count": 6}, {"count": 2, "value": 3465, "iterations": 600, "cumulative count": 8}, {"count": 3, "value": 3465, "iterations": 700, "cumulative count": 11}, {"count": 4, "value": 3465, "iterations": 800, "cumulative count": 15}, {"count": 1, "value": 3465, "iterations": 900, "cumulative count": 16}, {"count": 3, "value": 3465, "iterations": 1000, "cumulative count": 19}, {"count": 1, "value": 3466, "iterations": 100, "cumulative count": 1}, {"count": 1, "value": 3466, "iterations": 200, "cumulative count": 2}, {"count": 1, "value": 3466, "iterations": 300, "cumulative count": 3}, {"count": 3, "value": 3466, "iterations": 400, "cumulative count": 6}, {"count": 2, "value": 3466, "iterations": 500, "cumulative count": 8}, {"count": 4, "value": 3466, "iterations": 600, "cumulative count": 12}, {"count": 2, "value": 3466, "iterations": 700, "cumulative count": 14}, {"count": 5, "value": 3466, "iterations": 800, "cumulative count": 19}, {"count": 7, "value": 3466, "iterations": 900, "cumulative count": 26}, {"count": 9, "value": 3466, "iterations": 1000, "cumulative count": 35}, {"count": 1, "value": 3467, "iterations": 200, "cumulative count": 1}, {"count": 3, "value": 3467, "iterations": 300, "cumulative count": 4}, {"count": 1, "value": 3467, "iterations": 400, "cumulative count": 5}, {"count": 3, "value": 3467, "iterations": 600, "cumulative count": 8}, {"count": 9, "value": 3467, "iterations": 700, "cumulative count": 17}, {"count": 3, "value": 3467, "iterations": 800, "cumulative count": 20}, {"count": 3, "value": 3467, "iterations": 900, "cumulative count": 23}, {"count": 6, "value": 3467, "iterations": 1000, "cumulative count": 29}, {"count": 4, "value": 3468, "iterations": 100, "cumulative count": 4}, {"count": 1, "value": 3468, "iterations": 200, "cumulative count": 5}, {"count": 1, "value": 3468, "iterations": 300, "cumulative count": 6}, {"count": 4, "value": 3468, "iterations": 500, "cumulative count": 10}, {"count": 6, "value": 3468, "iterations": 600, "cumulative count": 16}, {"count": 7, "value": 3468, "iterations": 700, "cumulative count": 23}, {"count": 5, "value": 3468, "iterations": 800, "cumulative count": 28}, {"count": 8, "value": 3468, "iterations": 900, "cumulative count": 36}, {"count": 7, "value": 3468, "iterations": 1000, "cumulative count": 43}, {"count": 6, "value": 3469, "iterations": 200, "cumulative count": 6}, {"count": 1, "value": 3469, "iterations": 300, "cumulative count": 7}, {"count": 4, "value": 3469, "iterations": 400, "cumulative count": 11}, {"count": 1, "value": 3469, "iterations": 500, "cumulative count": 12}, {"count": 7, "value": 3469, "iterations": 600, "cumulative count": 19}, {"count": 6, "value": 3469, "iterations": 700, "cumulative count": 25}, {"count": 6, "value": 3469, "iterations": 800, "cumulative count": 31}, {"count": 4, "value": 3469, "iterations": 900, "cumulative count": 35}, {"count": 12, "value": 3469, "iterations": 1000, "cumulative count": 47}, {"count": 1, "value": 3470, "iterations": 100, "cumulative count": 1}, {"count": 4, "value": 3470, "iterations": 200, "cumulative count": 5}, {"count": 4, "value": 3470, "iterations": 300, "cumulative count": 9}, {"count": 4, "value": 3470, "iterations": 500, "cumulative count": 13}, {"count": 4, "value": 3470, "iterations": 600, "cumulative count": 17}, {"count": 7, "value": 3470, "iterations": 700, "cumulative count": 24}, {"count": 3, "value": 3470, "iterations": 800, "cumulative count": 27}, {"count": 11, "value": 3470, "iterations": 900, "cumulative count": 38}, {"count": 7, "value": 3470, "iterations": 1000, "cumulative count": 45}, {"count": 2, "value": 3471, "iterations": 200, "cumulative count": 2}, {"count": 1, "value": 3471, "iterations": 300, "cumulative count": 3}, {"count": 2, "value": 3471, "iterations": 400, "cumulative count": 5}, {"count": 3, "value": 3471, "iterations": 500, "cumulative count": 8}, {"count": 2, "value": 3471, "iterations": 600, "cumulative count": 10}, {"count": 2, "value": 3471, "iterations": 700, "cumulative count": 12}, {"count": 2, "value": 3471, "iterations": 800, "cumulative count": 14}, {"count": 2, "value": 3471, "iterations": 900, "cumulative count": 16}, {"count": 3, "value": 3471, "iterations": 1000, "cumulative count": 19}, {"count": 1, "value": 3472, "iterations": 200, "cumulative count": 1}, {"count": 1, "value": 3472, "iterations": 300, "cumulative count": 2}, {"count": 4, "value": 3472, "iterations": 400, "cumulative count": 6}, {"count": 1, "value": 3472, "iterations": 500, "cumulative count": 7}, {"count": 4, "value": 3472, "iterations": 600, "cumulative count": 11}, {"count": 3, "value": 3472, "iterations": 700, "cumulative count": 14}, {"count": 4, "value": 3472, "iterations": 800, "cumulative count": 18}, {"count": 9, "value": 3472, "iterations": 900, "cumulative count": 27}, {"count": 4, "value": 3472, "iterations": 1000, "cumulative count": 31}, {"count": 1, "value": 3473, "iterations": 100, "cumulative count": 1}, {"count": 3, "value": 3473, "iterations": 200, "cumulative count": 4}, {"count": 3, "value": 3473, "iterations": 300, "cumulative count": 7}, {"count": 1, "value": 3473, "iterations": 400, "cumulative count": 8}, {"count": 6, "value": 3473, "iterations": 500, "cumulative count": 14}, {"count": 3, "value": 3473, "iterations": 600, "cumulative count": 17}, {"count": 2, "value": 3473, "iterations": 700, "cumulative count": 19}, {"count": 4, "value": 3473, "iterations": 800, "cumulative count": 23}, {"count": 8, "value": 3473, "iterations": 900, "cumulative count": 31}, {"count": 6, "value": 3473, "iterations": 1000, "cumulative count": 37}, {"count": 2, "value": 3474, "iterations": 200, "cumulative count": 2}, {"count": 2, "value": 3474, "iterations": 300, "cumulative count": 4}, {"count": 4, "value": 3474, "iterations": 500, "cumulative count": 8}, {"count": 2, "value": 3474, "iterations": 600, "cumulative count": 10}, {"count": 7, "value": 3474, "iterations": 700, "cumulative count": 17}, {"count": 9, "value": 3474, "iterations": 900, "cumulative count": 26}, {"count": 6, "value": 3474, "iterations": 1000, "cumulative count": 32}, {"count": 2, "value": 3475, "iterations": 100, "cumulative count": 2}, {"count": 1, "value": 3475, "iterations": 200, "cumulative count": 3}, {"count": 2, "value": 3475, "iterations": 300, "cumulative count": 5}, {"count": 4, "value": 3475, "iterations": 400, "cumulative count": 9}, {"count": 1, "value": 3475, "iterations": 500, "cumulative count": 10}, {"count": 2, "value": 3475, "iterations": 600, "cumulative count": 12}, {"count": 6, "value": 3475, "iterations": 700, "cumulative count": 18}, {"count": 9, "value": 3475, "iterations": 800, "cumulative count": 27}, {"count": 5, "value": 3475, "iterations": 900, "cumulative count": 32}, {"count": 5, "value": 3475, "iterations": 1000, "cumulative count": 37}, {"count": 3, "value": 3476, "iterations": 100, "cumulative count": 3}, {"count": 3, "value": 3476, "iterations": 200, "cumulative count": 6}, {"count": 3, "value": 3476, "iterations": 300, "cumulative count": 9}, {"count": 2, "value": 3476, "iterations": 400, "cumulative count": 11}, {"count": 5, "value": 3476, "iterations": 500, "cumulative count": 16}, {"count": 3, "value": 3476, "iterations": 600, "cumulative count": 19}, {"count": 5, "value": 3476, "iterations": 700, "cumulative count": 24}, {"count": 6, "value": 3476, "iterations": 800, "cumulative count": 30}, {"count": 7, "value": 3476, "iterations": 900, "cumulative count": 37}, {"count": 8, "value": 3476, "iterations": 1000, "cumulative count": 45}, {"count": 1, "value": 3477, "iterations": 200, "cumulative count": 1}, {"count": 1, "value": 3477, "iterations": 300, "cumulative count": 2}, {"count": 1, "value": 3477, "iterations": 400, "cumulative count": 3}, {"count": 2, "value": 3477, "iterations": 500, "cumulative count": 5}, {"count": 5, "value": 3477, "iterations": 600, "cumulative count": 10}, {"count": 5, "value": 3477, "iterations": 700, "cumulative count": 15}, {"count": 3, "value": 3477, "iterations": 800, "cumulative count": 18}, {"count": 6, "value": 3477, "iterations": 900, "cumulative count": 24}, {"count": 11, "value": 3477, "iterations": 1000, "cumulative count": 35}, {"count": 3, "value": 3478, "iterations": 200, "cumulative count": 3}, {"count": 1, "value": 3478, "iterations": 300, "cumulative count": 4}, {"count": 1, "value": 3478, "iterations": 400, "cumulative count": 5}, {"count": 2, "value": 3478, "iterations": 500, "cumulative count": 7}, {"count": 3, "value": 3478, "iterations": 600, "cumulative count": 10}, {"count": 4, "value": 3478, "iterations": 700, "cumulative count": 14}, {"count": 10, "value": 3478, "iterations": 800, "cumulative count": 24}, {"count": 10, "value": 3478, "iterations": 900, "cumulative count": 34}, {"count": 11, "value": 3478, "iterations": 1000, "cumulative count": 45}, {"count": 2, "value": 3479, "iterations": 100, "cumulative count": 2}, {"count": 1, "value": 3479, "iterations": 200, "cumulative count": 3}, {"count": 4, "value": 3479, "iterations": 300, "cumulative count": 7}, {"count": 3, "value": 3479, "iterations": 400, "cumulative count": 10}, {"count": 4, "value": 3479, "iterations": 500, "cumulative count": 14}, {"count": 4, "value": 3479, "iterations": 600, "cumulative count": 18}, {"count": 7, "value": 3479, "iterations": 700, "cumulative count": 25}, {"count": 5, "value": 3479, "iterations": 800, "cumulative count": 30}, {"count": 6, "value": 3479, "iterations": 900, "cumulative count": 36}, {"count": 7, "value": 3479, "iterations": 1000, "cumulative count": 43}, {"count": 1, "value": 3480, "iterations": 200, "cumulative count": 1}, {"count": 2, "value": 3480, "iterations": 300, "cumulative count": 3}, {"count": 4, "value": 3480, "iterations": 400, "cumulative count": 7}, {"count": 8, "value": 3480, "iterations": 500, "cumulative count": 15}, {"count": 3, "value": 3480, "iterations": 600, "cumulative count": 18}, {"count": 7, "value": 3480, "iterations": 700, "cumulative count": 25}, {"count": 10, "value": 3480, "iterations": 800, "cumulative count": 35}, {"count": 7, "value": 3480, "iterations": 900, "cumulative count": 42}, {"count": 9, "value": 3480, "iterations": 1000, "cumulative count": 51}, {"count": 1, "value": 3481, "iterations": 100, "cumulative count": 1}, {"count": 1, "value": 3481, "iterations": 200, "cumulative count": 2}, {"count": 2, "value": 3481, "iterations": 300, "cumulative count": 4}, {"count": 3, "value": 3481, "iterations": 400, "cumulative count": 7}, {"count": 3, "value": 3481, "iterations": 500, "cumulative count": 10}, {"count": 7, "value": 3481, "iterations": 600, "cumulative count": 17}, {"count": 4, "value": 3481, "iterations": 700, "cumulative count": 21}, {"count": 10, "value": 3481, "iterations": 800, "cumulative count": 31}, {"count": 6, "value": 3481, "iterations": 900, "cumulative count": 37}, {"count": 9, "value": 3481, "iterations": 1000, "cumulative count": 46}, {"count": 1, "value": 3482, "iterations": 100, "cumulative count": 1}, {"count": 2, "value": 3482, "iterations": 200, "cumulative count": 3}, {"count": 1, "value": 3482, "iterations": 300, "cumulative count": 4}, {"count": 3, "value": 3482, "iterations": 400, "cumulative count": 7}, {"count": 7, "value": 3482, "iterations": 500, "cumulative count": 14}, {"count": 2, "value": 3482, "iterations": 600, "cumulative count": 16}, {"count": 4, "value": 3482, "iterations": 700, "cumulative count": 20}, {"count": 4, "value": 3482, "iterations": 800, "cumulative count": 24}, {"count": 6, "value": 3482, "iterations": 900, "cumulative count": 30}, {"count": 4, "value": 3482, "iterations": 1000, "cumulative count": 34}, {"count": 3, "value": 3483, "iterations": 100, "cumulative count": 3}, {"count": 2, "value": 3483, "iterations": 400, "cumulative count": 5}, {"count": 2, "value": 3483, "iterations": 500, "cumulative count": 7}, {"count": 5, "value": 3483, "iterations": 600, "cumulative count": 12}, {"count": 9, "value": 3483, "iterations": 700, "cumulative count": 21}, {"count": 5, "value": 3483, "iterations": 800, "cumulative count": 26}, {"count": 6, "value": 3483, "iterations": 900, "cumulative count": 32}, {"count": 11, "value": 3483, "iterations": 1000, "cumulative count": 43}, {"count": 4, "value": 3484, "iterations": 200, "cumulative count": 4}, {"count": 4, "value": 3484, "iterations": 400, "cumulative count": 8}, {"count": 9, "value": 3484, "iterations": 500, "cumulative count": 17}, {"count": 5, "value": 3484, "iterations": 600, "cumulative count": 22}, {"count": 5, "value": 3484, "iterations": 700, "cumulative count": 27}, {"count": 4, "value": 3484, "iterations": 800, "cumulative count": 31}, {"count": 1, "value": 3484, "iterations": 900, "cumulative count": 32}, {"count": 3, "value": 3484, "iterations": 1000, "cumulative count": 35}, {"count": 4, "value": 3485, "iterations": 400, "cumulative count": 4}, {"count": 5, "value": 3485, "iterations": 500, "cumulative count": 9}, {"count": 5, "value": 3485, "iterations": 600, "cumulative count": 14}, {"count": 11, "value": 3485, "iterations": 700, "cumulative count": 25}, {"count": 8, "value": 3485, "iterations": 800, "cumulative count": 33}, {"count": 10, "value": 3485, "iterations": 900, "cumulative count": 43}, {"count": 8, "value": 3485, "iterations": 1000, "cumulative count": 51}, {"count": 2, "value": 3486, "iterations": 100, "cumulative count": 2}, {"count": 2, "value": 3486, "iterations": 300, "cumulative count": 4}, {"count": 3, "value": 3486, "iterations": 400, "cumulative count": 7}, {"count": 4, "value": 3486, "iterations": 500, "cumulative count": 11}, {"count": 3, "value": 3486, "iterations": 600, "cumulative count": 14}, {"count": 8, "value": 3486, "iterations": 700, "cumulative count": 22}, {"count": 5, "value": 3486, "iterations": 800, "cumulative count": 27}, {"count": 6, "value": 3486, "iterations": 900, "cumulative count": 33}, {"count": 5, "value": 3486, "iterations": 1000, "cumulative count": 38}, {"count": 1, "value": 3487, "iterations": 100, "cumulative count": 1}, {"count": 2, "value": 3487, "iterations": 200, "cumulative count": 3}, {"count": 2, "value": 3487, "iterations": 300, "cumulative count": 5}, {"count": 1, "value": 3487, "iterations": 400, "cumulative count": 6}, {"count": 4, "value": 3487, "iterations": 500, "cumulative count": 10}, {"count": 5, "value": 3487, "iterations": 600, "cumulative count": 15}, {"count": 6, "value": 3487, "iterations": 700, "cumulative count": 21}, {"count": 8, "value": 3487, "iterations": 800, "cumulative count": 29}, {"count": 10, "value": 3487, "iterations": 900, "cumulative count": 39}, {"count": 12, "value": 3487, "iterations": 1000, "cumulative count": 51}, {"count": 1, "value": 3488, "iterations": 100, "cumulative count": 1}, {"count": 4, "value": 3488, "iterations": 300, "cumulative count": 5}, {"count": 1, "value": 3488, "iterations": 400, "cumulative count": 6}, {"count": 7, "value": 3488, "iterations": 500, "cumulative count": 13}, {"count": 12, "value": 3488, "iterations": 600, "cumulative count": 25}, {"count": 6, "value": 3488, "iterations": 700, "cumulative count": 31}, {"count": 3, "value": 3488, "iterations": 800, "cumulative count": 34}, {"count": 8, "value": 3488, "iterations": 900, "cumulative count": 42}, {"count": 5, "value": 3488, "iterations": 1000, "cumulative count": 47}, {"count": 1, "value": 3489, "iterations": 100, "cumulative count": 1}, {"count": 2, "value": 3489, "iterations": 200, "cumulative count": 3}, {"count": 7, "value": 3489, "iterations": 300, "cumulative count": 10}, {"count": 2, "value": 3489, "iterations": 400, "cumulative count": 12}, {"count": 1, "value": 3489, "iterations": 500, "cumulative count": 13}, {"count": 5, "value": 3489, "iterations": 600, "cumulative count": 18}, {"count": 8, "value": 3489, "iterations": 700, "cumulative count": 26}, {"count": 6, "value": 3489, "iterations": 800, "cumulative count": 32}, {"count": 8, "value": 3489, "iterations": 900, "cumulative count": 40}, {"count": 11, "value": 3489, "iterations": 1000, "cumulative count": 51}, {"count": 2, "value": 3490, "iterations": 100, "cumulative count": 2}, {"count": 2, "value": 3490, "iterations": 200, "cumulative count": 4}, {"count": 3, "value": 3490, "iterations": 300, "cumulative count": 7}, {"count": 3, "value": 3490, "iterations": 400, "cumulative count": 10}, {"count": 2, "value": 3490, "iterations": 500, "cumulative count": 12}, {"count": 3, "value": 3490, "iterations": 600, "cumulative count": 15}, {"count": 4, "value": 3490, "iterations": 700, "cumulative count": 19}, {"count": 4, "value": 3490, "iterations": 800, "cumulative count": 23}, {"count": 6, "value": 3490, "iterations": 900, "cumulative count": 29}, {"count": 9, "value": 3490, "iterations": 1000, "cumulative count": 38}, {"count": 3, "value": 3491, "iterations": 200, "cumulative count": 3}, {"count": 2, "value": 3491, "iterations": 300, "cumulative count": 5}, {"count": 3, "value": 3491, "iterations": 400, "cumulative count": 8}, {"count": 3, "value": 3491, "iterations": 500, "cumulative count": 11}, {"count": 5, "value": 3491, "iterations": 600, "cumulative count": 16}, {"count": 3, "value": 3491, "iterations": 700, "cumulative count": 19}, {"count": 5, "value": 3491, "iterations": 800, "cumulative count": 24}, {"count": 6, "value": 3491, "iterations": 900, "cumulative count": 30}, {"count": 8, "value": 3491, "iterations": 1000, "cumulative count": 38}, {"count": 1, "value": 3492, "iterations": 100, "cumulative count": 1}, {"count": 2, "value": 3492, "iterations": 200, "cumulative count": 3}, {"count": 2, "value": 3492, "iterations": 300, "cumulative count": 5}, {"count": 3, "value": 3492, "iterations": 400, "cumulative count": 8}, {"count": 3, "value": 3492, "iterations": 500, "cumulative count": 11}, {"count": 5, "value": 3492, "iterations": 600, "cumulative count": 16}, {"count": 9, "value": 3492, "iterations": 700, "cumulative count": 25}, {"count": 5, "value": 3492, "iterations": 800, "cumulative count": 30}, {"count": 7, "value": 3492, "iterations": 900, "cumulative count": 37}, {"count": 7, "value": 3492, "iterations": 1000, "cumulative count": 44}, {"count": 3, "value": 3493, "iterations": 100, "cumulative count": 3}, {"count": 1, "value": 3493, "iterations": 200, "cumulative count": 4}, {"count": 4, "value": 3493, "iterations": 300, "cumulative count": 8}, {"count": 6, "value": 3493, "iterations": 400, "cumulative count": 14}, {"count": 6, "value": 3493, "iterations": 500, "cumulative count": 20}, {"count": 5, "value": 3493, "iterations": 600, "cumulative count": 25}, {"count": 4, "value": 3493, "iterations": 700, "cumulative count": 29}, {"count": 10, "value": 3493, "iterations": 800, "cumulative count": 39}, {"count": 8, "value": 3493, "iterations": 900, "cumulative count": 47}, {"count": 9, "value": 3493, "iterations": 1000, "cumulative count": 56}, {"count": 1, "value": 3494, "iterations": 100, "cumulative count": 1}, {"count": 3, "value": 3494, "iterations": 200, "cumulative count": 4}, {"count": 5, "value": 3494, "iterations": 300, "cumulative count": 9}, {"count": 6, "value": 3494, "iterations": 400, "cumulative count": 15}, {"count": 3, "value": 3494, "iterations": 500, "cumulative count": 18}, {"count": 4, "value": 3494, "iterations": 600, "cumulative count": 22}, {"count": 9, "value": 3494, "iterations": 700, "cumulative count": 31}, {"count": 5, "value": 3494, "iterations": 800, "cumulative count": 36}, {"count": 3, "value": 3494, "iterations": 900, "cumulative count": 39}, {"count": 11, "value": 3494, "iterations": 1000, "cumulative count": 50}, {"count": 2, "value": 3495, "iterations": 100, "cumulative count": 2}, {"count": 2, "value": 3495, "iterations": 200, "cumulative count": 4}, {"count": 1, "value": 3495, "iterations": 300, "cumulative count": 5}, {"count": 3, "value": 3495, "iterations": 400, "cumulative count": 8}, {"count": 2, "value": 3495, "iterations": 500, "cumulative count": 10}, {"count": 4, "value": 3495, "iterations": 600, "cumulative count": 14}, {"count": 5, "value": 3495, "iterations": 700, "cumulative count": 19}, {"count": 8, "value": 3495, "iterations": 800, "cumulative count": 27}, {"count": 7, "value": 3495, "iterations": 900, "cumulative count": 34}, {"count": 8, "value": 3495, "iterations": 1000, "cumulative count": 42}, {"count": 3, "value": 3496, "iterations": 200, "cumulative count": 3}, {"count": 2, "value": 3496, "iterations": 300, "cumulative count": 5}, {"count": 7, "value": 3496, "iterations": 400, "cumulative count": 12}, {"count": 7, "value": 3496, "iterations": 500, "cumulative count": 19}, {"count": 4, "value": 3496, "iterations": 600, "cumulative count": 23}, {"count": 4, "value": 3496, "iterations": 700, "cumulative count": 27}, {"count": 8, "value": 3496, "iterations": 800, "cumulative count": 35}, {"count": 10, "value": 3496, "iterations": 900, "cumulative count": 45}, {"count": 10, "value": 3496, "iterations": 1000, "cumulative count": 55}, {"count": 1, "value": 3497, "iterations": 100, "cumulative count": 1}, {"count": 1, "value": 3497, "iterations": 200, "cumulative count": 2}, {"count": 1, "value": 3497, "iterations": 300, "cumulative count": 3}, {"count": 1, "value": 3497, "iterations": 400, "cumulative count": 4}, {"count": 4, "value": 3497, "iterations": 500, "cumulative count": 8}, {"count": 6, "value": 3497, "iterations": 600, "cumulative count": 14}, {"count": 7, "value": 3497, "iterations": 700, "cumulative count": 21}, {"count": 4, "value": 3497, "iterations": 800, "cumulative count": 25}, {"count": 10, "value": 3497, "iterations": 900, "cumulative count": 35}, {"count": 9, "value": 3497, "iterations": 1000, "cumulative count": 44}, {"count": 3, "value": 3498, "iterations": 200, "cumulative count": 3}, {"count": 2, "value": 3498, "iterations": 300, "cumulative count": 5}, {"count": 3, "value": 3498, "iterations": 400, "cumulative count": 8}, {"count": 4, "value": 3498, "iterations": 500, "cumulative count": 12}, {"count": 5, "value": 3498, "iterations": 600, "cumulative count": 17}, {"count": 7, "value": 3498, "iterations": 700, "cumulative count": 24}, {"count": 3, "value": 3498, "iterations": 800, "cumulative count": 27}, {"count": 8, "value": 3498, "iterations": 900, "cumulative count": 35}, {"count": 5, "value": 3498, "iterations": 1000, "cumulative count": 40}, {"count": 1, "value": 3499, "iterations": 100, "cumulative count": 1}, {"count": 4, "value": 3499, "iterations": 300, "cumulative count": 5}, {"count": 1, "value": 3499, "iterations": 400, "cumulative count": 6}, {"count": 7, "value": 3499, "iterations": 600, "cumulative count": 13}, {"count": 5, "value": 3499, "iterations": 700, "cumulative count": 18}, {"count": 3, "value": 3499, "iterations": 800, "cumulative count": 21}, {"count": 10, "value": 3499, "iterations": 900, "cumulative count": 31}, {"count": 5, "value": 3499, "iterations": 1000, "cumulative count": 36}, {"count": 1, "value": 3500, "iterations": 100, "cumulative count": 1}, {"count": 1, "value": 3500, "iterations": 200, "cumulative count": 2}, {"count": 1, "value": 3500, "iterations": 300, "cumulative count": 3}, {"count": 5, "value": 3500, "iterations": 400, "cumulative count": 8}, {"count": 1, "value": 3500, "iterations": 500, "cumulative count": 9}, {"count": 9, "value": 3500, "iterations": 600, "cumulative count": 18}, {"count": 11, "value": 3500, "iterations": 700, "cumulative count": 29}, {"count": 7, "value": 3500, "iterations": 800, "cumulative count": 36}, {"count": 10, "value": 3500, "iterations": 900, "cumulative count": 46}, {"count": 7, "value": 3500, "iterations": 1000, "cumulative count": 53}, {"count": 1, "value": 3501, "iterations": 100, "cumulative count": 1}, {"count": 1, "value": 3501, "iterations": 200, "cumulative count": 2}, {"count": 5, "value": 3501, "iterations": 300, "cumulative count": 7}, {"count": 4, "value": 3501, "iterations": 400, "cumulative count": 11}, {"count": 5, "value": 3501, "iterations": 500, "cumulative count": 16}, {"count": 10, "value": 3501, "iterations": 600, "cumulative count": 26}, {"count": 5, "value": 3501, "iterations": 700, "cumulative count": 31}, {"count": 7, "value": 3501, "iterations": 800, "cumulative count": 38}, {"count": 6, "value": 3501, "iterations": 900, "cumulative count": 44}, {"count": 10, "value": 3501, "iterations": 1000, "cumulative count": 54}, {"count": 1, "value": 3502, "iterations": 200, "cumulative count": 1}, {"count": 5, "value": 3502, "iterations": 300, "cumulative count": 6}, {"count": 5, "value": 3502, "iterations": 400, "cumulative count": 11}, {"count": 2, "value": 3502, "iterations": 500, "cumulative count": 13}, {"count": 3, "value": 3502, "iterations": 600, "cumulative count": 16}, {"count": 8, "value": 3502, "iterations": 700, "cumulative count": 24}, {"count": 5, "value": 3502, "iterations": 800, "cumulative count": 29}, {"count": 7, "value": 3502, "iterations": 900, "cumulative count": 36}, {"count": 6, "value": 3502, "iterations": 1000, "cumulative count": 42}, {"count": 6, "value": 3503, "iterations": 200, "cumulative count": 6}, {"count": 4, "value": 3503, "iterations": 300, "cumulative count": 10}, {"count": 2, "value": 3503, "iterations": 400, "cumulative count": 12}, {"count": 6, "value": 3503, "iterations": 500, "cumulative count": 18}, {"count": 5, "value": 3503, "iterations": 600, "cumulative count": 23}, {"count": 8, "value": 3503, "iterations": 700, "cumulative count": 31}, {"count": 7, "value": 3503, "iterations": 800, "cumulative count": 38}, {"count": 11, "value": 3503, "iterations": 900, "cumulative count": 49}, {"count": 7, "value": 3503, "iterations": 1000, "cumulative count": 56}, {"count": 1, "value": 3504, "iterations": 100, "cumulative count": 1}, {"count": 1, "value": 3504, "iterations": 200, "cumulative count": 2}, {"count": 2, "value": 3504, "iterations": 300, "cumulative count": 4}, {"count": 2, "value": 3504, "iterations": 400, "cumulative count": 6}, {"count": 4, "value": 3504, "iterations": 500, "cumulative count": 10}, {"count": 4, "value": 3504, "iterations": 600, "cumulative count": 14}, {"count": 7, "value": 3504, "iterations": 700, "cumulative count": 21}, {"count": 4, "value": 3504, "iterations": 800, "cumulative count": 25}, {"count": 8, "value": 3504, "iterations": 900, "cumulative count": 33}, {"count": 13, "value": 3504, "iterations": 1000, "cumulative count": 46}, {"count": 1, "value": 3505, "iterations": 100, "cumulative count": 1}, {"count": 1, "value": 3505, "iterations": 200, "cumulative count": 2}, {"count": 3, "value": 3505, "iterations": 300, "cumulative count": 5}, {"count": 2, "value": 3505, "iterations": 400, "cumulative count": 7}, {"count": 3, "value": 3505, "iterations": 500, "cumulative count": 10}, {"count": 7, "value": 3505, "iterations": 600, "cumulative count": 17}, {"count": 3, "value": 3505, "iterations": 700, "cumulative count": 20}, {"count": 6, "value": 3505, "iterations": 800, "cumulative count": 26}, {"count": 10, "value": 3505, "iterations": 900, "cumulative count": 36}, {"count": 8, "value": 3505, "iterations": 1000, "cumulative count": 44}, {"count": 2, "value": 3506, "iterations": 200, "cumulative count": 2}, {"count": 1, "value": 3506, "iterations": 300, "cumulative count": 3}, {"count": 4, "value": 3506, "iterations": 400, "cumulative count": 7}, {"count": 5, "value": 3506, "iterations": 500, "cumulative count": 12}, {"count": 6, "value": 3506, "iterations": 600, "cumulative count": 18}, {"count": 9, "value": 3506, "iterations": 700, "cumulative count": 27}, {"count": 7, "value": 3506, "iterations": 800, "cumulative count": 34}, {"count": 18, "value": 3506, "iterations": 900, "cumulative count": 52}, {"count": 9, "value": 3506, "iterations": 1000, "cumulative count": 61}, {"count": 2, "value": 3507, "iterations": 100, "cumulative count": 2}, {"count": 2, "value": 3507, "iterations": 200, "cumulative count": 4}, {"count": 3, "value": 3507, "iterations": 300, "cumulative count": 7}, {"count": 5, "value": 3507, "iterations": 400, "cumulative count": 12}, {"count": 2, "value": 3507, "iterations": 500, "cumulative count": 14}, {"count": 4, "value": 3507, "iterations": 600, "cumulative count": 18}, {"count": 6, "value": 3507, "iterations": 700, "cumulative count": 24}, {"count": 10, "value": 3507, "iterations": 800, "cumulative count": 34}, {"count": 5, "value": 3507, "iterations": 900, "cumulative count": 39}, {"count": 4, "value": 3507, "iterations": 1000, "cumulative count": 43}, {"count": 1, "value": 3508, "iterations": 100, "cumulative count": 1}, {"count": 5, "value": 3508, "iterations": 200, "cumulative count": 6}, {"count": 3, "value": 3508, "iterations": 300, "cumulative count": 9}, {"count": 8, "value": 3508, "iterations": 400, "cumulative count": 17}, {"count": 5, "value": 3508, "iterations": 500, "cumulative count": 22}, {"count": 4, "value": 3508, "iterations": 600, "cumulative count": 26}, {"count": 6, "value": 3508, "iterations": 700, "cumulative count": 32}, {"count": 4, "value": 3508, "iterations": 800, "cumulative count": 36}, {"count": 9, "value": 3508, "iterations": 900, "cumulative count": 45}, {"count": 6, "value": 3508, "iterations": 1000, "cumulative count": 51}, {"count": 1, "value": 3509, "iterations": 100, "cumulative count": 1}, {"count": 1, "value": 3509, "iterations": 300, "cumulative count": 2}, {"count": 3, "value": 3509, "iterations": 400, "cumulative count": 5}, {"count": 3, "value": 3509, "iterations": 500, "cumulative count": 8}, {"count": 6, "value": 3509, "iterations": 600, "cumulative count": 14}, {"count": 2, "value": 3509, "iterations": 700, "cumulative count": 16}, {"count": 6, "value": 3509, "iterations": 800, "cumulative count": 22}, {"count": 2, "value": 3509, "iterations": 900, "cumulative count": 24}, {"count": 9, "value": 3509, "iterations": 1000, "cumulative count": 33}, {"count": 1, "value": 3510, "iterations": 200, "cumulative count": 1}, {"count": 4, "value": 3510, "iterations": 300, "cumulative count": 5}, {"count": 3, "value": 3510, "iterations": 400, "cumulative count": 8}, {"count": 1, "value": 3510, "iterations": 500, "cumulative count": 9}, {"count": 5, "value": 3510, "iterations": 600, "cumulative count": 14}, {"count": 8, "value": 3510, "iterations": 700, "cumulative count": 22}, {"count": 4, "value": 3510, "iterations": 800, "cumulative count": 26}, {"count": 15, "value": 3510, "iterations": 900, "cumulative count": 41}, {"count": 12, "value": 3510, "iterations": 1000, "cumulative count": 53}, {"count": 3, "value": 3511, "iterations": 100, "cumulative count": 3}, {"count": 3, "value": 3511, "iterations": 200, "cumulative count": 6}, {"count": 2, "value": 3511, "iterations": 300, "cumulative count": 8}, {"count": 5, "value": 3511, "iterations": 400, "cumulative count": 13}, {"count": 4, "value": 3511, "iterations": 500, "cumulative count": 17}, {"count": 4, "value": 3511, "iterations": 700, "cumulative count": 21}, {"count": 5, "value": 3511, "iterations": 800, "cumulative count": 26}, {"count": 9, "value": 3511, "iterations": 900, "cumulative count": 35}, {"count": 11, "value": 3511, "iterations": 1000, "cumulative count": 46}, {"count": 1, "value": 3512, "iterations": 100, "cumulative count": 1}, {"count": 2, "value": 3512, "iterations": 200, "cumulative count": 3}, {"count": 1, "value": 3512, "iterations": 300, "cumulative count": 4}, {"count": 3, "value": 3512, "iterations": 400, "cumulative count": 7}, {"count": 5, "value": 3512, "iterations": 500, "cumulative count": 12}, {"count": 7, "value": 3512, "iterations": 600, "cumulative count": 19}, {"count": 2, "value": 3512, "iterations": 700, "cumulative count": 21}, {"count": 10, "value": 3512, "iterations": 800, "cumulative count": 31}, {"count": 9, "value": 3512, "iterations": 900, "cumulative count": 40}, {"count": 9, "value": 3512, "iterations": 1000, "cumulative count": 49}, {"count": 1, "value": 3513, "iterations": 100, "cumulative count": 1}, {"count": 1, "value": 3513, "iterations": 200, "cumulative count": 2}, {"count": 3, "value": 3513, "iterations": 300, "cumulative count": 5}, {"count": 2, "value": 3513, "iterations": 400, "cumulative count": 7}, {"count": 7, "value": 3513, "iterations": 500, "cumulative count": 14}, {"count": 11, "value": 3513, "iterations": 600, "cumulative count": 25}, {"count": 3, "value": 3513, "iterations": 700, "cumulative count": 28}, {"count": 1, "value": 3513, "iterations": 800, "cumulative count": 29}, {"count": 4, "value": 3513, "iterations": 900, "cumulative count": 33}, {"count": 10, "value": 3513, "iterations": 1000, "cumulative count": 43}, {"count": 1, "value": 3514, "iterations": 100, "cumulative count": 1}, {"count": 2, "value": 3514, "iterations": 300, "cumulative count": 3}, {"count": 5, "value": 3514, "iterations": 400, "cumulative count": 8}, {"count": 2, "value": 3514, "iterations": 500, "cumulative count": 10}, {"count": 8, "value": 3514, "iterations": 600, "cumulative count": 18}, {"count": 4, "value": 3514, "iterations": 700, "cumulative count": 22}, {"count": 9, "value": 3514, "iterations": 800, "cumulative count": 31}, {"count": 4, "value": 3514, "iterations": 900, "cumulative count": 35}, {"count": 7, "value": 3514, "iterations": 1000, "cumulative count": 42}, {"count": 1, "value": 3515, "iterations": 100, "cumulative count": 1}, {"count": 2, "value": 3515, "iterations": 200, "cumulative count": 3}, {"count": 1, "value": 3515, "iterations": 300, "cumulative count": 4}, {"count": 5, "value": 3515, "iterations": 400, "cumulative count": 9}, {"count": 8, "value": 3515, "iterations": 500, "cumulative count": 17}, {"count": 3, "value": 3515, "iterations": 600, "cumulative count": 20}, {"count": 2, "value": 3515, "iterations": 700, "cumulative count": 22}, {"count": 10, "value": 3515, "iterations": 800, "cumulative count": 32}, {"count": 5, "value": 3515, "iterations": 900, "cumulative count": 37}, {"count": 8, "value": 3515, "iterations": 1000, "cumulative count": 45}, {"count": 1, "value": 3516, "iterations": 200, "cumulative count": 1}, {"count": 4, "value": 3516, "iterations": 300, "cumulative count": 5}, {"count": 2, "value": 3516, "iterations": 400, "cumulative count": 7}, {"count": 12, "value": 3516, "iterations": 500, "cumulative count": 19}, {"count": 3, "value": 3516, "iterations": 600, "cumulative count": 22}, {"count": 7, "value": 3516, "iterations": 700, "cumulative count": 29}, {"count": 11, "value": 3516, "iterations": 800, "cumulative count": 40}, {"count": 7, "value": 3516, "iterations": 900, "cumulative count": 47}, {"count": 9, "value": 3516, "iterations": 1000, "cumulative count": 56}, {"count": 1, "value": 3517, "iterations": 100, "cumulative count": 1}, {"count": 1, "value": 3517, "iterations": 200, "cumulative count": 2}, {"count": 1, "value": 3517, "iterations": 300, "cumulative count": 3}, {"count": 3, "value": 3517, "iterations": 400, "cumulative count": 6}, {"count": 6, "value": 3517, "iterations": 500, "cumulative count": 12}, {"count": 2, "value": 3517, "iterations": 600, "cumulative count": 14}, {"count": 9, "value": 3517, "iterations": 700, "cumulative count": 23}, {"count": 7, "value": 3517, "iterations": 800, "cumulative count": 30}, {"count": 7, "value": 3517, "iterations": 900, "cumulative count": 37}, {"count": 8, "value": 3517, "iterations": 1000, "cumulative count": 45}, {"count": 1, "value": 3518, "iterations": 200, "cumulative count": 1}, {"count": 2, "value": 3518, "iterations": 300, "cumulative count": 3}, {"count": 3, "value": 3518, "iterations": 400, "cumulative count": 6}, {"count": 7, "value": 3518, "iterations": 500, "cumulative count": 13}, {"count": 4, "value": 3518, "iterations": 600, "cumulative count": 17}, {"count": 8, "value": 3518, "iterations": 700, "cumulative count": 25}, {"count": 9, "value": 3518, "iterations": 800, "cumulative count": 34}, {"count": 12, "value": 3518, "iterations": 900, "cumulative count": 46}, {"count": 4, "value": 3518, "iterations": 1000, "cumulative count": 50}, {"count": 2, "value": 3519, "iterations": 100, "cumulative count": 2}, {"count": 1, "value": 3519, "iterations": 200, "cumulative count": 3}, {"count": 3, "value": 3519, "iterations": 300, "cumulative count": 6}, {"count": 5, "value": 3519, "iterations": 400, "cumulative count": 11}, {"count": 1, "value": 3519, "iterations": 500, "cumulative count": 12}, {"count": 4, "value": 3519, "iterations": 600, "cumulative count": 16}, {"count": 9, "value": 3519, "iterations": 700, "cumulative count": 25}, {"count": 9, "value": 3519, "iterations": 800, "cumulative count": 34}, {"count": 9, "value": 3519, "iterations": 900, "cumulative count": 43}, {"count": 12, "value": 3519, "iterations": 1000, "cumulative count": 55}, {"count": 2, "value": 3520, "iterations": 200, "cumulative count": 2}, {"count": 6, "value": 3520, "iterations": 400, "cumulative count": 8}, {"count": 2, "value": 3520, "iterations": 500, "cumulative count": 10}, {"count": 9, "value": 3520, "iterations": 600, "cumulative count": 19}, {"count": 8, "value": 3520, "iterations": 700, "cumulative count": 27}, {"count": 10, "value": 3520, "iterations": 800, "cumulative count": 37}, {"count": 3, "value": 3520, "iterations": 900, "cumulative count": 40}, {"count": 6, "value": 3520, "iterations": 1000, "cumulative count": 46}, {"count": 1, "value": 3521, "iterations": 100, "cumulative count": 1}, {"count": 4, "value": 3521, "iterations": 200, "cumulative count": 5}, {"count": 2, "value": 3521, "iterations": 300, "cumulative count": 7}, {"count": 2, "value": 3521, "iterations": 400, "cumulative count": 9}, {"count": 5, "value": 3521, "iterations": 500, "cumulative count": 14}, {"count": 7, "value": 3521, "iterations": 600, "cumulative count": 21}, {"count": 9, "value": 3521, "iterations": 700, "cumulative count": 30}, {"count": 4, "value": 3521, "iterations": 800, "cumulative count": 34}, {"count": 10, "value": 3521, "iterations": 900, "cumulative count": 44}, {"count": 7, "value": 3521, "iterations": 1000, "cumulative count": 51}, {"count": 1, "value": 3522, "iterations": 100, "cumulative count": 1}, {"count": 3, "value": 3522, "iterations": 200, "cumulative count": 4}, {"count": 3, "value": 3522, "iterations": 300, "cumulative count": 7}, {"count": 5, "value": 3522, "iterations": 400, "cumulative count": 12}, {"count": 5, "value": 3522, "iterations": 500, "cumulative count": 17}, {"count": 7, "value": 3522, "iterations": 600, "cumulative count": 24}, {"count": 8, "value": 3522, "iterations": 700, "cumulative count": 32}, {"count": 1, "value": 3522, "iterations": 800, "cumulative count": 33}, {"count": 4, "value": 3522, "iterations": 900, "cumulative count": 37}, {"count": 6, "value": 3522, "iterations": 1000, "cumulative count": 43}, {"count": 1, "value": 3523, "iterations": 100, "cumulative count": 1}, {"count": 1, "value": 3523, "iterations": 200, "cumulative count": 2}, {"count": 2, "value": 3523, "iterations": 300, "cumulative count": 4}, {"count": 3, "value": 3523, "iterations": 400, "cumulative count": 7}, {"count": 2, "value": 3523, "iterations": 500, "cumulative count": 9}, {"count": 8, "value": 3523, "iterations": 600, "cumulative count": 17}, {"count": 6, "value": 3523, "iterations": 700, "cumulative count": 23}, {"count": 11, "value": 3523, "iterations": 800, "cumulative count": 34}, {"count": 7, "value": 3523, "iterations": 900, "cumulative count": 41}, {"count": 10, "value": 3523, "iterations": 1000, "cumulative count": 51}, {"count": 1, "value": 3524, "iterations": 200, "cumulative count": 1}, {"count": 2, "value": 3524, "iterations": 300, "cumulative count": 3}, {"count": 3, "value": 3524, "iterations": 400, "cumulative count": 6}, {"count": 2, "value": 3524, "iterations": 500, "cumulative count": 8}, {"count": 6, "value": 3524, "iterations": 600, "cumulative count": 14}, {"count": 5, "value": 3524, "iterations": 700, "cumulative count": 19}, {"count": 10, "value": 3524, "iterations": 800, "cumulative count": 29}, {"count": 5, "value": 3524, "iterations": 900, "cumulative count": 34}, {"count": 6, "value": 3524, "iterations": 1000, "cumulative count": 40}, {"count": 3, "value": 3525, "iterations": 200, "cumulative count": 3}, {"count": 5, "value": 3525, "iterations": 300, "cumulative count": 8}, {"count": 2, "value": 3525, "iterations": 400, "cumulative count": 10}, {"count": 3, "value": 3525, "iterations": 500, "cumulative count": 13}, {"count": 4, "value": 3525, "iterations": 600, "cumulative count": 17}, {"count": 9, "value": 3525, "iterations": 700, "cumulative count": 26}, {"count": 11, "value": 3525, "iterations": 800, "cumulative count": 37}, {"count": 3, "value": 3525, "iterations": 900, "cumulative count": 40}, {"count": 6, "value": 3525, "iterations": 1000, "cumulative count": 46}, {"count": 1, "value": 3526, "iterations": 100, "cumulative count": 1}, {"count": 1, "value": 3526, "iterations": 200, "cumulative count": 2}, {"count": 4, "value": 3526, "iterations": 300, "cumulative count": 6}, {"count": 7, "value": 3526, "iterations": 400, "cumulative count": 13}, {"count": 2, "value": 3526, "iterations": 500, "cumulative count": 15}, {"count": 11, "value": 3526, "iterations": 600, "cumulative count": 26}, {"count": 6, "value": 3526, "iterations": 700, "cumulative count": 32}, {"count": 5, "value": 3526, "iterations": 800, "cumulative count": 37}, {"count": 10, "value": 3526, "iterations": 900, "cumulative count": 47}, {"count": 6, "value": 3526, "iterations": 1000, "cumulative count": 53}, {"count": 1, "value": 3527, "iterations": 300, "cumulative count": 1}, {"count": 3, "value": 3527, "iterations": 400, "cumulative count": 4}, {"count": 4, "value": 3527, "iterations": 500, "cumulative count": 8}, {"count": 4, "value": 3527, "iterations": 600, "cumulative count": 12}, {"count": 4, "value": 3527, "iterations": 700, "cumulative count": 16}, {"count": 4, "value": 3527, "iterations": 800, "cumulative count": 20}, {"count": 10, "value": 3527, "iterations": 900, "cumulative count": 30}, {"count": 4, "value": 3527, "iterations": 1000, "cumulative count": 34}, {"count": 1, "value": 3528, "iterations": 100, "cumulative count": 1}, {"count": 3, "value": 3528, "iterations": 300, "cumulative count": 4}, {"count": 4, "value": 3528, "iterations": 400, "cumulative count": 8}, {"count": 6, "value": 3528, "iterations": 500, "cumulative count": 14}, {"count": 1, "value": 3528, "iterations": 600, "cumulative count": 15}, {"count": 4, "value": 3528, "iterations": 700, "cumulative count": 19}, {"count": 4, "value": 3528, "iterations": 800, "cumulative count": 23}, {"count": 8, "value": 3528, "iterations": 900, "cumulative count": 31}, {"count": 8, "value": 3528, "iterations": 1000, "cumulative count": 39}, {"count": 1, "value": 3529, "iterations": 100, "cumulative count": 1}, {"count": 3, "value": 3529, "iterations": 200, "cumulative count": 4}, {"count": 6, "value": 3529, "iterations": 300, "cumulative count": 10}, {"count": 1, "value": 3529, "iterations": 400, "cumulative count": 11}, {"count": 5, "value": 3529, "iterations": 500, "cumulative count": 16}, {"count": 2, "value": 3529, "iterations": 600, "cumulative count": 18}, {"count": 6, "value": 3529, "iterations": 700, "cumulative count": 24}, {"count": 8, "value": 3529, "iterations": 800, "cumulative count": 32}, {"count": 7, "value": 3529, "iterations": 900, "cumulative count": 39}, {"count": 11, "value": 3529, "iterations": 1000, "cumulative count": 50}, {"count": 1, "value": 3530, "iterations": 100, "cumulative count": 1}, {"count": 4, "value": 3530, "iterations": 200, "cumulative count": 5}, {"count": 1, "value": 3530, "iterations": 300, "cumulative count": 6}, {"count": 6, "value": 3530, "iterations": 400, "cumulative count": 12}, {"count": 1, "value": 3530, "iterations": 500, "cumulative count": 13}, {"count": 3, "value": 3530, "iterations": 600, "cumulative count": 16}, {"count": 1, "value": 3530, "iterations": 700, "cumulative count": 17}, {"count": 2, "value": 3530, "iterations": 800, "cumulative count": 19}, {"count": 6, "value": 3530, "iterations": 900, "cumulative count": 25}, {"count": 3, "value": 3530, "iterations": 1000, "cumulative count": 28}, {"count": 1, "value": 3531, "iterations": 100, "cumulative count": 1}, {"count": 2, "value": 3531, "iterations": 200, "cumulative count": 3}, {"count": 2, "value": 3531, "iterations": 300, "cumulative count": 5}, {"count": 2, "value": 3531, "iterations": 400, "cumulative count": 7}, {"count": 3, "value": 3531, "iterations": 500, "cumulative count": 10}, {"count": 7, "value": 3531, "iterations": 600, "cumulative count": 17}, {"count": 8, "value": 3531, "iterations": 700, "cumulative count": 25}, {"count": 6, "value": 3531, "iterations": 800, "cumulative count": 31}, {"count": 4, "value": 3531, "iterations": 900, "cumulative count": 35}, {"count": 4, "value": 3531, "iterations": 1000, "cumulative count": 39}, {"count": 2, "value": 3532, "iterations": 200, "cumulative count": 2}, {"count": 2, "value": 3532, "iterations": 300, "cumulative count": 4}, {"count": 4, "value": 3532, "iterations": 400, "cumulative count": 8}, {"count": 3, "value": 3532, "iterations": 500, "cumulative count": 11}, {"count": 4, "value": 3532, "iterations": 600, "cumulative count": 15}, {"count": 5, "value": 3532, "iterations": 700, "cumulative count": 20}, {"count": 3, "value": 3532, "iterations": 800, "cumulative count": 23}, {"count": 8, "value": 3532, "iterations": 900, "cumulative count": 31}, {"count": 5, "value": 3532, "iterations": 1000, "cumulative count": 36}, {"count": 1, "value": 3533, "iterations": 200, "cumulative count": 1}, {"count": 2, "value": 3533, "iterations": 300, "cumulative count": 3}, {"count": 4, "value": 3533, "iterations": 400, "cumulative count": 7}, {"count": 3, "value": 3533, "iterations": 500, "cumulative count": 10}, {"count": 1, "value": 3533, "iterations": 600, "cumulative count": 11}, {"count": 3, "value": 3533, "iterations": 700, "cumulative count": 14}, {"count": 3, "value": 3533, "iterations": 800, "cumulative count": 17}, {"count": 7, "value": 3533, "iterations": 900, "cumulative count": 24}, {"count": 10, "value": 3533, "iterations": 1000, "cumulative count": 34}, {"count": 1, "value": 3534, "iterations": 200, "cumulative count": 1}, {"count": 2, "value": 3534, "iterations": 400, "cumulative count": 3}, {"count": 8, "value": 3534, "iterations": 600, "cumulative count": 11}, {"count": 3, "value": 3534, "iterations": 700, "cumulative count": 14}, {"count": 4, "value": 3534, "iterations": 800, "cumulative count": 18}, {"count": 11, "value": 3534, "iterations": 900, "cumulative count": 29}, {"count": 6, "value": 3534, "iterations": 1000, "cumulative count": 35}, {"count": 1, "value": 3535, "iterations": 100, "cumulative count": 1}, {"count": 1, "value": 3535, "iterations": 200, "cumulative count": 2}, {"count": 2, "value": 3535, "iterations": 300, "cumulative count": 4}, {"count": 3, "value": 3535, "iterations": 400, "cumulative count": 7}, {"count": 7, "value": 3535, "iterations": 500, "cumulative count": 14}, {"count": 6, "value": 3535, "iterations": 600, "cumulative count": 20}, {"count": 2, "value": 3535, "iterations": 700, "cumulative count": 22}, {"count": 7, "value": 3535, "iterations": 800, "cumulative count": 29}, {"count": 9, "value": 3535, "iterations": 900, "cumulative count": 38}, {"count": 3, "value": 3535, "iterations": 1000, "cumulative count": 41}, {"count": 1, "value": 3536, "iterations": 100, "cumulative count": 1}, {"count": 1, "value": 3536, "iterations": 200, "cumulative count": 2}, {"count": 1, "value": 3536, "iterations": 300, "cumulative count": 3}, {"count": 6, "value": 3536, "iterations": 400, "cumulative count": 9}, {"count": 3, "value": 3536, "iterations": 500, "cumulative count": 12}, {"count": 5, "value": 3536, "iterations": 600, "cumulative count": 17}, {"count": 3, "value": 3536, "iterations": 700, "cumulative count": 20}, {"count": 5, "value": 3536, "iterations": 800, "cumulative count": 25}, {"count": 5, "value": 3536, "iterations": 900, "cumulative count": 30}, {"count": 7, "value": 3536, "iterations": 1000, "cumulative count": 37}, {"count": 1, "value": 3537, "iterations": 200, "cumulative count": 1}, {"count": 2, "value": 3537, "iterations": 300, "cumulative count": 3}, {"count": 2, "value": 3537, "iterations": 400, "cumulative count": 5}, {"count": 8, "value": 3537, "iterations": 500, "cumulative count": 13}, {"count": 3, "value": 3537, "iterations": 600, "cumulative count": 16}, {"count": 3, "value": 3537, "iterations": 700, "cumulative count": 19}, {"count": 5, "value": 3537, "iterations": 800, "cumulative count": 24}, {"count": 8, "value": 3537, "iterations": 900, "cumulative count": 32}, {"count": 7, "value": 3537, "iterations": 1000, "cumulative count": 39}, {"count": 2, "value": 3538, "iterations": 300, "cumulative count": 2}, {"count": 5, "value": 3538, "iterations": 400, "cumulative count": 7}, {"count": 1, "value": 3538, "iterations": 600, "cumulative count": 8}, {"count": 2, "value": 3538, "iterations": 700, "cumulative count": 10}, {"count": 5, "value": 3538, "iterations": 800, "cumulative count": 15}, {"count": 5, "value": 3538, "iterations": 900, "cumulative count": 20}, {"count": 7, "value": 3538, "iterations": 1000, "cumulative count": 27}, {"count": 1, "value": 3539, "iterations": 200, "cumulative count": 1}, {"count": 2, "value": 3539, "iterations": 400, "cumulative count": 3}, {"count": 2, "value": 3539, "iterations": 500, "cumulative count": 5}, {"count": 3, "value": 3539, "iterations": 600, "cumulative count": 8}, {"count": 7, "value": 3539, "iterations": 700, "cumulative count": 15}, {"count": 6, "value": 3539, "iterations": 800, "cumulative count": 21}, {"count": 4, "value": 3539, "iterations": 900, "cumulative count": 25}, {"count": 9, "value": 3539, "iterations": 1000, "cumulative count": 34}, {"count": 2, "value": 3540, "iterations": 300, "cumulative count": 2}, {"count": 2, "value": 3540, "iterations": 500, "cumulative count": 4}, {"count": 1, "value": 3540, "iterations": 600, "cumulative count": 5}, {"count": 2, "value": 3540, "iterations": 700, "cumulative count": 7}, {"count": 8, "value": 3540, "iterations": 800, "cumulative count": 15}, {"count": 3, "value": 3540, "iterations": 900, "cumulative count": 18}, {"count": 8, "value": 3540, "iterations": 1000, "cumulative count": 26}, {"count": 1, "value": 3541, "iterations": 200, "cumulative count": 1}, {"count": 2, "value": 3541, "iterations": 300, "cumulative count": 3}, {"count": 2, "value": 3541, "iterations": 400, "cumulative count": 5}, {"count": 2, "value": 3541, "iterations": 500, "cumulative count": 7}, {"count": 8, "value": 3541, "iterations": 600, "cumulative count": 15}, {"count": 2, "value": 3541, "iterations": 700, "cumulative count": 17}, {"count": 6, "value": 3541, "iterations": 800, "cumulative count": 23}, {"count": 8, "value": 3541, "iterations": 900, "cumulative count": 31}, {"count": 3, "value": 3541, "iterations": 1000, "cumulative count": 34}, {"count": 3, "value": 3542, "iterations": 300, "cumulative count": 3}, {"count": 2, "value": 3542, "iterations": 400, "cumulative count": 5}, {"count": 3, "value": 3542, "iterations": 500, "cumulative count": 8}, {"count": 6, "value": 3542, "iterations": 800, "cumulative count": 14}, {"count": 6, "value": 3542, "iterations": 900, "cumulative count": 20}, {"count": 6, "value": 3542, "iterations": 1000, "cumulative count": 26}, {"count": 4, "value": 3543, "iterations": 300, "cumulative count": 4}, {"count": 2, "value": 3543, "iterations": 400, "cumulative count": 6}, {"count": 5, "value": 3543, "iterations": 500, "cumulative count": 11}, {"count": 2, "value": 3543, "iterations": 600, "cumulative count": 13}, {"count": 8, "value": 3543, "iterations": 700, "cumulative count": 21}, {"count": 4, "value": 3543, "iterations": 800, "cumulative count": 25}, {"count": 2, "value": 3543, "iterations": 900, "cumulative count": 27}, {"count": 3, "value": 3543, "iterations": 1000, "cumulative count": 30}, {"count": 2, "value": 3544, "iterations": 200, "cumulative count": 2}, {"count": 2, "value": 3544, "iterations": 300, "cumulative count": 4}, {"count": 2, "value": 3544, "iterations": 400, "cumulative count": 6}, {"count": 6, "value": 3544, "iterations": 500, "cumulative count": 12}, {"count": 2, "value": 3544, "iterations": 600, "cumulative count": 14}, {"count": 6, "value": 3544, "iterations": 700, "cumulative count": 20}, {"count": 6, "value": 3544, "iterations": 800, "cumulative count": 26}, {"count": 3, "value": 3544, "iterations": 900, "cumulative count": 29}, {"count": 4, "value": 3544, "iterations": 1000, "cumulative count": 33}, {"count": 4, "value": 3545, "iterations": 100, "cumulative count": 4}, {"count": 1, "value": 3545, "iterations": 200, "cumulative count": 5}, {"count": 3, "value": 3545, "iterations": 300, "cumulative count": 8}, {"count": 1, "value": 3545, "iterations": 400, "cumulative count": 9}, {"count": 4, "value": 3545, "iterations": 500, "cumulative count": 13}, {"count": 2, "value": 3545, "iterations": 600, "cumulative count": 15}, {"count": 1, "value": 3545, "iterations": 700, "cumulative count": 16}, {"count": 6, "value": 3545, "iterations": 800, "cumulative count": 22}, {"count": 3, "value": 3545, "iterations": 900, "cumulative count": 25}, {"count": 4, "value": 3545, "iterations": 1000, "cumulative count": 29}, {"count": 2, "value": 3546, "iterations": 200, "cumulative count": 2}, {"count": 1, "value": 3546, "iterations": 300, "cumulative count": 3}, {"count": 4, "value": 3546, "iterations": 400, "cumulative count": 7}, {"count": 1, "value": 3546, "iterations": 500, "cumulative count": 8}, {"count": 2, "value": 3546, "iterations": 600, "cumulative count": 10}, {"count": 4, "value": 3546, "iterations": 700, "cumulative count": 14}, {"count": 4, "value": 3546, "iterations": 800, "cumulative count": 18}, {"count": 6, "value": 3546, "iterations": 900, "cumulative count": 24}, {"count": 7, "value": 3546, "iterations": 1000, "cumulative count": 31}, {"count": 1, "value": 3547, "iterations": 200, "cumulative count": 1}, {"count": 2, "value": 3547, "iterations": 300, "cumulative count": 3}, {"count": 2, "value": 3547, "iterations": 400, "cumulative count": 5}, {"count": 1, "value": 3547, "iterations": 600, "cumulative count": 6}, {"count": 1, "value": 3547, "iterations": 700, "cumulative count": 7}, {"count": 1, "value": 3547, "iterations": 800, "cumulative count": 8}, {"count": 3, "value": 3547, "iterations": 900, "cumulative count": 11}, {"count": 5, "value": 3547, "iterations": 1000, "cumulative count": 16}, {"count": 1, "value": 3548, "iterations": 300, "cumulative count": 1}, {"count": 1, "value": 3548, "iterations": 400, "cumulative count": 2}, {"count": 2, "value": 3548, "iterations": 600, "cumulative count": 4}, {"count": 3, "value": 3548, "iterations": 700, "cumulative count": 7}, {"count": 4, "value": 3548, "iterations": 800, "cumulative count": 11}, {"count": 5, "value": 3548, "iterations": 900, "cumulative count": 16}, {"count": 4, "value": 3548, "iterations": 1000, "cumulative count": 20}, {"count": 1, "value": 3549, "iterations": 200, "cumulative count": 1}, {"count": 4, "value": 3549, "iterations": 300, "cumulative count": 5}, {"count": 1, "value": 3549, "iterations": 400, "cumulative count": 6}, {"count": 6, "value": 3549, "iterations": 500, "cumulative count": 12}, {"count": 5, "value": 3549, "iterations": 600, "cumulative count": 17}, {"count": 4, "value": 3549, "iterations": 700, "cumulative count": 21}, {"count": 4, "value": 3549, "iterations": 800, "cumulative count": 25}, {"count": 6, "value": 3549, "iterations": 900, "cumulative count": 31}, {"count": 6, "value": 3549, "iterations": 1000, "cumulative count": 37}, {"count": 2, "value": 3550, "iterations": 300, "cumulative count": 2}, {"count": 2, "value": 3550, "iterations": 400, "cumulative count": 4}, {"count": 1, "value": 3550, "iterations": 500, "cumulative count": 5}, {"count": 5, "value": 3550, "iterations": 600, "cumulative count": 10}, {"count": 5, "value": 3550, "iterations": 700, "cumulative count": 15}, {"count": 4, "value": 3550, "iterations": 800, "cumulative count": 19}, {"count": 5, "value": 3550, "iterations": 900, "cumulative count": 24}, {"count": 5, "value": 3550, "iterations": 1000, "cumulative count": 29}, {"count": 2, "value": 3551, "iterations": 200, "cumulative count": 2}, {"count": 3, "value": 3551, "iterations": 300, "cumulative count": 5}, {"count": 1, "value": 3551, "iterations": 400, "cumulative count": 6}, {"count": 6, "value": 3551, "iterations": 500, "cumulative count": 12}, {"count": 1, "value": 3551, "iterations": 700, "cumulative count": 13}, {"count": 6, "value": 3551, "iterations": 800, "cumulative count": 19}, {"count": 3, "value": 3551, "iterations": 900, "cumulative count": 22}, {"count": 2, "value": 3551, "iterations": 1000, "cumulative count": 24}, {"count": 1, "value": 3552, "iterations": 100, "cumulative count": 1}, {"count": 2, "value": 3552, "iterations": 300, "cumulative count": 3}, {"count": 4, "value": 3552, "iterations": 400, "cumulative count": 7}, {"count": 2, "value": 3552, "iterations": 500, "cumulative count": 9}, {"count": 4, "value": 3552, "iterations": 600, "cumulative count": 13}, {"count": 2, "value": 3552, "iterations": 700, "cumulative count": 15}, {"count": 4, "value": 3552, "iterations": 800, "cumulative count": 19}, {"count": 2, "value": 3552, "iterations": 900, "cumulative count": 21}, {"count": 4, "value": 3552, "iterations": 1000, "cumulative count": 25}, {"count": 1, "value": 3553, "iterations": 100, "cumulative count": 1}, {"count": 3, "value": 3553, "iterations": 300, "cumulative count": 4}, {"count": 1, "value": 3553, "iterations": 400, "cumulative count": 5}, {"count": 1, "value": 3553, "iterations": 600, "cumulative count": 6}, {"count": 4, "value": 3553, "iterations": 700, "cumulative count": 10}, {"count": 4, "value": 3553, "iterations": 800, "cumulative count": 14}, {"count": 3, "value": 3553, "iterations": 900, "cumulative count": 17}, {"count": 6, "value": 3553, "iterations": 1000, "cumulative count": 23}, {"count": 1, "value": 3554, "iterations": 300, "cumulative count": 1}, {"count": 1, "value": 3554, "iterations": 400, "cumulative count": 2}, {"count": 4, "value": 3554, "iterations": 500, "cumulative count": 6}, {"count": 2, "value": 3554, "iterations": 700, "cumulative count": 8}, {"count": 5, "value": 3554, "iterations": 800, "cumulative count": 13}, {"count": 3, "value": 3554, "iterations": 900, "cumulative count": 16}, {"count": 5, "value": 3554, "iterations": 1000, "cumulative count": 21}, {"count": 1, "value": 3555, "iterations": 300, "cumulative count": 1}, {"count": 1, "value": 3555, "iterations": 400, "cumulative count": 2}, {"count": 1, "value": 3555, "iterations": 500, "cumulative count": 3}, {"count": 1, "value": 3555, "iterations": 600, "cumulative count": 4}, {"count": 7, "value": 3555, "iterations": 700, "cumulative count": 11}, {"count": 1, "value": 3555, "iterations": 800, "cumulative count": 12}, {"count": 3, "value": 3555, "iterations": 900, "cumulative count": 15}, {"count": 8, "value": 3555, "iterations": 1000, "cumulative count": 23}, {"count": 1, "value": 3556, "iterations": 200, "cumulative count": 1}, {"count": 2, "value": 3556, "iterations": 300, "cumulative count": 3}, {"count": 2, "value": 3556, "iterations": 400, "cumulative count": 5}, {"count": 3, "value": 3556, "iterations": 500, "cumulative count": 8}, {"count": 1, "value": 3556, "iterations": 600, "cumulative count": 9}, {"count": 5, "value": 3556, "iterations": 700, "cumulative count": 14}, {"count": 4, "value": 3556, "iterations": 800, "cumulative count": 18}, {"count": 3, "value": 3556, "iterations": 900, "cumulative count": 21}, {"count": 1, "value": 3556, "iterations": 1000, "cumulative count": 22}, {"count": 2, "value": 3557, "iterations": 200, "cumulative count": 2}, {"count": 1, "value": 3557, "iterations": 300, "cumulative count": 3}, {"count": 2, "value": 3557, "iterations": 400, "cumulative count": 5}, {"count": 3, "value": 3557, "iterations": 500, "cumulative count": 8}, {"count": 3, "value": 3557, "iterations": 600, "cumulative count": 11}, {"count": 1, "value": 3557, "iterations": 700, "cumulative count": 12}, {"count": 2, "value": 3557, "iterations": 800, "cumulative count": 14}, {"count": 1, "value": 3557, "iterations": 900, "cumulative count": 15}, {"count": 5, "value": 3557, "iterations": 1000, "cumulative count": 20}, {"count": 2, "value": 3558, "iterations": 100, "cumulative count": 2}, {"count": 1, "value": 3558, "iterations": 300, "cumulative count": 3}, {"count": 3, "value": 3558, "iterations": 400, "cumulative count": 6}, {"count": 1, "value": 3558, "iterations": 500, "cumulative count": 7}, {"count": 4, "value": 3558, "iterations": 600, "cumulative count": 11}, {"count": 4, "value": 3558, "iterations": 700, "cumulative count": 15}, {"count": 6, "value": 3558, "iterations": 800, "cumulative count": 21}, {"count": 5, "value": 3558, "iterations": 900, "cumulative count": 26}, {"count": 3, "value": 3558, "iterations": 1000, "cumulative count": 29}, {"count": 1, "value": 3559, "iterations": 300, "cumulative count": 1}, {"count": 1, "value": 3559, "iterations": 500, "cumulative count": 2}, {"count": 1, "value": 3559, "iterations": 600, "cumulative count": 3}, {"count": 3, "value": 3559, "iterations": 700, "cumulative count": 6}, {"count": 5, "value": 3559, "iterations": 800, "cumulative count": 11}, {"count": 1, "value": 3559, "iterations": 900, "cumulative count": 12}, {"count": 3, "value": 3559, "iterations": 1000, "cumulative count": 15}, {"count": 3, "value": 3560, "iterations": 300, "cumulative count": 3}, {"count": 2, "value": 3560, "iterations": 400, "cumulative count": 5}, {"count": 4, "value": 3560, "iterations": 500, "cumulative count": 9}, {"count": 3, "value": 3560, "iterations": 600, "cumulative count": 12}, {"count": 1, "value": 3560, "iterations": 700, "cumulative count": 13}, {"count": 3, "value": 3560, "iterations": 800, "cumulative count": 16}, {"count": 4, "value": 3560, "iterations": 900, "cumulative count": 20}, {"count": 3, "value": 3560, "iterations": 1000, "cumulative count": 23}, {"count": 1, "value": 3561, "iterations": 200, "cumulative count": 1}, {"count": 2, "value": 3561, "iterations": 500, "cumulative count": 3}, {"count": 4, "value": 3561, "iterations": 600, "cumulative count": 7}, {"count": 1, "value": 3561, "iterations": 700, "cumulative count": 8}, {"count": 5, "value": 3561, "iterations": 900, "cumulative count": 13}, {"count": 3, "value": 3561, "iterations": 1000, "cumulative count": 16}, {"count": 1, "value": 3562, "iterations": 300, "cumulative count": 1}, {"count": 2, "value": 3562, "iterations": 400, "cumulative count": 3}, {"count": 2, "value": 3562, "iterations": 500, "cumulative count": 5}, {"count": 3, "value": 3562, "iterations": 600, "cumulative count": 8}, {"count": 4, "value": 3562, "iterations": 700, "cumulative count": 12}, {"count": 5, "value": 3562, "iterations": 800, "cumulative count": 17}, {"count": 4, "value": 3562, "iterations": 900, "cumulative count": 21}, {"count": 7, "value": 3562, "iterations": 1000, "cumulative count": 28}, {"count": 2, "value": 3563, "iterations": 300, "cumulative count": 2}, {"count": 3, "value": 3563, "iterations": 400, "cumulative count": 5}, {"count": 2, "value": 3563, "iterations": 500, "cumulative count": 7}, {"count": 3, "value": 3563, "iterations": 600, "cumulative count": 10}, {"count": 2, "value": 3563, "iterations": 700, "cumulative count": 12}, {"count": 2, "value": 3563, "iterations": 800, "cumulative count": 14}, {"count": 4, "value": 3563, "iterations": 900, "cumulative count": 18}, {"count": 3, "value": 3563, "iterations": 1000, "cumulative count": 21}, {"count": 2, "value": 3564, "iterations": 400, "cumulative count": 2}, {"count": 1, "value": 3564, "iterations": 500, "cumulative count": 3}, {"count": 2, "value": 3564, "iterations": 600, "cumulative count": 5}, {"count": 1, "value": 3564, "iterations": 700, "cumulative count": 6}, {"count": 1, "value": 3564, "iterations": 800, "cumulative count": 7}, {"count": 1, "value": 3564, "iterations": 1000, "cumulative count": 8}, {"count": 1, "value": 3565, "iterations": 100, "cumulative count": 1}, {"count": 1, "value": 3565, "iterations": 200, "cumulative count": 2}, {"count": 2, "value": 3565, "iterations": 300, "cumulative count": 4}, {"count": 1, "value": 3565, "iterations": 400, "cumulative count": 5}, {"count": 3, "value": 3565, "iterations": 500, "cumulative count": 8}, {"count": 2, "value": 3565, "iterations": 600, "cumulative count": 10}, {"count": 2, "value": 3565, "iterations": 700, "cumulative count": 12}, {"count": 2, "value": 3565, "iterations": 800, "cumulative count": 14}, {"count": 4, "value": 3565, "iterations": 900, "cumulative count": 18}, {"count": 5, "value": 3565, "iterations": 1000, "cumulative count": 23}, {"count": 1, "value": 3566, "iterations": 300, "cumulative count": 1}, {"count": 1, "value": 3566, "iterations": 500, "cumulative count": 2}, {"count": 1, "value": 3566, "iterations": 600, "cumulative count": 3}, {"count": 4, "value": 3566, "iterations": 700, "cumulative count": 7}, {"count": 2, "value": 3566, "iterations": 800, "cumulative count": 9}, {"count": 4, "value": 3566, "iterations": 900, "cumulative count": 13}, {"count": 4, "value": 3566, "iterations": 1000, "cumulative count": 17}, {"count": 1, "value": 3567, "iterations": 100, "cumulative count": 1}, {"count": 1, "value": 3567, "iterations": 200, "cumulative count": 2}, {"count": 3, "value": 3567, "iterations": 400, "cumulative count": 5}, {"count": 1, "value": 3567, "iterations": 500, "cumulative count": 6}, {"count": 2, "value": 3567, "iterations": 700, "cumulative count": 8}, {"count": 3, "value": 3567, "iterations": 800, "cumulative count": 11}, {"count": 2, "value": 3567, "iterations": 900, "cumulative count": 13}, {"count": 3, "value": 3567, "iterations": 1000, "cumulative count": 16}, {"count": 1, "value": 3568, "iterations": 400, "cumulative count": 1}, {"count": 1, "value": 3568, "iterations": 600, "cumulative count": 2}, {"count": 1, "value": 3568, "iterations": 700, "cumulative count": 3}, {"count": 2, "value": 3568, "iterations": 800, "cumulative count": 5}, {"count": 2, "value": 3568, "iterations": 900, "cumulative count": 7}, {"count": 1, "value": 3568, "iterations": 1000, "cumulative count": 8}, {"count": 1, "value": 3569, "iterations": 100, "cumulative count": 1}, {"count": 2, "value": 3569, "iterations": 200, "cumulative count": 3}, {"count": 1, "value": 3569, "iterations": 500, "cumulative count": 4}, {"count": 1, "value": 3569, "iterations": 600, "cumulative count": 5}, {"count": 3, "value": 3569, "iterations": 700, "cumulative count": 8}, {"count": 1, "value": 3569, "iterations": 800, "cumulative count": 9}, {"count": 2, "value": 3569, "iterations": 900, "cumulative count": 11}, {"count": 3, "value": 3569, "iterations": 1000, "cumulative count": 14}, {"count": 1, "value": 3570, "iterations": 100, "cumulative count": 1}, {"count": 1, "value": 3570, "iterations": 300, "cumulative count": 2}, {"count": 1, "value": 3570, "iterations": 400, "cumulative count": 3}, {"count": 2, "value": 3570, "iterations": 500, "cumulative count": 5}, {"count": 1, "value": 3570, "iterations": 700, "cumulative count": 6}, {"count": 3, "value": 3570, "iterations": 800, "cumulative count": 9}, {"count": 4, "value": 3570, "iterations": 900, "cumulative count": 13}, {"count": 5, "value": 3570, "iterations": 1000, "cumulative count": 18}, {"count": 2, "value": 3571, "iterations": 300, "cumulative count": 2}, {"count": 3, "value": 3571, "iterations": 400, "cumulative count": 5}, {"count": 4, "value": 3571, "iterations": 500, "cumulative count": 9}, {"count": 2, "value": 3571, "iterations": 600, "cumulative count": 11}, {"count": 4, "value": 3571, "iterations": 700, "cumulative count": 15}, {"count": 2, "value": 3571, "iterations": 800, "cumulative count": 17}, {"count": 6, "value": 3571, "iterations": 900, "cumulative count": 23}, {"count": 2, "value": 3571, "iterations": 1000, "cumulative count": 25}, {"count": 3, "value": 3572, "iterations": 500, "cumulative count": 3}, {"count": 1, "value": 3572, "iterations": 600, "cumulative count": 4}, {"count": 1, "value": 3572, "iterations": 700, "cumulative count": 5}, {"count": 2, "value": 3572, "iterations": 900, "cumulative count": 7}, {"count": 3, "value": 3572, "iterations": 1000, "cumulative count": 10}, {"count": 1, "value": 3573, "iterations": 100, "cumulative count": 1}, {"count": 3, "value": 3573, "iterations": 300, "cumulative count": 4}, {"count": 1, "value": 3573, "iterations": 400, "cumulative count": 5}, {"count": 2, "value": 3573, "iterations": 600, "cumulative count": 7}, {"count": 1, "value": 3573, "iterations": 700, "cumulative count": 8}, {"count": 6, "value": 3573, "iterations": 1000, "cumulative count": 14}, {"count": 1, "value": 3574, "iterations": 200, "cumulative count": 1}, {"count": 1, "value": 3574, "iterations": 400, "cumulative count": 2}, {"count": 2, "value": 3574, "iterations": 500, "cumulative count": 4}, {"count": 1, "value": 3574, "iterations": 600, "cumulative count": 5}, {"count": 1, "value": 3574, "iterations": 700, "cumulative count": 6}, {"count": 1, "value": 3574, "iterations": 800, "cumulative count": 7}, {"count": 4, "value": 3574, "iterations": 900, "cumulative count": 11}, {"count": 5, "value": 3574, "iterations": 1000, "cumulative count": 16}, {"count": 1, "value": 3575, "iterations": 200, "cumulative count": 1}, {"count": 1, "value": 3575, "iterations": 300, "cumulative count": 2}, {"count": 2, "value": 3575, "iterations": 500, "cumulative count": 4}, {"count": 4, "value": 3575, "iterations": 600, "cumulative count": 8}, {"count": 2, "value": 3575, "iterations": 700, "cumulative count": 10}, {"count": 4, "value": 3575, "iterations": 800, "cumulative count": 14}, {"count": 1, "value": 3575, "iterations": 1000, "cumulative count": 15}, {"count": 2, "value": 3576, "iterations": 200, "cumulative count": 2}, {"count": 2, "value": 3576, "iterations": 300, "cumulative count": 4}, {"count": 1, "value": 3576, "iterations": 400, "cumulative count": 5}, {"count": 1, "value": 3576, "iterations": 500, "cumulative count": 6}, {"count": 1, "value": 3576, "iterations": 600, "cumulative count": 7}, {"count": 1, "value": 3576, "iterations": 700, "cumulative count": 8}, {"count": 2, "value": 3576, "iterations": 800, "cumulative count": 10}, {"count": 1, "value": 3576, "iterations": 900, "cumulative count": 11}, {"count": 4, "value": 3576, "iterations": 1000, "cumulative count": 15}, {"count": 3, "value": 3577, "iterations": 400, "cumulative count": 3}, {"count": 1, "value": 3577, "iterations": 500, "cumulative count": 4}, {"count": 2, "value": 3577, "iterations": 700, "cumulative count": 6}, {"count": 1, "value": 3577, "iterations": 800, "cumulative count": 7}, {"count": 2, "value": 3577, "iterations": 900, "cumulative count": 9}, {"count": 1, "value": 3577, "iterations": 1000, "cumulative count": 10}, {"count": 1, "value": 3578, "iterations": 300, "cumulative count": 1}, {"count": 2, "value": 3578, "iterations": 500, "cumulative count": 3}, {"count": 2, "value": 3578, "iterations": 600, "cumulative count": 5}, {"count": 4, "value": 3578, "iterations": 700, "cumulative count": 9}, {"count": 2, "value": 3578, "iterations": 800, "cumulative count": 11}, {"count": 2, "value": 3578, "iterations": 900, "cumulative count": 13}, {"count": 4, "value": 3578, "iterations": 1000, "cumulative count": 17}, {"count": 1, "value": 3579, "iterations": 500, "cumulative count": 1}, {"count": 3, "value": 3579, "iterations": 600, "cumulative count": 4}, {"count": 1, "value": 3579, "iterations": 700, "cumulative count": 5}, {"count": 3, "value": 3579, "iterations": 800, "cumulative count": 8}, {"count": 1, "value": 3579, "iterations": 1000, "cumulative count": 9}, {"count": 1, "value": 3580, "iterations": 200, "cumulative count": 1}, {"count": 1, "value": 3580, "iterations": 500, "cumulative count": 2}, {"count": 1, "value": 3580, "iterations": 600, "cumulative count": 3}, {"count": 3, "value": 3580, "iterations": 800, "cumulative count": 6}, {"count": 1, "value": 3580, "iterations": 900, "cumulative count": 7}, {"count": 1, "value": 3580, "iterations": 1000, "cumulative count": 8}, {"count": 1, "value": 3581, "iterations": 300, "cumulative count": 1}, {"count": 1, "value": 3581, "iterations": 700, "cumulative count": 2}, {"count": 2, "value": 3581, "iterations": 900, "cumulative count": 4}, {"count": 3, "value": 3581, "iterations": 1000, "cumulative count": 7}, {"count": 2, "value": 3582, "iterations": 400, "cumulative count": 2}, {"count": 2, "value": 3582, "iterations": 700, "cumulative count": 4}, {"count": 2, "value": 3582, "iterations": 800, "cumulative count": 6}, {"count": 1, "value": 3582, "iterations": 900, "cumulative count": 7}, {"count": 1, "value": 3582, "iterations": 1000, "cumulative count": 8}, {"count": 1, "value": 3583, "iterations": 200, "cumulative count": 1}, {"count": 1, "value": 3583, "iterations": 600, "cumulative count": 2}, {"count": 1, "value": 3583, "iterations": 800, "cumulative count": 3}, {"count": 2, "value": 3583, "iterations": 900, "cumulative count": 5}, {"count": 4, "value": 3583, "iterations": 1000, "cumulative count": 9}, {"count": 1, "value": 3584, "iterations": 500, "cumulative count": 1}, {"count": 1, "value": 3584, "iterations": 700, "cumulative count": 2}, {"count": 1, "value": 3584, "iterations": 800, "cumulative count": 3}, {"count": 1, "value": 3584, "iterations": 900, "cumulative count": 4}, {"count": 1, "value": 3584, "iterations": 1000, "cumulative count": 5}, {"count": 2, "value": 3585, "iterations": 400, "cumulative count": 2}, {"count": 3, "value": 3585, "iterations": 700, "cumulative count": 5}, {"count": 1, "value": 3585, "iterations": 800, "cumulative count": 6}, {"count": 4, "value": 3585, "iterations": 1000, "cumulative count": 10}, {"count": 1, "value": 3586, "iterations": 400, "cumulative count": 1}, {"count": 1, "value": 3586, "iterations": 500, "cumulative count": 2}, {"count": 1, "value": 3586, "iterations": 600, "cumulative count": 3}, {"count": 3, "value": 3586, "iterations": 900, "cumulative count": 6}, {"count": 2, "value": 3586, "iterations": 1000, "cumulative count": 8}, {"count": 1, "value": 3587, "iterations": 400, "cumulative count": 1}, {"count": 1, "value": 3587, "iterations": 600, "cumulative count": 2}, {"count": 1, "value": 3587, "iterations": 700, "cumulative count": 3}, {"count": 1, "value": 3587, "iterations": 800, "cumulative count": 4}, {"count": 2, "value": 3587, "iterations": 900, "cumulative count": 6}, {"count": 2, "value": 3587, "iterations": 1000, "cumulative count": 8}, {"count": 1, "value": 3588, "iterations": 500, "cumulative count": 1}, {"count": 1, "value": 3588, "iterations": 700, "cumulative count": 2}, {"count": 2, "value": 3588, "iterations": 800, "cumulative count": 4}, {"count": 1, "value": 3588, "iterations": 900, "cumulative count": 5}, {"count": 2, "value": 3588, "iterations": 1000, "cumulative count": 7}, {"count": 1, "value": 3589, "iterations": 500, "cumulative count": 1}, {"count": 5, "value": 3589, "iterations": 800, "cumulative count": 6}, {"count": 2, "value": 3590, "iterations": 400, "cumulative count": 2}, {"count": 2, "value": 3590, "iterations": 600, "cumulative count": 4}, {"count": 1, "value": 3590, "iterations": 800, "cumulative count": 5}, {"count": 1, "value": 3591, "iterations": 200, "cumulative count": 1}, {"count": 1, "value": 3591, "iterations": 400, "cumulative count": 2}, {"count": 1, "value": 3591, "iterations": 700, "cumulative count": 3}, {"count": 2, "value": 3591, "iterations": 1000, "cumulative count": 5}, {"count": 1, "value": 3592, "iterations": 500, "cumulative count": 1}, {"count": 2, "value": 3592, "iterations": 700, "cumulative count": 3}, {"count": 2, "value": 3592, "iterations": 800, "cumulative count": 5}, {"count": 3, "value": 3592, "iterations": 900, "cumulative count": 8}, {"count": 1, "value": 3592, "iterations": 1000, "cumulative count": 9}, {"count": 1, "value": 3593, "iterations": 300, "cumulative count": 1}, {"count": 1, "value": 3593, "iterations": 400, "cumulative count": 2}, {"count": 1, "value": 3593, "iterations": 600, "cumulative count": 3}, {"count": 1, "value": 3594, "iterations": 500, "cumulative count": 1}, {"count": 1, "value": 3594, "iterations": 600, "cumulative count": 2}, {"count": 3, "value": 3594, "iterations": 700, "cumulative count": 5}, {"count": 1, "value": 3594, "iterations": 800, "cumulative count": 6}, {"count": 2, "value": 3594, "iterations": 900, "cumulative count": 8}, {"count": 2, "value": 3595, "iterations": 600, "cumulative count": 2}, {"count": 1, "value": 3595, "iterations": 700, "cumulative count": 3}, {"count": 1, "value": 3595, "iterations": 800, "cumulative count": 4}, {"count": 2, "value": 3595, "iterations": 900, "cumulative count": 6}, {"count": 1, "value": 3596, "iterations": 400, "cumulative count": 1}, {"count": 1, "value": 3596, "iterations": 600, "cumulative count": 2}, {"count": 1, "value": 3597, "iterations": 800, "cumulative count": 1}, {"count": 1, "value": 3597, "iterations": 900, "cumulative count": 2}, {"count": 1, "value": 3598, "iterations": 200, "cumulative count": 1}, {"count": 1, "value": 3598, "iterations": 600, "cumulative count": 2}, {"count": 1, "value": 3598, "iterations": 800, "cumulative count": 3}, {"count": 2, "value": 3598, "iterations": 900, "cumulative count": 5}, {"count": 2, "value": 3598, "iterations": 1000, "cumulative count": 7}, {"count": 1, "value": 3599, "iterations": 400, "cumulative count": 1}, {"count": 1, "value": 3599, "iterations": 500, "cumulative count": 2}, {"count": 3, "value": 3599, "iterations": 1000, "cumulative count": 5}, {"count": 4, "value": 3600, "iterations": 600, "cumulative count": 4}, {"count": 3, "value": 3600, "iterations": 700, "cumulative count": 7}, {"count": 2, "value": 3600, "iterations": 1000, "cumulative count": 9}, {"count": 1, "value": 3601, "iterations": 500, "cumulative count": 1}, {"count": 1, "value": 3601, "iterations": 600, "cumulative count": 2}, {"count": 1, "value": 3601, "iterations": 700, "cumulative count": 3}, {"count": 1, "value": 3601, "iterations": 900, "cumulative count": 4}, {"count": 2, "value": 3601, "iterations": 1000, "cumulative count": 6}, {"count": 1, "value": 3602, "iterations": 500, "cumulative count": 1}, {"count": 1, "value": 3602, "iterations": 600, "cumulative count": 2}, {"count": 1, "value": 3602, "iterations": 800, "cumulative count": 3}, {"count": 1, "value": 3602, "iterations": 900, "cumulative count": 4}, {"count": 1, "value": 3603, "iterations": 600, "cumulative count": 1}, {"count": 1, "value": 3603, "iterations": 800, "cumulative count": 2}, {"count": 1, "value": 3603, "iterations": 900, "cumulative count": 3}, {"count": 1, "value": 3603, "iterations": 1000, "cumulative count": 4}, {"count": 1, "value": 3604, "iterations": 600, "cumulative count": 1}, {"count": 1, "value": 3604, "iterations": 700, "cumulative count": 2}, {"count": 1, "value": 3604, "iterations": 1000, "cumulative count": 3}, {"count": 1, "value": 3605, "iterations": 500, "cumulative count": 1}, {"count": 2, "value": 3605, "iterations": 700, "cumulative count": 3}, {"count": 1, "value": 3605, "iterations": 800, "cumulative count": 4}, {"count": 1, "value": 3605, "iterations": 1000, "cumulative count": 5}, {"count": 2, "value": 3606, "iterations": 400, "cumulative count": 2}, {"count": 1, "value": 3606, "iterations": 800, "cumulative count": 3}, {"count": 1, "value": 3607, "iterations": 600, "cumulative count": 1}, {"count": 1, "value": 3607, "iterations": 700, "cumulative count": 2}, {"count": 2, "value": 3607, "iterations": 800, "cumulative count": 4}, {"count": 1, "value": 3608, "iterations": 300, "cumulative count": 1}, {"count": 1, "value": 3608, "iterations": 700, "cumulative count": 2}, {"count": 1, "value": 3608, "iterations": 800, "cumulative count": 3}, {"count": 1, "value": 3608, "iterations": 900, "cumulative count": 4}, {"count": 2, "value": 3608, "iterations": 1000, "cumulative count": 6}, {"count": 1, "value": 3609, "iterations": 800, "cumulative count": 1}, {"count": 1, "value": 3610, "iterations": 400, "cumulative count": 1}, {"count": 1, "value": 3610, "iterations": 900, "cumulative count": 2}, {"count": 2, "value": 3611, "iterations": 400, "cumulative count": 2}, {"count": 1, "value": 3611, "iterations": 900, "cumulative count": 3}, {"count": 1, "value": 3611, "iterations": 1000, "cumulative count": 4}, {"count": 1, "value": 3612, "iterations": 300, "cumulative count": 1}, {"count": 1, "value": 3612, "iterations": 600, "cumulative count": 2}, {"count": 1, "value": 3612, "iterations": 800, "cumulative count": 3}, {"count": 2, "value": 3613, "iterations": 300, "cumulative count": 2}, {"count": 3, "value": 3613, "iterations": 800, "cumulative count": 5}, {"count": 1, "value": 3613, "iterations": 1000, "cumulative count": 6}, {"count": 1, "value": 3614, "iterations": 600, "cumulative count": 1}, {"count": 1, "value": 3614, "iterations": 700, "cumulative count": 2}, {"count": 1, "value": 3615, "iterations": 300, "cumulative count": 1}, {"count": 1, "value": 3615, "iterations": 400, "cumulative count": 2}, {"count": 1, "value": 3617, "iterations": 600, "cumulative count": 1}, {"count": 1, "value": 3618, "iterations": 200, "cumulative count": 1}, {"count": 1, "value": 3618, "iterations": 400, "cumulative count": 2}, {"count": 1, "value": 3618, "iterations": 700, "cumulative count": 3}, {"count": 1, "value": 3618, "iterations": 800, "cumulative count": 4}, {"count": 1, "value": 3619, "iterations": 1000, "cumulative count": 1}, {"count": 1, "value": 3620, "iterations": 800, "cumulative count": 1}, {"count": 1, "value": 3620, "iterations": 900, "cumulative count": 2}, {"count": 1, "value": 3621, "iterations": 100, "cumulative count": 1}, {"count": 1, "value": 3621, "iterations": 200, "cumulative count": 2}, {"count": 1, "value": 3621, "iterations": 800, "cumulative count": 3}, {"count": 1, "value": 3621, "iterations": 1000, "cumulative count": 4}, {"count": 1, "value": 3622, "iterations": 200, "cumulative count": 1}, {"count": 1, "value": 3622, "iterations": 800, "cumulative count": 2}, {"count": 1, "value": 3624, "iterations": 300, "cumulative count": 1}, {"count": 1, "value": 3624, "iterations": 600, "cumulative count": 2}, {"count": 2, "value": 3624, "iterations": 1000, "cumulative count": 4}, {"count": 1, "value": 3626, "iterations": 1000, "cumulative count": 1}, {"count": 1, "value": 3628, "iterations": 300, "cumulative count": 1}, {"count": 1, "value": 3629, "iterations": 600, "cumulative count": 1}, {"count": 1, "value": 3630, "iterations": 400, "cumulative count": 1}, {"count": 1, "value": 3630, "iterations": 800, "cumulative count": 2}, {"count": 1, "value": 3631, "iterations": 900, "cumulative count": 1}, {"count": 1, "value": 3633, "iterations": 1000, "cumulative count": 1}, {"count": 1, "value": 3635, "iterations": 600, "cumulative count": 1}, {"count": 1, "value": 3636, "iterations": 400, "cumulative count": 1}, {"count": 1, "value": 3636, "iterations": 700, "cumulative count": 2}, {"count": 1, "value": 3638, "iterations": 500, "cumulative count": 1}, {"count": 1, "value": 3639, "iterations": 100, "cumulative count": 1}, {"count": 1, "value": 3640, "iterations": 200, "cumulative count": 1}, {"count": 1, "value": 3641, "iterations": 700, "cumulative count": 1}, {"count": 1, "value": 3647, "iterations": 900, "cumulative count": 1}, {"count": 1, "value": 3647, "iterations": 1000, "cumulative count": 2}, {"count": 1, "value": 3651, "iterations": 500, "cumulative count": 1}, {"count": 1, "value": 3665, "iterations": 600, "cumulative count": 1}], "data-a29b52121bc89933f4067828879d1110": [{"x": 3364, "y": 0.00014356386602876192}, {"x": 3365, "y": 0.00015237403483581158}, {"x": 3366, "y": 0.0001616537928629258}, {"x": 3367, "y": 0.00017142333435532509}, {"x": 3368, "y": 0.00018170341349443841}, {"x": 3369, "y": 0.0001925153406633906}, {"x": 3370, "y": 0.0002038809772301753}, {"x": 3371, "y": 0.00021582272877190833}, {"x": 3372, "y": 0.00022836353666844111}, {"x": 3373, "y": 0.00024152686798856182}, {"x": 3374, "y": 0.0002553367036001175}, {"x": 3375, "y": 0.00026981752442900575}, {"x": 3376, "y": 0.00028499429580136626}, {"x": 3377, "y": 0.00030089244979919494}, {"x": 3378, "y": 0.000317537865565376}, {"x": 3379, "y": 0.0003349568474975695}, {"x": 3380, "y": 0.0003531761012691148}, {"x": 3381, "y": 0.00037222270762549137}, {"x": 3382, "y": 0.000392124093901991}, {"x": 3383, "y": 0.0004129080032181931}, {"x": 3384, "y": 0.0004346024613056665}, {"x": 3385, "y": 0.0004572357409334815}, {"x": 3386, "y": 0.00048083632389916975}, {"x": 3387, "y": 0.0005054328605612057}, {"x": 3388, "y": 0.0005310541268940261}, {"x": 3389, "y": 0.0005577289790530959}, {"x": 3390, "y": 0.0005854863054470805}, {"x": 3391, "y": 0.0006143549763185652}, {"x": 3392, "y": 0.0006443637908455924}, {"x": 3393, "y": 0.0006755414217831657}, {"x": 3394, "y": 0.0007079163576729219}, {"x": 3395, "y": 0.0007415168426582741}, {"x": 3396, "y": 0.000776370813951377}, {"x": 3397, "y": 0.0008125058370088145}, {"x": 3398, "y": 0.0008499490384816788}, {"x": 3399, "y": 0.0008887270370163125}, {"x": 3400, "y": 0.0009288658719924792}, {"x": 3401, "y": 0.0009703909302958835}, {"x": 3402, "y": 0.0010133268712334553}, {"x": 3403, "y": 0.001057697549708636}, {"x": 3404, "y": 0.0011035259377872308}, {"x": 3405, "y": 0.001150834044792881}, {"x": 3406, "y": 0.0011996428360838696}, {"x": 3407, "y": 0.0012499721506721295}, {"x": 3408, "y": 0.0013018406178567088}, {"x": 3409, "y": 0.0013552655730552088}, {"x": 3410, "y": 0.0014102629730241567}, {"x": 3411, "y": 0.0014668473106735358}, {"x": 3412, "y": 0.0015250315296855832}, {"x": 3413, "y": 0.0015848269391608993}, {"x": 3414, "y": 0.0016462431285220736}, {"x": 3415, "y": 0.001709287882913968}, {"x": 3416, "y": 0.001773967099346796}, {"x": 3417, "y": 0.001840284703837347}, {"x": 3418, "y": 0.0019082425698073169}, {"x": 3419, "y": 0.001977840438007694}, {"x": 3420, "y": 0.0020490758382391006}, {"x": 3421, "y": 0.0021219440131458045}, {"x": 3422, "y": 0.002196437844363408}, {"x": 3423, "y": 0.0022725477813028694}, {"x": 3424, "y": 0.0023502617728550224}, {"x": 3425, "y": 0.0024295652023031966}, {"x": 3426, "y": 0.002510440825726934}, {"x": 3427, "y": 0.00259286871418396}, {"x": 3428, "y": 0.002676826199950577}, {"x": 3429, "y": 0.002762287827101473}, {"x": 3430, "y": 0.0028492253067017304}, {"x": 3431, "y": 0.0029376074768830973}, {"x": 3432, "y": 0.0030274002680643064}, {"x": 3433, "y": 0.003118566673573131}, {"x": 3434, "y": 0.003211066725913869}, {"x": 3435, "y": 0.0033048574789187324}, {"x": 3436, "y": 0.0033998929960060154}, {"x": 3437, "y": 0.0034961243447586554}, {"x": 3438, "y": 0.0035934995980215767}, {"x": 3439, "y": 0.00369196384170406}, {"x": 3440, "y": 0.0037914591894521177}, {"x": 3441, "y": 0.0038919248043483012}, {"x": 3442, "y": 0.003993296927768453}, {"x": 3443, "y": 0.0040955089155142455}, {"x": 3444, "y": 0.004198491281317884}, {"x": 3445, "y": 0.004302171747791017}, {"x": 3446, "y": 0.0044064753048780325}, {"x": 3447, "y": 0.004511324275842221}, {"x": 3448, "y": 0.004616638390794514}, {"x": 3449, "y": 0.0047223348677562504}, {"x": 3450, "y": 0.004828328501211676}, {"x": 3451, "y": 0.004934531758096106}, {"x": 3452, "y": 0.005040854881128487}, {"x": 3453, "y": 0.005147205999381066}, {"x": 3454, "y": 0.005253491245948927}, {"x": 3455, "y": 0.005359614882560426}, {"x": 3456, "y": 0.005465479430940556}, {"x": 3457, "y": 0.005570985810719464}, {"x": 3458, "y": 0.005676033483649867}, {"x": 3459, "y": 0.00578052060387324}, {"x": 3460, "y": 0.00588434417395356}, {"x": 3461, "y": 0.005987400206370452}, {"x": 3462, "y": 0.0060895838901436905}, {"x": 3463, "y": 0.006190789762237081}, {"x": 3464, "y": 0.006290911883370387}, {"x": 3465, "y": 0.006389844017847646}, {"x": 3466, "y": 0.0064874798169884396}, {"x": 3467, "y": 0.006583713005736014}, {"x": 3468, "y": 0.006678437571993379}, {"x": 3469, "y": 0.006771547958229429}, {"x": 3470, "y": 0.006862939254875744}, {"x": 3471, "y": 0.00695250739503156}, {"x": 3472, "y": 0.007040149349973102}, {"x": 3473, "y": 0.007125763324963508}, {"x": 3474, "y": 0.007209248954844871}, {"x": 3475, "y": 0.0072905074988927066}, {"x": 3476, "y": 0.007369442034405704}, {"x": 3477, "y": 0.007445957648504198}, {"x": 3478, "y": 0.00751996162760693}, {"x": 3479, "y": 0.007591363644059934}, {"x": 3480, "y": 0.007660075939394717}, {"x": 3481, "y": 0.007726013503692619}, {"x": 3482, "y": 0.007789094250548745}, {"x": 3483, "y": 0.007849239187128598}, {"x": 3484, "y": 0.007906372578825205}, {"x": 3485, "y": 0.007960422108039433}, {"x": 3486, "y": 0.008011319026615116}, {"x": 3487, "y": 0.008058998301481213}, {"x": 3488, "y": 0.00810339875306787}, {"x": 3489, "y": 0.008144463186086914}, {"x": 3490, "y": 0.008182138512281778}, {"x": 3491, "y": 0.008216375864781467}, {"x": 3492, "y": 0.008247130703711913}, {"x": 3493, "y": 0.008274362912746303}, {"x": 3494, "y": 0.008298036886300486}, {"x": 3495, "y": 0.008318121607108986}, {"x": 3496, "y": 0.0083345907139446}, {"x": 3497, "y": 0.008347422559274953}, {"x": 3498, "y": 0.008356600256678948}, {"x": 3499, "y": 0.008362111717878096}, {"x": 3500, "y": 0.008363949679269567}, {"x": 3501, "y": 0.008362111717878151}, {"x": 3502, "y": 0.008356600256678837}, {"x": 3503, "y": 0.008347422559275008}, {"x": 3504, "y": 0.0083345907139446}, {"x": 3505, "y": 0.008318121607108986}, {"x": 3506, "y": 0.008298036886300486}, {"x": 3507, "y": 0.008274362912746303}, {"x": 3508, "y": 0.008247130703711858}, {"x": 3509, "y": 0.008216375864781522}, {"x": 3510, "y": 0.008182138512281778}, {"x": 3511, "y": 0.00814446318608697}, {"x": 3512, "y": 0.00810339875306787}, {"x": 3513, "y": 0.008058998301481157}, {"x": 3514, "y": 0.008011319026615116}, {"x": 3515, "y": 0.007960422108039378}, {"x": 3516, "y": 0.007906372578825316}, {"x": 3517, "y": 0.007849239187128543}, {"x": 3518, "y": 0.007789094250548745}, {"x": 3519, "y": 0.007726013503692619}, {"x": 3520, "y": 0.007660075939394662}, {"x": 3521, "y": 0.00759136364405999}, {"x": 3522, "y": 0.00751996162760693}, {"x": 3523, "y": 0.007445957648504198}, {"x": 3524, "y": 0.007369442034405704}, {"x": 3525, "y": 0.0072905074988927066}, {"x": 3526, "y": 0.007209248954844871}, {"x": 3527, "y": 0.007125763324963508}, {"x": 3528, "y": 0.007040149349973102}, {"x": 3529, "y": 0.006952507395031504}, {"x": 3530, "y": 0.0068629392548757995}, {"x": 3531, "y": 0.006771547958229429}, {"x": 3532, "y": 0.006678437571993379}, {"x": 3533, "y": 0.006583713005736014}, {"x": 3534, "y": 0.006487479816988495}, {"x": 3535, "y": 0.00638984401784759}, {"x": 3536, "y": 0.006290911883370387}, {"x": 3537, "y": 0.006190789762237081}, {"x": 3538, "y": 0.0060895838901436905}, {"x": 3539, "y": 0.005987400206370452}, {"x": 3540, "y": 0.00588434417395356}, {"x": 3541, "y": 0.00578052060387324}, {"x": 3542, "y": 0.005676033483649867}, {"x": 3543, "y": 0.005570985810719464}, {"x": 3544, "y": 0.005465479430940556}, {"x": 3545, "y": 0.005359614882560426}, {"x": 3546, "y": 0.005253491245948982}, {"x": 3547, "y": 0.00514720599938101}, {"x": 3548, "y": 0.005040854881128487}, {"x": 3549, "y": 0.004934531758096106}, {"x": 3550, "y": 0.004828328501211621}, {"x": 3551, "y": 0.004722334867756306}, {"x": 3552, "y": 0.004616638390794514}, {"x": 3553, "y": 0.004511324275842221}, {"x": 3554, "y": 0.0044064753048780325}, {"x": 3555, "y": 0.004302171747791017}, {"x": 3556, "y": 0.004198491281317884}, {"x": 3557, "y": 0.0040955089155142455}, {"x": 3558, "y": 0.003993296927768397}, {"x": 3559, "y": 0.0038919248043483012}, {"x": 3560, "y": 0.0037914591894521177}, {"x": 3561, "y": 0.0036919638417041156}, {"x": 3562, "y": 0.0035934995980215767}, {"x": 3563, "y": 0.0034961243447586554}, {"x": 3564, "y": 0.00339989299600596}, {"x": 3565, "y": 0.0033048574789187324}, {"x": 3566, "y": 0.0032110667259139802}, {"x": 3567, "y": 0.003118566673573131}, {"x": 3568, "y": 0.003027400268064251}, {"x": 3569, "y": 0.0029376074768830973}, {"x": 3570, "y": 0.0028492253067017304}, {"x": 3571, "y": 0.0027622878271015283}, {"x": 3572, "y": 0.002676826199950577}, {"x": 3573, "y": 0.002592868714183849}, {"x": 3574, "y": 0.002510440825727045}, {"x": 3575, "y": 0.0024295652023031966}, {"x": 3576, "y": 0.0023502617728550224}, {"x": 3577, "y": 0.002272547781302814}, {"x": 3578, "y": 0.002196437844363408}, {"x": 3579, "y": 0.0021219440131458045}, {"x": 3580, "y": 0.0020490758382391006}, {"x": 3581, "y": 0.0019778404380076386}, {"x": 3582, "y": 0.0019082425698073724}, {"x": 3583, "y": 0.001840284703837347}, {"x": 3584, "y": 0.0017739670993467405}, {"x": 3585, "y": 0.0017092878829140234}, {"x": 3586, "y": 0.001646243128522129}, {"x": 3587, "y": 0.0015848269391608438}, {"x": 3588, "y": 0.0015250315296856387}, {"x": 3589, "y": 0.0014668473106734803}, {"x": 3590, "y": 0.0014102629730241567}, {"x": 3591, "y": 0.0013552655730552088}, {"x": 3592, "y": 0.0013018406178566533}, {"x": 3593, "y": 0.0012499721506722405}, {"x": 3594, "y": 0.0011996428360838696}, {"x": 3595, "y": 0.00115083404479277}, {"x": 3596, "y": 0.0011035259377872864}, {"x": 3597, "y": 0.001057697549708636}, {"x": 3598, "y": 0.0010133268712334553}, {"x": 3599, "y": 0.000970390930295939}, {"x": 3600, "y": 0.0009288658719923681}, {"x": 3601, "y": 0.000888727037016368}, {"x": 3602, "y": 0.0008499490384816788}, {"x": 3603, "y": 0.000812505837008759}, {"x": 3604, "y": 0.0007763708139514325}, {"x": 3605, "y": 0.0007415168426583296}, {"x": 3606, "y": 0.0007079163576728664}, {"x": 3607, "y": 0.0006755414217831657}, {"x": 3608, "y": 0.0006443637908455369}, {"x": 3609, "y": 0.0006143549763186762}, {"x": 3610, "y": 0.0005854863054470805}, {"x": 3611, "y": 0.0005577289790530404}, {"x": 3612, "y": 0.0005310541268940261}, {"x": 3613, "y": 0.0005054328605612612}, {"x": 3614, "y": 0.0004808363238990587}, {"x": 3615, "y": 0.00045723574093359254}, {"x": 3616, "y": 0.00043460246130555547}, {"x": 3617, "y": 0.0004129080032182486}, {"x": 3618, "y": 0.000392124093901991}, {"x": 3619, "y": 0.00037222270762549137}, {"x": 3620, "y": 0.0003531761012691703}, {"x": 3621, "y": 0.000334956847497514}, {"x": 3622, "y": 0.0003175378655653205}, {"x": 3623, "y": 0.00030089244979925045}, {"x": 3624, "y": 0.00028499429580131075}, {"x": 3625, "y": 0.0002698175244291168}, {"x": 3626, "y": 0.0002553367036000065}, {"x": 3627, "y": 0.00024152686798861733}, {"x": 3628, "y": 0.00022836353666844111}, {"x": 3629, "y": 0.00021582272877196385}, {"x": 3630, "y": 0.00020388097723011978}, {"x": 3631, "y": 0.0001925153406633351}, {"x": 3632, "y": 0.00018170341349454944}, {"x": 3633, "y": 0.00017142333435526957}, {"x": 3634, "y": 0.0001616537928629258}, {"x": 3635, "y": 0.00015237403483581158}, {"x": 3636, "y": 0.00014356386602876192}, {"x": 3637, "y": 0.00013520365445840454}, {"x": 3638, "y": 0.00012727433139692046}, {"x": 3639, "y": 0.00011975739110503536}, {"x": 3640, "y": 0.00011263488938195731}, {"x": 3641, "y": 0.00010588944100353714}, {"x": 3642, "y": 9.95042161195947e-05}, {"x": 3643, "y": 9.346293568479602e-05}, {"x": 3644, "y": 8.77498659896947e-05}, {"x": 3645, "y": 8.234981236099337e-05}, {"x": 3646, "y": 7.724811209874893e-05}, {"x": 3647, "y": 7.243062671347111e-05}]}}, {"mode": "vega-lite"});
+</script>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div><a class="u-url" href="/2020/10/03/central-limit-theorem.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>This is not another blog about bitcoin.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/nocibambi" title="nocibambi"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
