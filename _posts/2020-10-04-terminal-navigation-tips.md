@@ -3,7 +3,7 @@ toc: false
 layout: post
 description: Quick tips for quick navigation in the terminal
 categories: [terminal, navigation, tips]
-title: Command line tips for quicker navigation interminal
+title: Command line tips for quick navigation in the terminal
 ---
 Things I wish I had knew earlier.
 
