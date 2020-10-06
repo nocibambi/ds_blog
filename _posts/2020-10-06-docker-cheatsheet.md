@@ -98,7 +98,7 @@ layout: notebook
 <h2 id="Container-related-commands">Container-related commands<a class="anchor-link" href="#Container-related-commands"> </a></h2><p>Open a terminal iteractively in the <code>container1</code> container.</p>
 <div class="highlight"><pre><span></span>docker <span class="nb">exec</span> -it container1 bash
 </pre></div>
-<p>Save current state of ntainer as new image (username is e.g. for DockerHub)</p>
+<p>Save current state of container as new image (username is e.g. for DockerHub)</p>
 <div class="highlight"><pre><span></span>docker commit container1 username/image2name:tagname
 </pre></div>
 <p>List running containers</p>
