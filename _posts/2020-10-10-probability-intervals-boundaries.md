@@ -23,7 +23,7 @@ layout: notebook
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In the previous post we calculated <a href="{% post_url 2020-10-07-probability-test %}">proabilities</a> and <a href="{% post_url 2020-10-09-inverse-normal-cdf %}">z values</a> with Python. Here we continue with finding the interval boundaries belonging to a particular tail or two-sided probabiltiy. sdfsdfdsdfd</p>
+<p>In the previous post we calculated <a href="{% post_url 2020-10-07-probability-test %}">proabilities</a> and <a href="{% post_url 2020-10-09-inverse-normal-cdf %}">z values</a> with Python. Here we continue with finding the interval boundaries belonging to a particular tail or two-sided probabiltiy.</p>
 
 </div>
 </div>
@@ -252,6 +252,9 @@ layout: notebook
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">normal_two_sided_bounds2</span><span class="p">(</span><span class="n">probability</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">mu</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">probability</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+
+    <span class="k">if</span> <span class="n">mu</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Requires standard normal distribution&quot;</span><span class="p">)</span>
 
     <span class="n">tail_probability</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">probability</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
     <span class="n">z</span> <span class="o">=</span> <span class="n">normal_upper_bound</span><span class="p">(</span><span class="n">tail_probability</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
