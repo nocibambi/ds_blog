@@ -145,6 +145,7 @@ layout: notebook
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">normal_upper_bound</span><span class="p">(</span><span class="n">probabilty</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">mu</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Return z for which P(Z &lt;= z) = probability&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">calc_inverse_normal_cdf</span><span class="p">(</span><span class="n">probabilty</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
 </pre></div>
 
@@ -163,6 +164,7 @@ layout: notebook
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">normal_lower_bound</span><span class="p">(</span><span class="n">probabilty</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">mu</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Return z for which P(Z &gt;= z) = probability&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">calc_inverse_normal_cdf</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">probabilty</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
 </pre></div>
 
@@ -233,7 +235,11 @@ layout: notebook
     <span class="k">if</span> <span class="n">probability</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
 
     <span class="n">tail_probability</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">probability</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
-    <span class="k">return</span> <span class="n">normal_lower_bound</span><span class="p">(</span><span class="n">tail_probability</span><span class="p">),</span> <span class="n">normal_upper_bound</span><span class="p">(</span><span class="n">tail_probability</span><span class="p">)</span>
+    
+    <span class="n">lower_bound</span> <span class="o">=</span> <span class="n">normal_upper_bound</span><span class="p">(</span><span class="n">tail_probability</span><span class="p">)</span>
+    <span class="n">upper_bound</span> <span class="o">=</span> <span class="n">normal_lower_bound</span><span class="p">(</span><span class="n">tail_probability</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">lower_bound</span><span class="p">,</span> <span class="n">upper_bound</span>
 </pre></div>
 
     </div>
@@ -299,16 +305,16 @@ layout: notebook
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>0.0:  True, (0, 0), (0, 0)
-0.1:  True, (0.12566566467285156, -0.12566566467285156), (0.12566566467285156, -0.12566566467285156)
-0.2:  True, (0.2533435821533203, -0.2533435821533203), (0.2533435821533203, -0.2533435821533203)
-0.3:  True, (0.3853130340576172, -0.3853130340576172), (0.3853130340576172, -0.3853130340576172)
-0.4:  True, (0.5243968963623047, -0.5243968963623047), (0.5243968963623047, -0.5243968963623047)
-0.5:  True, (0.6744861602783203, -0.6744861602783203), (0.6744861602783203, -0.6744861602783203)
-0.6:  True, (0.8416271209716797, -0.8416271209716797), (0.8416271209716797, -0.8416271209716797)
-0.7:  True, (1.0364246368408203, -1.0364246368408203), (1.0364246368408203, -1.0364246368408203)
-0.8:  True, (1.2815570831298828, -1.2815570831298828), (1.2815570831298828, -1.2815570831298828)
-0.9:  True, (1.6448497772216797, -1.6448497772216797), (1.6448497772216797, -1.6448497772216797)
-1.0:  True, (inf, -inf), (inf, -inf)
+0.1:  False, (-0.12566566467285156, 0.12566566467285156), (0.12566566467285156, -0.12566566467285156)
+0.2:  False, (-0.2533435821533203, 0.2533435821533203), (0.2533435821533203, -0.2533435821533203)
+0.3:  False, (-0.3853130340576172, 0.3853130340576172), (0.3853130340576172, -0.3853130340576172)
+0.4:  False, (-0.5243968963623047, 0.5243968963623047), (0.5243968963623047, -0.5243968963623047)
+0.5:  False, (-0.6744861602783203, 0.6744861602783203), (0.6744861602783203, -0.6744861602783203)
+0.6:  False, (-0.8416271209716797, 0.8416271209716797), (0.8416271209716797, -0.8416271209716797)
+0.7:  False, (-1.0364246368408203, 1.0364246368408203), (1.0364246368408203, -1.0364246368408203)
+0.8:  False, (-1.2815570831298828, 1.2815570831298828), (1.2815570831298828, -1.2815570831298828)
+0.9:  False, (-1.6448497772216797, 1.6448497772216797), (1.6448497772216797, -1.6448497772216797)
+1.0:  False, (-inf, inf), (inf, -inf)
 </pre>
 </div>
 </div>
