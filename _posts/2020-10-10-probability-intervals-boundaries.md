@@ -236,8 +236,8 @@ layout: notebook
 
     <span class="n">tail_probability</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">probability</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
     
-    <span class="n">lower_bound</span> <span class="o">=</span> <span class="n">normal_upper_bound</span><span class="p">(</span><span class="n">tail_probability</span><span class="p">)</span>
-    <span class="n">upper_bound</span> <span class="o">=</span> <span class="n">normal_lower_bound</span><span class="p">(</span><span class="n">tail_probability</span><span class="p">)</span>
+    <span class="n">lower_bound</span> <span class="o">=</span> <span class="n">normal_upper_bound</span><span class="p">(</span><span class="n">tail_probability</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
+    <span class="n">upper_bound</span> <span class="o">=</span> <span class="n">normal_lower_bound</span><span class="p">(</span><span class="n">tail_probability</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">lower_bound</span><span class="p">,</span> <span class="n">upper_bound</span>
 </pre></div>
