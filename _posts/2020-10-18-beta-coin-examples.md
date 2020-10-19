@@ -125,7 +125,7 @@ layout: notebook
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ol>
-<li>We believe that the coin is biased toward head by 75% of the time, so we choose $B(30, 10)</li>
+<li>We believe that the coin is biased toward head by 75% of the time, so we choose $B(30, 10)$</li>
 <li>Again, we got 3 heads out of 10</li>
 <li>Our poseterior distribution is $B(33, 17)$ centered around 0.66</li>
 <li>It suggest that the coin is biased toward the head, although less strongly as we believed</li>
