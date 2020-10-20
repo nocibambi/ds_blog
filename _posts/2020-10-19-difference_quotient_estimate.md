@@ -359,64 +359,64 @@ layout: notebook
   </thead>
   <tbody>
     <tr>
+      <th>5</th>
+      <td>5</td>
+      <td>actuals</td>
+      <td>-10.000</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>13</td>
+      <td>actuals</td>
+      <td>6.000</td>
+    </tr>
+    <tr>
       <th>34</th>
       <td>13</td>
       <td>estimates</td>
       <td>6.001</td>
     </tr>
     <tr>
-      <th>12</th>
-      <td>12</td>
+      <th>2</th>
+      <td>2</td>
       <td>actuals</td>
-      <td>4.000</td>
+      <td>-16.000</td>
     </tr>
     <tr>
-      <th>29</th>
-      <td>8</td>
-      <td>estimates</td>
-      <td>-3.999</td>
+      <th>19</th>
+      <td>19</td>
+      <td>actuals</td>
+      <td>18.000</td>
     </tr>
     <tr>
-      <th>37</th>
-      <td>16</td>
-      <td>estimates</td>
-      <td>12.001</td>
+      <th>0</th>
+      <td>0</td>
+      <td>actuals</td>
+      <td>-20.000</td>
     </tr>
     <tr>
-      <th>28</th>
+      <th>7</th>
       <td>7</td>
-      <td>estimates</td>
-      <td>-5.999</td>
+      <td>actuals</td>
+      <td>-6.000</td>
     </tr>
     <tr>
-      <th>41</th>
-      <td>20</td>
-      <td>estimates</td>
-      <td>20.001</td>
+      <th>3</th>
+      <td>3</td>
+      <td>actuals</td>
+      <td>-14.000</td>
     </tr>
     <tr>
-      <th>25</th>
-      <td>4</td>
+      <th>24</th>
+      <td>3</td>
       <td>estimates</td>
-      <td>-11.999</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>1</td>
-      <td>estimates</td>
-      <td>-17.999</td>
+      <td>-13.999</td>
     </tr>
     <tr>
       <th>11</th>
       <td>11</td>
       <td>actuals</td>
       <td>2.000</td>
-    </tr>
-    <tr>
-      <th>32</th>
-      <td>11</td>
-      <td>estimates</td>
-      <td>2.001</td>
     </tr>
   </tbody>
 </table>
