@@ -23,6 +23,13 @@ layout: notebook
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>From the <a href="https://www.oreilly.com/library/view/data-science-from/9781492041122/">Data Science from Scratch book</a>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Libraries-and-helper-functions">Libraries and helper functions<a class="anchor-link" href="#Libraries-and-helper-functions"> </a></h2>
 </div>
 </div>
