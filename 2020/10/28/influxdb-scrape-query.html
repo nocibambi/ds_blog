@@ -3,19 +3,19 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Starting off with InfluxDB | Value this</title>
+<title>Scraping, writing, and querying data with InfluxDB | Value this</title>
 <meta name="generator" content="Jekyll v4.0.0" />
-<meta property="og:title" content="Starting off with InfluxDB" />
+<meta property="og:title" content="Scraping, writing, and querying data with InfluxDB" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="This is not another blog about bitcoin." />
 <meta property="og:description" content="This is not another blog about bitcoin." />
-<link rel="canonical" href="https://andrasnovoszath.com/2020/10/26/influxdb-setup.html" />
-<meta property="og:url" content="https://andrasnovoszath.com/2020/10/26/influxdb-setup.html" />
+<link rel="canonical" href="https://andrasnovoszath.com/2020/10/28/influxdb-scrape-query.html" />
+<meta property="og:url" content="https://andrasnovoszath.com/2020/10/28/influxdb-scrape-query.html" />
 <meta property="og:site_name" content="Value this" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2020-10-26T00:00:00-05:00" />
+<meta property="article:published_time" content="2020-10-28T00:00:00-05:00" />
 <script type="application/ld+json">
-{"description":"This is not another blog about bitcoin.","headline":"Starting off with InfluxDB","dateModified":"2020-10-26T00:00:00-05:00","datePublished":"2020-10-26T00:00:00-05:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://andrasnovoszath.com/2020/10/26/influxdb-setup.html"},"url":"https://andrasnovoszath.com/2020/10/26/influxdb-setup.html","@context":"https://schema.org"}</script>
+{"description":"This is not another blog about bitcoin.","headline":"Scraping, writing, and querying data with InfluxDB","dateModified":"2020-10-28T00:00:00-05:00","datePublished":"2020-10-28T00:00:00-05:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://andrasnovoszath.com/2020/10/28/influxdb-scrape-query.html"},"url":"https://andrasnovoszath.com/2020/10/28/influxdb-scrape-query.html","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://andrasnovoszath.com/feed.xml" title="Value this" /><!-- the google_analytics_id gets auto inserted from the config file -->
 
@@ -24,19 +24,19 @@
 <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-178880214-1','auto');ga('require','displayfeatures');ga('send','pageview');</script>
 
 <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Starting off with InfluxDB | Value this</title>
+<title>Scraping, writing, and querying data with InfluxDB | Value this</title>
 <meta name="generator" content="Jekyll v4.0.0" />
-<meta property="og:title" content="Starting off with InfluxDB" />
+<meta property="og:title" content="Scraping, writing, and querying data with InfluxDB" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="This is not another blog about bitcoin." />
 <meta property="og:description" content="This is not another blog about bitcoin." />
-<link rel="canonical" href="https://andrasnovoszath.com/2020/10/26/influxdb-setup.html" />
-<meta property="og:url" content="https://andrasnovoszath.com/2020/10/26/influxdb-setup.html" />
+<link rel="canonical" href="https://andrasnovoszath.com/2020/10/28/influxdb-scrape-query.html" />
+<meta property="og:url" content="https://andrasnovoszath.com/2020/10/28/influxdb-scrape-query.html" />
 <meta property="og:site_name" content="Value this" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2020-10-26T00:00:00-05:00" />
+<meta property="article:published_time" content="2020-10-28T00:00:00-05:00" />
 <script type="application/ld+json">
-{"description":"This is not another blog about bitcoin.","headline":"Starting off with InfluxDB","dateModified":"2020-10-26T00:00:00-05:00","datePublished":"2020-10-26T00:00:00-05:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://andrasnovoszath.com/2020/10/26/influxdb-setup.html"},"url":"https://andrasnovoszath.com/2020/10/26/influxdb-setup.html","@context":"https://schema.org"}</script>
+{"description":"This is not another blog about bitcoin.","headline":"Scraping, writing, and querying data with InfluxDB","dateModified":"2020-10-28T00:00:00-05:00","datePublished":"2020-10-28T00:00:00-05:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://andrasnovoszath.com/2020/10/28/influxdb-scrape-query.html"},"url":"https://andrasnovoszath.com/2020/10/28/influxdb-scrape-query.html","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
@@ -113,8 +113,8 @@ window.onload = wrap_img;
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">Starting off with InfluxDB</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-10-26T00:00:00-05:00" itemprop="datePublished">
-        Oct 26, 2020
+    <h1 class="post-title p-name" itemprop="name headline">Scraping, writing, and querying data with InfluxDB</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-10-28T00:00:00-05:00" itemprop="datePublished">
+        Oct 28, 2020
       </time>
        • <span class="read-time" title="Estimated read time">
     
@@ -130,19 +130,19 @@ window.onload = wrap_img;
         <div class="pb-5 d-flex flex-wrap flex-justify-end">
           <div class="px-2">
 
-    <a href="https://github.com/nocibambi/ds_blog/tree/master/_notebooks/2020-10-26-influxdb-setup.ipynb" role="button" target="_blank">
+    <a href="https://github.com/nocibambi/ds_blog/tree/master/_notebooks/2020-10-28-influxdb-scrape-query.ipynb" role="button" target="_blank">
 <img class="notebook-badge-image" src="/assets/badges/github.svg" alt="View On GitHub">
     </a>
 </div>
 
           <div class="px-2">
-    <a href="https://mybinder.org/v2/gh/nocibambi/ds_blog/master?filepath=_notebooks%2F2020-10-26-influxdb-setup.ipynb" target="_blank">
+    <a href="https://mybinder.org/v2/gh/nocibambi/ds_blog/master?filepath=_notebooks%2F2020-10-28-influxdb-scrape-query.ipynb" target="_blank">
         <img class="notebook-badge-image" src="/assets/badges/binder.svg" alt="Open In Binder"/>
     </a>
 </div>
 
           <div class="px-2">
-    <a href="https://colab.research.google.com/github/nocibambi/ds_blog/blob/master/_notebooks/2020-10-26-influxdb-setup.ipynb" target="_blank">
+    <a href="https://colab.research.google.com/github/nocibambi/ds_blog/blob/master/_notebooks/2020-10-28-influxdb-scrape-query.ipynb" target="_blank">
         <img class="notebook-badge-image" src="/assets/badges/colab.svg" alt="Open In Colab"/>
     </a>
 </div>
@@ -154,7 +154,7 @@ window.onload = wrap_img;
 #################################################
 ### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
 #################################################
-# file to edit: _notebooks/2020-10-26-influxdb-setup.ipynb
+# file to edit: _notebooks/2020-10-28-influxdb-scrape-query.ipynb
 -->
 
 <div class="container" id="notebook-container">
@@ -168,21 +168,11 @@ window.onload = wrap_img;
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>InfluxDB is perhaps the most popular Time Series databases out there.</p>
-<p>It is maintained by <a href="https://www.influxdata.com">influxdata</a> who also provide a whole hosted service with the database, metrics collection, dashboards, and scripting (flux).</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Main-operations">Main operations<a class="anchor-link" href="#Main-operations"> </a></h2><p>The main operations we can do with influxDB on data:</p>
+<h2 id="Scraping-data">Scraping data<a class="anchor-link" href="#Scraping-data"> </a></h2><p>InfluxDB can scrape data</p>
 <ul>
-<li>Collect</li>
-<li>Write</li>
-<li>Process</li>
-<li>Visualize</li>
-<li>Monitor</li>
+<li>Can collect data in specified intervals</li>
+<li>Saves data into a InfluxDB bucket</li>
+<li>It collects data from endpoints that accept HTTP(S) and that provide data in the [prometheus data format][<a href="https://prometheus.io/docs/instrumenting/exposition_formats/">https://prometheus.io/docs/instrumenting/exposition_formats/</a>].</li>
 </ul>
 
 </div>
@@ -190,58 +180,29 @@ window.onload = wrap_img;
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Download">Download<a class="anchor-link" href="#Download"> </a></h2><p><a href="https://portal.influxdata.com/downloads/">https://portal.influxdata.com/downloads/</a></p>
-<ul>
-<li>Select the latest version</li>
-<li>Follow the instructions either for the docker file or for your OS.</li>
-</ul>
+<h3 id="Steps-to-scrape-data">Steps to scrape data<a class="anchor-link" href="#Steps-to-scrape-data"> </a></h3><p>Here we will use a the sample metrics data what influxDB generates and can be accessed at <code>http://localhost:8086/metrics</code></p>
+<ol>
+<li>Find the navigation menu and select <strong>Data</strong></li>
+<li>There select the <strong>Scrapers</strong> tab</li>
+<li>Click on the <strong>Select Scraper</strong> button</li>
+<li>In the popup window, enter a name and select a bucket.</li>
+<li>For the <strong>Target URL</strong> add <code>http://localhost:8086/metrics</code> (or the url from where you would like to scrape your data)</li>
+<li>Click <strong>Create</strong></li>
+</ol>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Installation">Installation<a class="anchor-link" href="#Installation"> </a></h2><ul>
-<li>Follow the <a href="https://docs.influxdata.com/influxdb/v2.0/">installation instructions</a> for the open source version (OSS)</li>
-<li>Run it with <code>influxd</code> from the terminal.</li>
-<li>You can set up influxDB either by opening <code>http://localhost:8086</code> in your browser, or by running <code>influx setup</code> in the terminal.</li>
-</ul>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>There go through the setup instructions. If you want also set up the influx CLI.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="The-line-protocol">The line protocol<a class="anchor-link" href="#The-line-protocol"> </a></h2><p>You can write data into InfluxDB in a <a href="https://docs.influxdata.com/influxdb/v2.0/reference/syntax/line-protocol/">line protocol format</a>. Its specifications:</p>
-<ul>
-<li>One line is one data point</li>
-<li>Dimensions:<ul>
-<li>measurement</li>
-<li>field set</li>
-<li>tag set</li>
-<li>timestamp</li>
-</ul>
-</li>
-</ul>
-<p>A few example lines (from the official tutorial)</p>
-<div class="highlight"><pre><span></span>mem,host<span class="o">=</span>host1 <span class="nv">used_percent</span><span class="o">=</span><span class="m">23</span>.43234543 <span class="m">1556892576842902000</span>
-cpu,host<span class="o">=</span>host1 <span class="nv">usage_user</span><span class="o">=</span><span class="m">3</span>.8234,usage_system<span class="o">=</span><span class="m">4</span>.23874 <span class="m">1556892726597397000</span>
-mem,host<span class="o">=</span>host1 <span class="nv">used_percent</span><span class="o">=</span><span class="m">21</span>.83599203 <span class="m">1556892777007291000</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Scraping">Scraping<a class="anchor-link" href="#Scraping"> </a></h2><p>InfluxDB can scrape data in the <a href="https://prometheus.io/docs/instrumenting/exposition_formats/">prometheus data format</a>.</p>
+<h2 id="Querying-data">Querying data<a class="anchor-link" href="#Querying-data"> </a></h2><p>You can mainly query data in the following ways</p>
+<ol>
+<li>Flux, InfluxData's functional scripting language</li>
+<li>The InfluxDB user interface</li>
+<li>The <code>influx</code> command line interface</li>
+<li>Directly through the InfluxDB API (<code>/api/v2/query</code>)</li>
+<li>Using one of the InfluxDB clients </li>
+</ol>
 
 </div>
 </div>
@@ -250,7 +211,7 @@ mem,host<span class="o">=</span>host1 <span class="nv">used_percent</span><span 
 
 
 
-  </div><a class="u-url" href="/2020/10/26/influxdb-setup.html" hidden></a>
+  </div><a class="u-url" href="/2020/10/28/influxdb-scrape-query.html" hidden></a>
 </article>
       </div>
     </main><footer class="site-footer h-card">
