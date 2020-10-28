@@ -59,7 +59,7 @@ layout: notebook
 <h2 id="Installation">Installation<a class="anchor-link" href="#Installation"> </a></h2><ul>
 <li>Follow the <a href="https://docs.influxdata.com/influxdb/v2.0/">installation instructions</a> for the open source version (OSS)</li>
 <li>Run it with <code>influxd</code> from the terminal.</li>
-<li>Open <code>http://localhost:8086</code> in your browser</li>
+<li>You can set up influxDB either by opening <code>http://localhost:8086</code> in your browser, or by running <code>influx setup</code> in the terminal.</li>
 </ul>
 
 </div>
@@ -67,7 +67,7 @@ layout: notebook
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>There go through the setup instructions. If you want also set up the influx CLI</p>
+<p>There go through the setup instructions. If you want also set up the influx CLI.</p>
 
 </div>
 </div>
