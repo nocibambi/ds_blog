@@ -1,1 +1,1 @@
-Sitemap: https://andrasnovoszath.com/sitemap.xml
+Sitemap: https://andrasnovoszath.com/ds_blog/sitemap.xml
