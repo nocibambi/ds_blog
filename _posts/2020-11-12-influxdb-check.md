@@ -78,18 +78,6 @@ layout: notebook
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="View-a-checks">View a checks<a class="anchor-link" href="#View-a-checks"> </a></h2><p>You can review the existing checks in the <strong>Alerts</strong> screen. You will see the list of the checks under the <strong>Checks</strong> section on the left side.</p>
-<p>You can see the details of the checks and update them by clicking on their names.</p>
-<p>You can enable/disable a check by setting the toggle button on their card.</p>
-<p>You can also add a description and labels to the check.</p>
-<p>You can see the check history, by clicking on the eye icon next to the check's name and select <strong>View History</strong>. In the same screen, you can see review the generated notifications by clicking on <strong>Notifications</strong>.</p>
-<p>Finally, this is where you can also delete the check, by using the thrash icon.</p>
-
-</div>
-</div>
-</div>
 </div>
  
 
