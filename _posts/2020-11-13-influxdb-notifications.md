@@ -1,7 +1,7 @@
 ---
 toc: false
 layout: post
-description: How to create and manage notifications in InfluxDB
+description: How to create and manage notifications in InfluxDB?
 categories: [InfluxDB, monitoring, time-series, notification]
 title: Notifications in InfluxDB
 ---
