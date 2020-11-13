@@ -1,4 +1,71 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://andrasnovoszath.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://andrasnovoszath.com/" rel="alternate" type="text/html" /><updated>2020-11-12T07:42:43-06:00</updated><id>https://andrasnovoszath.com/feed.xml</id><title type="html">Value this</title><subtitle>This is not another blog about bitcoin.</subtitle><entry><title type="html">Checks in InlfuxDB</title><link href="https://andrasnovoszath.com/2020/11/12/influxdb-check.html" rel="alternate" type="text/html" title="Checks in InlfuxDB" /><published>2020-11-12T00:00:00-06:00</published><updated>2020-11-12T00:00:00-06:00</updated><id>https://andrasnovoszath.com/2020/11/12/influxdb-check</id><content type="html" xml:base="https://andrasnovoszath.com/2020/11/12/influxdb-check.html">&lt;!--
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://andrasnovoszath.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://andrasnovoszath.com/" rel="alternate" type="text/html" /><updated>2020-11-13T05:00:23-06:00</updated><id>https://andrasnovoszath.com/feed.xml</id><title type="html">Value this</title><subtitle>This is not another blog about bitcoin.</subtitle><entry><title type="html">Notifications in InfluxDB</title><link href="https://andrasnovoszath.com/influxdb/monitoring/time-series/notification/2020/11/13/influxdb-notifications.html" rel="alternate" type="text/html" title="Notifications in InfluxDB" /><published>2020-11-13T00:00:00-06:00</published><updated>2020-11-13T00:00:00-06:00</updated><id>https://andrasnovoszath.com/influxdb/monitoring/time-series/notification/2020/11/13/influxdb-notifications</id><content type="html" xml:base="https://andrasnovoszath.com/influxdb/monitoring/time-series/notification/2020/11/13/influxdb-notifications.html">&lt;h2 id=&quot;notification-endpoints&quot;&gt;Notification endpoints&lt;/h2&gt;
+
+&lt;p&gt;Notification endpoints define connections to third party services.&lt;/p&gt;
+
+&lt;h3 id=&quot;create-notification-endpoints&quot;&gt;Create notification endpoints&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Select the &lt;strong&gt;Alerts&lt;/strong&gt; screen from the navigation menu;&lt;/li&gt;
+  &lt;li&gt;At the top of the &lt;strong&gt;Notification Endpoints&lt;/strong&gt; section click the &lt;strong&gt;Create&lt;/strong&gt; button;&lt;/li&gt;
+  &lt;li&gt;Select a &lt;strong&gt;Destination&lt;/strong&gt; from the drop-down menu;&lt;/li&gt;
+  &lt;li&gt;Add a name and a description (optional);&lt;/li&gt;
+  &lt;li&gt;Add the destination-specific configurations;&lt;/li&gt;
+  &lt;li&gt;Click &lt;strong&gt;Create&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;For specific details for the different endpoints, see the &lt;a href=&quot;https://docs.influxdata.com/influxdb/v2.0/monitor-alert/notification-endpoints/create/&quot;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;manage-notification-endpoints&quot;&gt;Manage notification endpoints&lt;/h3&gt;
+
+&lt;p&gt;In the &lt;strong&gt;Alerts&lt;/strong&gt; menu, under the &lt;strong&gt;Notification Endpoints&lt;/strong&gt; section, you can manage notifications. In particular, you can:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Review the &lt;strong&gt;list&lt;/strong&gt; of the existing notification endpoints;&lt;/li&gt;
+  &lt;li&gt;Review their &lt;strong&gt;history&lt;/strong&gt; (eye icon);&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Update&lt;/strong&gt; a notification behavior (by clicking on their name);&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Rename&lt;/strong&gt; them (pen icon next to their name);&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Turn them on/off&lt;/strong&gt; (toggle button);&lt;/li&gt;
+  &lt;li&gt;Add &lt;strong&gt;labels&lt;/strong&gt; to them;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Delete&lt;/strong&gt; them (trash icon).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;notification-rules&quot;&gt;Notification rules&lt;/h2&gt;
+
+&lt;p&gt;Notification rules generate notifications by triggering notificaton endpoints based on a given condition regarding the outcome of checks.&lt;/p&gt;
+
+&lt;h3 id=&quot;create-notification-rules&quot;&gt;Create notification rules&lt;/h3&gt;
+
+&lt;p&gt;Before your first notification rule, you need to have at least one notification endpoint in place.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Select the &lt;strong&gt;Alerts&lt;/strong&gt; screen from the navigation menu.&lt;/li&gt;
+  &lt;li&gt;At the top of the &lt;strong&gt;Notification Rules&lt;/strong&gt; section click the &lt;strong&gt;Create&lt;/strong&gt; button;&lt;/li&gt;
+  &lt;li&gt;In the &lt;strong&gt;About&lt;/strong&gt; section add
+    &lt;ol&gt;
+      &lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Schedule&lt;/strong&gt;: how often you would like the notification to review checks and trigger a message&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Offset&lt;/strong&gt;: the delay relative to the start time of the intervals set under &lt;strong&gt;Schedule&lt;/strong&gt;.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;In the &lt;strong&gt;Conditions&lt;/strong&gt; section, define the rule that will trigger the notification based on check statuses and (optionally) on tag values.&lt;/li&gt;
+  &lt;li&gt;In the &lt;strong&gt;Messages&lt;/strong&gt; section select which endpoint should the rule trigger.&lt;/li&gt;
+  &lt;li&gt;Click &lt;strong&gt;Create Notification Rule&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;manage-notification-rules&quot;&gt;Manage notification rules&lt;/h3&gt;
+
+&lt;p&gt;In the &lt;strong&gt;Alerts&lt;/strong&gt; screen, under the &lt;strong&gt;Notification Rules&lt;/strong&gt; section, you can manage notifications. In particular, you can:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Review the &lt;strong&gt;list&lt;/strong&gt; of the existing notification rules;&lt;/li&gt;
+  &lt;li&gt;Review their &lt;strong&gt;history&lt;/strong&gt; (eye icon, &lt;strong&gt;View History&lt;/strong&gt;);&lt;/li&gt;
+  &lt;li&gt;Create a &lt;strong&gt;clone&lt;/strong&gt; of an existing notification (clone icon)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Update&lt;/strong&gt; a notification behavior (by clicking on their name);&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Rename&lt;/strong&gt; them (pen icon next to their name);&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Turn them on/off&lt;/strong&gt; (toggle button);&lt;/li&gt;
+  &lt;li&gt;Add &lt;strong&gt;labels&lt;/strong&gt; to them;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Delete&lt;/strong&gt; them (trash icon).&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><summary type="html">Notification endpoints</summary></entry><entry><title type="html">Checks in InlfuxDB</title><link href="https://andrasnovoszath.com/2020/11/12/influxdb-check.html" rel="alternate" type="text/html" title="Checks in InlfuxDB" /><published>2020-11-12T00:00:00-06:00</published><updated>2020-11-12T00:00:00-06:00</updated><id>https://andrasnovoszath.com/2020/11/12/influxdb-check</id><content type="html" xml:base="https://andrasnovoszath.com/2020/11/12/influxdb-check.html">&lt;!--
 #################################################
 ### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
 #################################################
@@ -755,131 +822,4 @@ from(bucket:&quot;example-bucket&quot;)
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;</content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">InfluxDB ebook outline</title><link href="https://andrasnovoszath.com/influxdb/gumroad/ebook/content%20strategy/2020/10/27/influxdb-ebook-outline.html" rel="alternate" type="text/html" title="InfluxDB ebook outline" /><published>2020-10-27T00:00:00-05:00</published><updated>2020-10-27T00:00:00-05:00</updated><id>https://andrasnovoszath.com/influxdb/gumroad/ebook/content%20strategy/2020/10/27/influxdb-ebook-outline</id><content type="html" xml:base="https://andrasnovoszath.com/influxdb/gumroad/ebook/content%20strategy/2020/10/27/influxdb-ebook-outline.html">&lt;p&gt;I am taking part of the &lt;a href=&quot;https://gumroad.com/l/BLwER&quot;&gt;Gumroad 14 day product challenge&lt;/a&gt; where I decided to write an introductory ebook for influxDB as it currently has the biggest chance to succeed in my current workflow.&lt;/p&gt;
-
-&lt;h2 id=&quot;audience&quot;&gt;Audience&lt;/h2&gt;
-
-&lt;p&gt;My target audience is data scientists who would like to start to use InfluxDB. They are not total beginners as they have an idea of what time series and databases are. Still, they have no experience with time series databases as such and zero experience with influxDB.&lt;/p&gt;
-
-&lt;h2 id=&quot;content-strategy&quot;&gt;Content strategy&lt;/h2&gt;
-
-&lt;p&gt;I am really behind this. I identified the following platforms where I could promote the process:&lt;/p&gt;
-
-&lt;h3 id=&quot;social-media-channels&quot;&gt;Social media channels&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Twitter&lt;/li&gt;
-  &lt;li&gt;LinkedIn&lt;/li&gt;
-  &lt;li&gt;Facebook (especially groups)&lt;/li&gt;
-  &lt;li&gt;Instagram&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;blogging-sites&quot;&gt;Blogging sites&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Medium (esp data science publications)&lt;/li&gt;
-  &lt;li&gt;Dev.to&lt;/li&gt;
-  &lt;li&gt;Hackernoon&lt;/li&gt;
-  &lt;li&gt;KDnuggets&lt;/li&gt;
-  &lt;li&gt;Dzone&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;quora&quot;&gt;Quora&lt;/h3&gt;
-
-&lt;h3 id=&quot;link-sharing-sites&quot;&gt;Link sharing sites&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Hackerrank&lt;/li&gt;
-  &lt;li&gt;Reddit (subreddits)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;social-aggregators&quot;&gt;Social aggregators&lt;/h3&gt;
-
-&lt;p&gt;I am also trying to find a social media aggregator in this other post. Any suggestions are wellcome!&lt;/p&gt;
-
-&lt;h2 id=&quot;outline&quot;&gt;Outline&lt;/h2&gt;
-
-&lt;p&gt;Title: InfluxDB for beginners&lt;/p&gt;
-
-&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;What are time-series databases&lt;/li&gt;
-  &lt;li&gt;How InfluxDB compares to others&lt;/li&gt;
-  &lt;li&gt;The outline of this book&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;installation-and-setup&quot;&gt;Installation and setup&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Download&lt;/li&gt;
-  &lt;li&gt;Install&lt;/li&gt;
-  &lt;li&gt;Configuration&lt;/li&gt;
-  &lt;li&gt;Getting the Influx version&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;functional-overview&quot;&gt;Functional overview&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;The overview of InfluxDB and its place within the influxdata ecosystem (Tick stack)&lt;/li&gt;
-  &lt;li&gt;InfluxDB OSS vs. Cloud&lt;/li&gt;
-  &lt;li&gt;Main functionalities&lt;/li&gt;
-  &lt;li&gt;Workflow&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;data-format-overview&quot;&gt;Data format overview&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;InfluxDB time-series format&lt;/li&gt;
-  &lt;li&gt;Tags and fields&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;loadingstoring-data&quot;&gt;Loading/storing data&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Loading sample data&lt;/li&gt;
-  &lt;li&gt;Scraping data&lt;/li&gt;
-  &lt;li&gt;Storage size&lt;/li&gt;
-  &lt;li&gt;Data export/import&lt;/li&gt;
-  &lt;li&gt;How to format time&lt;/li&gt;
-  &lt;li&gt;Single vs. multiple measurements&lt;/li&gt;
-  &lt;li&gt;value limits&lt;/li&gt;
-  &lt;li&gt;Creating a database&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;querying&quot;&gt;Querying&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Discussing flux its functional data scripting language&lt;/li&gt;
-  &lt;li&gt;The query language: select, where, group by, into, joins&lt;/li&gt;
-  &lt;li&gt;Math operations: count, min, max, arithmetic&lt;/li&gt;
-  &lt;li&gt;functions&lt;/li&gt;
-  &lt;li&gt;retention policy and continuous query&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;common-issues-based-on-stackoverflow&quot;&gt;Common issues (based on Stackoverflow)&lt;/h3&gt;
-
-&lt;p&gt;(Maybe I remix this into the normal chapters)&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;getting first/last values&lt;/li&gt;
-  &lt;li&gt;select where value is null&lt;/li&gt;
-  &lt;li&gt;How to delete data&lt;/li&gt;
-  &lt;li&gt;How to connect with grafana&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;use-case-study&quot;&gt;Use case study&lt;/h3&gt;
-
-&lt;p&gt;An example case study also perhaps using other features of the ecosystem.&lt;/p&gt;
-
-&lt;h3 id=&quot;resources&quot;&gt;Resources&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Where to learn more&lt;/li&gt;
-  &lt;li&gt;Learning strategies&lt;/li&gt;
-  &lt;li&gt;Ideas for implementation&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;optional-if-i-will-have-time&quot;&gt;Optional (if I will have time)&lt;/h3&gt;
-
-&lt;p&gt;Discussing the python client&lt;/p&gt;</content><author><name></name></author><summary type="html">I am taking part of the Gumroad 14 day product challenge where I decided to write an introductory ebook for influxDB as it currently has the biggest chance to succeed in my current workflow.</summary></entry></feed>
+&lt;/div&gt;</content><author><name></name></author><summary type="html"></summary></entry></feed>
