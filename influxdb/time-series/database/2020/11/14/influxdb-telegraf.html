@@ -3,18 +3,19 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Page 4 of 4 for Value this | This is not another blog about bitcoin.</title>
+<title>Writing data to InfluxDB with Telegraf | Value this</title>
 <meta name="generator" content="Jekyll v4.0.0" />
-<meta property="og:title" content="Value this" />
+<meta property="og:title" content="Writing data to InfluxDB with Telegraf" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="This is not another blog about bitcoin." />
-<meta property="og:description" content="This is not another blog about bitcoin." />
-<link rel="canonical" href="https://andrasnovoszath.com" />
-<meta property="og:url" content="https://andrasnovoszath.com" />
+<meta name="description" content="How to use Telegraf to write data to InfluxDB?" />
+<meta property="og:description" content="How to use Telegraf to write data to InfluxDB?" />
+<link rel="canonical" href="https://andrasnovoszath.com/influxdb/time-series/database/2020/11/14/influxdb-telegraf.html" />
+<meta property="og:url" content="https://andrasnovoszath.com/influxdb/time-series/database/2020/11/14/influxdb-telegraf.html" />
 <meta property="og:site_name" content="Value this" />
-<link rel="prev" href="https://andrasnovoszath.com/page3/" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-11-14T00:00:00-06:00" />
 <script type="application/ld+json">
-{"description":"This is not another blog about bitcoin.","headline":"Value this","@type":"WebPage","url":"https://andrasnovoszath.com","@context":"https://schema.org"}</script>
+{"description":"How to use Telegraf to write data to InfluxDB?","headline":"Writing data to InfluxDB with Telegraf","dateModified":"2020-11-14T00:00:00-06:00","datePublished":"2020-11-14T00:00:00-06:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://andrasnovoszath.com/influxdb/time-series/database/2020/11/14/influxdb-telegraf.html"},"url":"https://andrasnovoszath.com/influxdb/time-series/database/2020/11/14/influxdb-telegraf.html","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://andrasnovoszath.com/feed.xml" title="Value this" /><!-- the google_analytics_id gets auto inserted from the config file -->
 
@@ -23,18 +24,19 @@
 <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-178880214-1','auto');ga('require','displayfeatures');ga('send','pageview');</script>
 
 <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Page 4 of 4 for Value this | This is not another blog about bitcoin.</title>
+<title>Writing data to InfluxDB with Telegraf | Value this</title>
 <meta name="generator" content="Jekyll v4.0.0" />
-<meta property="og:title" content="Value this" />
+<meta property="og:title" content="Writing data to InfluxDB with Telegraf" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="This is not another blog about bitcoin." />
-<meta property="og:description" content="This is not another blog about bitcoin." />
-<link rel="canonical" href="https://andrasnovoszath.com" />
-<meta property="og:url" content="https://andrasnovoszath.com" />
+<meta name="description" content="How to use Telegraf to write data to InfluxDB?" />
+<meta property="og:description" content="How to use Telegraf to write data to InfluxDB?" />
+<link rel="canonical" href="https://andrasnovoszath.com/influxdb/time-series/database/2020/11/14/influxdb-telegraf.html" />
+<meta property="og:url" content="https://andrasnovoszath.com/influxdb/time-series/database/2020/11/14/influxdb-telegraf.html" />
 <meta property="og:site_name" content="Value this" />
-<link rel="prev" href="https://andrasnovoszath.com/page3/" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-11-14T00:00:00-06:00" />
 <script type="application/ld+json">
-{"description":"This is not another blog about bitcoin.","headline":"Value this","@type":"WebPage","url":"https://andrasnovoszath.com","@context":"https://schema.org"}</script>
+{"description":"How to use Telegraf to write data to InfluxDB?","headline":"Writing data to InfluxDB with Telegraf","dateModified":"2020-11-14T00:00:00-06:00","datePublished":"2020-11-14T00:00:00-06:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://andrasnovoszath.com/influxdb/time-series/database/2020/11/14/influxdb-telegraf.html"},"url":"https://andrasnovoszath.com/influxdb/time-series/database/2020/11/14/influxdb-telegraf.html","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
@@ -108,116 +110,70 @@ window.onload = wrap_img;
 </header>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
-        <div class="home"><h1 id="posts">Posts</h1>
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
-
-
-  
-
-  <!-- Hide posts if front matter flag hide:true -->
-  
-  
-
-  <ul class="post-list"><li><div class="Box box-shadow-medium rounded-1 col-12"><div class="col-8 d-table-cell p-3">
-        <h3>
-          <a class="post-link" href="/2020/09/23/random_predictions.html">
-            Random prediction
-          </a>
-        </h3>
-        <p class="post-meta-description"></p>
-          <p class="post-meta">Sep 23, 2020</p>
-      </div>
-  </div></li><li><div class="Box box-shadow-medium rounded-1 col-12"><div class="col-8 d-table-cell p-3">
-        <h3>
-          <a class="post-link" href="/2020/09/22/standardization.html">
-            How does data standardization work?
-          </a>
-        </h3>
-        <p class="post-meta-description"></p>
-          <p class="post-meta">Sep 22, 2020</p>
-      </div>
-  </div></li><li><div class="Box box-shadow-medium rounded-1 col-12"><div class="col-8 d-table-cell p-3">
-        <h3>
-          <a class="post-link" href="/2020/09/21/normalize-scale.html">
-            Data scale normalization
-          </a>
-        </h3>
-        <p class="post-meta-description"></p>
-          <p class="post-meta">Sep 21, 2020</p>
-      </div>
-  </div></li><li><div class="Box box-shadow-medium rounded-1 col-12"><div class="col-8 d-table-cell p-3">
-        <h3>
-          <a class="post-link" href="/note-taking/categorization/hierarchies/concept%20drift/chaos%20&%20order/2020/09/20/note-categorization-pain.html">
-            How to categorize your notes?
-          </a>
-        </h3>
-        <p class="post-meta-description">The pain of organizing your thoughts.</p>
-          <p class="post-meta">Sep 20, 2020</p>
-      </div>
-  </div></li><li><div class="Box box-shadow-medium rounded-1 col-12"><div class="col-8 d-table-cell p-3">
-        <h3>
-          <a class="post-link" href="/stock%20trading/zero-sum/finance/valuation/2020/09/19/stock-trading-sum.html">
-            The sum of stock trading
-          </a>
-        </h3>
-        <p class="post-meta-description">Stock trading might not always be a zero sum game</p>
-          <p class="post-meta">Sep 19, 2020</p>
-      </div>
-  </div></li><li><div class="Box box-shadow-medium rounded-1 col-12"><div class="col-8 d-table-cell p-3">
-        <h3>
-          <a class="post-link" href="/writing/habit/2020/09/18/writing-habit.html">
-            How to build up a writing habit?
-          </a>
-        </h3>
-        <p class="post-meta-description">Wondered how to build up a writing habit? Do not know what to write about? These tips might solve this for you.</p>
-          <p class="post-meta">Sep 18, 2020</p>
-      </div>
-  </div></li><li><div class="Box box-shadow-medium rounded-1 col-12"><div class="col-8 d-table-cell p-3">
-        <h3>
-          <a class="post-link" href="/finance/zero-sum/valuation/2020/09/17/finance-zero-sum.html">
-            Is finance a zero-sum activity?
-          </a>
-        </h3>
-        <p class="post-meta-description">I was thinking about whether financial exchange relationships are zero-sum or not? This is what I found.</p>
-          <p class="post-meta">Sep 17, 2020</p>
-      </div>
-  </div></li><li><div class="Box box-shadow-medium rounded-1 col-12"><div class="col-8 d-table-cell p-3">
-        <h3>
-          <a class="post-link" href="/self-knowledge/specialization/2020/09/16/specific-you.html">
-            The specific you
-          </a>
-        </h3>
-        <p class="post-meta-description">Why are your specific traits important and how to find them?</p>
-          <p class="post-meta">Sep 16, 2020</p>
-      </div>
-  </div></li><li><div class="Box box-shadow-medium rounded-1 col-12"><div class="col-8 d-table-cell p-3">
-        <h3>
-          <a class="post-link" href="/technology/valuation/experimentation/2020/09/15/technnology_valuation_experimentation.html">
-            Valuation technology experimentation
-          </a>
-        </h3>
-        <p class="post-meta-description"></p>
-          <p class="post-meta">Sep 15, 2020</p>
-      </div>
-  </div></li><li><div class="Box box-shadow-medium rounded-1 col-12"><div class="col-8 d-table-cell p-3">
-        <h3>
-          <a class="post-link" href="/note-taking/2020/09/14/note-taking-obsessions.html">
-            Note-taking obsessions
-          </a>
-        </h3>
-        <p class="post-meta-description">One of my core frustration with note taking</p>
-          <p class="post-meta">Sep 14, 2020</p>
-      </div>
-  </div></li></ul>
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Writing data to InfluxDB with Telegraf</h1><p class="page-description">How to use Telegraf to write data to InfluxDB?</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-11-14T00:00:00-06:00" itemprop="datePublished">
+        Nov 14, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      1 min read
+    
+</span></p>
 
     
-      <div class="pager">
-        <ul class="pagination">
-          <li><a href="/page3/" class="previous-page">3</a></li>
-          <li><div class="current-page">4</div></li>
-          <li><div class="pager-edge">•</div></li>
-        </ul>
-      </div></div>
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/categories/#InfluxDB">InfluxDB</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#time-series">time-series</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#database">database</a>
+        
+      
+      </p>
+    
+
+    </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h2 id="what-is-telegraf">What is Telegraf?</h2>
+
+<p><a href="https://www.influxdata.com/time-series-platform/telegraf/">Telegraf</a> is InfluxData’s time series data collection and reporting agent. Its main functionality is to collect data with the help of its plugins from a wide range of sources and to feed it to an InfluxDB database. It also can ingest data from InfluxDB databases and generate reports on them.</p>
+
+<p>At the time of writing, it has more than 200 integrations, like Amazon ECS and Docker. You can see the full list <a href="https://www.influxdata.com/products/integrations/">here</a>.</p>
+
+<p>Using Telegraf with InfluxDB most importantly consists of configuring Telegraf either automatically or manually. Configurations are stored in <code class="highlighter-rouge">telegraf.conf</code>.</p>
+
+<p>The following steps assume that you have Telegraf installed and running. If this is not the case, you can follow the instructions <a href="https://docs.influxdata.com/telegraf/v1.16/introduction/installation/">here</a>.</p>
+
+<h2 id="automatic-configuration">Automatic configuration</h2>
+
+<p>You can set up a subset of Telegraf plugins automatically (for the rest, do manual configuration).</p>
+
+<p>Steps in the InfluxDB UI:</p>
+
+<ol>
+  <li>Open the <strong>Data</strong> screen from the navigation menu</li>
+  <li>Select the <strong>Telegraf</strong> tab</li>
+  <li>Select <strong>Create Configuration</strong></li>
+  <li>In the <strong>Bucket</strong> dropdown, choose the bucket to where you want to write the data</li>
+  <li>Select the plugin groups you would like to use and click <strong>Continue</strong>. This will open a new window</li>
+  <li>In the window, add a name and description (optional)</li>
+  <li>If needed, configure the individual plugins within the group. (A green checkmark denotes plugins with no need of configuration)</li>
+  <li>Click <strong>Create and Verify</strong>. This opens a test page.</li>
+  <li>In the test page, follow the instructions to set up telegraf and click <strong>Listen to Data</strong>. This should result in a <strong>Connection Found!</strong> message.</li>
+  <li>You can close the screen with the <strong>Finish</strong> button.</li>
+</ol>
+
+<p>For using Telegraf with Window host monitoring, you may need to do some following configuration, see <a href="https://docs.influxdata.com/influxdb/v2.0/write-data/no-code/use-telegraf/auto-config/#windows">here</a>.</p>
+
+  </div><a class="u-url" href="/influxdb/time-series/database/2020/11/14/influxdb-telegraf.html" hidden></a>
+</article>
       </div>
     </main><footer class="site-footer h-card">
   <data class="u-url" href="/"></data>

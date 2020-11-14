@@ -1,4 +1,33 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://andrasnovoszath.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://andrasnovoszath.com/" rel="alternate" type="text/html" /><updated>2020-11-13T05:00:23-06:00</updated><id>https://andrasnovoszath.com/feed.xml</id><title type="html">Value this</title><subtitle>This is not another blog about bitcoin.</subtitle><entry><title type="html">Notifications in InfluxDB</title><link href="https://andrasnovoszath.com/influxdb/monitoring/time-series/notification/2020/11/13/influxdb-notifications.html" rel="alternate" type="text/html" title="Notifications in InfluxDB" /><published>2020-11-13T00:00:00-06:00</published><updated>2020-11-13T00:00:00-06:00</updated><id>https://andrasnovoszath.com/influxdb/monitoring/time-series/notification/2020/11/13/influxdb-notifications</id><content type="html" xml:base="https://andrasnovoszath.com/influxdb/monitoring/time-series/notification/2020/11/13/influxdb-notifications.html">&lt;h2 id=&quot;notification-endpoints&quot;&gt;Notification endpoints&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://andrasnovoszath.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://andrasnovoszath.com/" rel="alternate" type="text/html" /><updated>2020-11-14T15:29:49-06:00</updated><id>https://andrasnovoszath.com/feed.xml</id><title type="html">Value this</title><subtitle>This is not another blog about bitcoin.</subtitle><entry><title type="html">Writing data to InfluxDB with Telegraf</title><link href="https://andrasnovoszath.com/influxdb/time-series/database/2020/11/14/influxdb-telegraf.html" rel="alternate" type="text/html" title="Writing data to InfluxDB with Telegraf" /><published>2020-11-14T00:00:00-06:00</published><updated>2020-11-14T00:00:00-06:00</updated><id>https://andrasnovoszath.com/influxdb/time-series/database/2020/11/14/influxdb-telegraf</id><content type="html" xml:base="https://andrasnovoszath.com/influxdb/time-series/database/2020/11/14/influxdb-telegraf.html">&lt;h2 id=&quot;what-is-telegraf&quot;&gt;What is Telegraf?&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.influxdata.com/time-series-platform/telegraf/&quot;&gt;Telegraf&lt;/a&gt; is InfluxData’s time series data collection and reporting agent. Its main functionality is to collect data with the help of its plugins from a wide range of sources and to feed it to an InfluxDB database. It also can ingest data from InfluxDB databases and generate reports on them.&lt;/p&gt;
+
+&lt;p&gt;At the time of writing, it has more than 200 integrations, like Amazon ECS and Docker. You can see the full list &lt;a href=&quot;https://www.influxdata.com/products/integrations/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Using Telegraf with InfluxDB most importantly consists of configuring Telegraf either automatically or manually. Configurations are stored in &lt;code class=&quot;highlighter-rouge&quot;&gt;telegraf.conf&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;The following steps assume that you have Telegraf installed and running. If this is not the case, you can follow the instructions &lt;a href=&quot;https://docs.influxdata.com/telegraf/v1.16/introduction/installation/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;automatic-configuration&quot;&gt;Automatic configuration&lt;/h2&gt;
+
+&lt;p&gt;You can set up a subset of Telegraf plugins automatically (for the rest, do manual configuration).&lt;/p&gt;
+
+&lt;p&gt;Steps in the InfluxDB UI:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Open the &lt;strong&gt;Data&lt;/strong&gt; screen from the navigation menu&lt;/li&gt;
+  &lt;li&gt;Select the &lt;strong&gt;Telegraf&lt;/strong&gt; tab&lt;/li&gt;
+  &lt;li&gt;Select &lt;strong&gt;Create Configuration&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;In the &lt;strong&gt;Bucket&lt;/strong&gt; dropdown, choose the bucket to where you want to write the data&lt;/li&gt;
+  &lt;li&gt;Select the plugin groups you would like to use and click &lt;strong&gt;Continue&lt;/strong&gt;. This will open a new window&lt;/li&gt;
+  &lt;li&gt;In the window, add a name and description (optional)&lt;/li&gt;
+  &lt;li&gt;If needed, configure the individual plugins within the group. (A green checkmark denotes plugins with no need of configuration)&lt;/li&gt;
+  &lt;li&gt;Click &lt;strong&gt;Create and Verify&lt;/strong&gt;. This opens a test page.&lt;/li&gt;
+  &lt;li&gt;In the test page, follow the instructions to set up telegraf and click &lt;strong&gt;Listen to Data&lt;/strong&gt;. This should result in a &lt;strong&gt;Connection Found!&lt;/strong&gt; message.&lt;/li&gt;
+  &lt;li&gt;You can close the screen with the &lt;strong&gt;Finish&lt;/strong&gt; button.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;For using Telegraf with Window host monitoring, you may need to do some following configuration, see &lt;a href=&quot;https://docs.influxdata.com/influxdb/v2.0/write-data/no-code/use-telegraf/auto-config/#windows&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><summary type="html">What is Telegraf?</summary></entry><entry><title type="html">Notifications in InfluxDB</title><link href="https://andrasnovoszath.com/influxdb/monitoring/time-series/notification/2020/11/13/influxdb-notifications.html" rel="alternate" type="text/html" title="Notifications in InfluxDB" /><published>2020-11-13T00:00:00-06:00</published><updated>2020-11-13T00:00:00-06:00</updated><id>https://andrasnovoszath.com/influxdb/monitoring/time-series/notification/2020/11/13/influxdb-notifications</id><content type="html" xml:base="https://andrasnovoszath.com/influxdb/monitoring/time-series/notification/2020/11/13/influxdb-notifications.html">&lt;h2 id=&quot;notification-endpoints&quot;&gt;Notification endpoints&lt;/h2&gt;
 
 &lt;p&gt;Notification endpoints define connections to third party services.&lt;/p&gt;
 
@@ -761,63 +790,6 @@ from(bucket:&quot;example-bucket&quot;)
   |&amp;gt; range(start: v.timeRangeStart, stop: v.timeRangeStop)
   |&amp;gt; filter(fn: (r) =&amp;gt; r[&quot;_measurement&quot;] == &quot;boltdb_reads_total&quot;)
   |&amp;gt; aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;</content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">Scraping, writing, and querying data with InfluxDB</title><link href="https://andrasnovoszath.com/2020/10/28/influxdb-scrape-query.html" rel="alternate" type="text/html" title="Scraping, writing, and querying data with InfluxDB" /><published>2020-10-28T00:00:00-05:00</published><updated>2020-10-28T00:00:00-05:00</updated><id>https://andrasnovoszath.com/2020/10/28/influxdb-scrape-query</id><content type="html" xml:base="https://andrasnovoszath.com/2020/10/28/influxdb-scrape-query.html">&lt;!--
-#################################################
-### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
-#################################################
-# file to edit: _notebooks/2020-10-28-influxdb-scrape-query.ipynb
---&gt;
-
-&lt;div class=&quot;container&quot; id=&quot;notebook-container&quot;&gt;
-        
-    
-    
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-
-&lt;/div&gt;
-    
-
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;h2 id=&quot;Scraping-data&quot;&gt;Scraping data&lt;a class=&quot;anchor-link&quot; href=&quot;#Scraping-data&quot;&gt; &lt;/a&gt;&lt;/h2&gt;&lt;p&gt;InfluxDB can scrape data&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Can collect data in specified intervals&lt;/li&gt;
-&lt;li&gt;Saves data into a InfluxDB bucket&lt;/li&gt;
-&lt;li&gt;It collects data from endpoints that accept HTTP(S) and that provide data in the [prometheus data format][&lt;a href=&quot;https://prometheus.io/docs/instrumenting/exposition_formats/&quot;&gt;https://prometheus.io/docs/instrumenting/exposition_formats/&lt;/a&gt;].&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;h3 id=&quot;Steps-to-scrape-data&quot;&gt;Steps to scrape data&lt;a class=&quot;anchor-link&quot; href=&quot;#Steps-to-scrape-data&quot;&gt; &lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Here we will use a the sample metrics data what influxDB generates and can be accessed at &lt;code&gt;http://localhost:8086/metrics&lt;/code&gt;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Find the navigation menu and select &lt;strong&gt;Data&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;There select the &lt;strong&gt;Scrapers&lt;/strong&gt; tab&lt;/li&gt;
-&lt;li&gt;Click on the &lt;strong&gt;Select Scraper&lt;/strong&gt; button&lt;/li&gt;
-&lt;li&gt;In the popup window, enter a name and select a bucket.&lt;/li&gt;
-&lt;li&gt;For the &lt;strong&gt;Target URL&lt;/strong&gt; add &lt;code&gt;http://localhost:8086/metrics&lt;/code&gt; (or the url from where you would like to scrape your data)&lt;/li&gt;
-&lt;li&gt;Click &lt;strong&gt;Create&lt;/strong&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;h2 id=&quot;Querying-data&quot;&gt;Querying data&lt;a class=&quot;anchor-link&quot; href=&quot;#Querying-data&quot;&gt; &lt;/a&gt;&lt;/h2&gt;&lt;p&gt;You can mainly query data in the following ways&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Flux, InfluxData's functional scripting language&lt;/li&gt;
-&lt;li&gt;The InfluxDB user interface&lt;/li&gt;
-&lt;li&gt;The &lt;code&gt;influx&lt;/code&gt; command line interface&lt;/li&gt;
-&lt;li&gt;Directly through the InfluxDB API (&lt;code&gt;/api/v2/query&lt;/code&gt;)&lt;/li&gt;
-&lt;li&gt;Using one of the InfluxDB clients &lt;/li&gt;
-&lt;/ol&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
