@@ -1,4 +1,78 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://andrasnovoszath.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://andrasnovoszath.com/" rel="alternate" type="text/html" /><updated>2020-11-15T08:25:12-06:00</updated><id>https://andrasnovoszath.com/feed.xml</id><title type="html">Value this</title><subtitle>This is not another blog about bitcoin.</subtitle><entry><title type="html">Filtering with Flux in InfluxDB</title><link href="https://andrasnovoszath.com/influxdb/flux/filtering/querying/2020/11/15/influxdb-flux-filter.html" rel="alternate" type="text/html" title="Filtering with Flux in InfluxDB" /><published>2020-11-15T00:00:00-06:00</published><updated>2020-11-15T00:00:00-06:00</updated><id>https://andrasnovoszath.com/influxdb/flux/filtering/querying/2020/11/15/influxdb-flux-filter</id><content type="html" xml:base="https://andrasnovoszath.com/influxdb/flux/filtering/querying/2020/11/15/influxdb-flux-filter.html">&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;filter()&lt;/code&gt; function behaves similarly to the &lt;code class=&quot;highlighter-rouge&quot;&gt;WHERE&lt;/code&gt; command in SQL.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://andrasnovoszath.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://andrasnovoszath.com/" rel="alternate" type="text/html" /><updated>2020-11-17T01:08:46-06:00</updated><id>https://andrasnovoszath.com/feed.xml</id><title type="html">Value this</title><subtitle>This is not another blog about bitcoin.</subtitle><entry><title type="html">Grouping data with Flux in InfluxDB</title><link href="https://andrasnovoszath.com/influxdb/flux/time-series/2020/11/17/influxdb-flux-group.html" rel="alternate" type="text/html" title="Grouping data with Flux in InfluxDB" /><published>2020-11-17T00:00:00-06:00</published><updated>2020-11-17T00:00:00-06:00</updated><id>https://andrasnovoszath.com/influxdb/flux/time-series/2020/11/17/influxdb-flux-group</id><content type="html" xml:base="https://andrasnovoszath.com/influxdb/flux/time-series/2020/11/17/influxdb-flux-group.html">&lt;p&gt;Grouping happens based on &lt;strong&gt;group keys&lt;/strong&gt; which effectilve are the name of columns used for the grouping. A group then consists of rows having identical values in the group key columns.&lt;/p&gt;
+
+&lt;h2 id=&quot;example&quot;&gt;Example&lt;/h2&gt;
+
+&lt;p&gt;Let’s consider the http api request duration data.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-flux&quot;&gt;from(bucket: &quot;trial_bucket&quot;)
+  |&amp;gt; range(start: -15m)
+  |&amp;gt; filter(fn: (r) =&amp;gt; r._measurement == &quot;http_api_request_duration_seconds&quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In respect to the time columns, it is ‘grouped’, by default, by its ‘start’ and ‘end’ times.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/influxdb/influxdb-group-default-data.png&quot; alt=&quot;default grouping&quot; /&gt; “Default grouping”&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/influxdb/influxdb-group-default-chart.png&quot; alt=&quot;default chart&quot; /&gt; “Default grouping as chart”&lt;/p&gt;
+
+&lt;h2 id=&quot;grouping&quot;&gt;Grouping&lt;/h2&gt;
+
+&lt;p&gt;Now, with the following snippet, we group data along the &lt;code class=&quot;highlighter-rouge&quot;&gt;_measurement&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;_field&lt;/code&gt; columns.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-flux&quot;&gt;from(bucket: &quot;trial_bucket&quot;)
+  |&amp;gt; range(start: -15m)
+  |&amp;gt; filter(fn: (r) =&amp;gt; r._measurement == &quot;http_api_request_duration_seconds&quot;)
+  |&amp;gt; group(columns: [&quot;_measurement&quot;, &quot;_field&quot;])
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will change the group keys:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/influxdb/influxdb-group-time-data.png&quot; alt=&quot;grouped keys&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;And will also shape the charts:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/influxdb/influxdb-group-time-chart.png&quot; alt=&quot;grouped by time chart&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;As observations of the same time now belong to the same data, plotting them as a line chart on the time axis produces vertical lines.&lt;/p&gt;
+
+&lt;h2 id=&quot;aggregate-and-ungroup&quot;&gt;Aggregate and ungroup&lt;/h2&gt;
+
+&lt;p&gt;For the next step let’s calculate the mean values of the request durations.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-flux&quot;&gt;from(bucket: &quot;trial_bucket&quot;)
+  |&amp;gt; range(start: -15m)
+  |&amp;gt; filter(fn: (r) =&amp;gt; r._measurement == &quot;http_api_request_duration_seconds&quot;)
+  |&amp;gt; group(columns: [&quot;_time&quot;])
+  |&amp;gt; mean()
+  |&amp;gt; group()  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;While we calucalted the mean values for each timestamp, this also resulted in separate tables consisting of a single value. We can use the &lt;code class=&quot;highlighter-rouge&quot;&gt;group()&lt;/code&gt; function to ungroup data, that is, to merge all tables into a single table.&lt;/p&gt;
+
+&lt;p&gt;This will generate the following chart.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/influxdb/influxdb-group-degroup-chart.png&quot; alt=&quot;mean data&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We can produce the same result by explicitly turning off grouping on specific columns with the &lt;code class=&quot;highlighter-rouge&quot;&gt;mode&lt;/code&gt; parameter.&lt;/p&gt;
+
+&lt;h2 id=&quot;mode&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mode&lt;/code&gt;&lt;/h2&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;group()&lt;/code&gt; function also accepts a &lt;code class=&quot;highlighter-rouge&quot;&gt;mode&lt;/code&gt; parameter with the following values:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;by&lt;/code&gt;: Group by the columns defined in the &lt;code class=&quot;highlighter-rouge&quot;&gt;columns&lt;/code&gt; parameter.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;except&lt;/code&gt;: Group by the columns &lt;strong&gt;not defined&lt;/strong&gt; in the &lt;code class=&quot;highlighter-rouge&quot;&gt;columns&lt;/code&gt; parameter.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Accordingly, we can modify the above code to get the same result:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-flux&quot;&gt;from(bucket: &quot;trial_bucket&quot;)
+  |&amp;gt; range(start: -15m)
+  |&amp;gt; filter(fn: (r) =&amp;gt; r._measurement == &quot;http_api_request_duration_seconds&quot;)
+  |&amp;gt; group(columns: [&quot;_time&quot;])
+  |&amp;gt; mean()
+  |&amp;gt; group(columns: [&quot;_time&quot;, &quot;_value&quot;], mode: &quot;except&quot;)
+&lt;/code&gt;&lt;/pre&gt;</content><author><name></name></author><summary type="html">Grouping happens based on group keys which effectilve are the name of columns used for the grouping. A group then consists of rows having identical values in the group key columns.</summary></entry><entry><title type="html">Filtering with Flux in InfluxDB</title><link href="https://andrasnovoszath.com/influxdb/flux/filtering/querying/2020/11/15/influxdb-flux-filter.html" rel="alternate" type="text/html" title="Filtering with Flux in InfluxDB" /><published>2020-11-15T00:00:00-06:00</published><updated>2020-11-15T00:00:00-06:00</updated><id>https://andrasnovoszath.com/influxdb/flux/filtering/querying/2020/11/15/influxdb-flux-filter</id><content type="html" xml:base="https://andrasnovoszath.com/influxdb/flux/filtering/querying/2020/11/15/influxdb-flux-filter.html">&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;filter()&lt;/code&gt; function behaves similarly to the &lt;code class=&quot;highlighter-rouge&quot;&gt;WHERE&lt;/code&gt; command in SQL.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&quot;language-flux&quot;&gt;from(bucket: &quot;trial_bucket&quot;)
   |&amp;gt; range(start: v.timeRangeStart, stop: v.timeRangeStop)
@@ -627,85 +701,6 @@ myMeasurement,tag1&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;value1,tag2&lt;s
 &lt;/li&gt;
 &lt;li&gt;group keys: use for grouping&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;</content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">InfluxDB organizing concepts (Organization, Buckets, Data elements)</title><link href="https://andrasnovoszath.com/2020/10/30/influxdb-concepts-data-bucket.html" rel="alternate" type="text/html" title="InfluxDB organizing concepts (Organization, Buckets, Data elements)" /><published>2020-10-30T00:00:00-05:00</published><updated>2020-10-30T00:00:00-05:00</updated><id>https://andrasnovoszath.com/2020/10/30/influxdb-concepts-data-bucket</id><content type="html" xml:base="https://andrasnovoszath.com/2020/10/30/influxdb-concepts-data-bucket.html">&lt;!--
-#################################################
-### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
-#################################################
-# file to edit: _notebooks/2020-10-30-influxdb-concepts-data-bucket.ipynb
---&gt;
-
-&lt;div class=&quot;container&quot; id=&quot;notebook-container&quot;&gt;
-        
-    
-    
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-
-&lt;/div&gt;
-    
-
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;h2 id=&quot;Organizations&quot;&gt;Organizations&lt;a class=&quot;anchor-link&quot; href=&quot;#Organizations&quot;&gt; &lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Organizations behave as workspaces. They can possess&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;a user or a group of users,&lt;/li&gt;
-&lt;li&gt;dashboards&lt;/li&gt;
-&lt;li&gt;tasks&lt;/li&gt;
-&lt;li&gt;buckets&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;h2 id=&quot;Buckets&quot;&gt;Buckets&lt;a class=&quot;anchor-link&quot; href=&quot;#Buckets&quot;&gt; &lt;/a&gt;&lt;/h2&gt;&lt;p&gt;InfluxDB data is stored in buckets. Each bucket belongs to an organization.&lt;/p&gt;
-&lt;p&gt;Buckets are basically databases with the important addition of retention policies.&lt;/p&gt;
-&lt;p&gt;A bucket's &lt;strong&gt;retention policy&lt;/strong&gt; determines the time duration for which its datapoints persist.&lt;/p&gt;
-&lt;h3 id=&quot;Bucket-creation&quot;&gt;Bucket creation&lt;a class=&quot;anchor-link&quot; href=&quot;#Bucket-creation&quot;&gt; &lt;/a&gt;&lt;/h3&gt;&lt;p&gt;You can create bucket on the UI either in the&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Data Explorer&lt;/strong&gt;, or&lt;/li&gt;
-&lt;li&gt;in the &lt;strong&gt;Load Data&lt;/strong&gt; menu points.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Here you need to give a name and also set when would you like to delete the data.&lt;/p&gt;
-&lt;h3 id=&quot;Edit-buckets&quot;&gt;Edit buckets&lt;a class=&quot;anchor-link&quot; href=&quot;#Edit-buckets&quot;&gt; &lt;/a&gt;&lt;/h3&gt;&lt;p&gt;You can view your existing buckets and edit them under the &lt;strong&gt;Data&lt;/strong&gt; / &lt;strong&gt;Load Data&lt;/strong&gt; menu points.&lt;/p&gt;
-&lt;h3 id=&quot;Delete-buckets&quot;&gt;Delete buckets&lt;a class=&quot;anchor-link&quot; href=&quot;#Delete-buckets&quot;&gt; &lt;/a&gt;&lt;/h3&gt;&lt;p&gt;You can delet buckets under the &lt;strong&gt;Data&lt;/strong&gt; / &lt;strong&gt;Load Data&lt;/strong&gt; menu points.&lt;/p&gt;
-&lt;h3 id=&quot;Explore-bucket-data&quot;&gt;Explore bucket data&lt;a class=&quot;anchor-link&quot; href=&quot;#Explore-bucket-data&quot;&gt; &lt;/a&gt;&lt;/h3&gt;&lt;p&gt;In the &lt;strong&gt;Data&lt;/strong&gt; / &lt;strong&gt;Load Data&lt;/strong&gt; menu point, you can simply click on a bucket to open it in the &lt;strong&gt;Data Explorer&lt;/strong&gt;&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;h2 id=&quot;Data-elements&quot;&gt;Data elements&lt;a class=&quot;anchor-link&quot; href=&quot;#Data-elements&quot;&gt; &lt;/a&gt;&lt;/h2&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;_time&lt;/code&gt;, timestamp (in epoch nanosecond)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;_measurement&lt;/code&gt;, string&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;_field&lt;/code&gt;, string: field key&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;_value&lt;/code&gt;, string, floats, integers, or booleans: field value&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Fields are not indexed, and required. Tags are indexed but are not required.&lt;/p&gt;
-&lt;p&gt;An additional element is a 'field set' which are the collection of field key-value pairs having the same timestamp.&lt;/p&gt;
-&lt;p&gt;Tags: these are simple column-like structure where the column name is the 'tag key' and its content are 'tag values'.&lt;/p&gt;
-&lt;p&gt;Tag sets are the tag-key value combinations in the data.&lt;/p&gt;
-&lt;p&gt;As tags are indexed, they are more performant than fields. For this reason, often, you might want to restructure your tables so your fields will become tags and the other way around.&lt;/p&gt;
-&lt;p&gt;With tags having many unique values, however, look out for &lt;a href=&quot;https://docs.influxdata.com/influxdb/v2.0/reference/glossary/#series-cardinality&quot;&gt;series cardinality&lt;/a&gt; as it can eat up your memory!&lt;/p&gt;
-&lt;h3 id=&quot;Series&quot;&gt;Series&lt;a class=&quot;anchor-link&quot; href=&quot;#Series&quot;&gt; &lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Series key is a collection of points which have the same&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;measurement,&lt;/li&gt;
-&lt;li&gt;tag set, and&lt;/li&gt;
-&lt;li&gt;field key.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Their use is a core element in definint the data schema.&lt;/p&gt;
-&lt;h3 id=&quot;Points&quot;&gt;Points&lt;a class=&quot;anchor-link&quot; href=&quot;#Points&quot;&gt; &lt;/a&gt;&lt;/h3&gt;&lt;p&gt;A &lt;strong&gt;Point&lt;/strong&gt; consists of a series key, a field value, and a timestamp.&lt;/p&gt;
 
 &lt;/div&gt;
 &lt;/div&gt;
