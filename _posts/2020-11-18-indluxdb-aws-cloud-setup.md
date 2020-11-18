@@ -1,5 +1,5 @@
 ---
-title: Setting up AWS Cloud for InlfuxDB
+title: Setting up AWS Cloud for InfluxDB
 description: How to set up AWS Cloud for InfluxDB?
 categories: [InfluxDB, AWS]
 toc: false
