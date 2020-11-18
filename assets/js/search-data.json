@@ -2,7 +2,7 @@
   
     
         "post0": {
-            "title": "Setting up AWS Cloud for InlfuxDB",
+            "title": "Setting up AWS Cloud for InfluxDB",
             "content": "Here are the preparation steps you need to do if you would like to use AWS Cloudwatcher with InfluxDB. . Based on this post . Create an AWS account | Select the appropriate region | . Create a new EC2 instance (Please not that it may take up to 24 hours for amazon to activate). | . Select Key Pairs and the create a key pair | Download keys | Make the key readable only by the owner: chmod 400 influx_private.pem | Open IAM in Security section of the Services menu. | Create a user and grant permissions to it. | Generate and access key ID and a secred for the AWS command line interface. |",
             "url": "https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup.html",
             "relUrl": "/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup.html",
