@@ -1,4 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://andrasnovoszath.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://andrasnovoszath.com/" rel="alternate" type="text/html" /><updated>2020-11-17T01:08:46-06:00</updated><id>https://andrasnovoszath.com/feed.xml</id><title type="html">Value this</title><subtitle>This is not another blog about bitcoin.</subtitle><entry><title type="html">Grouping data with Flux in InfluxDB</title><link href="https://andrasnovoszath.com/influxdb/flux/time-series/2020/11/17/influxdb-flux-group.html" rel="alternate" type="text/html" title="Grouping data with Flux in InfluxDB" /><published>2020-11-17T00:00:00-06:00</published><updated>2020-11-17T00:00:00-06:00</updated><id>https://andrasnovoszath.com/influxdb/flux/time-series/2020/11/17/influxdb-flux-group</id><content type="html" xml:base="https://andrasnovoszath.com/influxdb/flux/time-series/2020/11/17/influxdb-flux-group.html">&lt;p&gt;Grouping happens based on &lt;strong&gt;group keys&lt;/strong&gt; which effectilve are the name of columns used for the grouping. A group then consists of rows having identical values in the group key columns.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://andrasnovoszath.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://andrasnovoszath.com/" rel="alternate" type="text/html" /><updated>2020-11-18T00:39:52-06:00</updated><id>https://andrasnovoszath.com/feed.xml</id><title type="html">Value this</title><subtitle>This is not another blog about bitcoin.</subtitle><entry><title type="html">Setting up AWS Cloud for InlfuxDB</title><link href="https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup.html" rel="alternate" type="text/html" title="Setting up AWS Cloud for InlfuxDB" /><published>2020-11-18T00:00:00-06:00</published><updated>2020-11-18T00:00:00-06:00</updated><id>https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup</id><content type="html" xml:base="https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup.html">&lt;p&gt;Here are the preparation steps you need to do if you would like to use AWS Cloudwatcher with InfluxDB.&lt;/p&gt;
+
+&lt;p&gt;Based on this &lt;a href=&quot;https://www.influxdata.com/blog/running-influxdb-on-aws-with-cloud-formation/&quot;&gt;post&lt;/a&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/free/&quot;&gt;Create an AWS account&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Select the appropriate region&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/influxdb/influxdb-aws-region.png&quot; alt=&quot;aws region select&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Create a new EC2 instance (Please not that it may take up to 24 hours for amazon to activate).&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/influxdb/influxdb-aws-ec2-select.png&quot; alt=&quot;aws ec2 select&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Select &lt;strong&gt;Key Pairs&lt;/strong&gt; and the create a key pair&lt;/li&gt;
+  &lt;li&gt;Download keys&lt;/li&gt;
+  &lt;li&gt;Make the key readable only by the owner: &lt;code class=&quot;highlighter-rouge&quot;&gt;chmod 400 influx_private.pem&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Open &lt;strong&gt;IAM&lt;/strong&gt; in &lt;strong&gt;Security&lt;/strong&gt; section of the &lt;strong&gt;Services menu&lt;/strong&gt;.&lt;/li&gt;
+  &lt;li&gt;Create a user and grant permissions to it.&lt;/li&gt;
+  &lt;li&gt;Generate and access key ID and a secred for the AWS command line interface.&lt;/li&gt;
+&lt;/ol&gt;</content><author><name></name></author><summary type="html">Here are the preparation steps you need to do if you would like to use AWS Cloudwatcher with InfluxDB.</summary></entry><entry><title type="html">Grouping data with Flux in InfluxDB</title><link href="https://andrasnovoszath.com/influxdb/flux/time-series/2020/11/17/influxdb-flux-group.html" rel="alternate" type="text/html" title="Grouping data with Flux in InfluxDB" /><published>2020-11-17T00:00:00-06:00</published><updated>2020-11-17T00:00:00-06:00</updated><id>https://andrasnovoszath.com/influxdb/flux/time-series/2020/11/17/influxdb-flux-group</id><content type="html" xml:base="https://andrasnovoszath.com/influxdb/flux/time-series/2020/11/17/influxdb-flux-group.html">&lt;p&gt;Grouping happens based on &lt;strong&gt;group keys&lt;/strong&gt; which effectilve are the name of columns used for the grouping. A group then consists of rows having identical values in the group key columns.&lt;/p&gt;
 
 &lt;h2 id=&quot;example&quot;&gt;Example&lt;/h2&gt;
 
@@ -621,85 +645,6 @@ Or you can copy the JSON to the clipboard.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Delete&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;</content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">InfluxDB Design principles, Line Protocol, Data Schema</title><link href="https://andrasnovoszath.com/2020/11/01/influxdb-design-schema-line-protocol.html" rel="alternate" type="text/html" title="InfluxDB Design principles, Line Protocol, Data Schema" /><published>2020-11-01T00:00:00-05:00</published><updated>2020-11-01T00:00:00-05:00</updated><id>https://andrasnovoszath.com/2020/11/01/influxdb-design-schema-line-protocol</id><content type="html" xml:base="https://andrasnovoszath.com/2020/11/01/influxdb-design-schema-line-protocol.html">&lt;!--
-#################################################
-### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
-#################################################
-# file to edit: _notebooks/2020-11-01-influxdb-design-schema-line-protocol.ipynb
---&gt;
-
-&lt;div class=&quot;container&quot; id=&quot;notebook-container&quot;&gt;
-        
-    
-    
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-
-&lt;/div&gt;
-    
-
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;h2 id=&quot;InfluxDB-design-principles&quot;&gt;InfluxDB design principles&lt;a class=&quot;anchor-link&quot; href=&quot;#InfluxDB-design-principles&quot;&gt; &lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;Time ordering&lt;/li&gt;
-&lt;li&gt;Restricted delete and update&lt;/li&gt;
-&lt;li&gt;Priority of read/write over consistency&lt;/li&gt;
-&lt;li&gt;Schemaless design allowing discontinous data&lt;/li&gt;
-&lt;li&gt;Priority of datasets over invdividual points. Points do not have IDs besides their timestamp and series.&lt;/li&gt;
-&lt;li&gt;Assuming duplicates status for identical points. If only field value is different, update with the latest.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;h2 id=&quot;Line-protocol&quot;&gt;Line protocol&lt;a class=&quot;anchor-link&quot; href=&quot;#Line-protocol&quot;&gt; &lt;/a&gt;&lt;/h2&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;p&gt;The elements of the line protocol&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;measurement&lt;/li&gt;
-&lt;li&gt;tag set&lt;/li&gt;
-&lt;li&gt;field set:&lt;ul&gt;
-&lt;li&gt;double quote field values&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;timestamp&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# An example&lt;/span&gt;
-myMeasurement,tag1&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;value1,tag2&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;value2 &lt;span class=&quot;nv&quot;&gt;fieldKey&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;fieldValue&amp;quot;&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1556813561098000000&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;The line protocol is whitespace sensitive and &lt;code&gt;\n&lt;/code&gt; newlines separate single points.&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;measurementName,tagKey&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;tagValue &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;whitespace&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;fieldKey&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;fieldValue&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;whitespace&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1465839830100400200&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;For further information read the &lt;a href=&quot;https://docs.influxdata.com/influxdb/v2.0/reference/syntax/line-protocol/#elements-of-line-protocol&quot;&gt;documentation&lt;/a&gt;&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;h2 id=&quot;Data-Schema&quot;&gt;Data Schema&lt;a class=&quot;anchor-link&quot; href=&quot;#Data-Schema&quot;&gt; &lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Tabular data schema&lt;/p&gt;
-&lt;p&gt;You can use it to view raw data and return query results with annotated syntax.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;annotation rows: describe column properties (e.g. datatype)&lt;/li&gt;
-&lt;li&gt;header row: column labels&lt;/li&gt;
-&lt;li&gt;data rows: the values defined in the header for each point&lt;/li&gt;
-&lt;li&gt;other columns: they are optional&lt;ul&gt;
-&lt;li&gt;annotation&lt;/li&gt;
-&lt;li&gt;result&lt;/li&gt;
-&lt;li&gt;table&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;group keys: use for grouping&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;/div&gt;
