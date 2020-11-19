@@ -144,24 +144,50 @@ window.onload = wrap_img;
 
 <ol>
   <li><a href="https://aws.amazon.com/free/">Create an AWS account</a></li>
-  <li>Select the appropriate region</li>
-</ol>
+  <li>Select the appropriate region:
+ <img src="/images/influxdb/aws_cloudformation/influxdb-aws-region.png" alt="aws region select" /></li>
+  <li>Search for “EC2” in the <strong>Find Services</strong> search box and select <strong>EC2 (Virtual Servers in the Cloud)</strong> (Please not that you have to provide credit card information and it may take up to 24 hours for amazon to activate):
+ <img src="/images/influxdb/aws_cloudformation/influxdb-aws-ec2-select.png" alt="aws ec2 select" /></li>
+  <li>Select <strong>Key Pairs</strong> and the create a key pair: <img src="/images/influxdb/aws_cloudformation/influxdb-aws-ec2-key-pairs-menu.png" alt="key-pairs" /></li>
+  <li>Download the keys.</li>
+  <li>Make the key readable only by the owner: <code class="highlighter-rouge">chmod 400 name-of-the-key.pem</code></li>
+  <li>Open <strong>IAM</strong> from the <strong>Services menu</strong>: <img src="/images/influxdb/aws_cloudformation/screenshot-eu-central-1.console.aws.amazon.com-2020.11.19-06_05_58.png" alt="open-aim" /></li>
+  <li>Create a user and grant permissions to it:
+    <ol>
+      <li>Select <strong>Add user</strong>: <img src="/images/influxdb/aws_cloudformation/screenshot-console.aws.amazon.com-2020.11.19-06_11_48.png" alt="iam-new-user" /></li>
+      <li>Name the user and add access rights: <img src="/images/influxdb/aws_cloudformation/influxdb-aws-iam-new-user-access.png" alt="iam-new-user-access" /></li>
+      <li>On the <strong>Set Permissions</strong> screen click on <strong>Add user to group</strong> and <strong>Create a group</strong>: <img src="/images/influxdb/aws_cloudformation/influxdb-aws-iam-new-user-create-group.png" alt="iam-new-user-new-group" /></li>
+      <li>Define a name and add a policy for the new group: <img src="/images/influxdb/aws_cloudformation/influxdb-aws-iam-group-permissions.png" alt="iam-new-group" /></li>
+      <li>At the end of the process you will see your access details: <img src="/images/influxdb/aws_cloudformation/influxdb-aws-iam-new-user-success.png" alt="iam-new-user-success" /></li>
+    </ol>
 
-<p><img src="/images/influxdb/influxdb-aws-region.png" alt="aws region select" /></p>
+    <p>Note that AWS does not save your secret after you close your final screen. On the other hand, you will always be able to create a new key for your users.</p>
+  </li>
+  <li>
+    <p>Install the AWS CLI on your system.</p>
 
-<ol>
-  <li>Create a new EC2 instance (Please not that it may take up to 24 hours for amazon to activate).</li>
-</ol>
+    <p>On a linux machine, you can do this as here:</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="s2">"https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"</span> <span class="nt">-o</span> <span class="s2">"awscliv2.zip"</span>
+unzip awscliv2.zip
+<span class="nb">sudo</span> ./aws/install
+</code></pre></div>    </div>
 
-<p><img src="/images/influxdb/influxdb-aws-ec2-select.png" alt="aws ec2 select" /></p>
+    <p>Verify your version:</p>
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aws <span class="nt">--version</span>
+</code></pre></div>    </div>
 
-<ol>
-  <li>Select <strong>Key Pairs</strong> and the create a key pair</li>
-  <li>Download keys</li>
-  <li>Make the key readable only by the owner: <code class="highlighter-rouge">chmod 400 influx_private.pem</code></li>
-  <li>Open <strong>IAM</strong> in <strong>Security</strong> section of the <strong>Services menu</strong>.</li>
-  <li>Create a user and grant permissions to it.</li>
-  <li>Generate and access key ID and a secred for the AWS command line interface.</li>
+    <p>For further instructions <a href="https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html">see here</a>.</p>
+  </li>
+  <li>
+    <p>Also create a folder where you will store your keys and your yaml configuration.</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> ~/Projects/influxdb_aws_cloudformation
+<span class="nb">cd</span> ~/Projects/influxdb_aws_cloudformation
+<span class="nb">mv</span> ~/Downloads/name-of-the-key.pem <span class="nb">.</span>
+<span class="nb">touch </span>config.yml
+</code></pre></div>    </div>
+  </li>
+  <li>Configure AWS with <code class="highlighter-rouge">aws configure</code>. This is where you need to add your <strong>Access Key ID</strong>, your <strong>Secret Access Key</strong>, and the <strong>region name</strong> (e.g. <code class="highlighter-rouge">eu-central-1</code>). You can skip the output format.</li>
 </ol>
 
   </div><a class="u-url" href="/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup.html" hidden></a>
