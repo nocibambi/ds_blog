@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://andrasnovoszath.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://andrasnovoszath.com/" rel="alternate" type="text/html" /><updated>2020-11-19T00:42:10-06:00</updated><id>https://andrasnovoszath.com/feed.xml</id><title type="html">Value this</title><subtitle>This is not another blog about bitcoin.</subtitle><entry><title type="html">Setting up AWS Cloud for InfluxDB</title><link href="https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup.html" rel="alternate" type="text/html" title="Setting up AWS Cloud for InfluxDB" /><published>2020-11-18T00:00:00-06:00</published><updated>2020-11-18T00:00:00-06:00</updated><id>https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup</id><content type="html" xml:base="https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup.html">&lt;p&gt;Here are the preparation steps you need to do if you would like to use AWS Cloudwatcher with InfluxDB.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://andrasnovoszath.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://andrasnovoszath.com/" rel="alternate" type="text/html" /><updated>2020-11-19T00:47:08-06:00</updated><id>https://andrasnovoszath.com/feed.xml</id><title type="html">Value this</title><subtitle>This is not another blog about bitcoin.</subtitle><entry><title type="html">Setting up AWS Cloud for InfluxDB</title><link href="https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup.html" rel="alternate" type="text/html" title="Setting up AWS Cloud for InfluxDB" /><published>2020-11-18T00:00:00-06:00</published><updated>2020-11-18T00:00:00-06:00</updated><id>https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup</id><content type="html" xml:base="https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup.html">&lt;p&gt;Here are the preparation steps you need to do if you would like to use AWS Cloudwatcher with InfluxDB.&lt;/p&gt;
 
 &lt;p&gt;Based on this &lt;a href=&quot;https://www.influxdata.com/blog/running-influxdb-on-aws-with-cloud-formation/&quot;&gt;post&lt;/a&gt;&lt;/p&gt;
 
@@ -27,13 +27,15 @@
     &lt;p&gt;Install the AWS CLI on your system.&lt;/p&gt;
 
     &lt;p&gt;On a linux machine, you can do this as here:&lt;/p&gt;
-    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;curl &lt;span class=&quot;s2&quot;&gt;&quot;https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;awscliv2.zip&quot;&lt;/span&gt;
-unzip awscliv2.zip
-&lt;span class=&quot;nb&quot;&gt;sudo&lt;/span&gt; ./aws/install
+
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; curl &lt;span class=&quot;s2&quot;&gt;&quot;https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;awscliv2.zip&quot;&lt;/span&gt;
+ unzip awscliv2.zip
+ &lt;span class=&quot;nb&quot;&gt;sudo&lt;/span&gt; ./aws/install
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
 
     &lt;p&gt;Verify your version:&lt;/p&gt;
-    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;aws &lt;span class=&quot;nt&quot;&gt;--version&lt;/span&gt;
+
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; aws &lt;span class=&quot;nt&quot;&gt;--version&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
 
     &lt;p&gt;For further instructions &lt;a href=&quot;https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html&quot;&gt;see here&lt;/a&gt;.&lt;/p&gt;
@@ -41,10 +43,10 @@ unzip awscliv2.zip
   &lt;li&gt;
     &lt;p&gt;Also create a folder where you will store your keys and your yaml configuration.&lt;/p&gt;
 
-    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;mkdir&lt;/span&gt; ~/Projects/influxdb_aws_cloudformation
-&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/Projects/influxdb_aws_cloudformation
-&lt;span class=&quot;nb&quot;&gt;mv&lt;/span&gt; ~/Downloads/name-of-the-key.pem &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;touch &lt;/span&gt;config.yml
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nb&quot;&gt;mkdir&lt;/span&gt; ~/Projects/influxdb_aws_cloudformation
+ &lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/Projects/influxdb_aws_cloudformation
+ &lt;span class=&quot;nb&quot;&gt;mv&lt;/span&gt; ~/Downloads/name-of-the-key.pem &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+ &lt;span class=&quot;nb&quot;&gt;touch &lt;/span&gt;config.yml
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;Configure AWS with &lt;code class=&quot;highlighter-rouge&quot;&gt;aws configure&lt;/code&gt;. This is where you need to add your &lt;strong&gt;Access Key ID&lt;/strong&gt;, your &lt;strong&gt;Secret Access Key&lt;/strong&gt;, and the &lt;strong&gt;region name&lt;/strong&gt; (e.g. &lt;code class=&quot;highlighter-rouge&quot;&gt;eu-central-1&lt;/code&gt;). You can skip the output format.&lt;/li&gt;

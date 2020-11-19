@@ -167,13 +167,15 @@ window.onload = wrap_img;
     <p>Install the AWS CLI on your system.</p>
 
     <p>On a linux machine, you can do this as here:</p>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="s2">"https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"</span> <span class="nt">-o</span> <span class="s2">"awscliv2.zip"</span>
-unzip awscliv2.zip
-<span class="nb">sudo</span> ./aws/install
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> curl <span class="s2">"https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"</span> <span class="nt">-o</span> <span class="s2">"awscliv2.zip"</span>
+ unzip awscliv2.zip
+ <span class="nb">sudo</span> ./aws/install
 </code></pre></div>    </div>
 
     <p>Verify your version:</p>
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aws <span class="nt">--version</span>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> aws <span class="nt">--version</span>
 </code></pre></div>    </div>
 
     <p>For further instructions <a href="https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html">see here</a>.</p>
@@ -181,10 +183,10 @@ unzip awscliv2.zip
   <li>
     <p>Also create a folder where you will store your keys and your yaml configuration.</p>
 
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> ~/Projects/influxdb_aws_cloudformation
-<span class="nb">cd</span> ~/Projects/influxdb_aws_cloudformation
-<span class="nb">mv</span> ~/Downloads/name-of-the-key.pem <span class="nb">.</span>
-<span class="nb">touch </span>config.yml
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">mkdir</span> ~/Projects/influxdb_aws_cloudformation
+ <span class="nb">cd</span> ~/Projects/influxdb_aws_cloudformation
+ <span class="nb">mv</span> ~/Downloads/name-of-the-key.pem <span class="nb">.</span>
+ <span class="nb">touch </span>config.yml
 </code></pre></div>    </div>
   </li>
   <li>Configure AWS with <code class="highlighter-rouge">aws configure</code>. This is where you need to add your <strong>Access Key ID</strong>, your <strong>Secret Access Key</strong>, and the <strong>region name</strong> (e.g. <code class="highlighter-rouge">eu-central-1</code>). You can skip the output format.</li>
