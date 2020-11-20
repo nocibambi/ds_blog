@@ -142,6 +142,8 @@ window.onload = wrap_img;
 
 <p>Based on this <a href="https://www.influxdata.com/blog/running-influxdb-on-aws-with-cloud-formation/">post</a></p>
 
+<h2 id="setting-up-an-ec2-virtual-server">Setting up an EC2 virtual server</h2>
+
 <ol>
   <li><a href="https://aws.amazon.com/free/">Create an AWS account</a></li>
   <li>Select the appropriate region:
@@ -151,10 +153,10 @@ window.onload = wrap_img;
   <li>Select <strong>Key Pairs</strong> and the create a key pair: <img src="/images/influxdb/aws_cloudformation/influxdb-aws-ec2-key-pairs-menu.png" alt="key-pairs" /></li>
   <li>Download the keys.</li>
   <li>Make the key readable only by the owner: <code class="highlighter-rouge">chmod 400 name-of-the-key.pem</code></li>
-  <li>Open <strong>IAM</strong> from the <strong>Services menu</strong>: <img src="/images/influxdb/aws_cloudformation/screenshot-eu-central-1.console.aws.amazon.com-2020.11.19-06_05_58.png" alt="open-aim" /></li>
+  <li>Open <strong>IAM</strong> from the <strong>Services menu</strong>: <img src="/images/influxdb/aws_cloudformation/infludb-aws-select-iam.png" alt="open-aim" /></li>
   <li>Create a user and grant permissions to it:
     <ol>
-      <li>Select <strong>Add user</strong>: <img src="/images/influxdb/aws_cloudformation/screenshot-console.aws.amazon.com-2020.11.19-06_11_48.png" alt="iam-new-user" /></li>
+      <li>Select <strong>Add user</strong>: <img src="/images/influxdb/aws_cloudformation/infludb-aws-iam-create-user.png" alt="iam-new-user" /></li>
       <li>Name the user and add access rights: <img src="/images/influxdb/aws_cloudformation/influxdb-aws-iam-new-user-access.png" alt="iam-new-user-access" /></li>
       <li>On the <strong>Set Permissions</strong> screen click on <strong>Add user to group</strong> and <strong>Create a group</strong>: <img src="/images/influxdb/aws_cloudformation/influxdb-aws-iam-new-user-create-group.png" alt="iam-new-user-new-group" /></li>
       <li>Define a name and add a policy for the new group: <img src="/images/influxdb/aws_cloudformation/influxdb-aws-iam-group-permissions.png" alt="iam-new-group" /></li>
@@ -191,6 +193,49 @@ window.onload = wrap_img;
   </li>
   <li>Configure AWS with <code class="highlighter-rouge">aws configure</code>. This is where you need to add your <strong>Access Key ID</strong>, your <strong>Secret Access Key</strong>, and the <strong>region name</strong> (e.g. <code class="highlighter-rouge">eu-central-1</code>). You can skip the output format.</li>
 </ol>
+
+<h2 id="stack-definition">Stack definition</h2>
+
+<p>Resources
+Logical ID
+Instance properties
+AMI (Amazon Machine Image) ID</p>
+
+<h2 id="amazon-machine-image">Amazon Machine Image</h2>
+
+<p>Open the <a href="https://aws.amazon.com/marketplace/">Amazon AWS Marketplace</a>.</p>
+
+<p>Find a public image</p>
+
+<p><img src="/images/influxdb/2020-11-20-influxdb-aws-find-public-image.png" alt="Find public image" /></p>
+
+<h2 id="instance">Instance</h2>
+
+<p><img src="/images/influxdb/2020-11-20-influxdb-aws-register-new-ami.png" alt="Register a new Amazon Machine Image" /></p>
+
+<p><img src="/images/influxdb/2020-11-20-influxdb-aws-open-marketplace.png" alt="Open AWS Marketplace" /></p>
+
+<p><img src="/images/influxdb/2020-11-20-influxdb-aws-select-ubuntu.png" alt="Select Ubuntu Image" /></p>
+
+<p><img src="/images/influxdb/2020-11-20-influxdb-aws-subscribe-ami.png" alt="Subscribe AMI" /></p>
+<ul>
+  <li><strong>Continue to Configuration</strong>: <img src="/images/influxdb/2020-11-20-influxdb-aws-terms-conditions.png" alt="Terms and Conditions" /></li>
+  <li><img src="/images/influxdb/2020-11-20-influxdb-aws-configure-ami.png" alt="Configure AMI" /></li>
+  <li><img src="/images/influxdb/2020-11-20-influxdb-aws-launch-instance.png" alt="Launch Instance" /></li>
+  <li><img src="/images/influxdb/2020-11-20-influxdb-aws-instance-type.png" alt="Instance Type" /></li>
+  <li><img src="/images/influxdb/2020-11-20-influxdb-aws-launc-instance.png" alt="Launch Instance" /></li>
+  <li><img src="/images/influxdb/2020-11-20-influxdb-aws-select-key-pair.png" alt="Select Key Pair" /></li>
+  <li><img src="/images/influxdb/2020-11-20-influxdb-aws-instance-end.png" alt="Instance Launch Screen" /></li>
+  <li></li>
+</ul>
+
+<p>Security group</p>
+
+<ul>
+  <li>virtual firewall</li>
+  <li>intrinsic reference</li>
+</ul>
+
 
   </div><a class="u-url" href="/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup.html" hidden></a>
 </article>

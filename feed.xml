@@ -1,6 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://andrasnovoszath.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://andrasnovoszath.com/" rel="alternate" type="text/html" /><updated>2020-11-19T00:47:08-06:00</updated><id>https://andrasnovoszath.com/feed.xml</id><title type="html">Value this</title><subtitle>This is not another blog about bitcoin.</subtitle><entry><title type="html">Setting up AWS Cloud for InfluxDB</title><link href="https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup.html" rel="alternate" type="text/html" title="Setting up AWS Cloud for InfluxDB" /><published>2020-11-18T00:00:00-06:00</published><updated>2020-11-18T00:00:00-06:00</updated><id>https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup</id><content type="html" xml:base="https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup.html">&lt;p&gt;Here are the preparation steps you need to do if you would like to use AWS Cloudwatcher with InfluxDB.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://andrasnovoszath.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://andrasnovoszath.com/" rel="alternate" type="text/html" /><updated>2020-11-20T00:41:40-06:00</updated><id>https://andrasnovoszath.com/feed.xml</id><title type="html">Value this</title><subtitle>This is not another blog about bitcoin.</subtitle><entry><title type="html">Setting up AWS Cloud for InfluxDB</title><link href="https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup.html" rel="alternate" type="text/html" title="Setting up AWS Cloud for InfluxDB" /><published>2020-11-18T00:00:00-06:00</published><updated>2020-11-18T00:00:00-06:00</updated><id>https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup</id><content type="html" xml:base="https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup.html">&lt;p&gt;Here are the preparation steps you need to do if you would like to use AWS Cloudwatcher with InfluxDB.&lt;/p&gt;
 
 &lt;p&gt;Based on this &lt;a href=&quot;https://www.influxdata.com/blog/running-influxdb-on-aws-with-cloud-formation/&quot;&gt;post&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;setting-up-an-ec2-virtual-server&quot;&gt;Setting up an EC2 virtual server&lt;/h2&gt;
 
 &lt;ol&gt;
   &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/free/&quot;&gt;Create an AWS account&lt;/a&gt;&lt;/li&gt;
@@ -11,10 +13,10 @@
   &lt;li&gt;Select &lt;strong&gt;Key Pairs&lt;/strong&gt; and the create a key pair: &lt;img src=&quot;/images/influxdb/aws_cloudformation/influxdb-aws-ec2-key-pairs-menu.png&quot; alt=&quot;key-pairs&quot; /&gt;&lt;/li&gt;
   &lt;li&gt;Download the keys.&lt;/li&gt;
   &lt;li&gt;Make the key readable only by the owner: &lt;code class=&quot;highlighter-rouge&quot;&gt;chmod 400 name-of-the-key.pem&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Open &lt;strong&gt;IAM&lt;/strong&gt; from the &lt;strong&gt;Services menu&lt;/strong&gt;: &lt;img src=&quot;/images/influxdb/aws_cloudformation/screenshot-eu-central-1.console.aws.amazon.com-2020.11.19-06_05_58.png&quot; alt=&quot;open-aim&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;Open &lt;strong&gt;IAM&lt;/strong&gt; from the &lt;strong&gt;Services menu&lt;/strong&gt;: &lt;img src=&quot;/images/influxdb/aws_cloudformation/infludb-aws-select-iam.png&quot; alt=&quot;open-aim&quot; /&gt;&lt;/li&gt;
   &lt;li&gt;Create a user and grant permissions to it:
     &lt;ol&gt;
-      &lt;li&gt;Select &lt;strong&gt;Add user&lt;/strong&gt;: &lt;img src=&quot;/images/influxdb/aws_cloudformation/screenshot-console.aws.amazon.com-2020.11.19-06_11_48.png&quot; alt=&quot;iam-new-user&quot; /&gt;&lt;/li&gt;
+      &lt;li&gt;Select &lt;strong&gt;Add user&lt;/strong&gt;: &lt;img src=&quot;/images/influxdb/aws_cloudformation/infludb-aws-iam-create-user.png&quot; alt=&quot;iam-new-user&quot; /&gt;&lt;/li&gt;
       &lt;li&gt;Name the user and add access rights: &lt;img src=&quot;/images/influxdb/aws_cloudformation/influxdb-aws-iam-new-user-access.png&quot; alt=&quot;iam-new-user-access&quot; /&gt;&lt;/li&gt;
       &lt;li&gt;On the &lt;strong&gt;Set Permissions&lt;/strong&gt; screen click on &lt;strong&gt;Add user to group&lt;/strong&gt; and &lt;strong&gt;Create a group&lt;/strong&gt;: &lt;img src=&quot;/images/influxdb/aws_cloudformation/influxdb-aws-iam-new-user-create-group.png&quot; alt=&quot;iam-new-user-new-group&quot; /&gt;&lt;/li&gt;
       &lt;li&gt;Define a name and add a policy for the new group: &lt;img src=&quot;/images/influxdb/aws_cloudformation/influxdb-aws-iam-group-permissions.png&quot; alt=&quot;iam-new-group&quot; /&gt;&lt;/li&gt;
@@ -50,7 +52,49 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;Configure AWS with &lt;code class=&quot;highlighter-rouge&quot;&gt;aws configure&lt;/code&gt;. This is where you need to add your &lt;strong&gt;Access Key ID&lt;/strong&gt;, your &lt;strong&gt;Secret Access Key&lt;/strong&gt;, and the &lt;strong&gt;region name&lt;/strong&gt; (e.g. &lt;code class=&quot;highlighter-rouge&quot;&gt;eu-central-1&lt;/code&gt;). You can skip the output format.&lt;/li&gt;
-&lt;/ol&gt;</content><author><name></name></author><summary type="html">Here are the preparation steps you need to do if you would like to use AWS Cloudwatcher with InfluxDB.</summary></entry><entry><title type="html">Grouping data with Flux in InfluxDB</title><link href="https://andrasnovoszath.com/influxdb/flux/time-series/2020/11/17/influxdb-flux-group.html" rel="alternate" type="text/html" title="Grouping data with Flux in InfluxDB" /><published>2020-11-17T00:00:00-06:00</published><updated>2020-11-17T00:00:00-06:00</updated><id>https://andrasnovoszath.com/influxdb/flux/time-series/2020/11/17/influxdb-flux-group</id><content type="html" xml:base="https://andrasnovoszath.com/influxdb/flux/time-series/2020/11/17/influxdb-flux-group.html">&lt;p&gt;Grouping happens based on &lt;strong&gt;group keys&lt;/strong&gt; which effectilve are the name of columns used for the grouping. A group then consists of rows having identical values in the group key columns.&lt;/p&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;stack-definition&quot;&gt;Stack definition&lt;/h2&gt;
+
+&lt;p&gt;Resources
+Logical ID
+Instance properties
+AMI (Amazon Machine Image) ID&lt;/p&gt;
+
+&lt;h2 id=&quot;amazon-machine-image&quot;&gt;Amazon Machine Image&lt;/h2&gt;
+
+&lt;p&gt;Open the &lt;a href=&quot;https://aws.amazon.com/marketplace/&quot;&gt;Amazon AWS Marketplace&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Find a public image&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-find-public-image.png&quot; alt=&quot;Find public image&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;instance&quot;&gt;Instance&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-register-new-ami.png&quot; alt=&quot;Register a new Amazon Machine Image&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-open-marketplace.png&quot; alt=&quot;Open AWS Marketplace&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-select-ubuntu.png&quot; alt=&quot;Select Ubuntu Image&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-subscribe-ami.png&quot; alt=&quot;Subscribe AMI&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Continue to Configuration&lt;/strong&gt;: &lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-terms-conditions.png&quot; alt=&quot;Terms and Conditions&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-configure-ami.png&quot; alt=&quot;Configure AMI&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-launch-instance.png&quot; alt=&quot;Launch Instance&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-instance-type.png&quot; alt=&quot;Instance Type&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-launc-instance.png&quot; alt=&quot;Launch Instance&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-select-key-pair.png&quot; alt=&quot;Select Key Pair&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-instance-end.png&quot; alt=&quot;Instance Launch Screen&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Security group&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;virtual firewall&lt;/li&gt;
+  &lt;li&gt;intrinsic reference&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><summary type="html">Here are the preparation steps you need to do if you would like to use AWS Cloudwatcher with InfluxDB.</summary></entry><entry><title type="html">Grouping data with Flux in InfluxDB</title><link href="https://andrasnovoszath.com/influxdb/flux/time-series/2020/11/17/influxdb-flux-group.html" rel="alternate" type="text/html" title="Grouping data with Flux in InfluxDB" /><published>2020-11-17T00:00:00-06:00</published><updated>2020-11-17T00:00:00-06:00</updated><id>https://andrasnovoszath.com/influxdb/flux/time-series/2020/11/17/influxdb-flux-group</id><content type="html" xml:base="https://andrasnovoszath.com/influxdb/flux/time-series/2020/11/17/influxdb-flux-group.html">&lt;p&gt;Grouping happens based on &lt;strong&gt;group keys&lt;/strong&gt; which effectilve are the name of columns used for the grouping. A group then consists of rows having identical values in the group key columns.&lt;/p&gt;
 
 &lt;h2 id=&quot;example&quot;&gt;Example&lt;/h2&gt;
 
