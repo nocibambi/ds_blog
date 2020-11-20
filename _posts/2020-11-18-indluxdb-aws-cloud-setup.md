@@ -9,6 +9,8 @@ Here are the preparation steps you need to do if you would like to use AWS Cloud
 
 Based on this [post](https://www.influxdata.com/blog/running-influxdb-on-aws-with-cloud-formation/)
 
+## Setting up an EC2 virtual server
+
 1. [Create an AWS account](https://aws.amazon.com/free/)
 1. Select the appropriate region:
     ![aws region select](/images/influxdb/aws_cloudformation/influxdb-aws-region.png)
@@ -17,9 +19,9 @@ Based on this [post](https://www.influxdata.com/blog/running-influxdb-on-aws-wit
 1. Select **Key Pairs** and the create a key pair: ![key-pairs](/images/influxdb/aws_cloudformation/influxdb-aws-ec2-key-pairs-menu.png)
 1. Download the keys.
 1. Make the key readable only by the owner: `chmod 400 name-of-the-key.pem`
-1. Open **IAM** from the **Services menu**: ![open-aim](/images/influxdb/aws_cloudformation/screenshot-eu-central-1.console.aws.amazon.com-2020.11.19-06_05_58.png)
+1. Open **IAM** from the **Services menu**: ![open-aim](/images/influxdb/aws_cloudformation/infludb-aws-select-iam.png)
 1. Create a user and grant permissions to it:
-    1. Select **Add user**: ![iam-new-user](/images/influxdb/aws_cloudformation/screenshot-console.aws.amazon.com-2020.11.19-06_11_48.png)
+    1. Select **Add user**: ![iam-new-user](/images/influxdb/aws_cloudformation/infludb-aws-iam-create-user.png)
     2. Name the user and add access rights: ![iam-new-user-access](/images/influxdb/aws_cloudformation/influxdb-aws-iam-new-user-access.png)
     3. On the **Set Permissions** screen click on **Add user to group** and **Create a group**: ![iam-new-user-new-group](/images/influxdb/aws_cloudformation/influxdb-aws-iam-new-user-create-group.png)
     4. Define a name and add a policy for the new group: ![iam-new-group](/images/influxdb/aws_cloudformation/influxdb-aws-iam-group-permissions.png)
@@ -54,3 +56,50 @@ Based on this [post](https://www.influxdata.com/blog/running-influxdb-on-aws-wit
     ```
 
 1. Configure AWS with `aws configure`. This is where you need to add your **Access Key ID**, your **Secret Access Key**, and the **region name** (e.g. `eu-central-1`). You can skip the output format.
+
+## Stack definition
+
+Resources
+Logical ID
+Instance properties
+AMI (Amazon Machine Image) ID
+
+
+## Amazon Machine Image
+
+Open the [Amazon AWS Marketplace](https://aws.amazon.com/marketplace/).
+
+Find a public image
+
+![Find public image](/images/influxdb/2020-11-20-influxdb-aws-find-public-image.png)
+
+## Instance
+
+![Register a new Amazon Machine Image](/images/influxdb/2020-11-20-influxdb-aws-register-new-ami.png)
+
+
+![Open AWS Marketplace](/images/influxdb/2020-11-20-influxdb-aws-open-marketplace.png)
+
+
+![Select Ubuntu Image](/images/influxdb/2020-11-20-influxdb-aws-select-ubuntu.png)
+
+![Subscribe AMI](/images/influxdb/2020-11-20-influxdb-aws-subscribe-ami.png)
+- **Continue to Configuration**: ![Terms and Conditions](/images/influxdb/2020-11-20-influxdb-aws-terms-conditions.png)
+- ![Configure AMI](/images/influxdb/2020-11-20-influxdb-aws-configure-ami.png)
+- ![Launch Instance](/images/influxdb/2020-11-20-influxdb-aws-launch-instance.png)
+- ![Instance Type](/images/influxdb/2020-11-20-influxdb-aws-instance-type.png)
+- ![Launch Instance](/images/influxdb/2020-11-20-influxdb-aws-launc-instance.png)
+- ![Select Key Pair](/images/influxdb/2020-11-20-influxdb-aws-select-key-pair.png)
+- ![Instance Launch Screen](/images/influxdb/2020-11-20-influxdb-aws-instance-end.png)
+- 
+
+
+
+
+
+
+Security group
+
+- virtual firewall
+- intrinsic reference
+
