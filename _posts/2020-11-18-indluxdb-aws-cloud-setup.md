@@ -57,13 +57,6 @@ Based on this [post](https://www.influxdata.com/blog/running-influxdb-on-aws-wit
 
 1. Configure AWS with `aws configure`. This is where you need to add your **Access Key ID**, your **Secret Access Key**, and the **region name** (e.g. `eu-central-1`). You can skip the output format.
 
-## Stack definition
-
-Resources
-Logical ID
-Instance properties
-AMI (Amazon Machine Image) ID
-
 
 ## Amazon Machine Image
 
@@ -73,17 +66,68 @@ Find a public image
 
 ![Find public image](/images/influxdb/2020-11-20-influxdb-aws-find-public-image.png)
 
+## Defining resources
+
+Resources
+Logical ID
+Instance properties
+AMI (Amazon Machine Image) ID
+
+
+```yaml
+Resources:
+  Appnode:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.nano
+      ImageId: ami-06a719e5f8e22c33b # The AMI instance ID
+      Keyname: InfluxDB_AWS_example # The name of your key pair
+      SecurityGroups:
+        - !Ref AppnodeSecurityGroup # Reference the security group defined below
+```
+
+You need to define a security group. Security groups act as virtual firewalls for your incoming/outgoing traffic with the help of rules. You can read more about them [here](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-security-groups.html). Here, we define an [inbound security group](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-ingress.html). For particular rules, [see here](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SecurityGroupRules).
+
+We define the security group and link it to our app node definition with the [`Ref` function](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-ref.html).
+
+```yaml
+# Define the security group
+AppnodeSecurityGroup:
+  Type: AWS::EC2::SecurityGroup
+  Properties:
+    GroupDescription: SSH enabled app nodes
+    # Inbound security rule
+    # Expose the HTTP port 80 with tcp to inbound traffic from andy Ipv4 addresses
+    SecurityGroupIngress:
+      - IpProtocol: tcp 
+        FromPort: '80'
+        ToPort: '80'
+        CidrIp: 0.0.0.0/0
+```
+
+Define Bash script to install docker and influxdb on the image.
+
+
+
+Create stack
+
+```shell
+aws cloudformation create-stack \
+    --stack-name influxdb-trial-stack \
+    --region eu-central-1 \
+    --template-body stack.yml
+```
+
 ## Instance
 
 ![Register a new Amazon Machine Image](/images/influxdb/2020-11-20-influxdb-aws-register-new-ami.png)
 
-
 ![Open AWS Marketplace](/images/influxdb/2020-11-20-influxdb-aws-open-marketplace.png)
-
 
 ![Select Ubuntu Image](/images/influxdb/2020-11-20-influxdb-aws-select-ubuntu.png)
 
 ![Subscribe AMI](/images/influxdb/2020-11-20-influxdb-aws-subscribe-ami.png)
+
 - **Continue to Configuration**: ![Terms and Conditions](/images/influxdb/2020-11-20-influxdb-aws-terms-conditions.png)
 - ![Configure AMI](/images/influxdb/2020-11-20-influxdb-aws-configure-ami.png)
 - ![Launch Instance](/images/influxdb/2020-11-20-influxdb-aws-launch-instance.png)
@@ -91,15 +135,10 @@ Find a public image
 - ![Launch Instance](/images/influxdb/2020-11-20-influxdb-aws-launc-instance.png)
 - ![Select Key Pair](/images/influxdb/2020-11-20-influxdb-aws-select-key-pair.png)
 - ![Instance Launch Screen](/images/influxdb/2020-11-20-influxdb-aws-instance-end.png)
-- 
 
-
-
-
-
+-
 
 Security group
 
 - virtual firewall
 - intrinsic reference
-
