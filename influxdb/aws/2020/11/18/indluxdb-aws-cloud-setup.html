@@ -119,7 +119,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      1 min read
+      2 min read
     
 </span></p>
 
@@ -194,13 +194,6 @@ window.onload = wrap_img;
   <li>Configure AWS with <code class="highlighter-rouge">aws configure</code>. This is where you need to add your <strong>Access Key ID</strong>, your <strong>Secret Access Key</strong>, and the <strong>region name</strong> (e.g. <code class="highlighter-rouge">eu-central-1</code>). You can skip the output format.</li>
 </ol>
 
-<h2 id="stack-definition">Stack definition</h2>
-
-<p>Resources
-Logical ID
-Instance properties
-AMI (Amazon Machine Image) ID</p>
-
 <h2 id="amazon-machine-image">Amazon Machine Image</h2>
 
 <p>Open the <a href="https://aws.amazon.com/marketplace/">Amazon AWS Marketplace</a>.</p>
@@ -208,6 +201,52 @@ AMI (Amazon Machine Image) ID</p>
 <p>Find a public image</p>
 
 <p><img src="/images/influxdb/2020-11-20-influxdb-aws-find-public-image.png" alt="Find public image" /></p>
+
+<h2 id="defining-resources">Defining resources</h2>
+
+<p>Resources
+Logical ID
+Instance properties
+AMI (Amazon Machine Image) ID</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">Resources</span><span class="pi">:</span>
+  <span class="na">Appnode</span><span class="pi">:</span>
+    <span class="na">Type</span><span class="pi">:</span> <span class="s">AWS::EC2::Instance</span>
+    <span class="na">Properties</span><span class="pi">:</span>
+      <span class="na">InstanceType</span><span class="pi">:</span> <span class="s">t2.nano</span>
+      <span class="na">ImageId</span><span class="pi">:</span> <span class="s">ami-06a719e5f8e22c33b</span> <span class="c1"># The AMI instance ID</span>
+      <span class="na">Keyname</span><span class="pi">:</span> <span class="s">InfluxDB_AWS_example</span> <span class="c1"># The name of your key pair</span>
+      <span class="na">SecurityGroups</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="kt">!Ref</span> <span class="s">AppnodeSecurityGroup</span> <span class="c1"># Reference the security group defined below</span>
+</code></pre></div></div>
+
+<p>You need to define a security group. Security groups act as virtual firewalls for your incoming/outgoing traffic with the help of rules. You can read more about them <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-security-groups.html">here</a>. Here, we define an <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-ingress.html">inbound security group</a>. For particular rules, <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SecurityGroupRules">see here</a>.</p>
+
+<p>We define the security group and link it to our app node definition with the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-ref.html"><code class="highlighter-rouge">Ref</code> function</a>.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Define the security group</span>
+<span class="na">AppnodeSecurityGroup</span><span class="pi">:</span>
+  <span class="na">Type</span><span class="pi">:</span> <span class="s">AWS::EC2::SecurityGroup</span>
+  <span class="na">Properties</span><span class="pi">:</span>
+    <span class="na">GroupDescription</span><span class="pi">:</span> <span class="s">SSH enabled app nodes</span>
+    <span class="c1"># Inbound security rule</span>
+    <span class="c1"># Expose the HTTP port 80 with tcp to inbound traffic from andy Ipv4 addresses</span>
+    <span class="na">SecurityGroupIngress</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">IpProtocol</span><span class="pi">:</span> <span class="s">tcp</span> 
+        <span class="na">FromPort</span><span class="pi">:</span> <span class="s1">'</span><span class="s">80'</span>
+        <span class="na">ToPort</span><span class="pi">:</span> <span class="s1">'</span><span class="s">80'</span>
+        <span class="na">CidrIp</span><span class="pi">:</span> <span class="s">0.0.0.0/0</span>
+</code></pre></div></div>
+
+<p>Define Bash script to install docker and influxdb on the image.</p>
+
+<p>Create stack</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aws cloudformation create-stack <span class="se">\</span>
+    <span class="nt">--stack-name</span> influxdb-trial-stack <span class="se">\</span>
+    <span class="nt">--region</span> eu-central-1 <span class="se">\</span>
+    <span class="nt">--template-body</span> stack.yml
+</code></pre></div></div>
 
 <h2 id="instance">Instance</h2>
 
@@ -218,6 +257,7 @@ AMI (Amazon Machine Image) ID</p>
 <p><img src="/images/influxdb/2020-11-20-influxdb-aws-select-ubuntu.png" alt="Select Ubuntu Image" /></p>
 
 <p><img src="/images/influxdb/2020-11-20-influxdb-aws-subscribe-ami.png" alt="Subscribe AMI" /></p>
+
 <ul>
   <li><strong>Continue to Configuration</strong>: <img src="/images/influxdb/2020-11-20-influxdb-aws-terms-conditions.png" alt="Terms and Conditions" /></li>
   <li><img src="/images/influxdb/2020-11-20-influxdb-aws-configure-ami.png" alt="Configure AMI" /></li>
@@ -226,8 +266,9 @@ AMI (Amazon Machine Image) ID</p>
   <li><img src="/images/influxdb/2020-11-20-influxdb-aws-launc-instance.png" alt="Launch Instance" /></li>
   <li><img src="/images/influxdb/2020-11-20-influxdb-aws-select-key-pair.png" alt="Select Key Pair" /></li>
   <li><img src="/images/influxdb/2020-11-20-influxdb-aws-instance-end.png" alt="Instance Launch Screen" /></li>
-  <li></li>
 </ul>
+
+<p>-</p>
 
 <p>Security group</p>
 
@@ -235,7 +276,6 @@ AMI (Amazon Machine Image) ID</p>
   <li>virtual firewall</li>
   <li>intrinsic reference</li>
 </ul>
-
 
   </div><a class="u-url" href="/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup.html" hidden></a>
 </article>

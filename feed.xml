@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://andrasnovoszath.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://andrasnovoszath.com/" rel="alternate" type="text/html" /><updated>2020-11-20T00:41:40-06:00</updated><id>https://andrasnovoszath.com/feed.xml</id><title type="html">Value this</title><subtitle>This is not another blog about bitcoin.</subtitle><entry><title type="html">Setting up AWS Cloud for InfluxDB</title><link href="https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup.html" rel="alternate" type="text/html" title="Setting up AWS Cloud for InfluxDB" /><published>2020-11-18T00:00:00-06:00</published><updated>2020-11-18T00:00:00-06:00</updated><id>https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup</id><content type="html" xml:base="https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup.html">&lt;p&gt;Here are the preparation steps you need to do if you would like to use AWS Cloudwatcher with InfluxDB.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://andrasnovoszath.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://andrasnovoszath.com/" rel="alternate" type="text/html" /><updated>2020-11-21T00:04:59-06:00</updated><id>https://andrasnovoszath.com/feed.xml</id><title type="html">Value this</title><subtitle>This is not another blog about bitcoin.</subtitle><entry><title type="html">Setting up AWS Cloud for InfluxDB</title><link href="https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup.html" rel="alternate" type="text/html" title="Setting up AWS Cloud for InfluxDB" /><published>2020-11-18T00:00:00-06:00</published><updated>2020-11-18T00:00:00-06:00</updated><id>https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup</id><content type="html" xml:base="https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup.html">&lt;p&gt;Here are the preparation steps you need to do if you would like to use AWS Cloudwatcher with InfluxDB.&lt;/p&gt;
 
 &lt;p&gt;Based on this &lt;a href=&quot;https://www.influxdata.com/blog/running-influxdb-on-aws-with-cloud-formation/&quot;&gt;post&lt;/a&gt;&lt;/p&gt;
 
@@ -54,13 +54,6 @@
   &lt;li&gt;Configure AWS with &lt;code class=&quot;highlighter-rouge&quot;&gt;aws configure&lt;/code&gt;. This is where you need to add your &lt;strong&gt;Access Key ID&lt;/strong&gt;, your &lt;strong&gt;Secret Access Key&lt;/strong&gt;, and the &lt;strong&gt;region name&lt;/strong&gt; (e.g. &lt;code class=&quot;highlighter-rouge&quot;&gt;eu-central-1&lt;/code&gt;). You can skip the output format.&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&quot;stack-definition&quot;&gt;Stack definition&lt;/h2&gt;
-
-&lt;p&gt;Resources
-Logical ID
-Instance properties
-AMI (Amazon Machine Image) ID&lt;/p&gt;
-
 &lt;h2 id=&quot;amazon-machine-image&quot;&gt;Amazon Machine Image&lt;/h2&gt;
 
 &lt;p&gt;Open the &lt;a href=&quot;https://aws.amazon.com/marketplace/&quot;&gt;Amazon AWS Marketplace&lt;/a&gt;.&lt;/p&gt;
@@ -68,6 +61,52 @@ AMI (Amazon Machine Image) ID&lt;/p&gt;
 &lt;p&gt;Find a public image&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-find-public-image.png&quot; alt=&quot;Find public image&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;defining-resources&quot;&gt;Defining resources&lt;/h2&gt;
+
+&lt;p&gt;Resources
+Logical ID
+Instance properties
+AMI (Amazon Machine Image) ID&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;Resources&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;Appnode&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;Type&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;AWS::EC2::Instance&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;Properties&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;InstanceType&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;t2.nano&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;ImageId&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ami-06a719e5f8e22c33b&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# The AMI instance ID&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;Keyname&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;InfluxDB_AWS_example&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# The name of your key pair&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;SecurityGroups&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;!Ref&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;AppnodeSecurityGroup&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# Reference the security group defined below&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;You need to define a security group. Security groups act as virtual firewalls for your incoming/outgoing traffic with the help of rules. You can read more about them &lt;a href=&quot;https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-security-groups.html&quot;&gt;here&lt;/a&gt;. Here, we define an &lt;a href=&quot;https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-ingress.html&quot;&gt;inbound security group&lt;/a&gt;. For particular rules, &lt;a href=&quot;https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SecurityGroupRules&quot;&gt;see here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;We define the security group and link it to our app node definition with the &lt;a href=&quot;https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-ref.html&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Ref&lt;/code&gt; function&lt;/a&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Define the security group&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;AppnodeSecurityGroup&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;Type&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;AWS::EC2::SecurityGroup&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;Properties&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;GroupDescription&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;SSH enabled app nodes&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Inbound security rule&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Expose the HTTP port 80 with tcp to inbound traffic from andy Ipv4 addresses&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;SecurityGroupIngress&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;IpProtocol&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;tcp&lt;/span&gt; 
+        &lt;span class=&quot;na&quot;&gt;FromPort&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;80'&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;ToPort&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;80'&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;CidrIp&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;0.0.0.0/0&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Define Bash script to install docker and influxdb on the image.&lt;/p&gt;
+
+&lt;p&gt;Create stack&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;aws cloudformation create-stack &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;--stack-name&lt;/span&gt; influxdb-trial-stack &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;--region&lt;/span&gt; eu-central-1 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;--template-body&lt;/span&gt; stack.yml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;instance&quot;&gt;Instance&lt;/h2&gt;
 
@@ -78,6 +117,7 @@ AMI (Amazon Machine Image) ID&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-select-ubuntu.png&quot; alt=&quot;Select Ubuntu Image&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-subscribe-ami.png&quot; alt=&quot;Subscribe AMI&quot; /&gt;&lt;/p&gt;
+
 &lt;ul&gt;
   &lt;li&gt;&lt;strong&gt;Continue to Configuration&lt;/strong&gt;: &lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-terms-conditions.png&quot; alt=&quot;Terms and Conditions&quot; /&gt;&lt;/li&gt;
   &lt;li&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-configure-ami.png&quot; alt=&quot;Configure AMI&quot; /&gt;&lt;/li&gt;
@@ -86,8 +126,9 @@ AMI (Amazon Machine Image) ID&lt;/p&gt;
   &lt;li&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-launc-instance.png&quot; alt=&quot;Launch Instance&quot; /&gt;&lt;/li&gt;
   &lt;li&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-select-key-pair.png&quot; alt=&quot;Select Key Pair&quot; /&gt;&lt;/li&gt;
   &lt;li&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-instance-end.png&quot; alt=&quot;Instance Launch Screen&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;p&gt;-&lt;/p&gt;
 
 &lt;p&gt;Security group&lt;/p&gt;
 
