@@ -108,15 +108,61 @@ AppnodeSecurityGroup:
 Define Bash script to install docker and influxdb on the image.
 
 
+The full yaml:
+
+```yaml
+Resources:
+  AppNode:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.nano
+      ImageId: ami-06a719e5f8e22c33b
+      KeyName: InfluxDB_AWS_example
+      SecurityGroups:
+        - !Ref AppNodeSG
+      UserData: !Base64 |
+          #!/bin/bash
+          apt-get update -qq
+          apt-get install -y apt-transport-https ca-certificates
+          apt-key adv apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+          apt-get update -qq apt-get purge lxc-docker || true
+          curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+          add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+          apt-get -y install linux-image-extra-$(uname -r) linux-image-extra-virtual
+          apt-get -y install docker-ce
+          usermod -aG docker unbuntu
+          docker image pull quay.io/influxdb/influxdb:2.0.0-alpha
+          docker container run -p 80:9999 quay.io/influxdb/influxdb:2.0.0-alpha
+          wget https://dl.influxdata.com/telegraf/releases/telegraf_1.10.4-1_amd64.deb
+          sudo dpkg -i telegraf_1.10.4-1_amd64.deb
+  AppNodeSG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: for the app nodes that allow ssh
+      SecurityGroupIngress:
+      - IpProtocol: tcp
+        FromPort: '80'
+        ToPort: '80'
+        CidrIp: 0.0.0.0/0
+      - IpProtocol: tcp 
+        FromPort: '22'
+        ToPort: '22'
+        CidrIp: 0.0.0.0/0
+```
+
+
 
 Create stack
 
 ```shell
 aws cloudformation create-stack \
-    --stack-name influxdb-trial-stack \
-    --region eu-central-1 \
-    --template-body stack.yml
+  --stack-name influxdb-trial-stack \
+  --region eu-central-1 \
+  --template-body file://$PWD/stack.yaml
 ```
+
+![Check AMI Instance](/images/influxdb/2020-11-22-influxdb-aws-ami-check-instance.png)
+
 
 ## Instance
 
