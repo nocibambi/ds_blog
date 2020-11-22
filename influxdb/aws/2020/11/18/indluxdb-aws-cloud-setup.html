@@ -119,7 +119,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      2 min read
+      3 min read
     
 </span></p>
 
@@ -240,13 +240,56 @@ AMI (Amazon Machine Image) ID</p>
 
 <p>Define Bash script to install docker and influxdb on the image.</p>
 
+<p>The full yaml:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">Resources</span><span class="pi">:</span>
+  <span class="na">AppNode</span><span class="pi">:</span>
+    <span class="na">Type</span><span class="pi">:</span> <span class="s">AWS::EC2::Instance</span>
+    <span class="na">Properties</span><span class="pi">:</span>
+      <span class="na">InstanceType</span><span class="pi">:</span> <span class="s">t2.nano</span>
+      <span class="na">ImageId</span><span class="pi">:</span> <span class="s">ami-06a719e5f8e22c33b</span>
+      <span class="na">KeyName</span><span class="pi">:</span> <span class="s">InfluxDB_AWS_example</span>
+      <span class="na">SecurityGroups</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="kt">!Ref</span> <span class="s">AppNodeSG</span>
+      <span class="na">UserData</span><span class="pi">:</span> <span class="kt">!Base64</span> <span class="pi">|</span>
+          <span class="s">#!/bin/bash</span>
+          <span class="s">apt-get update -qq</span>
+          <span class="s">apt-get install -y apt-transport-https ca-certificates</span>
+          <span class="s">apt-key adv apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D</span>
+          <span class="s">apt-get update -qq apt-get purge lxc-docker || true</span>
+          <span class="s">curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -</span>
+          <span class="s">add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"</span>
+          <span class="s">apt-get -y install linux-image-extra-$(uname -r) linux-image-extra-virtual</span>
+          <span class="s">apt-get -y install docker-ce</span>
+          <span class="s">usermod -aG docker unbuntu</span>
+          <span class="s">docker image pull quay.io/influxdb/influxdb:2.0.0-alpha</span>
+          <span class="s">docker container run -p 80:9999 quay.io/influxdb/influxdb:2.0.0-alpha</span>
+          <span class="s">wget https://dl.influxdata.com/telegraf/releases/telegraf_1.10.4-1_amd64.deb</span>
+          <span class="s">sudo dpkg -i telegraf_1.10.4-1_amd64.deb</span>
+  <span class="na">AppNodeSG</span><span class="pi">:</span>
+    <span class="na">Type</span><span class="pi">:</span> <span class="s">AWS::EC2::SecurityGroup</span>
+    <span class="na">Properties</span><span class="pi">:</span>
+      <span class="na">GroupDescription</span><span class="pi">:</span> <span class="s">for the app nodes that allow ssh</span>
+      <span class="na">SecurityGroupIngress</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">IpProtocol</span><span class="pi">:</span> <span class="s">tcp</span>
+        <span class="na">FromPort</span><span class="pi">:</span> <span class="s1">'</span><span class="s">80'</span>
+        <span class="na">ToPort</span><span class="pi">:</span> <span class="s1">'</span><span class="s">80'</span>
+        <span class="na">CidrIp</span><span class="pi">:</span> <span class="s">0.0.0.0/0</span>
+      <span class="pi">-</span> <span class="na">IpProtocol</span><span class="pi">:</span> <span class="s">tcp</span> 
+        <span class="na">FromPort</span><span class="pi">:</span> <span class="s1">'</span><span class="s">22'</span>
+        <span class="na">ToPort</span><span class="pi">:</span> <span class="s1">'</span><span class="s">22'</span>
+        <span class="na">CidrIp</span><span class="pi">:</span> <span class="s">0.0.0.0/0</span>
+</code></pre></div></div>
+
 <p>Create stack</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aws cloudformation create-stack <span class="se">\</span>
-    <span class="nt">--stack-name</span> influxdb-trial-stack <span class="se">\</span>
-    <span class="nt">--region</span> eu-central-1 <span class="se">\</span>
-    <span class="nt">--template-body</span> stack.yml
+  <span class="nt">--stack-name</span> influxdb-trial-stack <span class="se">\</span>
+  <span class="nt">--region</span> eu-central-1 <span class="se">\</span>
+  <span class="nt">--template-body</span> file://<span class="nv">$PWD</span>/stack.yaml
 </code></pre></div></div>
+
+<p><img src="/images/influxdb/2020-11-22-influxdb-aws-ami-check-instance.png" alt="Check AMI Instance" /></p>
 
 <h2 id="instance">Instance</h2>
 
