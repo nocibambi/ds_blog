@@ -232,7 +232,7 @@ AMI (Amazon Machine Image) ID</p>
     <span class="c1"># Inbound security rule</span>
     <span class="c1"># Expose the HTTP port 80 with tcp to inbound traffic from andy Ipv4 addresses</span>
     <span class="na">SecurityGroupIngress</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="na">IpProtocol</span><span class="pi">:</span> <span class="s">tcp</span> 
+      <span class="pi">-</span> <span class="na">IpProtocol</span><span class="pi">:</span> <span class="s">tcp</span>
         <span class="na">FromPort</span><span class="pi">:</span> <span class="s1">'</span><span class="s">80'</span>
         <span class="na">ToPort</span><span class="pi">:</span> <span class="s1">'</span><span class="s">80'</span>
         <span class="na">CidrIp</span><span class="pi">:</span> <span class="s">0.0.0.0/0</span>
@@ -275,7 +275,7 @@ AMI (Amazon Machine Image) ID</p>
         <span class="na">FromPort</span><span class="pi">:</span> <span class="s1">'</span><span class="s">80'</span>
         <span class="na">ToPort</span><span class="pi">:</span> <span class="s1">'</span><span class="s">80'</span>
         <span class="na">CidrIp</span><span class="pi">:</span> <span class="s">0.0.0.0/0</span>
-      <span class="pi">-</span> <span class="na">IpProtocol</span><span class="pi">:</span> <span class="s">tcp</span> 
+      <span class="pi">-</span> <span class="na">IpProtocol</span><span class="pi">:</span> <span class="s">tcp</span>
         <span class="na">FromPort</span><span class="pi">:</span> <span class="s1">'</span><span class="s">22'</span>
         <span class="na">ToPort</span><span class="pi">:</span> <span class="s1">'</span><span class="s">22'</span>
         <span class="na">CidrIp</span><span class="pi">:</span> <span class="s">0.0.0.0/0</span>
@@ -289,7 +289,44 @@ AMI (Amazon Machine Image) ID</p>
   <span class="nt">--template-body</span> file://<span class="nv">$PWD</span>/stack.yaml
 </code></pre></div></div>
 
-<p><img src="/images/influxdb/2020-11-22-influxdb-aws-ami-check-instance.png" alt="Check AMI Instance" /></p>
+<p><img src="/images/influxdb/2020-11-23-influxdb-aws-get-instance-dns.png" alt="Get AMI instance DNS" /></p>
+
+<p>Create a connection to our instance:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh <span class="nt">-v</span> <span class="nt">-i</span> InfluxDB_AWS_example.pem ubuntu@ec2-3-122-245-32.eu-central-1.compute.amazonaws.com
+</code></pre></div></div>
+
+<h3 id="install-telegraf">Install telegraf</h3>
+
+<p>We need to install telegraf onto our instance.</p>
+
+<p>On an Ubuntu instance this will look like this:</p>
+
+<p>Adding the repository:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget <span class="nt">-qO-</span> https://repos.influxdata.com/influxdb.key | <span class="nb">sudo </span>apt-key add -
+<span class="nb">source</span> /etc/lsb-release
+<span class="nb">echo</span> <span class="s2">"deb https://repos.influxdata.com/</span><span class="k">${</span><span class="nv">DISTRIB_ID</span><span class="p">,,</span><span class="k">}</span><span class="s2"> </span><span class="k">${</span><span class="nv">DISTRIB_CODENAME</span><span class="k">}</span><span class="s2"> stable"</span> | <span class="nb">sudo tee</span> /etc/apt/sources.list.d/influxdb.list
+</code></pre></div></div>
+
+<p>Starting the Telegraph service:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get update <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>apt-get <span class="nb">install </span>telegraf
+<span class="nb">sudo </span>systemctl start telegraf
+</code></pre></div></div>
+
+<p>For other systems and futher information see <a href="https://docs.influxdata.com/telegraf/v1.16/introduction/installation/">this link</a>.</p>
+
+<h3 id="configure-telegraf">Configure Telegraf</h3>
+
+<p>On Ubuntu instance the config file path is at <code class="highlighter-rouge">/etc/telegraf/telegraf.conf</code>.</p>
+
+<ul>
+  <li>https://docs.influxdata.com/telegraf/v1.15/administration/configuration/</li>
+  <li>https://docs.influxdata.com/telegraf/v1.16/introduction/getting-started/</li>
+</ul>
+
+<p>For further options and for configuration on other systems, see the <a href="https://docs.influxdata.com/telegraf/v1.16/introduction/getting-started/#configure-telegraf">documentation</a>.</p>
 
 <h2 id="instance">Instance</h2>
 
