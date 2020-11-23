@@ -57,7 +57,6 @@ Based on this [post](https://www.influxdata.com/blog/running-influxdb-on-aws-wit
 
 1. Configure AWS with `aws configure`. This is where you need to add your **Access Key ID**, your **Secret Access Key**, and the **region name** (e.g. `eu-central-1`). You can skip the output format.
 
-
 ## Amazon Machine Image
 
 Open the [Amazon AWS Marketplace](https://aws.amazon.com/marketplace/).
@@ -72,7 +71,6 @@ Resources
 Logical ID
 Instance properties
 AMI (Amazon Machine Image) ID
-
 
 ```yaml
 Resources:
@@ -99,14 +97,13 @@ AppnodeSecurityGroup:
     # Inbound security rule
     # Expose the HTTP port 80 with tcp to inbound traffic from andy Ipv4 addresses
     SecurityGroupIngress:
-      - IpProtocol: tcp 
+      - IpProtocol: tcp
         FromPort: '80'
         ToPort: '80'
         CidrIp: 0.0.0.0/0
 ```
 
 Define Bash script to install docker and influxdb on the image.
-
 
 The full yaml:
 
@@ -144,13 +141,11 @@ Resources:
         FromPort: '80'
         ToPort: '80'
         CidrIp: 0.0.0.0/0
-      - IpProtocol: tcp 
+      - IpProtocol: tcp
         FromPort: '22'
         ToPort: '22'
         CidrIp: 0.0.0.0/0
 ```
-
-
 
 Create stack
 
@@ -161,8 +156,47 @@ aws cloudformation create-stack \
   --template-body file://$PWD/stack.yaml
 ```
 
-![Check AMI Instance](/images/influxdb/2020-11-22-influxdb-aws-ami-check-instance.png)
+![Get AMI instance DNS](/images/influxdb/2020-11-23-influxdb-aws-get-instance-dns.png)
 
+Create a connection to our instance:
+
+```bash
+ssh -v -i InfluxDB_AWS_example.pem ubuntu@ec2-3-122-245-32.eu-central-1.compute.amazonaws.com
+```
+
+### Install telegraf
+
+We need to install telegraf onto our instance.
+
+On an Ubuntu instance this will look like this:
+
+Adding the repository:
+
+```bash
+wget -qO- https://repos.influxdata.com/influxdb.key | sudo apt-key add -
+source /etc/lsb-release
+echo "deb https://repos.influxdata.com/${DISTRIB_ID,,} ${DISTRIB_CODENAME} stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
+```
+
+Starting the Telegraph service:
+
+```bash
+sudo apt-get update && sudo apt-get install telegraf
+sudo systemctl start telegraf
+```
+
+For other systems and futher information see [this link](https://docs.influxdata.com/telegraf/v1.16/introduction/installation/).
+
+### Configure Telegraf
+
+On Ubuntu instance the config file path is at `/etc/telegraf/telegraf.conf`.
+
+
+- https://docs.influxdata.com/telegraf/v1.15/administration/configuration/
+- https://docs.influxdata.com/telegraf/v1.16/introduction/getting-started/
+
+
+For further options and for configuration on other systems, see the [documentation](https://docs.influxdata.com/telegraf/v1.16/introduction/getting-started/#configure-telegraf).
 
 ## Instance
 
