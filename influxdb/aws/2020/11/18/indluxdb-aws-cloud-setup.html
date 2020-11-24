@@ -119,7 +119,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      3 min read
+      4 min read
     
 </span></p>
 
@@ -311,11 +311,28 @@ AMI (Amazon Machine Image) ID</p>
 
 <p>Starting the Telegraph service:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get update <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>apt-get <span class="nb">install </span>telegraf
-<span class="nb">sudo </span>systemctl start telegraf
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>apt-get update <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>apt-get <span class="nb">install </span>telegraf
+<span class="nv">$ </span><span class="nb">sudo </span>systemctl start telegraf
 </code></pre></div></div>
 
 <p>For other systems and futher information see <a href="https://docs.influxdata.com/telegraf/v1.16/introduction/installation/">this link</a>.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>telegraf <span class="nt">--test</span>
+</code></pre></div></div>
+
+<h3 id="install-influxdb">Install InfluxDB</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>wget https://dl.influxdata.com/influxdb/releases/influxdb_2.0.2_amd64.deb
+<span class="nv">$ </span><span class="nb">sudo </span>dpkg <span class="nt">-i</span> influxdb_2.0.2_amd64.deb
+</code></pre></div></div>
+
+<p>Start and test the influxdb service.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo systemctl start influxdb.service
+$ sudo systemctl status influxdb.service
+</code></pre></div></div>
+
+<p>https://devconnected.com/how-to-install-influxdb-on-ubuntu-debian-in-2019/#II_Installing_InfluxDB_20</p>
 
 <h3 id="configure-telegraf">Configure Telegraf</h3>
 
