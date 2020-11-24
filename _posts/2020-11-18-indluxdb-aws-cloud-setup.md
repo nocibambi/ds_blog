@@ -181,11 +181,33 @@ echo "deb https://repos.influxdata.com/${DISTRIB_ID,,} ${DISTRIB_CODENAME} stabl
 Starting the Telegraph service:
 
 ```bash
-sudo apt-get update && sudo apt-get install telegraf
-sudo systemctl start telegraf
+$ sudo apt-get update && sudo apt-get install telegraf
+$ sudo systemctl start telegraf
 ```
 
 For other systems and futher information see [this link](https://docs.influxdata.com/telegraf/v1.16/introduction/installation/).
+
+
+```bash
+telegraf --test
+```
+
+### Install InfluxDB
+
+```bash
+$ wget https://dl.influxdata.com/influxdb/releases/influxdb_2.0.2_amd64.deb
+$ sudo dpkg -i influxdb_2.0.2_amd64.deb
+```
+
+Start and test the influxdb service.
+
+```
+$ sudo systemctl start influxdb.service
+$ sudo systemctl status influxdb.service
+```
+
+https://devconnected.com/how-to-install-influxdb-on-ubuntu-debian-in-2019/#II_Installing_InfluxDB_20
+
 
 ### Configure Telegraf
 
