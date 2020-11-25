@@ -293,8 +293,24 @@ AMI (Amazon Machine Image) ID</p>
 
 <p>Create a connection to our instance:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh <span class="nt">-v</span> <span class="nt">-i</span> InfluxDB_AWS_example.pem ubuntu@ec2-3-122-245-32.eu-central-1.compute.amazonaws.com
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh <span class="nt">-v</span> <span class="nt">-i</span> InfluxDB_AWS_example.pem <span class="se">\</span>
+  ubuntu@ec2-3-122-245-32.eu-central-1.compute.amazonaws.com
 </code></pre></div></div>
+
+<h3 id="install-influxdb">Install InfluxDB</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://dl.influxdata.com/influxdb/releases/influxdb_2.0.2_amd64.deb
+<span class="nb">sudo </span>dpkg <span class="nt">-i</span> influxdb_2.0.2_amd64.deb
+</code></pre></div></div>
+
+<p>Setup InfluxDB configuration settings</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>influx setup
+</code></pre></div></div>
+
+<p>Here you need to add a username, a password, and name your organization and your primary bucket. You can skip on the retention period question.</p>
+
+<p><a href="https://devconnected.com/how-to-install-influxdb-on-ubuntu-debian-in-2019/#II_Installing_InfluxDB_20">https://devconnected.com/how-to-install-influxdb-on-ubuntu-debian-in-2019/#II_Installing_InfluxDB_20</a></p>
 
 <h3 id="install-telegraf">Install telegraf</h3>
 
@@ -306,44 +322,56 @@ AMI (Amazon Machine Image) ID</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget <span class="nt">-qO-</span> https://repos.influxdata.com/influxdb.key | <span class="nb">sudo </span>apt-key add -
 <span class="nb">source</span> /etc/lsb-release
-<span class="nb">echo</span> <span class="s2">"deb https://repos.influxdata.com/</span><span class="k">${</span><span class="nv">DISTRIB_ID</span><span class="p">,,</span><span class="k">}</span><span class="s2"> </span><span class="k">${</span><span class="nv">DISTRIB_CODENAME</span><span class="k">}</span><span class="s2"> stable"</span> | <span class="nb">sudo tee</span> /etc/apt/sources.list.d/influxdb.list
+<span class="nb">echo</span> <span class="s2">"deb https://repos.influxdata.com/</span><span class="k">${</span><span class="nv">DISTRIB_ID</span><span class="p">,,</span><span class="k">}</span><span class="s2"> </span><span class="k">${</span><span class="nv">DISTRIB_CODENAME</span><span class="k">}</span><span class="s2"> stable"</span> <span class="se">\</span>
+  | <span class="nb">sudo tee</span> /etc/apt/sources.list.d/influxdb.list
 </code></pre></div></div>
 
-<p>Starting the Telegraph service:</p>
+<p>Installing telegraf:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>apt-get update <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>apt-get <span class="nb">install </span>telegraf
-<span class="nv">$ </span><span class="nb">sudo </span>systemctl start telegraf
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get update <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>apt-get <span class="nb">install </span>telegraf
 </code></pre></div></div>
 
-<p>For other systems and futher information see <a href="https://docs.influxdata.com/telegraf/v1.16/introduction/installation/">this link</a>.</p>
+<p>You can verify your installation by running a test:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>telegraf <span class="nt">--test</span>
 </code></pre></div></div>
 
-<h3 id="install-influxdb">Install InfluxDB</h3>
+<p>https://docs.influxdata.com/telegraf/v1.16/guides/using_http/</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>wget https://dl.influxdata.com/influxdb/releases/influxdb_2.0.2_amd64.deb
-<span class="nv">$ </span><span class="nb">sudo </span>dpkg <span class="nt">-i</span> influxdb_2.0.2_amd64.deb
+<p>For other systems and futher information see <a href="https://docs.influxdata.com/telegraf/v1.16/introduction/installation/">this link</a>.</p>
+
+<h2 id="install-chronograph">Install Chronograph</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://dl.influxdata.com/chronograf/releases/chronograf_1.8.8_amd64.deb
+<span class="nb">sudo </span>dpkg <span class="nt">-i</span> chronograf_1.8.8_amd64.deb
 </code></pre></div></div>
-
-<p>Start and test the influxdb service.</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo systemctl start influxdb.service
-$ sudo systemctl status influxdb.service
-</code></pre></div></div>
-
-<p>https://devconnected.com/how-to-install-influxdb-on-ubuntu-debian-in-2019/#II_Installing_InfluxDB_20</p>
 
 <h3 id="configure-telegraf">Configure Telegraf</h3>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />https://docs.influxdata.com/telegraf/v1.16/guides/using_http/</li>
+</ul>
 
 <p>On Ubuntu instance the config file path is at <code class="highlighter-rouge">/etc/telegraf/telegraf.conf</code>.</p>
 
 <ul>
-  <li>https://docs.influxdata.com/telegraf/v1.15/administration/configuration/</li>
-  <li>https://docs.influxdata.com/telegraf/v1.16/introduction/getting-started/</li>
+  <li><a href="https://docs.influxdata.com/telegraf/v1.15/administration/configuration/">https://docs.influxdata.com/telegraf/v1.15/administration/configuration/</a></li>
+  <li><a href="https://docs.influxdata.com/telegraf/v1.16/introduction/getting-started/">https://docs.influxdata.com/telegraf/v1.16/introduction/getting-started/</a></li>
 </ul>
 
 <p>For further options and for configuration on other systems, see the <a href="https://docs.influxdata.com/telegraf/v1.16/introduction/getting-started/#configure-telegraf">documentation</a>.</p>
+
+<p>Starting the Telegraph service:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>systemctl start telegraf
+<span class="nb">sudo </span>systemctl status telegraf
+</code></pre></div></div>
+
+<h3 id="run-influxdb-service">Run influxdb service?</h3>
+
+<p>Start the influxdb service.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>systemctl start influxdb.service
+</code></pre></div></div>
 
 <h2 id="instance">Instance</h2>
 
