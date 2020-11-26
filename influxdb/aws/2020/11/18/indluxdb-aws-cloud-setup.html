@@ -310,6 +310,13 @@ AMI (Amazon Machine Image) ID</p>
 
 <p>Here you need to add a username, a password, and name your organization and your primary bucket. You can skip on the retention period question.</p>
 
+<h3 id="run-influxdb-service">Run influxdb service</h3>
+
+<p>Start the influxdb service.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>systemctl start influxdb.service
+</code></pre></div></div>
+
 <p><a href="https://devconnected.com/how-to-install-influxdb-on-ubuntu-debian-in-2019/#II_Installing_InfluxDB_20">https://devconnected.com/how-to-install-influxdb-on-ubuntu-debian-in-2019/#II_Installing_InfluxDB_20</a></p>
 
 <h3 id="install-telegraf">Install telegraf</h3>
@@ -330,13 +337,17 @@ AMI (Amazon Machine Image) ID</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get update <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>apt-get <span class="nb">install </span>telegraf
 </code></pre></div></div>
-
-<p>You can verify your installation by running a test:</p>
+<p>j</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>telegraf <span class="nt">--test</span>
 </code></pre></div></div>
 
-<p>https://docs.influxdata.com/telegraf/v1.16/guides/using_http/</p>
+<p>Create an example data collection setting config and test it</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>telegraf <span class="nt">-sample-config</span> <span class="nt">--input-filter</span> cpu:mem <span class="nt">--output-filter</span> influxdb <span class="o">&gt;</span> telegraf_test.conf
+telegraf <span class="nt">--config</span> telegraf.conf <span class="nt">--test</span>
+</code></pre></div></div>
+
+<p><a href="https://docs.influxdata.com/telegraf/v1.16/guides/using_http/">https://docs.influxdata.com/telegraf/v1.16/guides/using_http/</a></p>
 
 <p>For other systems and futher information see <a href="https://docs.influxdata.com/telegraf/v1.16/introduction/installation/">this link</a>.</p>
 
@@ -349,7 +360,7 @@ AMI (Amazon Machine Image) ID</p>
 <h3 id="configure-telegraf">Configure Telegraf</h3>
 
 <ul class="task-list">
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />https://docs.influxdata.com/telegraf/v1.16/guides/using_http/</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><a href="https://docs.influxdata.com/telegraf/v1.16/guides/using_http/">https://docs.influxdata.com/telegraf/v1.16/guides/using_http/</a></li>
 </ul>
 
 <p>On Ubuntu instance the config file path is at <code class="highlighter-rouge">/etc/telegraf/telegraf.conf</code>.</p>
@@ -365,12 +376,6 @@ AMI (Amazon Machine Image) ID</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>systemctl start telegraf
 <span class="nb">sudo </span>systemctl status telegraf
-</code></pre></div></div>
-
-<h3 id="run-influxdb-service">Run influxdb service?</h3>
-
-<p>Start the influxdb service.</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>systemctl start influxdb.service
 </code></pre></div></div>
 
 <h2 id="instance">Instance</h2>
@@ -391,15 +396,6 @@ AMI (Amazon Machine Image) ID</p>
   <li><img src="/images/influxdb/2020-11-20-influxdb-aws-launc-instance.png" alt="Launch Instance" /></li>
   <li><img src="/images/influxdb/2020-11-20-influxdb-aws-select-key-pair.png" alt="Select Key Pair" /></li>
   <li><img src="/images/influxdb/2020-11-20-influxdb-aws-instance-end.png" alt="Instance Launch Screen" /></li>
-</ul>
-
-<p>-</p>
-
-<p>Security group</p>
-
-<ul>
-  <li>virtual firewall</li>
-  <li>intrinsic reference</li>
 </ul>
 
   </div><a class="u-url" href="/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup.html" hidden></a>

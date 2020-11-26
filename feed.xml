@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://andrasnovoszath.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://andrasnovoszath.com/" rel="alternate" type="text/html" /><updated>2020-11-25T01:16:26-06:00</updated><id>https://andrasnovoszath.com/feed.xml</id><title type="html">Value this</title><subtitle>This is not another blog about bitcoin.</subtitle><entry><title type="html">Setting up AWS Cloud for InfluxDB</title><link href="https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup.html" rel="alternate" type="text/html" title="Setting up AWS Cloud for InfluxDB" /><published>2020-11-18T00:00:00-06:00</published><updated>2020-11-18T00:00:00-06:00</updated><id>https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup</id><content type="html" xml:base="https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup.html">&lt;p&gt;Here are the preparation steps you need to do if you would like to use AWS Cloudwatcher with InfluxDB.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://andrasnovoszath.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://andrasnovoszath.com/" rel="alternate" type="text/html" /><updated>2020-11-26T02:20:29-06:00</updated><id>https://andrasnovoszath.com/feed.xml</id><title type="html">Value this</title><subtitle>This is not another blog about bitcoin.</subtitle><entry><title type="html">Setting up AWS Cloud for InfluxDB</title><link href="https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup.html" rel="alternate" type="text/html" title="Setting up AWS Cloud for InfluxDB" /><published>2020-11-18T00:00:00-06:00</published><updated>2020-11-18T00:00:00-06:00</updated><id>https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup</id><content type="html" xml:base="https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup.html">&lt;p&gt;Here are the preparation steps you need to do if you would like to use AWS Cloudwatcher with InfluxDB.&lt;/p&gt;
 
 &lt;p&gt;Based on this &lt;a href=&quot;https://www.influxdata.com/blog/running-influxdb-on-aws-with-cloud-formation/&quot;&gt;post&lt;/a&gt;&lt;/p&gt;
 
@@ -170,6 +170,13 @@ AMI (Amazon Machine Image) ID&lt;/p&gt;
 
 &lt;p&gt;Here you need to add a username, a password, and name your organization and your primary bucket. You can skip on the retention period question.&lt;/p&gt;
 
+&lt;h3 id=&quot;run-influxdb-service&quot;&gt;Run influxdb service&lt;/h3&gt;
+
+&lt;p&gt;Start the influxdb service.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl start influxdb.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
 &lt;p&gt;&lt;a href=&quot;https://devconnected.com/how-to-install-influxdb-on-ubuntu-debian-in-2019/#II_Installing_InfluxDB_20&quot;&gt;https://devconnected.com/how-to-install-influxdb-on-ubuntu-debian-in-2019/#II_Installing_InfluxDB_20&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;install-telegraf&quot;&gt;Install telegraf&lt;/h3&gt;
@@ -190,13 +197,17 @@ AMI (Amazon Machine Image) ID&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get update &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;telegraf
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;You can verify your installation by running a test:&lt;/p&gt;
+&lt;p&gt;j&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;telegraf &lt;span class=&quot;nt&quot;&gt;--test&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;https://docs.influxdata.com/telegraf/v1.16/guides/using_http/&lt;/p&gt;
+&lt;p&gt;Create an example data collection setting config and test it&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;telegraf &lt;span class=&quot;nt&quot;&gt;-sample-config&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--input-filter&lt;/span&gt; cpu:mem &lt;span class=&quot;nt&quot;&gt;--output-filter&lt;/span&gt; influxdb &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; telegraf_test.conf
+telegraf &lt;span class=&quot;nt&quot;&gt;--config&lt;/span&gt; telegraf.conf &lt;span class=&quot;nt&quot;&gt;--test&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://docs.influxdata.com/telegraf/v1.16/guides/using_http/&quot;&gt;https://docs.influxdata.com/telegraf/v1.16/guides/using_http/&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;For other systems and futher information see &lt;a href=&quot;https://docs.influxdata.com/telegraf/v1.16/introduction/installation/&quot;&gt;this link&lt;/a&gt;.&lt;/p&gt;
 
@@ -209,7 +220,7 @@ AMI (Amazon Machine Image) ID&lt;/p&gt;
 &lt;h3 id=&quot;configure-telegraf&quot;&gt;Configure Telegraf&lt;/h3&gt;
 
 &lt;ul class=&quot;task-list&quot;&gt;
-  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;https://docs.influxdata.com/telegraf/v1.16/guides/using_http/&lt;/li&gt;
+  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;&lt;a href=&quot;https://docs.influxdata.com/telegraf/v1.16/guides/using_http/&quot;&gt;https://docs.influxdata.com/telegraf/v1.16/guides/using_http/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;On Ubuntu instance the config file path is at &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/telegraf/telegraf.conf&lt;/code&gt;.&lt;/p&gt;
@@ -225,12 +236,6 @@ AMI (Amazon Machine Image) ID&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl start telegraf
 &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl status telegraf
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;run-influxdb-service&quot;&gt;Run influxdb service?&lt;/h3&gt;
-
-&lt;p&gt;Start the influxdb service.&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl start influxdb.service
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;instance&quot;&gt;Instance&lt;/h2&gt;
@@ -251,15 +256,6 @@ AMI (Amazon Machine Image) ID&lt;/p&gt;
   &lt;li&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-launc-instance.png&quot; alt=&quot;Launch Instance&quot; /&gt;&lt;/li&gt;
   &lt;li&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-select-key-pair.png&quot; alt=&quot;Select Key Pair&quot; /&gt;&lt;/li&gt;
   &lt;li&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-instance-end.png&quot; alt=&quot;Instance Launch Screen&quot; /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;-&lt;/p&gt;
-
-&lt;p&gt;Security group&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;virtual firewall&lt;/li&gt;
-  &lt;li&gt;intrinsic reference&lt;/li&gt;
 &lt;/ul&gt;</content><author><name></name></author><summary type="html">Here are the preparation steps you need to do if you would like to use AWS Cloudwatcher with InfluxDB.</summary></entry><entry><title type="html">Grouping data with Flux in InfluxDB</title><link href="https://andrasnovoszath.com/influxdb/flux/time-series/2020/11/17/influxdb-flux-group.html" rel="alternate" type="text/html" title="Grouping data with Flux in InfluxDB" /><published>2020-11-17T00:00:00-06:00</published><updated>2020-11-17T00:00:00-06:00</updated><id>https://andrasnovoszath.com/influxdb/flux/time-series/2020/11/17/influxdb-flux-group</id><content type="html" xml:base="https://andrasnovoszath.com/influxdb/flux/time-series/2020/11/17/influxdb-flux-group.html">&lt;p&gt;Grouping happens based on &lt;strong&gt;group keys&lt;/strong&gt; which effectilve are the name of columns used for the grouping. A group then consists of rows having identical values in the group key columns.&lt;/p&gt;
 
 &lt;h2 id=&quot;example&quot;&gt;Example&lt;/h2&gt;
