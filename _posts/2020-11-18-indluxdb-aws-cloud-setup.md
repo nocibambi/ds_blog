@@ -180,6 +180,14 @@ influx setup
 
 Here you need to add a username, a password, and name your organization and your primary bucket. You can skip on the retention period question.
 
+### Run influxdb service
+
+Start the influxdb service.
+
+```bash
+sudo systemctl start influxdb.service
+```
+
 <https://devconnected.com/how-to-install-influxdb-on-ubuntu-debian-in-2019/#II_Installing_InfluxDB_20>
 
 ### Install telegraf
@@ -197,23 +205,29 @@ echo "deb https://repos.influxdata.com/${DISTRIB_ID,,} ${DISTRIB_CODENAME} stabl
   | sudo tee /etc/apt/sources.list.d/influxdb.list
 ```
 
+
 Installing telegraf:
 
 ```bash
 sudo apt-get update && sudo apt-get install telegraf
 ```
-
-You can verify your installation by running a test:
+j
 
 ```bash
 telegraf --test
 ```
 
-https://docs.influxdata.com/telegraf/v1.16/guides/using_http/
+Create an example data collection setting config and test it
+```bash
+telegraf -sample-config --input-filter cpu:mem --output-filter influxdb > telegraf_test.conf
+telegraf --config telegraf.conf --test
+```
 
+
+
+<https://docs.influxdata.com/telegraf/v1.16/guides/using_http/>
 
 For other systems and futher information see [this link](https://docs.influxdata.com/telegraf/v1.16/introduction/installation/).
-
 
 ## Install Chronograph
 
@@ -224,7 +238,7 @@ sudo dpkg -i chronograf_1.8.8_amd64.deb
 
 ### Configure Telegraf
 
-- [ ] https://docs.influxdata.com/telegraf/v1.16/guides/using_http/
+- [ ] <https://docs.influxdata.com/telegraf/v1.16/guides/using_http/>
 
 On Ubuntu instance the config file path is at `/etc/telegraf/telegraf.conf`.
 
@@ -233,22 +247,12 @@ On Ubuntu instance the config file path is at `/etc/telegraf/telegraf.conf`.
 
 For further options and for configuration on other systems, see the [documentation](https://docs.influxdata.com/telegraf/v1.16/introduction/getting-started/#configure-telegraf).
 
-
 Starting the Telegraph service:
 
 ```bash
 sudo systemctl start telegraf
 sudo systemctl status telegraf
 ```
-
-### Run influxdb service?
-
-Start the influxdb service.
-```bash
-sudo systemctl start influxdb.service
-```
-
-
 
 ## Instance
 
@@ -267,10 +271,3 @@ sudo systemctl start influxdb.service
 - ![Launch Instance](/images/influxdb/2020-11-20-influxdb-aws-launc-instance.png)
 - ![Select Key Pair](/images/influxdb/2020-11-20-influxdb-aws-select-key-pair.png)
 - ![Instance Launch Screen](/images/influxdb/2020-11-20-influxdb-aws-instance-end.png)
-
--
-
-Security group
-
-- virtual firewall
-- intrinsic reference
