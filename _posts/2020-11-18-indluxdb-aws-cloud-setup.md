@@ -166,6 +166,8 @@ ssh -v -i InfluxDB_AWS_example.pem \
 ```
 
 ### Install InfluxDB
+Maybe this: https://websiteforstudents.com/how-to-install-influxdb-on-ubuntu-18-04-16-04/
+
 
 ```bash
 wget https://dl.influxdata.com/influxdb/releases/influxdb_2.0.2_amd64.deb
