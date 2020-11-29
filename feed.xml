@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://andrasnovoszath.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://andrasnovoszath.com/" rel="alternate" type="text/html" /><updated>2020-11-27T02:30:08-06:00</updated><id>https://andrasnovoszath.com/feed.xml</id><title type="html">Value this</title><subtitle>This is not another blog about bitcoin.</subtitle><entry><title type="html">Setting up AWS Cloud for InfluxDB</title><link href="https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup.html" rel="alternate" type="text/html" title="Setting up AWS Cloud for InfluxDB" /><published>2020-11-18T00:00:00-06:00</published><updated>2020-11-18T00:00:00-06:00</updated><id>https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup</id><content type="html" xml:base="https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup.html">&lt;p&gt;Here are the preparation steps you need to do if you would like to use AWS Cloudwatcher with InfluxDB.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://andrasnovoszath.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://andrasnovoszath.com/" rel="alternate" type="text/html" /><updated>2020-11-29T02:15:03-06:00</updated><id>https://andrasnovoszath.com/feed.xml</id><title type="html">Value this</title><subtitle>This is not another blog about bitcoin.</subtitle><entry><title type="html">Setting up AWS Cloud for InfluxDB</title><link href="https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup.html" rel="alternate" type="text/html" title="Setting up AWS Cloud for InfluxDB" /><published>2020-11-18T00:00:00-06:00</published><updated>2020-11-18T00:00:00-06:00</updated><id>https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup</id><content type="html" xml:base="https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup.html">&lt;p&gt;Here are the preparation steps you need to do if you would like to use AWS Cloudwatcher with InfluxDB.&lt;/p&gt;
 
 &lt;p&gt;Based on this &lt;a href=&quot;https://www.influxdata.com/blog/running-influxdb-on-aws-with-cloud-formation/&quot;&gt;post&lt;/a&gt;&lt;/p&gt;
 
@@ -106,8 +106,8 @@ AMI (Amazon Machine Image) ID&lt;/p&gt;
   &lt;span class=&quot;na&quot;&gt;AppNode&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
     &lt;span class=&quot;na&quot;&gt;Type&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;AWS::EC2::Instance&lt;/span&gt;
     &lt;span class=&quot;na&quot;&gt;Properties&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;InstanceType&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;t2.nano&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;ImageId&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ami-06a719e5f8e22c33b&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;InstanceType&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;t2.micro&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;ImageId&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ami-03d85bfa79ad10274&lt;/span&gt;
       &lt;span class=&quot;na&quot;&gt;KeyName&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;InfluxDB_AWS_example&lt;/span&gt;
       &lt;span class=&quot;na&quot;&gt;SecurityGroups&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
         &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;!Ref&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;AppNodeSG&lt;/span&gt;
@@ -154,7 +154,7 @@ AMI (Amazon Machine Image) ID&lt;/p&gt;
 &lt;p&gt;Create a connection to our instance:&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ssh &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; InfluxDB_AWS_example.pem &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-  ubuntu@ec2-3-122-245-32.eu-central-1.compute.amazonaws.com
+  ubuntu@ec2-3-122-XXX-XX.eu-central-1.compute.amazonaws.com
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;install-influxdb&quot;&gt;Install InfluxDB&lt;/h3&gt;

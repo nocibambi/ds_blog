@@ -246,8 +246,8 @@ AMI (Amazon Machine Image) ID</p>
   <span class="na">AppNode</span><span class="pi">:</span>
     <span class="na">Type</span><span class="pi">:</span> <span class="s">AWS::EC2::Instance</span>
     <span class="na">Properties</span><span class="pi">:</span>
-      <span class="na">InstanceType</span><span class="pi">:</span> <span class="s">t2.nano</span>
-      <span class="na">ImageId</span><span class="pi">:</span> <span class="s">ami-06a719e5f8e22c33b</span>
+      <span class="na">InstanceType</span><span class="pi">:</span> <span class="s">t2.micro</span>
+      <span class="na">ImageId</span><span class="pi">:</span> <span class="s">ami-03d85bfa79ad10274</span>
       <span class="na">KeyName</span><span class="pi">:</span> <span class="s">InfluxDB_AWS_example</span>
       <span class="na">SecurityGroups</span><span class="pi">:</span>
         <span class="pi">-</span> <span class="kt">!Ref</span> <span class="s">AppNodeSG</span>
@@ -294,7 +294,7 @@ AMI (Amazon Machine Image) ID</p>
 <p>Create a connection to our instance:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh <span class="nt">-v</span> <span class="nt">-i</span> InfluxDB_AWS_example.pem <span class="se">\</span>
-  ubuntu@ec2-3-122-245-32.eu-central-1.compute.amazonaws.com
+  ubuntu@ec2-3-122-XXX-XX.eu-central-1.compute.amazonaws.com
 </code></pre></div></div>
 
 <h3 id="install-influxdb">Install InfluxDB</h3>
