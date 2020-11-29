@@ -112,8 +112,8 @@ Resources:
   AppNode:
     Type: AWS::EC2::Instance
     Properties:
-      InstanceType: t2.nano
-      ImageId: ami-06a719e5f8e22c33b
+      InstanceType: t2.micro
+      ImageId: ami-03d85bfa79ad10274
       KeyName: InfluxDB_AWS_example
       SecurityGroups:
         - !Ref AppNodeSG
@@ -162,7 +162,7 @@ Create a connection to our instance:
 
 ```bash
 ssh -v -i InfluxDB_AWS_example.pem \
-  ubuntu@ec2-3-122-245-32.eu-central-1.compute.amazonaws.com
+  ubuntu@ec2-3-122-XXX-XX.eu-central-1.compute.amazonaws.com
 ```
 
 ### Install InfluxDB
