@@ -1,7 +1,7 @@
 ---
 title: Setting up AWS Cloud for InfluxDB
 description: How to set up AWS Cloud for InfluxDB?
-categories: [InfluxDB, AWS]
+categories: [AWS, EC2, InfluxDB]
 toc: false
 layout: post
 ---
@@ -181,6 +181,40 @@ influx setup
 ```
 
 Here you need to add a username, a password, and name your organization and your primary bucket. You can skip on the retention period question.
+
+### Try out InfluxDB
+
+```bash
+influx bucket list
+```
+
+```bash
+$ date +%s
+1606723341
+```
+
+```bash
+$ influx write -b test_bucket -o nocibambi@gmail.com -p s 'test_measurement,host=testHost testField="testFieldValue" 1606723341'
+```
+```bash
+$ influx query
+from(bucket: "test_bucket") |> range(start:-1h)
+Result: _result
+Table: keys: [_start, _stop, _field, _measurement, host]
+                   _start:time                      _stop:time           _field:string     _measurement:string             host:string                      _time:time           _value:string  
+------------------------------  ------------------------------  ----------------------  ----------------------  ----------------------  ------------------------------  ----------------------  
+2020-11-30T07:03:07.010273692Z  2020-11-30T08:03:07.010273692Z               testField        test_measurement                testHost  2020-11-30T08:02:21.000000000Z          testFieldValue  
+```
+
+
+```bash
+influx query
+```
+
+```flux
+from(bucket: "test_bucket") |> range(start: -7d)
+```
+
 
 ### Run influxdb service
 
