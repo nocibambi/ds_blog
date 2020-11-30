@@ -9,13 +9,13 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="How to set up AWS Cloud for InfluxDB?" />
 <meta property="og:description" content="How to set up AWS Cloud for InfluxDB?" />
-<link rel="canonical" href="https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup.html" />
-<meta property="og:url" content="https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup.html" />
+<link rel="canonical" href="https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/indluxdb-aws-cloud-setup.html" />
+<meta property="og:url" content="https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/indluxdb-aws-cloud-setup.html" />
 <meta property="og:site_name" content="Value this" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-11-18T00:00:00-06:00" />
 <script type="application/ld+json">
-{"description":"How to set up AWS Cloud for InfluxDB?","headline":"Setting up AWS Cloud for InfluxDB","dateModified":"2020-11-18T00:00:00-06:00","datePublished":"2020-11-18T00:00:00-06:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup.html"},"url":"https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup.html","@context":"https://schema.org"}</script>
+{"description":"How to set up AWS Cloud for InfluxDB?","headline":"Setting up AWS Cloud for InfluxDB","dateModified":"2020-11-18T00:00:00-06:00","datePublished":"2020-11-18T00:00:00-06:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/indluxdb-aws-cloud-setup.html"},"url":"https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/indluxdb-aws-cloud-setup.html","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://andrasnovoszath.com/feed.xml" title="Value this" /><!-- the google_analytics_id gets auto inserted from the config file -->
 
@@ -30,13 +30,13 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="How to set up AWS Cloud for InfluxDB?" />
 <meta property="og:description" content="How to set up AWS Cloud for InfluxDB?" />
-<link rel="canonical" href="https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup.html" />
-<meta property="og:url" content="https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup.html" />
+<link rel="canonical" href="https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/indluxdb-aws-cloud-setup.html" />
+<meta property="og:url" content="https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/indluxdb-aws-cloud-setup.html" />
 <meta property="og:site_name" content="Value this" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-11-18T00:00:00-06:00" />
 <script type="application/ld+json">
-{"description":"How to set up AWS Cloud for InfluxDB?","headline":"Setting up AWS Cloud for InfluxDB","dateModified":"2020-11-18T00:00:00-06:00","datePublished":"2020-11-18T00:00:00-06:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup.html"},"url":"https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup.html","@context":"https://schema.org"}</script>
+{"description":"How to set up AWS Cloud for InfluxDB?","headline":"Setting up AWS Cloud for InfluxDB","dateModified":"2020-11-18T00:00:00-06:00","datePublished":"2020-11-18T00:00:00-06:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/indluxdb-aws-cloud-setup.html"},"url":"https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/indluxdb-aws-cloud-setup.html","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
@@ -126,10 +126,13 @@ window.onload = wrap_img;
     
       <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
       
-        <a class="category-tags-link" href="/categories/#InfluxDB">InfluxDB</a>
+        <a class="category-tags-link" href="/categories/#AWS">AWS</a>
         &nbsp;
       
-        <a class="category-tags-link" href="/categories/#AWS">AWS</a>
+        <a class="category-tags-link" href="/categories/#EC2">EC2</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#InfluxDB">InfluxDB</a>
         
       
       </p>
@@ -311,6 +314,32 @@ AMI (Amazon Machine Image) ID</p>
 
 <p>Here you need to add a username, a password, and name your organization and your primary bucket. You can skip on the retention period question.</p>
 
+<h3 id="try-out-influxdb">Try out InfluxDB</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>influx bucket list
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">date</span> +%s
+1606723341
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>influx write <span class="nt">-b</span> test_bucket <span class="nt">-o</span> nocibambi@gmail.com <span class="nt">-p</span> s <span class="s1">'test_measurement,host=testHost testField="testFieldValue" 1606723341'</span>
+</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>influx query
+from<span class="o">(</span>bucket: <span class="s2">"test_bucket"</span><span class="o">)</span> |&gt; range<span class="o">(</span>start:-1h<span class="o">)</span>
+Result: _result
+Table: keys: <span class="o">[</span>_start, _stop, _field, _measurement, host]
+                   _start:time                      _stop:time           _field:string     _measurement:string             host:string                      _time:time           _value:string  
+<span class="nt">------------------------------</span>  <span class="nt">------------------------------</span>  <span class="nt">----------------------</span>  <span class="nt">----------------------</span>  <span class="nt">----------------------</span>  <span class="nt">------------------------------</span>  <span class="nt">----------------------</span>  
+2020-11-30T07:03:07.010273692Z  2020-11-30T08:03:07.010273692Z               testField        test_measurement                testHost  2020-11-30T08:02:21.000000000Z          testFieldValue  
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>influx query
+</code></pre></div></div>
+
+<pre><code class="language-flux">from(bucket: "test_bucket") |&gt; range(start: -7d)
+</code></pre>
+
 <h3 id="run-influxdb-service">Run influxdb service</h3>
 
 <p>Start the influxdb service.</p>
@@ -399,7 +428,7 @@ telegraf <span class="nt">--config</span> telegraf.conf <span class="nt">--test<
   <li><img src="/images/influxdb/2020-11-20-influxdb-aws-instance-end.png" alt="Instance Launch Screen" /></li>
 </ul>
 
-  </div><a class="u-url" href="/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup.html" hidden></a>
+  </div><a class="u-url" href="/aws/ec2/influxdb/2020/11/18/indluxdb-aws-cloud-setup.html" hidden></a>
 </article>
       </div>
     </main><footer class="site-footer h-card">

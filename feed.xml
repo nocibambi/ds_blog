@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://andrasnovoszath.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://andrasnovoszath.com/" rel="alternate" type="text/html" /><updated>2020-11-29T02:15:03-06:00</updated><id>https://andrasnovoszath.com/feed.xml</id><title type="html">Value this</title><subtitle>This is not another blog about bitcoin.</subtitle><entry><title type="html">Setting up AWS Cloud for InfluxDB</title><link href="https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup.html" rel="alternate" type="text/html" title="Setting up AWS Cloud for InfluxDB" /><published>2020-11-18T00:00:00-06:00</published><updated>2020-11-18T00:00:00-06:00</updated><id>https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup</id><content type="html" xml:base="https://andrasnovoszath.com/influxdb/aws/2020/11/18/indluxdb-aws-cloud-setup.html">&lt;p&gt;Here are the preparation steps you need to do if you would like to use AWS Cloudwatcher with InfluxDB.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://andrasnovoszath.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://andrasnovoszath.com/" rel="alternate" type="text/html" /><updated>2020-11-30T03:02:30-06:00</updated><id>https://andrasnovoszath.com/feed.xml</id><title type="html">Value this</title><subtitle>This is not another blog about bitcoin.</subtitle><entry><title type="html">Setting up AWS Cloud for InfluxDB</title><link href="https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/indluxdb-aws-cloud-setup.html" rel="alternate" type="text/html" title="Setting up AWS Cloud for InfluxDB" /><published>2020-11-18T00:00:00-06:00</published><updated>2020-11-18T00:00:00-06:00</updated><id>https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/indluxdb-aws-cloud-setup</id><content type="html" xml:base="https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/indluxdb-aws-cloud-setup.html">&lt;p&gt;Here are the preparation steps you need to do if you would like to use AWS Cloudwatcher with InfluxDB.&lt;/p&gt;
 
 &lt;p&gt;Based on this &lt;a href=&quot;https://www.influxdata.com/blog/running-influxdb-on-aws-with-cloud-formation/&quot;&gt;post&lt;/a&gt;&lt;/p&gt;
 
@@ -170,6 +170,32 @@ AMI (Amazon Machine Image) ID&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Here you need to add a username, a password, and name your organization and your primary bucket. You can skip on the retention period question.&lt;/p&gt;
+
+&lt;h3 id=&quot;try-out-influxdb&quot;&gt;Try out InfluxDB&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;influx bucket list
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;date&lt;/span&gt; +%s
+1606723341
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;influx write &lt;span class=&quot;nt&quot;&gt;-b&lt;/span&gt; test_bucket &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; nocibambi@gmail.com &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; s &lt;span class=&quot;s1&quot;&gt;'test_measurement,host=testHost testField=&quot;testFieldValue&quot; 1606723341'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;influx query
+from&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;bucket: &lt;span class=&quot;s2&quot;&gt;&quot;test_bucket&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; |&amp;gt; range&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;start:-1h&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+Result: _result
+Table: keys: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;_start, _stop, _field, _measurement, host]
+                   _start:time                      _stop:time           _field:string     _measurement:string             host:string                      _time:time           _value:string  
+&lt;span class=&quot;nt&quot;&gt;------------------------------&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;------------------------------&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;----------------------&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;----------------------&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;----------------------&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;------------------------------&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;----------------------&lt;/span&gt;  
+2020-11-30T07:03:07.010273692Z  2020-11-30T08:03:07.010273692Z               testField        test_measurement                testHost  2020-11-30T08:02:21.000000000Z          testFieldValue  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;influx query
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-flux&quot;&gt;from(bucket: &quot;test_bucket&quot;) |&amp;gt; range(start: -7d)
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&quot;run-influxdb-service&quot;&gt;Run influxdb service&lt;/h3&gt;
 
