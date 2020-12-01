@@ -5,29 +5,51 @@ categories: [AWS, EC2, InfluxDB]
 toc: false
 layout: post
 ---
-Here are the preparation steps you need to do if you would like to use AWS Cloudwatcher with InfluxDB.
+In this post you can learn the steps you need to make to set up InfluxDB on an AWS EC2 instance.
 
-Based on this [post](https://www.influxdata.com/blog/running-influxdb-on-aws-with-cloud-formation/)
+We can group the steps into these high-level phases:
 
-## Setting up an EC2 virtual server
+1. Set up an AWS account and an EC2 Virtual Server
+2. Set up an AWS EC2 instance
+3. Set up InfluxDB on you EC2 instance
+4. Try out InfluxDB on your EC2 instance
+
+## Set up an EC2 Virtual Server
+
+In this section we will set up an EC2 Virtual Server. This we need to create our EC2 instance. This phase consists of the following steps:
+
+1. Set up an AWS account
+2. Set up an EC2 key pair
+3. Set up an AWS user
+4. Install and set up the AWS command line client (AWS CLI) on your system
+
+### Set up an AWS account
 
 1. [Create an AWS account](https://aws.amazon.com/free/)
 1. Select the appropriate region:
     ![aws region select](/images/influxdb/aws_cloudformation/influxdb-aws-region.png)
+
+### Set up an EC2 Key pair
 1. Search for "EC2" in the **Find Services** search box and select **EC2 (Virtual Servers in the Cloud)** (Please not that you have to provide credit card information and it may take up to 24 hours for amazon to activate):
     ![aws ec2 select](/images/influxdb/aws_cloudformation/influxdb-aws-ec2-select.png)
 1. Select **Key Pairs** and the create a key pair: ![key-pairs](/images/influxdb/aws_cloudformation/influxdb-aws-ec2-key-pairs-menu.png)
 1. Download the keys.
 1. Make the key readable only by the owner: `chmod 400 name-of-the-key.pem`
-1. Open **IAM** from the **Services menu**: ![open-aim](/images/influxdb/aws_cloudformation/infludb-aws-select-iam.png)
+
+### Set up an AWS user
+
+1. Open **IAM** (Identity and Access Management) from the **Services menu**: ![open-aim](/images/influxdb/aws_cloudformation/infludb-aws-select-iam.png)
 1. Create a user and grant permissions to it:
     1. Select **Add user**: ![iam-new-user](/images/influxdb/aws_cloudformation/infludb-aws-iam-create-user.png)
-    2. Name the user and add access rights: ![iam-new-user-access](/images/influxdb/aws_cloudformation/influxdb-aws-iam-new-user-access.png)
-    3. On the **Set Permissions** screen click on **Add user to group** and **Create a group**: ![iam-new-user-new-group](/images/influxdb/aws_cloudformation/influxdb-aws-iam-new-user-create-group.png)
-    4. Define a name and add a policy for the new group: ![iam-new-group](/images/influxdb/aws_cloudformation/influxdb-aws-iam-group-permissions.png)
-    5. At the end of the process you will see your access details: ![iam-new-user-success](/images/influxdb/aws_cloudformation/influxdb-aws-iam-new-user-success.png)
+    1. Name the user and add access rights: ![iam-new-user-access](/images/influxdb/aws_cloudformation/influxdb-aws-iam-new-user-access.png)
+    1. On the **Set Permissions** screen click on **Add user to group** and **Create a group**: ![iam-new-user-new-group](/images/influxdb/aws_cloudformation/influxdb-aws-iam-new-user-create-group.png)
+    1. Define a name and add a policy for the new group: ![iam-new-group](/images/influxdb/aws_cloudformation/influxdb-aws-iam-group-permissions.png)
+    1. At the end of the process you will see your access details: ![iam-new-user-success](/images/influxdb/aws_cloudformation/influxdb-aws-iam-new-user-success.png)
 
     Note that AWS does not save your secret after you close your final screen. On the other hand, you will always be able to create a new key for your users.
+
+### Set up AWS CLI on your system
+
 1. Install the AWS CLI on your system.
 
     On a linux machine, you can do this as here:
@@ -54,10 +76,9 @@ Based on this [post](https://www.influxdata.com/blog/running-influxdb-on-aws-wit
     mv ~/Downloads/name-of-the-key.pem .
     touch config.yml
     ```
-
 1. Configure AWS with `aws configure`. This is where you need to add your **Access Key ID**, your **Secret Access Key**, and the **region name** (e.g. `eu-central-1`). You can skip the output format.
 
-## Amazon Machine Image
+## Set up an AWS EC2 instance
 
 Open the [Amazon AWS Marketplace](https://aws.amazon.com/marketplace/).
 
@@ -65,7 +86,7 @@ Find a public image
 
 ![Find public image](/images/influxdb/2020-11-20-influxdb-aws-find-public-image.png)
 
-## Defining resources
+### Define resources
 
 Resources
 Logical ID
@@ -117,21 +138,6 @@ Resources:
       KeyName: InfluxDB_AWS_example
       SecurityGroups:
         - !Ref AppNodeSG
-      UserData: !Base64 |
-          #!/bin/bash
-          apt-get update -qq
-          apt-get install -y apt-transport-https ca-certificates
-          apt-key adv apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-          apt-get update -qq apt-get purge lxc-docker || true
-          curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
-          add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
-          apt-get -y install linux-image-extra-$(uname -r) linux-image-extra-virtual
-          apt-get -y install docker-ce
-          usermod -aG docker unbuntu
-          docker image pull quay.io/influxdb/influxdb:2.0.0-alpha
-          docker container run -p 80:9999 quay.io/influxdb/influxdb:2.0.0-alpha
-          wget https://dl.influxdata.com/telegraf/releases/telegraf_1.10.4-1_amd64.deb
-          sudo dpkg -i telegraf_1.10.4-1_amd64.deb
   AppNodeSG:
     Type: AWS::EC2::SecurityGroup
     Properties:
@@ -147,7 +153,12 @@ Resources:
         CidrIp: 0.0.0.0/0
 ```
 
-Create stack
+### Create a Cloud Formation stack
+
+- ![Select Cloudformation](../images/influxdb/2020-12-01-influxdb-aws-select-cloudformation.png)
+- ![Select Create Stack](/images/influxdb/2020-12-01-influxdb-aws-select-create-stack.png)
+- ![Upload Template](/images/influxdb/2020-12-01-influxdb-aws-upload-template.png)
+- On the rest of the screens the only thing you have to do is to name the stack, you can skip the rest of the options.
 
 ```shell
 aws cloudformation create-stack \
@@ -155,6 +166,12 @@ aws cloudformation create-stack \
   --region eu-central-1 \
   --template-body file://$PWD/stack.yaml
 ```
+
+Go back to the EC2 services page and find the instances menu. There you will be able to see your newly created instance. Wait until it finishies initialization and has all of its checkes passed.
+
+![EC2 instance initialization](/images/influxdb/2020-12-01-influxdb-aws-instance-initialization.png)
+
+### Connect to your instance
 
 ![Get AMI instance DNS](/images/influxdb/2020-11-23-influxdb-aws-get-instance-dns.png)
 
@@ -165,14 +182,22 @@ ssh -v -i InfluxDB_AWS_example.pem \
   ubuntu@ec2-3-122-XXX-XX.eu-central-1.compute.amazonaws.com
 ```
 
-### Install InfluxDB
-Maybe this: https://websiteforstudents.com/how-to-install-influxdb-on-ubuntu-18-04-16-04/
+## Set up InfluxDB on the EC2 instance
 
+### Install InfluxDB
 
 ```bash
 wget https://dl.influxdata.com/influxdb/releases/influxdb_2.0.2_amd64.deb
 sudo dpkg -i influxdb_2.0.2_amd64.deb
 ```
+
+
+Start the influxdb service.
+
+```bash
+sudo systemctl start influxdb
+```
+
 
 Setup InfluxDB configuration settings
 
@@ -182,10 +207,14 @@ influx setup
 
 Here you need to add a username, a password, and name your organization and your primary bucket. You can skip on the retention period question.
 
-### Try out InfluxDB
+## Try out InfluxDB
 
 ```bash
-influx bucket list
+$ influx bucket list
+ID			Name		Retention	Organization ID
+61003b98acb988da	_monitoring	168h0m0s	aca7861debe89fb5
+62a458b6d3091276	_tasks		72h0m0s		aca7861debe89fb5
+d4e2f2ae14c34289	test_bucket	1h0m0s		aca7861debe89fb5
 ```
 
 ```bash
@@ -196,6 +225,9 @@ $ date +%s
 ```bash
 $ influx write -b test_bucket -o nocibambi@gmail.com -p s 'test_measurement,host=testHost testField="testFieldValue" 1606723341'
 ```
+
+Use Ctrl-D to execute the query.
+
 ```bash
 $ influx query
 from(bucket: "test_bucket") |> range(start:-1h)
@@ -205,105 +237,3 @@ Table: keys: [_start, _stop, _field, _measurement, host]
 ------------------------------  ------------------------------  ----------------------  ----------------------  ----------------------  ------------------------------  ----------------------  
 2020-11-30T07:03:07.010273692Z  2020-11-30T08:03:07.010273692Z               testField        test_measurement                testHost  2020-11-30T08:02:21.000000000Z          testFieldValue  
 ```
-
-
-```bash
-influx query
-```
-
-```flux
-from(bucket: "test_bucket") |> range(start: -7d)
-```
-
-
-### Run influxdb service
-
-Start the influxdb service.
-
-```bash
-sudo systemctl start influxdb.service
-```
-
-<https://devconnected.com/how-to-install-influxdb-on-ubuntu-debian-in-2019/#II_Installing_InfluxDB_20>
-
-### Install telegraf
-
-We need to install telegraf onto our instance.
-
-On an Ubuntu instance this will look like this:
-
-Adding the repository:
-
-```bash
-wget -qO- https://repos.influxdata.com/influxdb.key | sudo apt-key add -
-source /etc/lsb-release
-echo "deb https://repos.influxdata.com/${DISTRIB_ID,,} ${DISTRIB_CODENAME} stable" \
-  | sudo tee /etc/apt/sources.list.d/influxdb.list
-```
-
-
-Installing telegraf:
-
-```bash
-sudo apt-get update && sudo apt-get install telegraf
-```
-j
-
-```bash
-telegraf --test
-```
-
-Create an example data collection setting config and test it
-```bash
-telegraf -sample-config --input-filter cpu:mem --output-filter influxdb > telegraf_test.conf
-telegraf --config telegraf.conf --test
-```
-
-
-
-<https://docs.influxdata.com/telegraf/v1.16/guides/using_http/>
-
-For other systems and futher information see [this link](https://docs.influxdata.com/telegraf/v1.16/introduction/installation/).
-
-## Install Chronograph
-
-```bash
-wget https://dl.influxdata.com/chronograf/releases/chronograf_1.8.8_amd64.deb
-sudo dpkg -i chronograf_1.8.8_amd64.deb
-```
-
-### Configure Telegraf
-
-- [ ] <https://docs.influxdata.com/telegraf/v1.16/guides/using_http/>
-
-On Ubuntu instance the config file path is at `/etc/telegraf/telegraf.conf`.
-
-- <https://docs.influxdata.com/telegraf/v1.15/administration/configuration/>
-- <https://docs.influxdata.com/telegraf/v1.16/introduction/getting-started/>
-
-For further options and for configuration on other systems, see the [documentation](https://docs.influxdata.com/telegraf/v1.16/introduction/getting-started/#configure-telegraf).
-
-Starting the Telegraph service:
-
-```bash
-sudo systemctl start telegraf
-sudo systemctl status telegraf
-```
-
-## Instance
-
-![Register a new Amazon Machine Image](/images/influxdb/2020-11-20-influxdb-aws-register-new-ami.png)
-
-![Open AWS Marketplace](/images/influxdb/2020-11-20-influxdb-aws-open-marketplace.png)
-
-![Select Ubuntu Image](/images/influxdb/2020-11-20-influxdb-aws-select-ubuntu.png)
-
-![Subscribe AMI](/images/influxdb/2020-11-20-influxdb-aws-subscribe-ami.png)
-
-- **Continue to Configuration**: ![Terms and Conditions](/images/influxdb/2020-11-20-influxdb-aws-terms-conditions.png)
-- ![Configure AMI](/images/influxdb/2020-11-20-influxdb-aws-configure-ami.png)
-- ![Launch Instance](/images/influxdb/2020-11-20-influxdb-aws-launch-instance.png)
-- ![Instance Type](/images/influxdb/2020-11-20-influxdb-aws-instance-type.png)
-- ![Launch Instance](/images/influxdb/2020-11-20-influxdb-aws-launc-instance.png)
-- ![Select Key Pair](/images/influxdb/2020-11-20-influxdb-aws-select-key-pair.png)
-- ![Instance Launch Screen](/images/influxdb/2020-11-20-influxdb-aws-instance-end.png)
