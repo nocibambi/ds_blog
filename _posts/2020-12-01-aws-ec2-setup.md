@@ -1,5 +1,5 @@
 ---
-title: How create a new AWS, EC2 instance?
+title: How create a new AWS EC2 instance?
 description: The main steps to create an AWS instance.
 categories: [AWS, EC2, tutorial]
 toc: false
