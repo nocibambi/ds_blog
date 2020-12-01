@@ -141,22 +141,49 @@ window.onload = wrap_img;
     </header>
 
   <div class="post-content e-content" itemprop="articleBody">
-    <p>Here are the preparation steps you need to do if you would like to use AWS Cloudwatcher with InfluxDB.</p>
+    <p>In this post you can learn the steps you need to make to set up InfluxDB on an AWS EC2 instance.</p>
 
-<p>Based on this <a href="https://www.influxdata.com/blog/running-influxdb-on-aws-with-cloud-formation/">post</a></p>
+<p>We can group the steps into these high-level phases:</p>
 
-<h2 id="setting-up-an-ec2-virtual-server">Setting up an EC2 virtual server</h2>
+<ol>
+  <li>Set up an AWS account and an EC2 Virtual Server</li>
+  <li>Set up an AWS EC2 instance</li>
+  <li>Set up InfluxDB on you EC2 instance</li>
+  <li>Try out InfluxDB on your EC2 instance</li>
+</ol>
+
+<h2 id="set-up-an-ec2-virtual-server">Set up an EC2 Virtual Server</h2>
+
+<p>In this section we will set up an EC2 Virtual Server. This we need to create our EC2 instance. This phase consists of the following steps:</p>
+
+<ol>
+  <li>Set up an AWS account</li>
+  <li>Set up an EC2 key pair</li>
+  <li>Set up an AWS user</li>
+  <li>Install and set up the AWS command line client (AWS CLI) on your system</li>
+</ol>
+
+<h3 id="set-up-an-aws-account">Set up an AWS account</h3>
 
 <ol>
   <li><a href="https://aws.amazon.com/free/">Create an AWS account</a></li>
   <li>Select the appropriate region:
  <img src="/images/influxdb/aws_cloudformation/influxdb-aws-region.png" alt="aws region select" /></li>
+</ol>
+
+<h3 id="set-up-an-ec2-key-pair">Set up an EC2 Key pair</h3>
+<ol>
   <li>Search for “EC2” in the <strong>Find Services</strong> search box and select <strong>EC2 (Virtual Servers in the Cloud)</strong> (Please not that you have to provide credit card information and it may take up to 24 hours for amazon to activate):
  <img src="/images/influxdb/aws_cloudformation/influxdb-aws-ec2-select.png" alt="aws ec2 select" /></li>
   <li>Select <strong>Key Pairs</strong> and the create a key pair: <img src="/images/influxdb/aws_cloudformation/influxdb-aws-ec2-key-pairs-menu.png" alt="key-pairs" /></li>
   <li>Download the keys.</li>
   <li>Make the key readable only by the owner: <code class="highlighter-rouge">chmod 400 name-of-the-key.pem</code></li>
-  <li>Open <strong>IAM</strong> from the <strong>Services menu</strong>: <img src="/images/influxdb/aws_cloudformation/infludb-aws-select-iam.png" alt="open-aim" /></li>
+</ol>
+
+<h3 id="set-up-an-aws-user">Set up an AWS user</h3>
+
+<ol>
+  <li>Open <strong>IAM</strong> (Identity and Access Management) from the <strong>Services menu</strong>: <img src="/images/influxdb/aws_cloudformation/infludb-aws-select-iam.png" alt="open-aim" /></li>
   <li>Create a user and grant permissions to it:
     <ol>
       <li>Select <strong>Add user</strong>: <img src="/images/influxdb/aws_cloudformation/infludb-aws-iam-create-user.png" alt="iam-new-user" /></li>
@@ -168,6 +195,11 @@ window.onload = wrap_img;
 
     <p>Note that AWS does not save your secret after you close your final screen. On the other hand, you will always be able to create a new key for your users.</p>
   </li>
+</ol>
+
+<h3 id="set-up-aws-cli-on-your-system">Set up AWS CLI on your system</h3>
+
+<ol>
   <li>
     <p>Install the AWS CLI on your system.</p>
 
@@ -194,10 +226,12 @@ window.onload = wrap_img;
  <span class="nb">touch </span>config.yml
 </code></pre></div>    </div>
   </li>
-  <li>Configure AWS with <code class="highlighter-rouge">aws configure</code>. This is where you need to add your <strong>Access Key ID</strong>, your <strong>Secret Access Key</strong>, and the <strong>region name</strong> (e.g. <code class="highlighter-rouge">eu-central-1</code>). You can skip the output format.</li>
+  <li>
+    <p>Configure AWS with <code class="highlighter-rouge">aws configure</code>. This is where you need to add your <strong>Access Key ID</strong>, your <strong>Secret Access Key</strong>, and the <strong>region name</strong> (e.g. <code class="highlighter-rouge">eu-central-1</code>). You can skip the output format.</p>
+  </li>
 </ol>
 
-<h2 id="amazon-machine-image">Amazon Machine Image</h2>
+<h2 id="set-up-an-aws-ec2-instance">Set up an AWS EC2 instance</h2>
 
 <p>Open the <a href="https://aws.amazon.com/marketplace/">Amazon AWS Marketplace</a>.</p>
 
@@ -205,7 +239,7 @@ window.onload = wrap_img;
 
 <p><img src="/images/influxdb/2020-11-20-influxdb-aws-find-public-image.png" alt="Find public image" /></p>
 
-<h2 id="defining-resources">Defining resources</h2>
+<h3 id="define-resources">Define resources</h3>
 
 <p>Resources
 Logical ID
@@ -254,21 +288,6 @@ AMI (Amazon Machine Image) ID</p>
       <span class="na">KeyName</span><span class="pi">:</span> <span class="s">InfluxDB_AWS_example</span>
       <span class="na">SecurityGroups</span><span class="pi">:</span>
         <span class="pi">-</span> <span class="kt">!Ref</span> <span class="s">AppNodeSG</span>
-      <span class="na">UserData</span><span class="pi">:</span> <span class="kt">!Base64</span> <span class="pi">|</span>
-          <span class="s">#!/bin/bash</span>
-          <span class="s">apt-get update -qq</span>
-          <span class="s">apt-get install -y apt-transport-https ca-certificates</span>
-          <span class="s">apt-key adv apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D</span>
-          <span class="s">apt-get update -qq apt-get purge lxc-docker || true</span>
-          <span class="s">curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -</span>
-          <span class="s">add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"</span>
-          <span class="s">apt-get -y install linux-image-extra-$(uname -r) linux-image-extra-virtual</span>
-          <span class="s">apt-get -y install docker-ce</span>
-          <span class="s">usermod -aG docker unbuntu</span>
-          <span class="s">docker image pull quay.io/influxdb/influxdb:2.0.0-alpha</span>
-          <span class="s">docker container run -p 80:9999 quay.io/influxdb/influxdb:2.0.0-alpha</span>
-          <span class="s">wget https://dl.influxdata.com/telegraf/releases/telegraf_1.10.4-1_amd64.deb</span>
-          <span class="s">sudo dpkg -i telegraf_1.10.4-1_amd64.deb</span>
   <span class="na">AppNodeSG</span><span class="pi">:</span>
     <span class="na">Type</span><span class="pi">:</span> <span class="s">AWS::EC2::SecurityGroup</span>
     <span class="na">Properties</span><span class="pi">:</span>
@@ -284,13 +303,26 @@ AMI (Amazon Machine Image) ID</p>
         <span class="na">CidrIp</span><span class="pi">:</span> <span class="s">0.0.0.0/0</span>
 </code></pre></div></div>
 
-<p>Create stack</p>
+<h3 id="create-a-cloud-formation-stack">Create a Cloud Formation stack</h3>
+
+<ul>
+  <li><img src="../images/influxdb/2020-12-01-influxdb-aws-select-cloudformation.png" alt="Select Cloudformation" /></li>
+  <li><img src="/images/influxdb/2020-12-01-influxdb-aws-select-create-stack.png" alt="Select Create Stack" /></li>
+  <li><img src="/images/influxdb/2020-12-01-influxdb-aws-upload-template.png" alt="Upload Template" /></li>
+  <li>On the rest of the screens the only thing you have to do is to name the stack, you can skip the rest of the options.</li>
+</ul>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aws cloudformation create-stack <span class="se">\</span>
   <span class="nt">--stack-name</span> influxdb-trial-stack <span class="se">\</span>
   <span class="nt">--region</span> eu-central-1 <span class="se">\</span>
   <span class="nt">--template-body</span> file://<span class="nv">$PWD</span>/stack.yaml
 </code></pre></div></div>
+
+<p>Go back to the EC2 services page and find the instances menu. There you will be able to see your newly created instance. Wait until it finishies initialization and has all of its checkes passed.</p>
+
+<p><img src="/images/influxdb/2020-12-01-influxdb-aws-instance-initialization.png" alt="EC2 instance initialization" /></p>
+
+<h3 id="connect-to-your-instance">Connect to your instance</h3>
 
 <p><img src="/images/influxdb/2020-11-23-influxdb-aws-get-instance-dns.png" alt="Get AMI instance DNS" /></p>
 
@@ -300,11 +332,17 @@ AMI (Amazon Machine Image) ID</p>
   ubuntu@ec2-3-122-XXX-XX.eu-central-1.compute.amazonaws.com
 </code></pre></div></div>
 
+<h2 id="set-up-influxdb-on-the-ec2-instance">Set up InfluxDB on the EC2 instance</h2>
+
 <h3 id="install-influxdb">Install InfluxDB</h3>
-<p>Maybe this: https://websiteforstudents.com/how-to-install-influxdb-on-ubuntu-18-04-16-04/</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://dl.influxdata.com/influxdb/releases/influxdb_2.0.2_amd64.deb
 <span class="nb">sudo </span>dpkg <span class="nt">-i</span> influxdb_2.0.2_amd64.deb
+</code></pre></div></div>
+
+<p>Start the influxdb service.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>systemctl start influxdb
 </code></pre></div></div>
 
 <p>Setup InfluxDB configuration settings</p>
@@ -314,9 +352,13 @@ AMI (Amazon Machine Image) ID</p>
 
 <p>Here you need to add a username, a password, and name your organization and your primary bucket. You can skip on the retention period question.</p>
 
-<h3 id="try-out-influxdb">Try out InfluxDB</h3>
+<h2 id="try-out-influxdb">Try out InfluxDB</h2>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>influx bucket list
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>influx bucket list
+ID			Name		Retention	Organization ID
+61003b98acb988da	_monitoring	168h0m0s	aca7861debe89fb5
+62a458b6d3091276	_tasks		72h0m0s		aca7861debe89fb5
+d4e2f2ae14c34289	test_bucket	1h0m0s		aca7861debe89fb5
 </code></pre></div></div>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">date</span> +%s
@@ -325,6 +367,9 @@ AMI (Amazon Machine Image) ID</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>influx write <span class="nt">-b</span> test_bucket <span class="nt">-o</span> nocibambi@gmail.com <span class="nt">-p</span> s <span class="s1">'test_measurement,host=testHost testField="testFieldValue" 1606723341'</span>
 </code></pre></div></div>
+
+<p>Use Ctrl-D to execute the query.</p>
+
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>influx query
 from<span class="o">(</span>bucket: <span class="s2">"test_bucket"</span><span class="o">)</span> |&gt; range<span class="o">(</span>start:-1h<span class="o">)</span>
 Result: _result
@@ -333,100 +378,6 @@ Table: keys: <span class="o">[</span>_start, _stop, _field, _measurement, host]
 <span class="nt">------------------------------</span>  <span class="nt">------------------------------</span>  <span class="nt">----------------------</span>  <span class="nt">----------------------</span>  <span class="nt">----------------------</span>  <span class="nt">------------------------------</span>  <span class="nt">----------------------</span>  
 2020-11-30T07:03:07.010273692Z  2020-11-30T08:03:07.010273692Z               testField        test_measurement                testHost  2020-11-30T08:02:21.000000000Z          testFieldValue  
 </code></pre></div></div>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>influx query
-</code></pre></div></div>
-
-<pre><code class="language-flux">from(bucket: "test_bucket") |&gt; range(start: -7d)
-</code></pre>
-
-<h3 id="run-influxdb-service">Run influxdb service</h3>
-
-<p>Start the influxdb service.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>systemctl start influxdb.service
-</code></pre></div></div>
-
-<p><a href="https://devconnected.com/how-to-install-influxdb-on-ubuntu-debian-in-2019/#II_Installing_InfluxDB_20">https://devconnected.com/how-to-install-influxdb-on-ubuntu-debian-in-2019/#II_Installing_InfluxDB_20</a></p>
-
-<h3 id="install-telegraf">Install telegraf</h3>
-
-<p>We need to install telegraf onto our instance.</p>
-
-<p>On an Ubuntu instance this will look like this:</p>
-
-<p>Adding the repository:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget <span class="nt">-qO-</span> https://repos.influxdata.com/influxdb.key | <span class="nb">sudo </span>apt-key add -
-<span class="nb">source</span> /etc/lsb-release
-<span class="nb">echo</span> <span class="s2">"deb https://repos.influxdata.com/</span><span class="k">${</span><span class="nv">DISTRIB_ID</span><span class="p">,,</span><span class="k">}</span><span class="s2"> </span><span class="k">${</span><span class="nv">DISTRIB_CODENAME</span><span class="k">}</span><span class="s2"> stable"</span> <span class="se">\</span>
-  | <span class="nb">sudo tee</span> /etc/apt/sources.list.d/influxdb.list
-</code></pre></div></div>
-
-<p>Installing telegraf:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get update <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>apt-get <span class="nb">install </span>telegraf
-</code></pre></div></div>
-<p>j</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>telegraf <span class="nt">--test</span>
-</code></pre></div></div>
-
-<p>Create an example data collection setting config and test it</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>telegraf <span class="nt">-sample-config</span> <span class="nt">--input-filter</span> cpu:mem <span class="nt">--output-filter</span> influxdb <span class="o">&gt;</span> telegraf_test.conf
-telegraf <span class="nt">--config</span> telegraf.conf <span class="nt">--test</span>
-</code></pre></div></div>
-
-<p><a href="https://docs.influxdata.com/telegraf/v1.16/guides/using_http/">https://docs.influxdata.com/telegraf/v1.16/guides/using_http/</a></p>
-
-<p>For other systems and futher information see <a href="https://docs.influxdata.com/telegraf/v1.16/introduction/installation/">this link</a>.</p>
-
-<h2 id="install-chronograph">Install Chronograph</h2>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://dl.influxdata.com/chronograf/releases/chronograf_1.8.8_amd64.deb
-<span class="nb">sudo </span>dpkg <span class="nt">-i</span> chronograf_1.8.8_amd64.deb
-</code></pre></div></div>
-
-<h3 id="configure-telegraf">Configure Telegraf</h3>
-
-<ul class="task-list">
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><a href="https://docs.influxdata.com/telegraf/v1.16/guides/using_http/">https://docs.influxdata.com/telegraf/v1.16/guides/using_http/</a></li>
-</ul>
-
-<p>On Ubuntu instance the config file path is at <code class="highlighter-rouge">/etc/telegraf/telegraf.conf</code>.</p>
-
-<ul>
-  <li><a href="https://docs.influxdata.com/telegraf/v1.15/administration/configuration/">https://docs.influxdata.com/telegraf/v1.15/administration/configuration/</a></li>
-  <li><a href="https://docs.influxdata.com/telegraf/v1.16/introduction/getting-started/">https://docs.influxdata.com/telegraf/v1.16/introduction/getting-started/</a></li>
-</ul>
-
-<p>For further options and for configuration on other systems, see the <a href="https://docs.influxdata.com/telegraf/v1.16/introduction/getting-started/#configure-telegraf">documentation</a>.</p>
-
-<p>Starting the Telegraph service:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>systemctl start telegraf
-<span class="nb">sudo </span>systemctl status telegraf
-</code></pre></div></div>
-
-<h2 id="instance">Instance</h2>
-
-<p><img src="/images/influxdb/2020-11-20-influxdb-aws-register-new-ami.png" alt="Register a new Amazon Machine Image" /></p>
-
-<p><img src="/images/influxdb/2020-11-20-influxdb-aws-open-marketplace.png" alt="Open AWS Marketplace" /></p>
-
-<p><img src="/images/influxdb/2020-11-20-influxdb-aws-select-ubuntu.png" alt="Select Ubuntu Image" /></p>
-
-<p><img src="/images/influxdb/2020-11-20-influxdb-aws-subscribe-ami.png" alt="Subscribe AMI" /></p>
-
-<ul>
-  <li><strong>Continue to Configuration</strong>: <img src="/images/influxdb/2020-11-20-influxdb-aws-terms-conditions.png" alt="Terms and Conditions" /></li>
-  <li><img src="/images/influxdb/2020-11-20-influxdb-aws-configure-ami.png" alt="Configure AMI" /></li>
-  <li><img src="/images/influxdb/2020-11-20-influxdb-aws-launch-instance.png" alt="Launch Instance" /></li>
-  <li><img src="/images/influxdb/2020-11-20-influxdb-aws-instance-type.png" alt="Instance Type" /></li>
-  <li><img src="/images/influxdb/2020-11-20-influxdb-aws-launc-instance.png" alt="Launch Instance" /></li>
-  <li><img src="/images/influxdb/2020-11-20-influxdb-aws-select-key-pair.png" alt="Select Key Pair" /></li>
-  <li><img src="/images/influxdb/2020-11-20-influxdb-aws-instance-end.png" alt="Instance Launch Screen" /></li>
-</ul>
 
   </div><a class="u-url" href="/aws/ec2/influxdb/2020/11/18/indluxdb-aws-cloud-setup.html" hidden></a>
 </article>
@@ -451,7 +402,7 @@ telegraf <span class="nt">--config</span> telegraf.conf <span class="nt">--test<
       </div>
     </div>
 
-    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/nocibambi" title="nocibambi"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li></ul>
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/nocibambi" title="nocibambi"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/nocibambi" title="nocibambi"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
 </div>
 
   </div>

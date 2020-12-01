@@ -1,19 +1,70 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://andrasnovoszath.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://andrasnovoszath.com/" rel="alternate" type="text/html" /><updated>2020-11-30T03:02:30-06:00</updated><id>https://andrasnovoszath.com/feed.xml</id><title type="html">Value this</title><subtitle>This is not another blog about bitcoin.</subtitle><entry><title type="html">Setting up AWS Cloud for InfluxDB</title><link href="https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/indluxdb-aws-cloud-setup.html" rel="alternate" type="text/html" title="Setting up AWS Cloud for InfluxDB" /><published>2020-11-18T00:00:00-06:00</published><updated>2020-11-18T00:00:00-06:00</updated><id>https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/indluxdb-aws-cloud-setup</id><content type="html" xml:base="https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/indluxdb-aws-cloud-setup.html">&lt;p&gt;Here are the preparation steps you need to do if you would like to use AWS Cloudwatcher with InfluxDB.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://andrasnovoszath.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://andrasnovoszath.com/" rel="alternate" type="text/html" /><updated>2020-12-01T02:47:54-06:00</updated><id>https://andrasnovoszath.com/feed.xml</id><title type="html">Value this</title><subtitle>This is not another blog about bitcoin.</subtitle><entry><title type="html">How create a new AWS, EC2 instance?</title><link href="https://andrasnovoszath.com/aws/ec2/tutorial/2020/12/01/aws-ec2-setup.html" rel="alternate" type="text/html" title="How create a new AWS, EC2 instance?" /><published>2020-12-01T00:00:00-06:00</published><updated>2020-12-01T00:00:00-06:00</updated><id>https://andrasnovoszath.com/aws/ec2/tutorial/2020/12/01/aws-ec2-setup</id><content type="html" xml:base="https://andrasnovoszath.com/aws/ec2/tutorial/2020/12/01/aws-ec2-setup.html">&lt;p&gt;Register a new Amazon Machine Image&lt;/p&gt;
 
-&lt;p&gt;Based on this &lt;a href=&quot;https://www.influxdata.com/blog/running-influxdb-on-aws-with-cloud-formation/&quot;&gt;post&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-register-new-ami.png&quot; alt=&quot;Register a new Amazon Machine Image&quot; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;setting-up-an-ec2-virtual-server&quot;&gt;Setting up an EC2 virtual server&lt;/h2&gt;
+&lt;p&gt;Open the AWS Marketplace&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-open-marketplace.png&quot; alt=&quot;Open AWS Marketplace&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Select an image of your choosing.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-select-ubuntu.png&quot; alt=&quot;Select Ubuntu Image&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Subscribe to the Amazon Machine Image.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-subscribe-ami.png&quot; alt=&quot;Subscribe AMI&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Continue to Configuration&lt;/strong&gt;: &lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-terms-conditions.png&quot; alt=&quot;Terms and Conditions&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-configure-ami.png&quot; alt=&quot;Configure AMI&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-launch-instance.png&quot; alt=&quot;Launch Instance&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-instance-type.png&quot; alt=&quot;Instance Type&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-launc-instance.png&quot; alt=&quot;Launch Instance&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-select-key-pair.png&quot; alt=&quot;Select Key Pair&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-instance-end.png&quot; alt=&quot;Instance Launch Screen&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name></name></author><summary type="html">Register a new Amazon Machine Image</summary></entry><entry><title type="html">Setting up AWS Cloud for InfluxDB</title><link href="https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/indluxdb-aws-cloud-setup.html" rel="alternate" type="text/html" title="Setting up AWS Cloud for InfluxDB" /><published>2020-11-18T00:00:00-06:00</published><updated>2020-11-18T00:00:00-06:00</updated><id>https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/indluxdb-aws-cloud-setup</id><content type="html" xml:base="https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/indluxdb-aws-cloud-setup.html">&lt;p&gt;In this post you can learn the steps you need to make to set up InfluxDB on an AWS EC2 instance.&lt;/p&gt;
+
+&lt;p&gt;We can group the steps into these high-level phases:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Set up an AWS account and an EC2 Virtual Server&lt;/li&gt;
+  &lt;li&gt;Set up an AWS EC2 instance&lt;/li&gt;
+  &lt;li&gt;Set up InfluxDB on you EC2 instance&lt;/li&gt;
+  &lt;li&gt;Try out InfluxDB on your EC2 instance&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;set-up-an-ec2-virtual-server&quot;&gt;Set up an EC2 Virtual Server&lt;/h2&gt;
+
+&lt;p&gt;In this section we will set up an EC2 Virtual Server. This we need to create our EC2 instance. This phase consists of the following steps:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Set up an AWS account&lt;/li&gt;
+  &lt;li&gt;Set up an EC2 key pair&lt;/li&gt;
+  &lt;li&gt;Set up an AWS user&lt;/li&gt;
+  &lt;li&gt;Install and set up the AWS command line client (AWS CLI) on your system&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;set-up-an-aws-account&quot;&gt;Set up an AWS account&lt;/h3&gt;
 
 &lt;ol&gt;
   &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/free/&quot;&gt;Create an AWS account&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Select the appropriate region:
  &lt;img src=&quot;/images/influxdb/aws_cloudformation/influxdb-aws-region.png&quot; alt=&quot;aws region select&quot; /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;set-up-an-ec2-key-pair&quot;&gt;Set up an EC2 Key pair&lt;/h3&gt;
+&lt;ol&gt;
   &lt;li&gt;Search for “EC2” in the &lt;strong&gt;Find Services&lt;/strong&gt; search box and select &lt;strong&gt;EC2 (Virtual Servers in the Cloud)&lt;/strong&gt; (Please not that you have to provide credit card information and it may take up to 24 hours for amazon to activate):
  &lt;img src=&quot;/images/influxdb/aws_cloudformation/influxdb-aws-ec2-select.png&quot; alt=&quot;aws ec2 select&quot; /&gt;&lt;/li&gt;
   &lt;li&gt;Select &lt;strong&gt;Key Pairs&lt;/strong&gt; and the create a key pair: &lt;img src=&quot;/images/influxdb/aws_cloudformation/influxdb-aws-ec2-key-pairs-menu.png&quot; alt=&quot;key-pairs&quot; /&gt;&lt;/li&gt;
   &lt;li&gt;Download the keys.&lt;/li&gt;
   &lt;li&gt;Make the key readable only by the owner: &lt;code class=&quot;highlighter-rouge&quot;&gt;chmod 400 name-of-the-key.pem&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Open &lt;strong&gt;IAM&lt;/strong&gt; from the &lt;strong&gt;Services menu&lt;/strong&gt;: &lt;img src=&quot;/images/influxdb/aws_cloudformation/infludb-aws-select-iam.png&quot; alt=&quot;open-aim&quot; /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;set-up-an-aws-user&quot;&gt;Set up an AWS user&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Open &lt;strong&gt;IAM&lt;/strong&gt; (Identity and Access Management) from the &lt;strong&gt;Services menu&lt;/strong&gt;: &lt;img src=&quot;/images/influxdb/aws_cloudformation/infludb-aws-select-iam.png&quot; alt=&quot;open-aim&quot; /&gt;&lt;/li&gt;
   &lt;li&gt;Create a user and grant permissions to it:
     &lt;ol&gt;
       &lt;li&gt;Select &lt;strong&gt;Add user&lt;/strong&gt;: &lt;img src=&quot;/images/influxdb/aws_cloudformation/infludb-aws-iam-create-user.png&quot; alt=&quot;iam-new-user&quot; /&gt;&lt;/li&gt;
@@ -25,6 +76,11 @@
 
     &lt;p&gt;Note that AWS does not save your secret after you close your final screen. On the other hand, you will always be able to create a new key for your users.&lt;/p&gt;
   &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;set-up-aws-cli-on-your-system&quot;&gt;Set up AWS CLI on your system&lt;/h3&gt;
+
+&lt;ol&gt;
   &lt;li&gt;
     &lt;p&gt;Install the AWS CLI on your system.&lt;/p&gt;
 
@@ -51,10 +107,12 @@
  &lt;span class=&quot;nb&quot;&gt;touch &lt;/span&gt;config.yml
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
-  &lt;li&gt;Configure AWS with &lt;code class=&quot;highlighter-rouge&quot;&gt;aws configure&lt;/code&gt;. This is where you need to add your &lt;strong&gt;Access Key ID&lt;/strong&gt;, your &lt;strong&gt;Secret Access Key&lt;/strong&gt;, and the &lt;strong&gt;region name&lt;/strong&gt; (e.g. &lt;code class=&quot;highlighter-rouge&quot;&gt;eu-central-1&lt;/code&gt;). You can skip the output format.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Configure AWS with &lt;code class=&quot;highlighter-rouge&quot;&gt;aws configure&lt;/code&gt;. This is where you need to add your &lt;strong&gt;Access Key ID&lt;/strong&gt;, your &lt;strong&gt;Secret Access Key&lt;/strong&gt;, and the &lt;strong&gt;region name&lt;/strong&gt; (e.g. &lt;code class=&quot;highlighter-rouge&quot;&gt;eu-central-1&lt;/code&gt;). You can skip the output format.&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&quot;amazon-machine-image&quot;&gt;Amazon Machine Image&lt;/h2&gt;
+&lt;h2 id=&quot;set-up-an-aws-ec2-instance&quot;&gt;Set up an AWS EC2 instance&lt;/h2&gt;
 
 &lt;p&gt;Open the &lt;a href=&quot;https://aws.amazon.com/marketplace/&quot;&gt;Amazon AWS Marketplace&lt;/a&gt;.&lt;/p&gt;
 
@@ -62,7 +120,7 @@
 
 &lt;p&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-find-public-image.png&quot; alt=&quot;Find public image&quot; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;defining-resources&quot;&gt;Defining resources&lt;/h2&gt;
+&lt;h3 id=&quot;define-resources&quot;&gt;Define resources&lt;/h3&gt;
 
 &lt;p&gt;Resources
 Logical ID
@@ -111,21 +169,6 @@ AMI (Amazon Machine Image) ID&lt;/p&gt;
       &lt;span class=&quot;na&quot;&gt;KeyName&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;InfluxDB_AWS_example&lt;/span&gt;
       &lt;span class=&quot;na&quot;&gt;SecurityGroups&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
         &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;!Ref&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;AppNodeSG&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;UserData&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;!Base64&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
-          &lt;span class=&quot;s&quot;&gt;#!/bin/bash&lt;/span&gt;
-          &lt;span class=&quot;s&quot;&gt;apt-get update -qq&lt;/span&gt;
-          &lt;span class=&quot;s&quot;&gt;apt-get install -y apt-transport-https ca-certificates&lt;/span&gt;
-          &lt;span class=&quot;s&quot;&gt;apt-key adv apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D&lt;/span&gt;
-          &lt;span class=&quot;s&quot;&gt;apt-get update -qq apt-get purge lxc-docker || true&lt;/span&gt;
-          &lt;span class=&quot;s&quot;&gt;curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -&lt;/span&gt;
-          &lt;span class=&quot;s&quot;&gt;add-apt-repository &quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable&quot;&lt;/span&gt;
-          &lt;span class=&quot;s&quot;&gt;apt-get -y install linux-image-extra-$(uname -r) linux-image-extra-virtual&lt;/span&gt;
-          &lt;span class=&quot;s&quot;&gt;apt-get -y install docker-ce&lt;/span&gt;
-          &lt;span class=&quot;s&quot;&gt;usermod -aG docker unbuntu&lt;/span&gt;
-          &lt;span class=&quot;s&quot;&gt;docker image pull quay.io/influxdb/influxdb:2.0.0-alpha&lt;/span&gt;
-          &lt;span class=&quot;s&quot;&gt;docker container run -p 80:9999 quay.io/influxdb/influxdb:2.0.0-alpha&lt;/span&gt;
-          &lt;span class=&quot;s&quot;&gt;wget https://dl.influxdata.com/telegraf/releases/telegraf_1.10.4-1_amd64.deb&lt;/span&gt;
-          &lt;span class=&quot;s&quot;&gt;sudo dpkg -i telegraf_1.10.4-1_amd64.deb&lt;/span&gt;
   &lt;span class=&quot;na&quot;&gt;AppNodeSG&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
     &lt;span class=&quot;na&quot;&gt;Type&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;AWS::EC2::SecurityGroup&lt;/span&gt;
     &lt;span class=&quot;na&quot;&gt;Properties&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
@@ -141,13 +184,26 @@ AMI (Amazon Machine Image) ID&lt;/p&gt;
         &lt;span class=&quot;na&quot;&gt;CidrIp&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;0.0.0.0/0&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Create stack&lt;/p&gt;
+&lt;h3 id=&quot;create-a-cloud-formation-stack&quot;&gt;Create a Cloud Formation stack&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;img src=&quot;../images/influxdb/2020-12-01-influxdb-aws-select-cloudformation.png&quot; alt=&quot;Select Cloudformation&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/images/influxdb/2020-12-01-influxdb-aws-select-create-stack.png&quot; alt=&quot;Select Create Stack&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;img src=&quot;/images/influxdb/2020-12-01-influxdb-aws-upload-template.png&quot; alt=&quot;Upload Template&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;On the rest of the screens the only thing you have to do is to name the stack, you can skip the rest of the options.&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;aws cloudformation create-stack &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
   &lt;span class=&quot;nt&quot;&gt;--stack-name&lt;/span&gt; influxdb-trial-stack &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
   &lt;span class=&quot;nt&quot;&gt;--region&lt;/span&gt; eu-central-1 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
   &lt;span class=&quot;nt&quot;&gt;--template-body&lt;/span&gt; file://&lt;span class=&quot;nv&quot;&gt;$PWD&lt;/span&gt;/stack.yaml
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Go back to the EC2 services page and find the instances menu. There you will be able to see your newly created instance. Wait until it finishies initialization and has all of its checkes passed.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/influxdb/2020-12-01-influxdb-aws-instance-initialization.png&quot; alt=&quot;EC2 instance initialization&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;connect-to-your-instance&quot;&gt;Connect to your instance&lt;/h3&gt;
 
 &lt;p&gt;&lt;img src=&quot;/images/influxdb/2020-11-23-influxdb-aws-get-instance-dns.png&quot; alt=&quot;Get AMI instance DNS&quot; /&gt;&lt;/p&gt;
 
@@ -157,11 +213,17 @@ AMI (Amazon Machine Image) ID&lt;/p&gt;
   ubuntu@ec2-3-122-XXX-XX.eu-central-1.compute.amazonaws.com
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
+&lt;h2 id=&quot;set-up-influxdb-on-the-ec2-instance&quot;&gt;Set up InfluxDB on the EC2 instance&lt;/h2&gt;
+
 &lt;h3 id=&quot;install-influxdb&quot;&gt;Install InfluxDB&lt;/h3&gt;
-&lt;p&gt;Maybe this: https://websiteforstudents.com/how-to-install-influxdb-on-ubuntu-18-04-16-04/&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget https://dl.influxdata.com/influxdb/releases/influxdb_2.0.2_amd64.deb
 &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;dpkg &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; influxdb_2.0.2_amd64.deb
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Start the influxdb service.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl start influxdb
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Setup InfluxDB configuration settings&lt;/p&gt;
@@ -171,9 +233,13 @@ AMI (Amazon Machine Image) ID&lt;/p&gt;
 
 &lt;p&gt;Here you need to add a username, a password, and name your organization and your primary bucket. You can skip on the retention period question.&lt;/p&gt;
 
-&lt;h3 id=&quot;try-out-influxdb&quot;&gt;Try out InfluxDB&lt;/h3&gt;
+&lt;h2 id=&quot;try-out-influxdb&quot;&gt;Try out InfluxDB&lt;/h2&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;influx bucket list
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;influx bucket list
+ID			Name		Retention	Organization ID
+61003b98acb988da	_monitoring	168h0m0s	aca7861debe89fb5
+62a458b6d3091276	_tasks		72h0m0s		aca7861debe89fb5
+d4e2f2ae14c34289	test_bucket	1h0m0s		aca7861debe89fb5
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;date&lt;/span&gt; +%s
@@ -182,6 +248,9 @@ AMI (Amazon Machine Image) ID&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;influx write &lt;span class=&quot;nt&quot;&gt;-b&lt;/span&gt; test_bucket &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; nocibambi@gmail.com &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; s &lt;span class=&quot;s1&quot;&gt;'test_measurement,host=testHost testField=&quot;testFieldValue&quot; 1606723341'&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Use Ctrl-D to execute the query.&lt;/p&gt;
+
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;influx query
 from&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;bucket: &lt;span class=&quot;s2&quot;&gt;&quot;test_bucket&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; |&amp;gt; range&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;start:-1h&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
 Result: _result
@@ -189,101 +258,7 @@ Table: keys: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;_start, _stop, _field
                    _start:time                      _stop:time           _field:string     _measurement:string             host:string                      _time:time           _value:string  
 &lt;span class=&quot;nt&quot;&gt;------------------------------&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;------------------------------&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;----------------------&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;----------------------&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;----------------------&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;------------------------------&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;----------------------&lt;/span&gt;  
 2020-11-30T07:03:07.010273692Z  2020-11-30T08:03:07.010273692Z               testField        test_measurement                testHost  2020-11-30T08:02:21.000000000Z          testFieldValue  
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;influx query
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-flux&quot;&gt;from(bucket: &quot;test_bucket&quot;) |&amp;gt; range(start: -7d)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;run-influxdb-service&quot;&gt;Run influxdb service&lt;/h3&gt;
-
-&lt;p&gt;Start the influxdb service.&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl start influxdb.service
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://devconnected.com/how-to-install-influxdb-on-ubuntu-debian-in-2019/#II_Installing_InfluxDB_20&quot;&gt;https://devconnected.com/how-to-install-influxdb-on-ubuntu-debian-in-2019/#II_Installing_InfluxDB_20&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;install-telegraf&quot;&gt;Install telegraf&lt;/h3&gt;
-
-&lt;p&gt;We need to install telegraf onto our instance.&lt;/p&gt;
-
-&lt;p&gt;On an Ubuntu instance this will look like this:&lt;/p&gt;
-
-&lt;p&gt;Adding the repository:&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget &lt;span class=&quot;nt&quot;&gt;-qO-&lt;/span&gt; https://repos.influxdata.com/influxdb.key | &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-key add -
-&lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt; /etc/lsb-release
-&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;deb https://repos.influxdata.com/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;DISTRIB_ID&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,,&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;DISTRIB_CODENAME&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; stable&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-  | &lt;span class=&quot;nb&quot;&gt;sudo tee&lt;/span&gt; /etc/apt/sources.list.d/influxdb.list
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Installing telegraf:&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get update &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;telegraf
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;j&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;telegraf &lt;span class=&quot;nt&quot;&gt;--test&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Create an example data collection setting config and test it&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;telegraf &lt;span class=&quot;nt&quot;&gt;-sample-config&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--input-filter&lt;/span&gt; cpu:mem &lt;span class=&quot;nt&quot;&gt;--output-filter&lt;/span&gt; influxdb &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; telegraf_test.conf
-telegraf &lt;span class=&quot;nt&quot;&gt;--config&lt;/span&gt; telegraf.conf &lt;span class=&quot;nt&quot;&gt;--test&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://docs.influxdata.com/telegraf/v1.16/guides/using_http/&quot;&gt;https://docs.influxdata.com/telegraf/v1.16/guides/using_http/&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;For other systems and futher information see &lt;a href=&quot;https://docs.influxdata.com/telegraf/v1.16/introduction/installation/&quot;&gt;this link&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;install-chronograph&quot;&gt;Install Chronograph&lt;/h2&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget https://dl.influxdata.com/chronograf/releases/chronograf_1.8.8_amd64.deb
-&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;dpkg &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; chronograf_1.8.8_amd64.deb
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;configure-telegraf&quot;&gt;Configure Telegraf&lt;/h3&gt;
-
-&lt;ul class=&quot;task-list&quot;&gt;
-  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;&lt;a href=&quot;https://docs.influxdata.com/telegraf/v1.16/guides/using_http/&quot;&gt;https://docs.influxdata.com/telegraf/v1.16/guides/using_http/&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;On Ubuntu instance the config file path is at &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/telegraf/telegraf.conf&lt;/code&gt;.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://docs.influxdata.com/telegraf/v1.15/administration/configuration/&quot;&gt;https://docs.influxdata.com/telegraf/v1.15/administration/configuration/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://docs.influxdata.com/telegraf/v1.16/introduction/getting-started/&quot;&gt;https://docs.influxdata.com/telegraf/v1.16/introduction/getting-started/&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;For further options and for configuration on other systems, see the &lt;a href=&quot;https://docs.influxdata.com/telegraf/v1.16/introduction/getting-started/#configure-telegraf&quot;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Starting the Telegraph service:&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl start telegraf
-&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl status telegraf
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;instance&quot;&gt;Instance&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-register-new-ami.png&quot; alt=&quot;Register a new Amazon Machine Image&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-open-marketplace.png&quot; alt=&quot;Open AWS Marketplace&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-select-ubuntu.png&quot; alt=&quot;Select Ubuntu Image&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-subscribe-ami.png&quot; alt=&quot;Subscribe AMI&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Continue to Configuration&lt;/strong&gt;: &lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-terms-conditions.png&quot; alt=&quot;Terms and Conditions&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-configure-ami.png&quot; alt=&quot;Configure AMI&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-launch-instance.png&quot; alt=&quot;Launch Instance&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-instance-type.png&quot; alt=&quot;Instance Type&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-launc-instance.png&quot; alt=&quot;Launch Instance&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-select-key-pair.png&quot; alt=&quot;Select Key Pair&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-instance-end.png&quot; alt=&quot;Instance Launch Screen&quot; /&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><summary type="html">Here are the preparation steps you need to do if you would like to use AWS Cloudwatcher with InfluxDB.</summary></entry><entry><title type="html">Grouping data with Flux in InfluxDB</title><link href="https://andrasnovoszath.com/influxdb/flux/time-series/2020/11/17/influxdb-flux-group.html" rel="alternate" type="text/html" title="Grouping data with Flux in InfluxDB" /><published>2020-11-17T00:00:00-06:00</published><updated>2020-11-17T00:00:00-06:00</updated><id>https://andrasnovoszath.com/influxdb/flux/time-series/2020/11/17/influxdb-flux-group</id><content type="html" xml:base="https://andrasnovoszath.com/influxdb/flux/time-series/2020/11/17/influxdb-flux-group.html">&lt;p&gt;Grouping happens based on &lt;strong&gt;group keys&lt;/strong&gt; which effectilve are the name of columns used for the grouping. A group then consists of rows having identical values in the group key columns.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">In this post you can learn the steps you need to make to set up InfluxDB on an AWS EC2 instance.</summary></entry><entry><title type="html">Grouping data with Flux in InfluxDB</title><link href="https://andrasnovoszath.com/influxdb/flux/time-series/2020/11/17/influxdb-flux-group.html" rel="alternate" type="text/html" title="Grouping data with Flux in InfluxDB" /><published>2020-11-17T00:00:00-06:00</published><updated>2020-11-17T00:00:00-06:00</updated><id>https://andrasnovoszath.com/influxdb/flux/time-series/2020/11/17/influxdb-flux-group</id><content type="html" xml:base="https://andrasnovoszath.com/influxdb/flux/time-series/2020/11/17/influxdb-flux-group.html">&lt;p&gt;Grouping happens based on &lt;strong&gt;group keys&lt;/strong&gt; which effectilve are the name of columns used for the grouping. A group then consists of rows having identical values in the group key columns.&lt;/p&gt;
 
 &lt;h2 id=&quot;example&quot;&gt;Example&lt;/h2&gt;
 
@@ -812,100 +787,6 @@ schame.measurementTagValues(bucket: &quot;bucket-name&quot;, tag: &quot;host&quo
 &lt;li&gt;be unique&lt;/li&gt;
 &lt;li&gt;start with and underscore '&lt;code&gt;_&lt;/code&gt;'&lt;/li&gt;
 &lt;li&gt;they cannot be one of the Flux reserved keywords: and, import, not, return, option, test, empty, in, or, package, and builtin.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;</content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">Data visualization and dashboards with InfluxDB</title><link href="https://andrasnovoszath.com/2020/11/02/influxdb-visualization-dashboard.html" rel="alternate" type="text/html" title="Data visualization and dashboards with InfluxDB" /><published>2020-11-02T00:00:00-06:00</published><updated>2020-11-02T00:00:00-06:00</updated><id>https://andrasnovoszath.com/2020/11/02/influxdb-visualization-dashboard</id><content type="html" xml:base="https://andrasnovoszath.com/2020/11/02/influxdb-visualization-dashboard.html">&lt;!--
-#################################################
-### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
-#################################################
-# file to edit: _notebooks/2020-11-02-influxdb-visualization-dashboard.ipynb
---&gt;
-
-&lt;div class=&quot;container&quot; id=&quot;notebook-container&quot;&gt;
-        
-    
-    
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-
-&lt;/div&gt;
-    
-
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;h2 id=&quot;Visualizations&quot;&gt;Visualizations&lt;a class=&quot;anchor-link&quot; href=&quot;#Visualizations&quot;&gt; &lt;/a&gt;&lt;/h2&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;ol&gt;
-&lt;li&gt;Open &lt;strong&gt;Data Explorer&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;Create a flux query (either with the panel at the bottom, or writing manually in the &lt;strong&gt;Script Editor&lt;/strong&gt;)&lt;/li&gt;
-&lt;li&gt;Press &lt;strong&gt;Submit&lt;/strong&gt; to run the query. This will generate the graph preview.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;You can add further queries with the &lt;code&gt;+&lt;/code&gt; button&lt;/li&gt;
-&lt;li&gt;You an hide/show the visualizations by clicking on the eye icon&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;You can choose a different graph type from the left menu.&lt;/p&gt;
-&lt;p&gt;To see you data in a tablet format, turn on the &lt;strong&gt;View Raw Data&lt;/strong&gt; switch.&lt;/p&gt;
-&lt;p&gt;You can refresh the dashboard with the refresh button. 
-You can change the auto-refresh interval (by default it is stopped and shows a pause sign).&lt;/p&gt;
-&lt;p&gt;You can save your query as a dashboard cell by clicking on the &lt;strong&gt;Save as&lt;/strong&gt;&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;h2 id=&quot;Dashboards&quot;&gt;Dashboards&lt;a class=&quot;anchor-link&quot; href=&quot;#Dashboards&quot;&gt; &lt;/a&gt;&lt;/h2&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;ol&gt;
-&lt;li&gt;Select the &lt;strong&gt;Boards&lt;/strong&gt; menu item in the navigation menu.&lt;/li&gt;
-&lt;li&gt;Select &lt;strong&gt;Create Dashboard&lt;/strong&gt; menu in the middle and select &lt;strong&gt;New Dashboard&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;Name the dashboard at the top field (saying &lt;strong&gt;Name this dashboard&lt;/strong&gt;)&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;You can also import a dashboard from a file or simply pasting a JSON file.&lt;/p&gt;
-&lt;p&gt;You can also create a new dashboard from templates.&lt;/p&gt;
-&lt;p&gt;You can also clone your dashboard and change it for another need.&lt;/p&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;p&gt;For these operations you need to open a dashboard (e.g. by clicking on its name in the &lt;strong&gt;Boards&lt;/strong&gt; screen).&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;You can add further data to your dashboard with the &lt;strong&gt;Add cell&lt;/strong&gt; button at the top left corner.&lt;/li&gt;
-&lt;li&gt;You can add notes to your dashboard with the &lt;strong&gt;Add Note&lt;/strong&gt; buttom at the top left corner.&lt;/li&gt;
-&lt;li&gt;Change time zone&lt;/li&gt;
-&lt;li&gt;Manually refresh&lt;/li&gt;
-&lt;li&gt;Set automatic refresh interval&lt;/li&gt;
-&lt;li&gt;Select time range&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;h2 id=&quot;Further-operations&quot;&gt;Further operations&lt;a class=&quot;anchor-link&quot; href=&quot;#Further-operations&quot;&gt; &lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Export&lt;/strong&gt;: Click on the gear icon and select &lt;strong&gt;Export&lt;/strong&gt;. You can export the dashboard as&lt;ul&gt;
-&lt;li&gt;JSON file&lt;/li&gt;
-&lt;li&gt;A template
-Or you can copy the JSON to the clipboard.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Delete&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;/div&gt;
