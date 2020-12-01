@@ -2,7 +2,7 @@
   
     
         "post0": {
-            "title": "How create a new AWS, EC2 instance?",
+            "title": "How create a new AWS EC2 instance?",
             "content": "Register a new Amazon Machine Image . . Open the AWS Marketplace . . Select an image of your choosing. . . Subscribe to the Amazon Machine Image. . . Continue to Configuration: | | | | | | | .",
             "url": "https://andrasnovoszath.com/aws/ec2/tutorial/2020/12/01/aws-ec2-setup.html",
             "relUrl": "/aws/ec2/tutorial/2020/12/01/aws-ec2-setup.html",
