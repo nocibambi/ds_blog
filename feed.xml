@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://andrasnovoszath.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://andrasnovoszath.com/" rel="alternate" type="text/html" /><updated>2020-12-01T02:50:53-06:00</updated><id>https://andrasnovoszath.com/feed.xml</id><title type="html">Value this</title><subtitle>This is not another blog about bitcoin.</subtitle><entry><title type="html">How create a new AWS EC2 instance?</title><link href="https://andrasnovoszath.com/aws/ec2/tutorial/2020/12/01/aws-ec2-setup.html" rel="alternate" type="text/html" title="How create a new AWS EC2 instance?" /><published>2020-12-01T00:00:00-06:00</published><updated>2020-12-01T00:00:00-06:00</updated><id>https://andrasnovoszath.com/aws/ec2/tutorial/2020/12/01/aws-ec2-setup</id><content type="html" xml:base="https://andrasnovoszath.com/aws/ec2/tutorial/2020/12/01/aws-ec2-setup.html">&lt;p&gt;Register a new Amazon Machine Image&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://andrasnovoszath.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://andrasnovoszath.com/" rel="alternate" type="text/html" /><updated>2020-12-02T03:24:16-06:00</updated><id>https://andrasnovoszath.com/feed.xml</id><title type="html">Value this</title><subtitle>This is not another blog about bitcoin.</subtitle><entry><title type="html">How create a new AWS EC2 instance?</title><link href="https://andrasnovoszath.com/aws/ec2/tutorial/2020/12/01/aws-ec2-setup.html" rel="alternate" type="text/html" title="How create a new AWS EC2 instance?" /><published>2020-12-01T00:00:00-06:00</published><updated>2020-12-01T00:00:00-06:00</updated><id>https://andrasnovoszath.com/aws/ec2/tutorial/2020/12/01/aws-ec2-setup</id><content type="html" xml:base="https://andrasnovoszath.com/aws/ec2/tutorial/2020/12/01/aws-ec2-setup.html">&lt;p&gt;Register a new Amazon Machine Image&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-register-new-ami.png&quot; alt=&quot;Register a new Amazon Machine Image&quot; /&gt;&lt;/p&gt;
 
@@ -22,9 +22,9 @@
   &lt;li&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-launc-instance.png&quot; alt=&quot;Launch Instance&quot; /&gt;&lt;/li&gt;
   &lt;li&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-select-key-pair.png&quot; alt=&quot;Select Key Pair&quot; /&gt;&lt;/li&gt;
   &lt;li&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-instance-end.png&quot; alt=&quot;Instance Launch Screen&quot; /&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><summary type="html">Register a new Amazon Machine Image</summary></entry><entry><title type="html">Setting up AWS Cloud for InfluxDB</title><link href="https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/indluxdb-aws-cloud-setup.html" rel="alternate" type="text/html" title="Setting up AWS Cloud for InfluxDB" /><published>2020-11-18T00:00:00-06:00</published><updated>2020-11-18T00:00:00-06:00</updated><id>https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/indluxdb-aws-cloud-setup</id><content type="html" xml:base="https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/indluxdb-aws-cloud-setup.html">&lt;p&gt;In this post you can learn the steps you need to make to set up InfluxDB on an AWS EC2 instance.&lt;/p&gt;
+&lt;/ul&gt;</content><author><name></name></author><summary type="html">Register a new Amazon Machine Image</summary></entry><entry><title type="html">Setting up AWS Cloud for InfluxDB</title><link href="https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/influxdb-aws-cloud-setup.html" rel="alternate" type="text/html" title="Setting up AWS Cloud for InfluxDB" /><published>2020-11-18T00:00:00-06:00</published><updated>2020-11-18T00:00:00-06:00</updated><id>https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/influxdb-aws-cloud-setup</id><content type="html" xml:base="https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/influxdb-aws-cloud-setup.html">&lt;p&gt;In this post you can learn the steps you need to set up InfluxDB on an AWS EC2 instance.&lt;/p&gt;
 
-&lt;p&gt;We can group the steps into these high-level phases:&lt;/p&gt;
+&lt;p&gt;For better comprehension, this posts is structured into the following sections:&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;Set up an AWS account and an EC2 Virtual Server&lt;/li&gt;
@@ -35,7 +35,7 @@
 
 &lt;h2 id=&quot;set-up-an-ec2-virtual-server&quot;&gt;Set up an EC2 Virtual Server&lt;/h2&gt;
 
-&lt;p&gt;In this section we will set up an EC2 Virtual Server. This we need to create our EC2 instance. This phase consists of the following steps:&lt;/p&gt;
+&lt;p&gt;In this section we will set up an EC2 Virtual Server. After this step we can create our EC2 instance. This phase consists of the following steps:&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;Set up an AWS account&lt;/li&gt;
@@ -46,39 +46,86 @@
 
 &lt;h3 id=&quot;set-up-an-aws-account&quot;&gt;Set up an AWS account&lt;/h3&gt;
 
+&lt;p&gt;In case you do not have an AWS account, you can create one for free.&lt;/p&gt;
+
 &lt;ol&gt;
   &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/free/&quot;&gt;Create an AWS account&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Select the appropriate region:
- &lt;img src=&quot;/images/influxdb/aws_cloudformation/influxdb-aws-region.png&quot; alt=&quot;aws region select&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Select the appropriate region:&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/images/influxdb/aws_cloudformation/influxdb-aws-region.png&quot; alt=&quot;aws region select&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h3 id=&quot;set-up-an-ec2-key-pair&quot;&gt;Set up an EC2 Key pair&lt;/h3&gt;
+
+&lt;p&gt;In order to access your cloud server you need to set up a proper authentication by generating a key pair.&lt;/p&gt;
+
 &lt;ol&gt;
-  &lt;li&gt;Search for “EC2” in the &lt;strong&gt;Find Services&lt;/strong&gt; search box and select &lt;strong&gt;EC2 (Virtual Servers in the Cloud)&lt;/strong&gt; (Please not that you have to provide credit card information and it may take up to 24 hours for amazon to activate):
- &lt;img src=&quot;/images/influxdb/aws_cloudformation/influxdb-aws-ec2-select.png&quot; alt=&quot;aws ec2 select&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;Select &lt;strong&gt;Key Pairs&lt;/strong&gt; and the create a key pair: &lt;img src=&quot;/images/influxdb/aws_cloudformation/influxdb-aws-ec2-key-pairs-menu.png&quot; alt=&quot;key-pairs&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Search for “EC2” in the &lt;strong&gt;Find Services&lt;/strong&gt; search box and select &lt;strong&gt;EC2 (Virtual Servers in the Cloud)&lt;/strong&gt;. (Note that you have to provide credit card information and that it may take up to 24 hours for amazon to activate):&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/images/influxdb/aws_cloudformation/influxdb-aws-ec2-select.png&quot; alt=&quot;aws ec2 select&quot; /&gt;&lt;/p&gt;
+
+    &lt;p&gt;This menu contains most of the EC2-related services so we will work here for a big part of this tutorial.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Select &lt;strong&gt;Key Pairs&lt;/strong&gt; and create a key pair:&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/images/influxdb/2020-12-02-influxdb-aws-create-key-pair.png&quot; alt=&quot;Create key pair&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
   &lt;li&gt;Download the keys.&lt;/li&gt;
-  &lt;li&gt;Make the key readable only by the owner: &lt;code class=&quot;highlighter-rouge&quot;&gt;chmod 400 name-of-the-key.pem&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Make the key readable only by the owner. Navigate to the folder to where you downloaded your key and change the key’s permissions:&lt;/p&gt;
+
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;chmod 400 name-of-the-key.pem&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h3 id=&quot;set-up-an-aws-user&quot;&gt;Set up an AWS user&lt;/h3&gt;
 
-&lt;ol&gt;
-  &lt;li&gt;Open &lt;strong&gt;IAM&lt;/strong&gt; (Identity and Access Management) from the &lt;strong&gt;Services menu&lt;/strong&gt;: &lt;img src=&quot;/images/influxdb/aws_cloudformation/infludb-aws-select-iam.png&quot; alt=&quot;open-aim&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;Create a user and grant permissions to it:
-    &lt;ol&gt;
-      &lt;li&gt;Select &lt;strong&gt;Add user&lt;/strong&gt;: &lt;img src=&quot;/images/influxdb/aws_cloudformation/infludb-aws-iam-create-user.png&quot; alt=&quot;iam-new-user&quot; /&gt;&lt;/li&gt;
-      &lt;li&gt;Name the user and add access rights: &lt;img src=&quot;/images/influxdb/aws_cloudformation/influxdb-aws-iam-new-user-access.png&quot; alt=&quot;iam-new-user-access&quot; /&gt;&lt;/li&gt;
-      &lt;li&gt;On the &lt;strong&gt;Set Permissions&lt;/strong&gt; screen click on &lt;strong&gt;Add user to group&lt;/strong&gt; and &lt;strong&gt;Create a group&lt;/strong&gt;: &lt;img src=&quot;/images/influxdb/aws_cloudformation/influxdb-aws-iam-new-user-create-group.png&quot; alt=&quot;iam-new-user-new-group&quot; /&gt;&lt;/li&gt;
-      &lt;li&gt;Define a name and add a policy for the new group: &lt;img src=&quot;/images/influxdb/aws_cloudformation/influxdb-aws-iam-group-permissions.png&quot; alt=&quot;iam-new-group&quot; /&gt;&lt;/li&gt;
-      &lt;li&gt;At the end of the process you will see your access details: &lt;img src=&quot;/images/influxdb/aws_cloudformation/influxdb-aws-iam-new-user-success.png&quot; alt=&quot;iam-new-user-success&quot; /&gt;&lt;/li&gt;
-    &lt;/ol&gt;
+&lt;p&gt;After creating a key pair, you also need to create a user and assign it to a user group with the necessary permissions.&lt;/p&gt;
 
-    &lt;p&gt;Note that AWS does not save your secret after you close your final screen. On the other hand, you will always be able to create a new key for your users.&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Open &lt;strong&gt;IAM&lt;/strong&gt; (Identity and Access Management) from &lt;strong&gt;Services&lt;/strong&gt;:&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/images/influxdb/aws_cloudformation/infludb-aws-select-iam.png&quot; alt=&quot;open-aim&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Select &lt;strong&gt;Add user&lt;/strong&gt;:&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/images/influxdb/aws_cloudformation/infludb-aws-iam-create-user.png&quot; alt=&quot;iam-new-user&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Name the user and add access rights to it:&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/images/influxdb/aws_cloudformation/influxdb-aws-iam-new-user-access.png&quot; alt=&quot;iam-new-user-access&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;On the &lt;strong&gt;Set Permissions&lt;/strong&gt; screen, click on &lt;strong&gt;Add user to group&lt;/strong&gt; and &lt;strong&gt;Create a group&lt;/strong&gt;:&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/images/influxdb/aws_cloudformation/influxdb-aws-iam-new-user-create-group.png&quot; alt=&quot;iam-new-user-new-group&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Define a name and add a policy for the new group:&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/images/influxdb/aws_cloudformation/influxdb-aws-iam-group-permissions.png&quot; alt=&quot;iam-new-group&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;At the end of the process, you will see your access details:&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/images/influxdb/aws_cloudformation/influxdb-aws-iam-new-user-success.png&quot; alt=&quot;iam-new-user-success&quot; /&gt;&lt;/p&gt;
+
+    &lt;p&gt;Here, write down somewhere your &lt;strong&gt;Access Key ID&lt;/strong&gt; and your &lt;strong&gt;Secret Access Key&lt;/strong&gt; as you will need them in a later step and &lt;a href=&quot;https://aws.amazon.com/blogs/security/wheres-my-secret-access-key/&quot;&gt;you will not be able to regenerate it&lt;/a&gt;.&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
 
+&lt;p&gt;Now, you have set up a user and credentials. In the next step, you will install the AWS Command Line Interface on your system.&lt;/p&gt;
+
 &lt;h3 id=&quot;set-up-aws-cli-on-your-system&quot;&gt;Set up AWS CLI on your system&lt;/h3&gt;
+
+&lt;p&gt;The AWS CLI will allow you to configure and access your AWS EC2 instance from the terminal.&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;
@@ -91,15 +138,16 @@
  &lt;span class=&quot;nb&quot;&gt;sudo&lt;/span&gt; ./aws/install
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
 
-    &lt;p&gt;Verify your version:&lt;/p&gt;
+    &lt;p&gt;For other systems and for further instructions &lt;a href=&quot;https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html&quot;&gt;see this guide&lt;/a&gt;.&lt;/p&gt;
 
-    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; aws &lt;span class=&quot;nt&quot;&gt;--version&lt;/span&gt;
+    &lt;p&gt;Verfify the version you installed:&lt;/p&gt;
+
+    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;aws &lt;span class=&quot;nt&quot;&gt;--version&lt;/span&gt;
+ aws-cli/2.1.2 Python/3.7.3 Linux/5.4.0-54-generic exe/x86_64.ubuntu.20
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-
-    &lt;p&gt;For further instructions &lt;a href=&quot;https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html&quot;&gt;see here&lt;/a&gt;.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Also create a folder where you will store your keys and your yaml configuration.&lt;/p&gt;
+    &lt;p&gt;Create a folder where you will store your keys and your yaml configuration.&lt;/p&gt;
 
     &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nb&quot;&gt;mkdir&lt;/span&gt; ~/Projects/influxdb_aws_cloudformation
  &lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/Projects/influxdb_aws_cloudformation
@@ -108,17 +156,35 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Configure AWS with &lt;code class=&quot;highlighter-rouge&quot;&gt;aws configure&lt;/code&gt;. This is where you need to add your &lt;strong&gt;Access Key ID&lt;/strong&gt;, your &lt;strong&gt;Secret Access Key&lt;/strong&gt;, and the &lt;strong&gt;region name&lt;/strong&gt; (e.g. &lt;code class=&quot;highlighter-rouge&quot;&gt;eu-central-1&lt;/code&gt;). You can skip the output format.&lt;/p&gt;
+    &lt;p&gt;Configure AWS with &lt;code class=&quot;highlighter-rouge&quot;&gt;aws configure&lt;/code&gt;. Here you need to add your &lt;strong&gt;Access Key ID&lt;/strong&gt;, your &lt;strong&gt;Secret Access Key&lt;/strong&gt; (that you generated for your user at the IAM), and the &lt;strong&gt;region name&lt;/strong&gt; (e.g. &lt;code class=&quot;highlighter-rouge&quot;&gt;eu-central-1&lt;/code&gt;). You can skip the output format.&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
 
+&lt;p&gt;Now you have everything you need to set up your EC2 instance. This is what we will do in the next step.&lt;/p&gt;
+
 &lt;h2 id=&quot;set-up-an-aws-ec2-instance&quot;&gt;Set up an AWS EC2 instance&lt;/h2&gt;
 
-&lt;p&gt;Open the &lt;a href=&quot;https://aws.amazon.com/marketplace/&quot;&gt;Amazon AWS Marketplace&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In this section we will go through the steps to create your EC2 instance. This section consists of the following steps:&lt;/p&gt;
 
-&lt;p&gt;Find a public image&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Identify and EC2 image to use&lt;/li&gt;
+  &lt;li&gt;Define your stack’s resources&lt;/li&gt;
+  &lt;li&gt;Create an AWS Cloud Formation stack&lt;/li&gt;
+  &lt;li&gt;Connect to your instance&lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-find-public-image.png&quot; alt=&quot;Find public image&quot; /&gt;&lt;/p&gt;
+&lt;h3 id=&quot;find-an-ec2-image&quot;&gt;Find an EC2 image&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Open the &lt;a href=&quot;https://aws.amazon.com/marketplace/&quot;&gt;Amazon AWS Marketplace&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Find a public image&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-find-public-image.png&quot; alt=&quot;Find public image&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;If you are not&lt;/p&gt;
 
 &lt;h3 id=&quot;define-resources&quot;&gt;Define resources&lt;/h3&gt;
 
@@ -213,7 +279,7 @@ AMI (Amazon Machine Image) ID&lt;/p&gt;
   ubuntu@ec2-3-122-XXX-XX.eu-central-1.compute.amazonaws.com
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h2 id=&quot;set-up-influxdb-on-the-ec2-instance&quot;&gt;Set up InfluxDB on the EC2 instance&lt;/h2&gt;
+&lt;h2 id=&quot;install-and-set-up-influxdb-on-the-ec2-instance&quot;&gt;Install and set up InfluxDB on the EC2 instance&lt;/h2&gt;
 
 &lt;h3 id=&quot;install-influxdb&quot;&gt;Install InfluxDB&lt;/h3&gt;
 
@@ -236,17 +302,17 @@ AMI (Amazon Machine Image) ID&lt;/p&gt;
 &lt;h2 id=&quot;try-out-influxdb&quot;&gt;Try out InfluxDB&lt;/h2&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;influx bucket list
-ID			Name		Retention	Organization ID
-61003b98acb988da	_monitoring	168h0m0s	aca7861debe89fb5
-62a458b6d3091276	_tasks		72h0m0s		aca7861debe89fb5
-d4e2f2ae14c34289	test_bucket	1h0m0s		aca7861debe89fb5
+ID   Name  Retention Organization ID
+61003b98acb988da _monitoring 168h0m0s aca7861debe89fb5
+62a458b6d3091276 _tasks  72h0m0s  aca7861debe89fb5
+d4e2f2ae14c34289 test_bucket 1h0m0s  aca7861debe89fb5
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;date&lt;/span&gt; +%s
 1606723341
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;influx write &lt;span class=&quot;nt&quot;&gt;-b&lt;/span&gt; test_bucket &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; nocibambi@gmail.com &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; s &lt;span class=&quot;s1&quot;&gt;'test_measurement,host=testHost testField=&quot;testFieldValue&quot; 1606723341'&lt;/span&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;influx write &lt;span class=&quot;nt&quot;&gt;-b&lt;/span&gt; test_bucket &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; nocibambi@gmail.com &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; s &lt;span class=&quot;s1&quot;&gt;'test_measurement,host=testHost testField=&quot;testFieldValue&quot; 1606723341'&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;Use Ctrl-D to execute the query.&lt;/p&gt;
@@ -258,7 +324,7 @@ Table: keys: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;_start, _stop, _field
                    _start:time                      _stop:time           _field:string     _measurement:string             host:string                      _time:time           _value:string  
 &lt;span class=&quot;nt&quot;&gt;------------------------------&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;------------------------------&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;----------------------&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;----------------------&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;----------------------&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;------------------------------&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;----------------------&lt;/span&gt;  
 2020-11-30T07:03:07.010273692Z  2020-11-30T08:03:07.010273692Z               testField        test_measurement                testHost  2020-11-30T08:02:21.000000000Z          testFieldValue  
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">In this post you can learn the steps you need to make to set up InfluxDB on an AWS EC2 instance.</summary></entry><entry><title type="html">Grouping data with Flux in InfluxDB</title><link href="https://andrasnovoszath.com/influxdb/flux/time-series/2020/11/17/influxdb-flux-group.html" rel="alternate" type="text/html" title="Grouping data with Flux in InfluxDB" /><published>2020-11-17T00:00:00-06:00</published><updated>2020-11-17T00:00:00-06:00</updated><id>https://andrasnovoszath.com/influxdb/flux/time-series/2020/11/17/influxdb-flux-group</id><content type="html" xml:base="https://andrasnovoszath.com/influxdb/flux/time-series/2020/11/17/influxdb-flux-group.html">&lt;p&gt;Grouping happens based on &lt;strong&gt;group keys&lt;/strong&gt; which effectilve are the name of columns used for the grouping. A group then consists of rows having identical values in the group key columns.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">In this post you can learn the steps you need to set up InfluxDB on an AWS EC2 instance.</summary></entry><entry><title type="html">Grouping data with Flux in InfluxDB</title><link href="https://andrasnovoszath.com/influxdb/flux/time-series/2020/11/17/influxdb-flux-group.html" rel="alternate" type="text/html" title="Grouping data with Flux in InfluxDB" /><published>2020-11-17T00:00:00-06:00</published><updated>2020-11-17T00:00:00-06:00</updated><id>https://andrasnovoszath.com/influxdb/flux/time-series/2020/11/17/influxdb-flux-group</id><content type="html" xml:base="https://andrasnovoszath.com/influxdb/flux/time-series/2020/11/17/influxdb-flux-group.html">&lt;p&gt;Grouping happens based on &lt;strong&gt;group keys&lt;/strong&gt; which effectilve are the name of columns used for the grouping. A group then consists of rows having identical values in the group key columns.&lt;/p&gt;
 
 &lt;h2 id=&quot;example&quot;&gt;Example&lt;/h2&gt;
 

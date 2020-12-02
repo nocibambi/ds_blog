@@ -9,13 +9,13 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="How to set up AWS Cloud for InfluxDB?" />
 <meta property="og:description" content="How to set up AWS Cloud for InfluxDB?" />
-<link rel="canonical" href="https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/indluxdb-aws-cloud-setup.html" />
-<meta property="og:url" content="https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/indluxdb-aws-cloud-setup.html" />
+<link rel="canonical" href="https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/influxdb-aws-cloud-setup.html" />
+<meta property="og:url" content="https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/influxdb-aws-cloud-setup.html" />
 <meta property="og:site_name" content="Value this" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-11-18T00:00:00-06:00" />
 <script type="application/ld+json">
-{"description":"How to set up AWS Cloud for InfluxDB?","headline":"Setting up AWS Cloud for InfluxDB","dateModified":"2020-11-18T00:00:00-06:00","datePublished":"2020-11-18T00:00:00-06:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/indluxdb-aws-cloud-setup.html"},"url":"https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/indluxdb-aws-cloud-setup.html","@context":"https://schema.org"}</script>
+{"description":"How to set up AWS Cloud for InfluxDB?","headline":"Setting up AWS Cloud for InfluxDB","dateModified":"2020-11-18T00:00:00-06:00","datePublished":"2020-11-18T00:00:00-06:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/influxdb-aws-cloud-setup.html"},"url":"https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/influxdb-aws-cloud-setup.html","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://andrasnovoszath.com/feed.xml" title="Value this" /><!-- the google_analytics_id gets auto inserted from the config file -->
 
@@ -30,13 +30,13 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="How to set up AWS Cloud for InfluxDB?" />
 <meta property="og:description" content="How to set up AWS Cloud for InfluxDB?" />
-<link rel="canonical" href="https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/indluxdb-aws-cloud-setup.html" />
-<meta property="og:url" content="https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/indluxdb-aws-cloud-setup.html" />
+<link rel="canonical" href="https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/influxdb-aws-cloud-setup.html" />
+<meta property="og:url" content="https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/influxdb-aws-cloud-setup.html" />
 <meta property="og:site_name" content="Value this" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-11-18T00:00:00-06:00" />
 <script type="application/ld+json">
-{"description":"How to set up AWS Cloud for InfluxDB?","headline":"Setting up AWS Cloud for InfluxDB","dateModified":"2020-11-18T00:00:00-06:00","datePublished":"2020-11-18T00:00:00-06:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/indluxdb-aws-cloud-setup.html"},"url":"https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/indluxdb-aws-cloud-setup.html","@context":"https://schema.org"}</script>
+{"description":"How to set up AWS Cloud for InfluxDB?","headline":"Setting up AWS Cloud for InfluxDB","dateModified":"2020-11-18T00:00:00-06:00","datePublished":"2020-11-18T00:00:00-06:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/influxdb-aws-cloud-setup.html"},"url":"https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/influxdb-aws-cloud-setup.html","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
@@ -119,7 +119,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      4 min read
+      5 min read
     
 </span></p>
 
@@ -141,9 +141,9 @@ window.onload = wrap_img;
     </header>
 
   <div class="post-content e-content" itemprop="articleBody">
-    <p>In this post you can learn the steps you need to make to set up InfluxDB on an AWS EC2 instance.</p>
+    <p>In this post you can learn the steps you need to set up InfluxDB on an AWS EC2 instance.</p>
 
-<p>We can group the steps into these high-level phases:</p>
+<p>For better comprehension, this posts is structured into the following sections:</p>
 
 <ol>
   <li>Set up an AWS account and an EC2 Virtual Server</li>
@@ -154,7 +154,7 @@ window.onload = wrap_img;
 
 <h2 id="set-up-an-ec2-virtual-server">Set up an EC2 Virtual Server</h2>
 
-<p>In this section we will set up an EC2 Virtual Server. This we need to create our EC2 instance. This phase consists of the following steps:</p>
+<p>In this section we will set up an EC2 Virtual Server. After this step we can create our EC2 instance. This phase consists of the following steps:</p>
 
 <ol>
   <li>Set up an AWS account</li>
@@ -165,39 +165,86 @@ window.onload = wrap_img;
 
 <h3 id="set-up-an-aws-account">Set up an AWS account</h3>
 
+<p>In case you do not have an AWS account, you can create one for free.</p>
+
 <ol>
   <li><a href="https://aws.amazon.com/free/">Create an AWS account</a></li>
-  <li>Select the appropriate region:
- <img src="/images/influxdb/aws_cloudformation/influxdb-aws-region.png" alt="aws region select" /></li>
+  <li>
+    <p>Select the appropriate region:</p>
+
+    <p><img src="/images/influxdb/aws_cloudformation/influxdb-aws-region.png" alt="aws region select" /></p>
+  </li>
 </ol>
 
 <h3 id="set-up-an-ec2-key-pair">Set up an EC2 Key pair</h3>
+
+<p>In order to access your cloud server you need to set up a proper authentication by generating a key pair.</p>
+
 <ol>
-  <li>Search for “EC2” in the <strong>Find Services</strong> search box and select <strong>EC2 (Virtual Servers in the Cloud)</strong> (Please not that you have to provide credit card information and it may take up to 24 hours for amazon to activate):
- <img src="/images/influxdb/aws_cloudformation/influxdb-aws-ec2-select.png" alt="aws ec2 select" /></li>
-  <li>Select <strong>Key Pairs</strong> and the create a key pair: <img src="/images/influxdb/aws_cloudformation/influxdb-aws-ec2-key-pairs-menu.png" alt="key-pairs" /></li>
+  <li>
+    <p>Search for “EC2” in the <strong>Find Services</strong> search box and select <strong>EC2 (Virtual Servers in the Cloud)</strong>. (Note that you have to provide credit card information and that it may take up to 24 hours for amazon to activate):</p>
+
+    <p><img src="/images/influxdb/aws_cloudformation/influxdb-aws-ec2-select.png" alt="aws ec2 select" /></p>
+
+    <p>This menu contains most of the EC2-related services so we will work here for a big part of this tutorial.</p>
+  </li>
+  <li>
+    <p>Select <strong>Key Pairs</strong> and create a key pair:</p>
+
+    <p><img src="/images/influxdb/2020-12-02-influxdb-aws-create-key-pair.png" alt="Create key pair" /></p>
+  </li>
   <li>Download the keys.</li>
-  <li>Make the key readable only by the owner: <code class="highlighter-rouge">chmod 400 name-of-the-key.pem</code></li>
+  <li>
+    <p>Make the key readable only by the owner. Navigate to the folder to where you downloaded your key and change the key’s permissions:</p>
+
+    <p><code class="highlighter-rouge">chmod 400 name-of-the-key.pem</code></p>
+  </li>
 </ol>
 
 <h3 id="set-up-an-aws-user">Set up an AWS user</h3>
 
-<ol>
-  <li>Open <strong>IAM</strong> (Identity and Access Management) from the <strong>Services menu</strong>: <img src="/images/influxdb/aws_cloudformation/infludb-aws-select-iam.png" alt="open-aim" /></li>
-  <li>Create a user and grant permissions to it:
-    <ol>
-      <li>Select <strong>Add user</strong>: <img src="/images/influxdb/aws_cloudformation/infludb-aws-iam-create-user.png" alt="iam-new-user" /></li>
-      <li>Name the user and add access rights: <img src="/images/influxdb/aws_cloudformation/influxdb-aws-iam-new-user-access.png" alt="iam-new-user-access" /></li>
-      <li>On the <strong>Set Permissions</strong> screen click on <strong>Add user to group</strong> and <strong>Create a group</strong>: <img src="/images/influxdb/aws_cloudformation/influxdb-aws-iam-new-user-create-group.png" alt="iam-new-user-new-group" /></li>
-      <li>Define a name and add a policy for the new group: <img src="/images/influxdb/aws_cloudformation/influxdb-aws-iam-group-permissions.png" alt="iam-new-group" /></li>
-      <li>At the end of the process you will see your access details: <img src="/images/influxdb/aws_cloudformation/influxdb-aws-iam-new-user-success.png" alt="iam-new-user-success" /></li>
-    </ol>
+<p>After creating a key pair, you also need to create a user and assign it to a user group with the necessary permissions.</p>
 
-    <p>Note that AWS does not save your secret after you close your final screen. On the other hand, you will always be able to create a new key for your users.</p>
+<ol>
+  <li>
+    <p>Open <strong>IAM</strong> (Identity and Access Management) from <strong>Services</strong>:</p>
+
+    <p><img src="/images/influxdb/aws_cloudformation/infludb-aws-select-iam.png" alt="open-aim" /></p>
+  </li>
+  <li>
+    <p>Select <strong>Add user</strong>:</p>
+
+    <p><img src="/images/influxdb/aws_cloudformation/infludb-aws-iam-create-user.png" alt="iam-new-user" /></p>
+  </li>
+  <li>
+    <p>Name the user and add access rights to it:</p>
+
+    <p><img src="/images/influxdb/aws_cloudformation/influxdb-aws-iam-new-user-access.png" alt="iam-new-user-access" /></p>
+  </li>
+  <li>
+    <p>On the <strong>Set Permissions</strong> screen, click on <strong>Add user to group</strong> and <strong>Create a group</strong>:</p>
+
+    <p><img src="/images/influxdb/aws_cloudformation/influxdb-aws-iam-new-user-create-group.png" alt="iam-new-user-new-group" /></p>
+  </li>
+  <li>
+    <p>Define a name and add a policy for the new group:</p>
+
+    <p><img src="/images/influxdb/aws_cloudformation/influxdb-aws-iam-group-permissions.png" alt="iam-new-group" /></p>
+  </li>
+  <li>
+    <p>At the end of the process, you will see your access details:</p>
+
+    <p><img src="/images/influxdb/aws_cloudformation/influxdb-aws-iam-new-user-success.png" alt="iam-new-user-success" /></p>
+
+    <p>Here, write down somewhere your <strong>Access Key ID</strong> and your <strong>Secret Access Key</strong> as you will need them in a later step and <a href="https://aws.amazon.com/blogs/security/wheres-my-secret-access-key/">you will not be able to regenerate it</a>.</p>
   </li>
 </ol>
 
+<p>Now, you have set up a user and credentials. In the next step, you will install the AWS Command Line Interface on your system.</p>
+
 <h3 id="set-up-aws-cli-on-your-system">Set up AWS CLI on your system</h3>
+
+<p>The AWS CLI will allow you to configure and access your AWS EC2 instance from the terminal.</p>
 
 <ol>
   <li>
@@ -210,15 +257,16 @@ window.onload = wrap_img;
  <span class="nb">sudo</span> ./aws/install
 </code></pre></div>    </div>
 
-    <p>Verify your version:</p>
+    <p>For other systems and for further instructions <a href="https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html">see this guide</a>.</p>
 
-    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> aws <span class="nt">--version</span>
+    <p>Verfify the version you installed:</p>
+
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>aws <span class="nt">--version</span>
+ aws-cli/2.1.2 Python/3.7.3 Linux/5.4.0-54-generic exe/x86_64.ubuntu.20
 </code></pre></div>    </div>
-
-    <p>For further instructions <a href="https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html">see here</a>.</p>
   </li>
   <li>
-    <p>Also create a folder where you will store your keys and your yaml configuration.</p>
+    <p>Create a folder where you will store your keys and your yaml configuration.</p>
 
     <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">mkdir</span> ~/Projects/influxdb_aws_cloudformation
  <span class="nb">cd</span> ~/Projects/influxdb_aws_cloudformation
@@ -227,17 +275,35 @@ window.onload = wrap_img;
 </code></pre></div>    </div>
   </li>
   <li>
-    <p>Configure AWS with <code class="highlighter-rouge">aws configure</code>. This is where you need to add your <strong>Access Key ID</strong>, your <strong>Secret Access Key</strong>, and the <strong>region name</strong> (e.g. <code class="highlighter-rouge">eu-central-1</code>). You can skip the output format.</p>
+    <p>Configure AWS with <code class="highlighter-rouge">aws configure</code>. Here you need to add your <strong>Access Key ID</strong>, your <strong>Secret Access Key</strong> (that you generated for your user at the IAM), and the <strong>region name</strong> (e.g. <code class="highlighter-rouge">eu-central-1</code>). You can skip the output format.</p>
   </li>
 </ol>
 
+<p>Now you have everything you need to set up your EC2 instance. This is what we will do in the next step.</p>
+
 <h2 id="set-up-an-aws-ec2-instance">Set up an AWS EC2 instance</h2>
 
-<p>Open the <a href="https://aws.amazon.com/marketplace/">Amazon AWS Marketplace</a>.</p>
+<p>In this section we will go through the steps to create your EC2 instance. This section consists of the following steps:</p>
 
-<p>Find a public image</p>
+<ol>
+  <li>Identify and EC2 image to use</li>
+  <li>Define your stack’s resources</li>
+  <li>Create an AWS Cloud Formation stack</li>
+  <li>Connect to your instance</li>
+</ol>
 
-<p><img src="/images/influxdb/2020-11-20-influxdb-aws-find-public-image.png" alt="Find public image" /></p>
+<h3 id="find-an-ec2-image">Find an EC2 image</h3>
+
+<ol>
+  <li>Open the <a href="https://aws.amazon.com/marketplace/">Amazon AWS Marketplace</a>.</li>
+  <li>
+    <p>Find a public image</p>
+
+    <p><img src="/images/influxdb/2020-11-20-influxdb-aws-find-public-image.png" alt="Find public image" /></p>
+  </li>
+</ol>
+
+<p>If you are not</p>
 
 <h3 id="define-resources">Define resources</h3>
 
@@ -332,7 +398,7 @@ AMI (Amazon Machine Image) ID</p>
   ubuntu@ec2-3-122-XXX-XX.eu-central-1.compute.amazonaws.com
 </code></pre></div></div>
 
-<h2 id="set-up-influxdb-on-the-ec2-instance">Set up InfluxDB on the EC2 instance</h2>
+<h2 id="install-and-set-up-influxdb-on-the-ec2-instance">Install and set up InfluxDB on the EC2 instance</h2>
 
 <h3 id="install-influxdb">Install InfluxDB</h3>
 
@@ -355,17 +421,17 @@ AMI (Amazon Machine Image) ID</p>
 <h2 id="try-out-influxdb">Try out InfluxDB</h2>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>influx bucket list
-ID			Name		Retention	Organization ID
-61003b98acb988da	_monitoring	168h0m0s	aca7861debe89fb5
-62a458b6d3091276	_tasks		72h0m0s		aca7861debe89fb5
-d4e2f2ae14c34289	test_bucket	1h0m0s		aca7861debe89fb5
+ID   Name  Retention Organization ID
+61003b98acb988da _monitoring 168h0m0s aca7861debe89fb5
+62a458b6d3091276 _tasks  72h0m0s  aca7861debe89fb5
+d4e2f2ae14c34289 test_bucket 1h0m0s  aca7861debe89fb5
 </code></pre></div></div>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">date</span> +%s
 1606723341
 </code></pre></div></div>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>influx write <span class="nt">-b</span> test_bucket <span class="nt">-o</span> nocibambi@gmail.com <span class="nt">-p</span> s <span class="s1">'test_measurement,host=testHost testField="testFieldValue" 1606723341'</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>influx write <span class="nt">-b</span> test_bucket <span class="nt">-o</span> nocibambi@gmail.com <span class="nt">-p</span> s <span class="s1">'test_measurement,host=testHost testField="testFieldValue" 1606723341'</span>
 </code></pre></div></div>
 
 <p>Use Ctrl-D to execute the query.</p>
@@ -379,7 +445,7 @@ Table: keys: <span class="o">[</span>_start, _stop, _field, _measurement, host]
 2020-11-30T07:03:07.010273692Z  2020-11-30T08:03:07.010273692Z               testField        test_measurement                testHost  2020-11-30T08:02:21.000000000Z          testFieldValue  
 </code></pre></div></div>
 
-  </div><a class="u-url" href="/aws/ec2/influxdb/2020/11/18/indluxdb-aws-cloud-setup.html" hidden></a>
+  </div><a class="u-url" href="/aws/ec2/influxdb/2020/11/18/influxdb-aws-cloud-setup.html" hidden></a>
 </article>
       </div>
     </main><footer class="site-footer h-card">
