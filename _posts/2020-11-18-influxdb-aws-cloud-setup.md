@@ -5,9 +5,9 @@ categories: [AWS, EC2, InfluxDB]
 toc: false
 layout: post
 ---
-In this post you can learn the steps you need to make to set up InfluxDB on an AWS EC2 instance.
+In this post you can learn the steps you need to set up InfluxDB on an AWS EC2 instance.
 
-We can group the steps into these high-level phases:
+For better comprehension, this posts is structured into the following sections:
 
 1. Set up an AWS account and an EC2 Virtual Server
 2. Set up an AWS EC2 instance
@@ -16,7 +16,7 @@ We can group the steps into these high-level phases:
 
 ## Set up an EC2 Virtual Server
 
-In this section we will set up an EC2 Virtual Server. This we need to create our EC2 instance. This phase consists of the following steps:
+In this section we will set up an EC2 Virtual Server. After this step we can create our EC2 instance. This phase consists of the following steps:
 
 1. Set up an AWS account
 2. Set up an EC2 key pair
@@ -25,30 +25,66 @@ In this section we will set up an EC2 Virtual Server. This we need to create our
 
 ### Set up an AWS account
 
+In case you do not have an AWS account, you can create one for free.
+
 1. [Create an AWS account](https://aws.amazon.com/free/)
 1. Select the appropriate region:
+
     ![aws region select](/images/influxdb/aws_cloudformation/influxdb-aws-region.png)
 
 ### Set up an EC2 Key pair
-1. Search for "EC2" in the **Find Services** search box and select **EC2 (Virtual Servers in the Cloud)** (Please not that you have to provide credit card information and it may take up to 24 hours for amazon to activate):
+
+In order to access your cloud server you need to set up a proper authentication by generating a key pair.
+
+1. Search for "EC2" in the **Find Services** search box and select **EC2 (Virtual Servers in the Cloud)**. (Note that you have to provide credit card information and that it may take up to 24 hours for amazon to activate):
+
     ![aws ec2 select](/images/influxdb/aws_cloudformation/influxdb-aws-ec2-select.png)
-1. Select **Key Pairs** and the create a key pair: ![key-pairs](/images/influxdb/aws_cloudformation/influxdb-aws-ec2-key-pairs-menu.png)
-1. Download the keys.
-1. Make the key readable only by the owner: `chmod 400 name-of-the-key.pem`
+
+    This menu contains most of the EC2-related services so we will work here for a big part of this tutorial.
+2. Select **Key Pairs** and create a key pair:
+
+    ![Create key pair](/images/influxdb/2020-12-02-influxdb-aws-create-key-pair.png)
+
+3. Download the keys.
+4. Make the key readable only by the owner. Navigate to the folder to where you downloaded your key and change the key's permissions:
+
+    `chmod 400 name-of-the-key.pem`
 
 ### Set up an AWS user
 
-1. Open **IAM** (Identity and Access Management) from the **Services menu**: ![open-aim](/images/influxdb/aws_cloudformation/infludb-aws-select-iam.png)
-1. Create a user and grant permissions to it:
-    1. Select **Add user**: ![iam-new-user](/images/influxdb/aws_cloudformation/infludb-aws-iam-create-user.png)
-    1. Name the user and add access rights: ![iam-new-user-access](/images/influxdb/aws_cloudformation/influxdb-aws-iam-new-user-access.png)
-    1. On the **Set Permissions** screen click on **Add user to group** and **Create a group**: ![iam-new-user-new-group](/images/influxdb/aws_cloudformation/influxdb-aws-iam-new-user-create-group.png)
-    1. Define a name and add a policy for the new group: ![iam-new-group](/images/influxdb/aws_cloudformation/influxdb-aws-iam-group-permissions.png)
-    1. At the end of the process you will see your access details: ![iam-new-user-success](/images/influxdb/aws_cloudformation/influxdb-aws-iam-new-user-success.png)
+After creating a key pair, you also need to create a user and assign it to a user group with the necessary permissions.
 
-    Note that AWS does not save your secret after you close your final screen. On the other hand, you will always be able to create a new key for your users.
+1. Open **IAM** (Identity and Access Management) from **Services**:
+
+    ![open-aim](/images/influxdb/aws_cloudformation/infludb-aws-select-iam.png)
+
+1. Select **Add user**:
+
+    ![iam-new-user](/images/influxdb/aws_cloudformation/infludb-aws-iam-create-user.png)
+
+1. Name the user and add access rights to it:
+
+    ![iam-new-user-access](/images/influxdb/aws_cloudformation/influxdb-aws-iam-new-user-access.png)
+
+1. On the **Set Permissions** screen, click on **Add user to group** and **Create a group**:
+
+    ![iam-new-user-new-group](/images/influxdb/aws_cloudformation/influxdb-aws-iam-new-user-create-group.png)
+
+1. Define a name and add a policy for the new group:
+
+    ![iam-new-group](/images/influxdb/aws_cloudformation/influxdb-aws-iam-group-permissions.png)
+
+1. At the end of the process, you will see your access details:
+
+    ![iam-new-user-success](/images/influxdb/aws_cloudformation/influxdb-aws-iam-new-user-success.png)
+
+    Here, write down somewhere your **Access Key ID** and your **Secret Access Key** as you will need them in a later step and [you will not be able to regenerate it](https://aws.amazon.com/blogs/security/wheres-my-secret-access-key/).
+
+Now, you have set up a user and credentials. In the next step, you will install the AWS Command Line Interface on your system.
 
 ### Set up AWS CLI on your system
+
+The AWS CLI will allow you to configure and access your AWS EC2 instance from the terminal.
 
 1. Install the AWS CLI on your system.
 
@@ -60,15 +96,16 @@ In this section we will set up an EC2 Virtual Server. This we need to create our
     sudo ./aws/install
     ```
 
-    Verify your version:
+    For other systems and for further instructions [see this guide](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html).
+
+    Verfify the version you installed:
 
     ```shell
-    aws --version
+    $ aws --version
+    aws-cli/2.1.2 Python/3.7.3 Linux/5.4.0-54-generic exe/x86_64.ubuntu.20
     ```
 
-    For further instructions [see here](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html).
-
-1. Also create a folder where you will store your keys and your yaml configuration.
+1. Create a folder where you will store your keys and your yaml configuration.
 
     ```shell
     mkdir ~/Projects/influxdb_aws_cloudformation
@@ -76,15 +113,28 @@ In this section we will set up an EC2 Virtual Server. This we need to create our
     mv ~/Downloads/name-of-the-key.pem .
     touch config.yml
     ```
-1. Configure AWS with `aws configure`. This is where you need to add your **Access Key ID**, your **Secret Access Key**, and the **region name** (e.g. `eu-central-1`). You can skip the output format.
+
+1. Configure AWS with `aws configure`. Here you need to add your **Access Key ID**, your **Secret Access Key** (that you generated for your user at the IAM), and the **region name** (e.g. `eu-central-1`). You can skip the output format.
+
+Now you have everything you need to set up your EC2 instance. This is what we will do in the next step.
 
 ## Set up an AWS EC2 instance
 
-Open the [Amazon AWS Marketplace](https://aws.amazon.com/marketplace/).
+In this section we will go through the steps to create your EC2 instance. This section consists of the following steps:
 
-Find a public image
+1. Identify and EC2 image to use
+2. Define your stack's resources
+3. Create an AWS Cloud Formation stack
+4. Connect to your instance
 
-![Find public image](/images/influxdb/2020-11-20-influxdb-aws-find-public-image.png)
+### Find an EC2 image
+
+1. Open the [Amazon AWS Marketplace](https://aws.amazon.com/marketplace/).
+1. Find a public image
+
+    ![Find public image](/images/influxdb/2020-11-20-influxdb-aws-find-public-image.png)
+
+If you are not 
 
 ### Define resources
 
@@ -182,7 +232,7 @@ ssh -v -i InfluxDB_AWS_example.pem \
   ubuntu@ec2-3-122-XXX-XX.eu-central-1.compute.amazonaws.com
 ```
 
-## Set up InfluxDB on the EC2 instance
+## Install and set up InfluxDB on the EC2 instance
 
 ### Install InfluxDB
 
@@ -191,13 +241,11 @@ wget https://dl.influxdata.com/influxdb/releases/influxdb_2.0.2_amd64.deb
 sudo dpkg -i influxdb_2.0.2_amd64.deb
 ```
 
-
 Start the influxdb service.
 
 ```bash
 sudo systemctl start influxdb
 ```
-
 
 Setup InfluxDB configuration settings
 
@@ -211,10 +259,10 @@ Here you need to add a username, a password, and name your organization and your
 
 ```bash
 $ influx bucket list
-ID			Name		Retention	Organization ID
-61003b98acb988da	_monitoring	168h0m0s	aca7861debe89fb5
-62a458b6d3091276	_tasks		72h0m0s		aca7861debe89fb5
-d4e2f2ae14c34289	test_bucket	1h0m0s		aca7861debe89fb5
+ID   Name  Retention Organization ID
+61003b98acb988da _monitoring 168h0m0s aca7861debe89fb5
+62a458b6d3091276 _tasks  72h0m0s  aca7861debe89fb5
+d4e2f2ae14c34289 test_bucket 1h0m0s  aca7861debe89fb5
 ```
 
 ```bash
@@ -223,7 +271,7 @@ $ date +%s
 ```
 
 ```bash
-$ influx write -b test_bucket -o nocibambi@gmail.com -p s 'test_measurement,host=testHost testField="testFieldValue" 1606723341'
+influx write -b test_bucket -o nocibambi@gmail.com -p s 'test_measurement,host=testHost testField="testFieldValue" 1606723341'
 ```
 
 Use Ctrl-D to execute the query.
