@@ -1,28 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://andrasnovoszath.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://andrasnovoszath.com/" rel="alternate" type="text/html" /><updated>2021-07-13T03:38:42-05:00</updated><id>https://andrasnovoszath.com/feed.xml</id><title type="html">Value this</title><subtitle>This is not another blog about bitcoin.</subtitle><entry><title type="html">How create a new AWS EC2 instance?</title><link href="https://andrasnovoszath.com/aws/ec2/tutorial/2020/12/01/aws-ec2-setup.html" rel="alternate" type="text/html" title="How create a new AWS EC2 instance?" /><published>2020-12-01T00:00:00-06:00</published><updated>2020-12-01T00:00:00-06:00</updated><id>https://andrasnovoszath.com/aws/ec2/tutorial/2020/12/01/aws-ec2-setup</id><content type="html" xml:base="https://andrasnovoszath.com/aws/ec2/tutorial/2020/12/01/aws-ec2-setup.html">&lt;p&gt;Register a new Amazon Machine Image&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-register-new-ami.png&quot; alt=&quot;Register a new Amazon Machine Image&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Open the AWS Marketplace&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-open-marketplace.png&quot; alt=&quot;Open AWS Marketplace&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Select an image of your choosing.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-select-ubuntu.png&quot; alt=&quot;Select Ubuntu Image&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Subscribe to the Amazon Machine Image.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-subscribe-ami.png&quot; alt=&quot;Subscribe AMI&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Continue to Configuration&lt;/strong&gt;: &lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-terms-conditions.png&quot; alt=&quot;Terms and Conditions&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-configure-ami.png&quot; alt=&quot;Configure AMI&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-launch-instance.png&quot; alt=&quot;Launch Instance&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-instance-type.png&quot; alt=&quot;Instance Type&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-launc-instance.png&quot; alt=&quot;Launch Instance&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-select-key-pair.png&quot; alt=&quot;Select Key Pair&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-instance-end.png&quot; alt=&quot;Instance Launch Screen&quot; /&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><summary type="html">Register a new Amazon Machine Image</summary></entry><entry><title type="html">Setting up AWS Cloud for InfluxDB</title><link href="https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/influxdb-aws-cloud-setup.html" rel="alternate" type="text/html" title="Setting up AWS Cloud for InfluxDB" /><published>2020-11-18T00:00:00-06:00</published><updated>2020-11-18T00:00:00-06:00</updated><id>https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/influxdb-aws-cloud-setup</id><content type="html" xml:base="https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/influxdb-aws-cloud-setup.html">&lt;p&gt;In this post you can learn the steps you need to set up InfluxDB on an AWS EC2 instance.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://andrasnovoszath.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://andrasnovoszath.com/" rel="alternate" type="text/html" /><updated>2021-08-06T06:30:44-05:00</updated><id>https://andrasnovoszath.com/feed.xml</id><title type="html">Value this</title><subtitle>This is not another blog about bitcoin.</subtitle><entry><title type="html">Setting up AWS Cloud for InfluxDB</title><link href="https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/influxdb-aws-cloud-setup.html" rel="alternate" type="text/html" title="Setting up AWS Cloud for InfluxDB" /><published>2020-11-18T00:00:00-06:00</published><updated>2020-11-18T00:00:00-06:00</updated><id>https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/influxdb-aws-cloud-setup</id><content type="html" xml:base="https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/influxdb-aws-cloud-setup.html">&lt;p&gt;In this post you can learn the steps you need to set up InfluxDB on an AWS EC2 instance.&lt;/p&gt;
 
 &lt;p&gt;For better comprehension, this posts is structured into the following sections:&lt;/p&gt;
 
@@ -853,6 +829,100 @@ schame.measurementTagValues(bucket: &quot;bucket-name&quot;, tag: &quot;host&quo
 &lt;li&gt;be unique&lt;/li&gt;
 &lt;li&gt;start with and underscore '&lt;code&gt;_&lt;/code&gt;'&lt;/li&gt;
 &lt;li&gt;they cannot be one of the Flux reserved keywords: and, import, not, return, option, test, empty, in, or, package, and builtin.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">Data visualization and dashboards with InfluxDB</title><link href="https://andrasnovoszath.com/2020/11/02/influxdb-visualization-dashboard.html" rel="alternate" type="text/html" title="Data visualization and dashboards with InfluxDB" /><published>2020-11-02T00:00:00-06:00</published><updated>2020-11-02T00:00:00-06:00</updated><id>https://andrasnovoszath.com/2020/11/02/influxdb-visualization-dashboard</id><content type="html" xml:base="https://andrasnovoszath.com/2020/11/02/influxdb-visualization-dashboard.html">&lt;!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-11-02-influxdb-visualization-dashboard.ipynb
+--&gt;
+
+&lt;div class=&quot;container&quot; id=&quot;notebook-container&quot;&gt;
+        
+    
+    
+&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
+
+&lt;/div&gt;
+    
+
+&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
+&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
+&lt;h2 id=&quot;Visualizations&quot;&gt;Visualizations&lt;a class=&quot;anchor-link&quot; href=&quot;#Visualizations&quot;&gt; &lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
+&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
+&lt;ol&gt;
+&lt;li&gt;Open &lt;strong&gt;Data Explorer&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Create a flux query (either with the panel at the bottom, or writing manually in the &lt;strong&gt;Script Editor&lt;/strong&gt;)&lt;/li&gt;
+&lt;li&gt;Press &lt;strong&gt;Submit&lt;/strong&gt; to run the query. This will generate the graph preview.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;You can add further queries with the &lt;code&gt;+&lt;/code&gt; button&lt;/li&gt;
+&lt;li&gt;You an hide/show the visualizations by clicking on the eye icon&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You can choose a different graph type from the left menu.&lt;/p&gt;
+&lt;p&gt;To see you data in a tablet format, turn on the &lt;strong&gt;View Raw Data&lt;/strong&gt; switch.&lt;/p&gt;
+&lt;p&gt;You can refresh the dashboard with the refresh button. 
+You can change the auto-refresh interval (by default it is stopped and shows a pause sign).&lt;/p&gt;
+&lt;p&gt;You can save your query as a dashboard cell by clicking on the &lt;strong&gt;Save as&lt;/strong&gt;&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
+&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
+&lt;h2 id=&quot;Dashboards&quot;&gt;Dashboards&lt;a class=&quot;anchor-link&quot; href=&quot;#Dashboards&quot;&gt; &lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
+&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
+&lt;ol&gt;
+&lt;li&gt;Select the &lt;strong&gt;Boards&lt;/strong&gt; menu item in the navigation menu.&lt;/li&gt;
+&lt;li&gt;Select &lt;strong&gt;Create Dashboard&lt;/strong&gt; menu in the middle and select &lt;strong&gt;New Dashboard&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Name the dashboard at the top field (saying &lt;strong&gt;Name this dashboard&lt;/strong&gt;)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;You can also import a dashboard from a file or simply pasting a JSON file.&lt;/p&gt;
+&lt;p&gt;You can also create a new dashboard from templates.&lt;/p&gt;
+&lt;p&gt;You can also clone your dashboard and change it for another need.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
+&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
+&lt;p&gt;For these operations you need to open a dashboard (e.g. by clicking on its name in the &lt;strong&gt;Boards&lt;/strong&gt; screen).&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;You can add further data to your dashboard with the &lt;strong&gt;Add cell&lt;/strong&gt; button at the top left corner.&lt;/li&gt;
+&lt;li&gt;You can add notes to your dashboard with the &lt;strong&gt;Add Note&lt;/strong&gt; buttom at the top left corner.&lt;/li&gt;
+&lt;li&gt;Change time zone&lt;/li&gt;
+&lt;li&gt;Manually refresh&lt;/li&gt;
+&lt;li&gt;Set automatic refresh interval&lt;/li&gt;
+&lt;li&gt;Select time range&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
+&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
+&lt;h2 id=&quot;Further-operations&quot;&gt;Further operations&lt;a class=&quot;anchor-link&quot; href=&quot;#Further-operations&quot;&gt; &lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Export&lt;/strong&gt;: Click on the gear icon and select &lt;strong&gt;Export&lt;/strong&gt;. You can export the dashboard as&lt;ul&gt;
+&lt;li&gt;JSON file&lt;/li&gt;
+&lt;li&gt;A template
+Or you can copy the JSON to the clipboard.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Delete&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;/div&gt;
