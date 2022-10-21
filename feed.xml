@@ -1,601 +1,601 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://andrasnovoszath.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://andrasnovoszath.com/" rel="alternate" type="text/html" /><updated>2022-07-22T04:16:20-05:00</updated><id>https://andrasnovoszath.com/feed.xml</id><title type="html">Value this</title><subtitle>This is not another blog about bitcoin.</subtitle><entry><title type="html">Setting up AWS Cloud for InfluxDB</title><link href="https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/influxdb-aws-cloud-setup.html" rel="alternate" type="text/html" title="Setting up AWS Cloud for InfluxDB" /><published>2020-11-18T00:00:00-06:00</published><updated>2020-11-18T00:00:00-06:00</updated><id>https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/influxdb-aws-cloud-setup</id><content type="html" xml:base="https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/influxdb-aws-cloud-setup.html">&lt;p&gt;In this post you can learn the steps you need to set up InfluxDB on an AWS EC2 instance.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.1">Jekyll</generator><link href="https://andrasnovoszath.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://andrasnovoszath.com/" rel="alternate" type="text/html" /><updated>2022-10-21T01:39:59-05:00</updated><id>https://andrasnovoszath.com/feed.xml</id><title type="html">Value this</title><subtitle>This is not another blog about bitcoin.</subtitle><entry><title type="html">Setting up AWS Cloud for InfluxDB</title><link href="https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/influxdb-aws-cloud-setup.html" rel="alternate" type="text/html" title="Setting up AWS Cloud for InfluxDB" /><published>2020-11-18T00:00:00-06:00</published><updated>2020-11-18T00:00:00-06:00</updated><id>https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/influxdb-aws-cloud-setup</id><content type="html" xml:base="https://andrasnovoszath.com/aws/ec2/influxdb/2020/11/18/influxdb-aws-cloud-setup.html"><![CDATA[<p>In this post you can learn the steps you need to set up InfluxDB on an AWS EC2 instance.</p>
 
-&lt;p&gt;For better comprehension, this posts is structured into the following sections:&lt;/p&gt;
+<p>For better comprehension, this posts is structured into the following sections:</p>
 
-&lt;ol&gt;
-  &lt;li&gt;Set up an AWS account and an EC2 Virtual Server&lt;/li&gt;
-  &lt;li&gt;Set up an AWS EC2 instance&lt;/li&gt;
-  &lt;li&gt;Set up InfluxDB on you EC2 instance&lt;/li&gt;
-  &lt;li&gt;Try out InfluxDB on your EC2 instance&lt;/li&gt;
-&lt;/ol&gt;
+<ol>
+  <li>Set up an AWS account and an EC2 Virtual Server</li>
+  <li>Set up an AWS EC2 instance</li>
+  <li>Set up InfluxDB on you EC2 instance</li>
+  <li>Try out InfluxDB on your EC2 instance</li>
+</ol>
 
-&lt;h2 id=&quot;set-up-an-ec2-virtual-server&quot;&gt;Set up an EC2 Virtual Server&lt;/h2&gt;
+<h2 id="set-up-an-ec2-virtual-server">Set up an EC2 Virtual Server</h2>
 
-&lt;p&gt;In this section we will set up an EC2 Virtual Server. After this step we can create our EC2 instance. This phase consists of the following steps:&lt;/p&gt;
+<p>In this section we will set up an EC2 Virtual Server. After this step we can create our EC2 instance. This phase consists of the following steps:</p>
 
-&lt;ol&gt;
-  &lt;li&gt;Set up an AWS account&lt;/li&gt;
-  &lt;li&gt;Set up an EC2 key pair&lt;/li&gt;
-  &lt;li&gt;Set up an AWS user&lt;/li&gt;
-  &lt;li&gt;Install and set up the AWS command line client (AWS CLI) on your system&lt;/li&gt;
-&lt;/ol&gt;
+<ol>
+  <li>Set up an AWS account</li>
+  <li>Set up an EC2 key pair</li>
+  <li>Set up an AWS user</li>
+  <li>Install and set up the AWS command line client (AWS CLI) on your system</li>
+</ol>
 
-&lt;h3 id=&quot;set-up-an-aws-account&quot;&gt;Set up an AWS account&lt;/h3&gt;
+<h3 id="set-up-an-aws-account">Set up an AWS account</h3>
 
-&lt;p&gt;In case you do not have an AWS account, you can create one for free.&lt;/p&gt;
+<p>In case you do not have an AWS account, you can create one for free.</p>
 
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/free/&quot;&gt;Create an AWS account&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Select the appropriate region:&lt;/p&gt;
+<ol>
+  <li><a href="https://aws.amazon.com/free/">Create an AWS account</a></li>
+  <li>
+    <p>Select the appropriate region:</p>
 
-    &lt;p&gt;&lt;img src=&quot;/images/influxdb/aws_cloudformation/influxdb-aws-region.png&quot; alt=&quot;aws region select&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
+    <p><img src="/images/influxdb/aws_cloudformation/influxdb-aws-region.png" alt="aws region select" /></p>
+  </li>
+</ol>
 
-&lt;h3 id=&quot;set-up-an-ec2-key-pair&quot;&gt;Set up an EC2 Key pair&lt;/h3&gt;
+<h3 id="set-up-an-ec2-key-pair">Set up an EC2 Key pair</h3>
 
-&lt;p&gt;In order to access your cloud server you need to set up a proper authentication by generating a key pair.&lt;/p&gt;
+<p>In order to access your cloud server you need to set up a proper authentication by generating a key pair.</p>
 
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;Search for “EC2” in the &lt;strong&gt;Find Services&lt;/strong&gt; search box and select &lt;strong&gt;EC2 (Virtual Servers in the Cloud)&lt;/strong&gt;. (Note that you have to provide credit card information and that it may take up to 24 hours for amazon to activate):&lt;/p&gt;
+<ol>
+  <li>
+    <p>Search for “EC2” in the <strong>Find Services</strong> search box and select <strong>EC2 (Virtual Servers in the Cloud)</strong>. (Note that you have to provide credit card information and that it may take up to 24 hours for amazon to activate):</p>
 
-    &lt;p&gt;&lt;img src=&quot;/images/influxdb/aws_cloudformation/influxdb-aws-ec2-select.png&quot; alt=&quot;aws ec2 select&quot; /&gt;&lt;/p&gt;
+    <p><img src="/images/influxdb/aws_cloudformation/influxdb-aws-ec2-select.png" alt="aws ec2 select" /></p>
 
-    &lt;p&gt;This menu contains most of the EC2-related services so we will work here for a big part of this tutorial.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Select &lt;strong&gt;Key Pairs&lt;/strong&gt; and create a key pair:&lt;/p&gt;
+    <p>This menu contains most of the EC2-related services so we will work here for a big part of this tutorial.</p>
+  </li>
+  <li>
+    <p>Select <strong>Key Pairs</strong> and create a key pair:</p>
 
-    &lt;p&gt;&lt;img src=&quot;/images/influxdb/2020-12-02-influxdb-aws-create-key-pair.png&quot; alt=&quot;Create key pair&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Download the keys.&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Make the key readable only by the owner. Navigate to the folder to where you downloaded your key and change the key’s permissions:&lt;/p&gt;
+    <p><img src="/images/influxdb/2020-12-02-influxdb-aws-create-key-pair.png" alt="Create key pair" /></p>
+  </li>
+  <li>Download the keys.</li>
+  <li>
+    <p>Make the key readable only by the owner. Navigate to the folder to where you downloaded your key and change the key’s permissions:</p>
 
-    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;chmod 400 name-of-the-key.pem&lt;/code&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
+    <p><code class="highlighter-rouge">chmod 400 name-of-the-key.pem</code></p>
+  </li>
+</ol>
 
-&lt;h3 id=&quot;set-up-an-aws-user&quot;&gt;Set up an AWS user&lt;/h3&gt;
+<h3 id="set-up-an-aws-user">Set up an AWS user</h3>
 
-&lt;p&gt;After creating a key pair, you also need to create a user and assign it to a user group with the necessary permissions.&lt;/p&gt;
+<p>After creating a key pair, you also need to create a user and assign it to a user group with the necessary permissions.</p>
 
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;Open &lt;strong&gt;IAM&lt;/strong&gt; (Identity and Access Management) from &lt;strong&gt;Services&lt;/strong&gt;:&lt;/p&gt;
+<ol>
+  <li>
+    <p>Open <strong>IAM</strong> (Identity and Access Management) from <strong>Services</strong>:</p>
 
-    &lt;p&gt;&lt;img src=&quot;/images/influxdb/aws_cloudformation/infludb-aws-select-iam.png&quot; alt=&quot;open-aim&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Select &lt;strong&gt;Add user&lt;/strong&gt;:&lt;/p&gt;
+    <p><img src="/images/influxdb/aws_cloudformation/infludb-aws-select-iam.png" alt="open-aim" /></p>
+  </li>
+  <li>
+    <p>Select <strong>Add user</strong>:</p>
 
-    &lt;p&gt;&lt;img src=&quot;/images/influxdb/aws_cloudformation/infludb-aws-iam-create-user.png&quot; alt=&quot;iam-new-user&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Name the user and add access rights to it:&lt;/p&gt;
+    <p><img src="/images/influxdb/aws_cloudformation/infludb-aws-iam-create-user.png" alt="iam-new-user" /></p>
+  </li>
+  <li>
+    <p>Name the user and add access rights to it:</p>
 
-    &lt;p&gt;&lt;img src=&quot;/images/influxdb/aws_cloudformation/influxdb-aws-iam-new-user-access.png&quot; alt=&quot;iam-new-user-access&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;On the &lt;strong&gt;Set Permissions&lt;/strong&gt; screen, click on &lt;strong&gt;Add user to group&lt;/strong&gt; and &lt;strong&gt;Create a group&lt;/strong&gt;:&lt;/p&gt;
+    <p><img src="/images/influxdb/aws_cloudformation/influxdb-aws-iam-new-user-access.png" alt="iam-new-user-access" /></p>
+  </li>
+  <li>
+    <p>On the <strong>Set Permissions</strong> screen, click on <strong>Add user to group</strong> and <strong>Create a group</strong>:</p>
 
-    &lt;p&gt;&lt;img src=&quot;/images/influxdb/aws_cloudformation/influxdb-aws-iam-new-user-create-group.png&quot; alt=&quot;iam-new-user-new-group&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Define a name and add a policy for the new group:&lt;/p&gt;
+    <p><img src="/images/influxdb/aws_cloudformation/influxdb-aws-iam-new-user-create-group.png" alt="iam-new-user-new-group" /></p>
+  </li>
+  <li>
+    <p>Define a name and add a policy for the new group:</p>
 
-    &lt;p&gt;&lt;img src=&quot;/images/influxdb/aws_cloudformation/influxdb-aws-iam-group-permissions.png&quot; alt=&quot;iam-new-group&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;At the end of the process, you will see your access details:&lt;/p&gt;
+    <p><img src="/images/influxdb/aws_cloudformation/influxdb-aws-iam-group-permissions.png" alt="iam-new-group" /></p>
+  </li>
+  <li>
+    <p>At the end of the process, you will see your access details:</p>
 
-    &lt;p&gt;&lt;img src=&quot;/images/influxdb/aws_cloudformation/influxdb-aws-iam-new-user-success.png&quot; alt=&quot;iam-new-user-success&quot; /&gt;&lt;/p&gt;
+    <p><img src="/images/influxdb/aws_cloudformation/influxdb-aws-iam-new-user-success.png" alt="iam-new-user-success" /></p>
 
-    &lt;p&gt;Here, write down somewhere your &lt;strong&gt;Access Key ID&lt;/strong&gt; and your &lt;strong&gt;Secret Access Key&lt;/strong&gt; as you will need them in a later step and &lt;a href=&quot;https://aws.amazon.com/blogs/security/wheres-my-secret-access-key/&quot;&gt;you will not be able to regenerate it&lt;/a&gt;.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
+    <p>Here, write down somewhere your <strong>Access Key ID</strong> and your <strong>Secret Access Key</strong> as you will need them in a later step and <a href="https://aws.amazon.com/blogs/security/wheres-my-secret-access-key/">you will not be able to regenerate it</a>.</p>
+  </li>
+</ol>
 
-&lt;p&gt;Now, you have set up a user and credentials. In the next step, you will install the AWS Command Line Interface on your system.&lt;/p&gt;
+<p>Now, you have set up a user and credentials. In the next step, you will install the AWS Command Line Interface on your system.</p>
 
-&lt;h3 id=&quot;set-up-aws-cli-on-your-system&quot;&gt;Set up AWS CLI on your system&lt;/h3&gt;
+<h3 id="set-up-aws-cli-on-your-system">Set up AWS CLI on your system</h3>
 
-&lt;p&gt;The AWS CLI will allow you to configure and access your AWS EC2 instance from the terminal.&lt;/p&gt;
+<p>The AWS CLI will allow you to configure and access your AWS EC2 instance from the terminal.</p>
 
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;Install the AWS CLI on your system.&lt;/p&gt;
+<ol>
+  <li>
+    <p>Install the AWS CLI on your system.</p>
 
-    &lt;p&gt;On a linux machine, you can do this as here:&lt;/p&gt;
+    <p>On a linux machine, you can do this as here:</p>
 
-    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; curl &lt;span class=&quot;s2&quot;&gt;&quot;https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;awscliv2.zip&quot;&lt;/span&gt;
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> curl <span class="s2">"https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"</span> <span class="nt">-o</span> <span class="s2">"awscliv2.zip"</span>
  unzip awscliv2.zip
- &lt;span class=&quot;nb&quot;&gt;sudo&lt;/span&gt; ./aws/install
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+ <span class="nb">sudo</span> ./aws/install
+</code></pre></div>    </div>
 
-    &lt;p&gt;For other systems and for further instructions &lt;a href=&quot;https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html&quot;&gt;see this guide&lt;/a&gt;.&lt;/p&gt;
+    <p>For other systems and for further instructions <a href="https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html">see this guide</a>.</p>
 
-    &lt;p&gt;Verfify the version you installed:&lt;/p&gt;
+    <p>Verfify the version you installed:</p>
 
-    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;aws &lt;span class=&quot;nt&quot;&gt;--version&lt;/span&gt;
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>aws <span class="nt">--version</span>
  aws-cli/2.1.2 Python/3.7.3 Linux/5.4.0-54-generic exe/x86_64.ubuntu.20
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Create a folder where you will store your keys and your yaml configuration.&lt;/p&gt;
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Create a folder where you will store your keys and your yaml configuration.</p>
 
-    &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nb&quot;&gt;mkdir&lt;/span&gt; ~/Projects/influxdb_aws_cloudformation
- &lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/Projects/influxdb_aws_cloudformation
- &lt;span class=&quot;nb&quot;&gt;mv&lt;/span&gt; ~/Downloads/name-of-the-key.pem &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
- &lt;span class=&quot;nb&quot;&gt;touch &lt;/span&gt;config.yml
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Configure AWS with &lt;code class=&quot;highlighter-rouge&quot;&gt;aws configure&lt;/code&gt;. Here you need to add your &lt;strong&gt;Access Key ID&lt;/strong&gt;, your &lt;strong&gt;Secret Access Key&lt;/strong&gt; (that you generated for your user at the IAM), and the &lt;strong&gt;region name&lt;/strong&gt; (e.g. &lt;code class=&quot;highlighter-rouge&quot;&gt;eu-central-1&lt;/code&gt;). You can skip the output format.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
+    <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">mkdir</span> ~/Projects/influxdb_aws_cloudformation
+ <span class="nb">cd</span> ~/Projects/influxdb_aws_cloudformation
+ <span class="nb">mv</span> ~/Downloads/name-of-the-key.pem <span class="nb">.</span>
+ <span class="nb">touch </span>config.yml
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Configure AWS with <code class="highlighter-rouge">aws configure</code>. Here you need to add your <strong>Access Key ID</strong>, your <strong>Secret Access Key</strong> (that you generated for your user at the IAM), and the <strong>region name</strong> (e.g. <code class="highlighter-rouge">eu-central-1</code>). You can skip the output format.</p>
+  </li>
+</ol>
 
-&lt;p&gt;Now you have everything you need to set up your EC2 instance. This is what we will do in the next step.&lt;/p&gt;
+<p>Now you have everything you need to set up your EC2 instance. This is what we will do in the next step.</p>
 
-&lt;h2 id=&quot;set-up-an-aws-ec2-instance&quot;&gt;Set up an AWS EC2 instance&lt;/h2&gt;
+<h2 id="set-up-an-aws-ec2-instance">Set up an AWS EC2 instance</h2>
 
-&lt;p&gt;In this section we will go through the steps to create your EC2 instance. This section consists of the following steps:&lt;/p&gt;
+<p>In this section we will go through the steps to create your EC2 instance. This section consists of the following steps:</p>
 
-&lt;ol&gt;
-  &lt;li&gt;Identify and EC2 image to use&lt;/li&gt;
-  &lt;li&gt;Define your stack’s resources&lt;/li&gt;
-  &lt;li&gt;Create an AWS Cloud Formation stack&lt;/li&gt;
-  &lt;li&gt;Connect to your instance&lt;/li&gt;
-&lt;/ol&gt;
+<ol>
+  <li>Identify and EC2 image to use</li>
+  <li>Define your stack’s resources</li>
+  <li>Create an AWS Cloud Formation stack</li>
+  <li>Connect to your instance</li>
+</ol>
 
-&lt;h3 id=&quot;find-an-ec2-image&quot;&gt;Find an EC2 image&lt;/h3&gt;
+<h3 id="find-an-ec2-image">Find an EC2 image</h3>
 
-&lt;ol&gt;
-  &lt;li&gt;Open the &lt;a href=&quot;https://aws.amazon.com/marketplace/&quot;&gt;Amazon AWS Marketplace&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Find a public image&lt;/p&gt;
+<ol>
+  <li>Open the <a href="https://aws.amazon.com/marketplace/">Amazon AWS Marketplace</a>.</li>
+  <li>
+    <p>Find a public image</p>
 
-    &lt;p&gt;&lt;img src=&quot;/images/influxdb/2020-11-20-influxdb-aws-find-public-image.png&quot; alt=&quot;Find public image&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
+    <p><img src="/images/influxdb/2020-11-20-influxdb-aws-find-public-image.png" alt="Find public image" /></p>
+  </li>
+</ol>
 
-&lt;p&gt;If you are not&lt;/p&gt;
+<p>If you are not</p>
 
-&lt;h3 id=&quot;define-resources&quot;&gt;Define resources&lt;/h3&gt;
+<h3 id="define-resources">Define resources</h3>
 
-&lt;p&gt;Resources
+<p>Resources
 Logical ID
 Instance properties
-AMI (Amazon Machine Image) ID&lt;/p&gt;
+AMI (Amazon Machine Image) ID</p>
 
-&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;Resources&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;Appnode&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;Type&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;AWS::EC2::Instance&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;Properties&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;InstanceType&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;t2.nano&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;ImageId&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ami-06a719e5f8e22c33b&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# The AMI instance ID&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;Keyname&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;InfluxDB_AWS_example&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# The name of your key pair&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;SecurityGroups&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;!Ref&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;AppnodeSecurityGroup&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# Reference the security group defined below&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">Resources</span><span class="pi">:</span>
+  <span class="na">Appnode</span><span class="pi">:</span>
+    <span class="na">Type</span><span class="pi">:</span> <span class="s">AWS::EC2::Instance</span>
+    <span class="na">Properties</span><span class="pi">:</span>
+      <span class="na">InstanceType</span><span class="pi">:</span> <span class="s">t2.nano</span>
+      <span class="na">ImageId</span><span class="pi">:</span> <span class="s">ami-06a719e5f8e22c33b</span> <span class="c1"># The AMI instance ID</span>
+      <span class="na">Keyname</span><span class="pi">:</span> <span class="s">InfluxDB_AWS_example</span> <span class="c1"># The name of your key pair</span>
+      <span class="na">SecurityGroups</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="kt">!Ref</span> <span class="s">AppnodeSecurityGroup</span> <span class="c1"># Reference the security group defined below</span>
+</code></pre></div></div>
 
-&lt;p&gt;You need to define a security group. Security groups act as virtual firewalls for your incoming/outgoing traffic with the help of rules. You can read more about them &lt;a href=&quot;https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-security-groups.html&quot;&gt;here&lt;/a&gt;. Here, we define an &lt;a href=&quot;https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-ingress.html&quot;&gt;inbound security group&lt;/a&gt;. For particular rules, &lt;a href=&quot;https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SecurityGroupRules&quot;&gt;see here&lt;/a&gt;.&lt;/p&gt;
+<p>You need to define a security group. Security groups act as virtual firewalls for your incoming/outgoing traffic with the help of rules. You can read more about them <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-security-groups.html">here</a>. Here, we define an <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-security-group-ingress.html">inbound security group</a>. For particular rules, <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SecurityGroupRules">see here</a>.</p>
 
-&lt;p&gt;We define the security group and link it to our app node definition with the &lt;a href=&quot;https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-ref.html&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Ref&lt;/code&gt; function&lt;/a&gt;.&lt;/p&gt;
+<p>We define the security group and link it to our app node definition with the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-ref.html"><code class="highlighter-rouge">Ref</code> function</a>.</p>
 
-&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Define the security group&lt;/span&gt;
-&lt;span class=&quot;na&quot;&gt;AppnodeSecurityGroup&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;Type&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;AWS::EC2::SecurityGroup&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;Properties&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;GroupDescription&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;SSH enabled app nodes&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# Inbound security rule&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# Expose the HTTP port 80 with tcp to inbound traffic from andy Ipv4 addresses&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;SecurityGroupIngress&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;IpProtocol&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;tcp&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;FromPort&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;80'&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;ToPort&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;80'&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;CidrIp&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;0.0.0.0/0&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Define the security group</span>
+<span class="na">AppnodeSecurityGroup</span><span class="pi">:</span>
+  <span class="na">Type</span><span class="pi">:</span> <span class="s">AWS::EC2::SecurityGroup</span>
+  <span class="na">Properties</span><span class="pi">:</span>
+    <span class="na">GroupDescription</span><span class="pi">:</span> <span class="s">SSH enabled app nodes</span>
+    <span class="c1"># Inbound security rule</span>
+    <span class="c1"># Expose the HTTP port 80 with tcp to inbound traffic from andy Ipv4 addresses</span>
+    <span class="na">SecurityGroupIngress</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">IpProtocol</span><span class="pi">:</span> <span class="s">tcp</span>
+        <span class="na">FromPort</span><span class="pi">:</span> <span class="s1">'</span><span class="s">80'</span>
+        <span class="na">ToPort</span><span class="pi">:</span> <span class="s1">'</span><span class="s">80'</span>
+        <span class="na">CidrIp</span><span class="pi">:</span> <span class="s">0.0.0.0/0</span>
+</code></pre></div></div>
 
-&lt;p&gt;Define Bash script to install docker and influxdb on the image.&lt;/p&gt;
+<p>Define Bash script to install docker and influxdb on the image.</p>
 
-&lt;p&gt;The full yaml:&lt;/p&gt;
+<p>The full yaml:</p>
 
-&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;Resources&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;AppNode&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;Type&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;AWS::EC2::Instance&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;Properties&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;InstanceType&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;t2.micro&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;ImageId&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ami-03d85bfa79ad10274&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;KeyName&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;InfluxDB_AWS_example&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;SecurityGroups&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-        &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;!Ref&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;AppNodeSG&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;AppNodeSG&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;Type&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;AWS::EC2::SecurityGroup&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;Properties&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;GroupDescription&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;for the app nodes that allow ssh&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;SecurityGroupIngress&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;IpProtocol&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;tcp&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;FromPort&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;80'&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;ToPort&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;80'&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;CidrIp&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;0.0.0.0/0&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;IpProtocol&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;tcp&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;FromPort&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;22'&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;ToPort&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;22'&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;CidrIp&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;0.0.0.0/0&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">Resources</span><span class="pi">:</span>
+  <span class="na">AppNode</span><span class="pi">:</span>
+    <span class="na">Type</span><span class="pi">:</span> <span class="s">AWS::EC2::Instance</span>
+    <span class="na">Properties</span><span class="pi">:</span>
+      <span class="na">InstanceType</span><span class="pi">:</span> <span class="s">t2.micro</span>
+      <span class="na">ImageId</span><span class="pi">:</span> <span class="s">ami-03d85bfa79ad10274</span>
+      <span class="na">KeyName</span><span class="pi">:</span> <span class="s">InfluxDB_AWS_example</span>
+      <span class="na">SecurityGroups</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="kt">!Ref</span> <span class="s">AppNodeSG</span>
+  <span class="na">AppNodeSG</span><span class="pi">:</span>
+    <span class="na">Type</span><span class="pi">:</span> <span class="s">AWS::EC2::SecurityGroup</span>
+    <span class="na">Properties</span><span class="pi">:</span>
+      <span class="na">GroupDescription</span><span class="pi">:</span> <span class="s">for the app nodes that allow ssh</span>
+      <span class="na">SecurityGroupIngress</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">IpProtocol</span><span class="pi">:</span> <span class="s">tcp</span>
+        <span class="na">FromPort</span><span class="pi">:</span> <span class="s1">'</span><span class="s">80'</span>
+        <span class="na">ToPort</span><span class="pi">:</span> <span class="s1">'</span><span class="s">80'</span>
+        <span class="na">CidrIp</span><span class="pi">:</span> <span class="s">0.0.0.0/0</span>
+      <span class="pi">-</span> <span class="na">IpProtocol</span><span class="pi">:</span> <span class="s">tcp</span>
+        <span class="na">FromPort</span><span class="pi">:</span> <span class="s1">'</span><span class="s">22'</span>
+        <span class="na">ToPort</span><span class="pi">:</span> <span class="s1">'</span><span class="s">22'</span>
+        <span class="na">CidrIp</span><span class="pi">:</span> <span class="s">0.0.0.0/0</span>
+</code></pre></div></div>
 
-&lt;h3 id=&quot;create-a-cloud-formation-stack&quot;&gt;Create a Cloud Formation stack&lt;/h3&gt;
+<h3 id="create-a-cloud-formation-stack">Create a Cloud Formation stack</h3>
 
-&lt;ul&gt;
-  &lt;li&gt;&lt;img src=&quot;../images/influxdb/2020-12-01-influxdb-aws-select-cloudformation.png&quot; alt=&quot;Select Cloudformation&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/images/influxdb/2020-12-01-influxdb-aws-select-create-stack.png&quot; alt=&quot;Select Create Stack&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;img src=&quot;/images/influxdb/2020-12-01-influxdb-aws-upload-template.png&quot; alt=&quot;Upload Template&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;On the rest of the screens the only thing you have to do is to name the stack, you can skip the rest of the options.&lt;/li&gt;
-&lt;/ul&gt;
+<ul>
+  <li><img src="../images/influxdb/2020-12-01-influxdb-aws-select-cloudformation.png" alt="Select Cloudformation" /></li>
+  <li><img src="/images/influxdb/2020-12-01-influxdb-aws-select-create-stack.png" alt="Select Create Stack" /></li>
+  <li><img src="/images/influxdb/2020-12-01-influxdb-aws-upload-template.png" alt="Upload Template" /></li>
+  <li>On the rest of the screens the only thing you have to do is to name the stack, you can skip the rest of the options.</li>
+</ul>
 
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;aws cloudformation create-stack &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;--stack-name&lt;/span&gt; influxdb-trial-stack &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;--region&lt;/span&gt; eu-central-1 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;--template-body&lt;/span&gt; file://&lt;span class=&quot;nv&quot;&gt;$PWD&lt;/span&gt;/stack.yaml
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aws cloudformation create-stack <span class="se">\</span>
+  <span class="nt">--stack-name</span> influxdb-trial-stack <span class="se">\</span>
+  <span class="nt">--region</span> eu-central-1 <span class="se">\</span>
+  <span class="nt">--template-body</span> file://<span class="nv">$PWD</span>/stack.yaml
+</code></pre></div></div>
 
-&lt;p&gt;Go back to the EC2 services page and find the instances menu. There you will be able to see your newly created instance. Wait until it finishies initialization and has all of its checkes passed.&lt;/p&gt;
+<p>Go back to the EC2 services page and find the instances menu. There you will be able to see your newly created instance. Wait until it finishies initialization and has all of its checkes passed.</p>
 
-&lt;p&gt;&lt;img src=&quot;/images/influxdb/2020-12-01-influxdb-aws-instance-initialization.png&quot; alt=&quot;EC2 instance initialization&quot; /&gt;&lt;/p&gt;
+<p><img src="/images/influxdb/2020-12-01-influxdb-aws-instance-initialization.png" alt="EC2 instance initialization" /></p>
 
-&lt;h3 id=&quot;connect-to-your-instance&quot;&gt;Connect to your instance&lt;/h3&gt;
+<h3 id="connect-to-your-instance">Connect to your instance</h3>
 
-&lt;p&gt;&lt;img src=&quot;/images/influxdb/2020-11-23-influxdb-aws-get-instance-dns.png&quot; alt=&quot;Get AMI instance DNS&quot; /&gt;&lt;/p&gt;
+<p><img src="/images/influxdb/2020-11-23-influxdb-aws-get-instance-dns.png" alt="Get AMI instance DNS" /></p>
 
-&lt;p&gt;Create a connection to our instance:&lt;/p&gt;
+<p>Create a connection to our instance:</p>
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ssh &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; InfluxDB_AWS_example.pem &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh <span class="nt">-v</span> <span class="nt">-i</span> InfluxDB_AWS_example.pem <span class="se">\</span>
   ubuntu@ec2-3-122-XXX-XX.eu-central-1.compute.amazonaws.com
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</code></pre></div></div>
 
-&lt;h2 id=&quot;install-and-set-up-influxdb-on-the-ec2-instance&quot;&gt;Install and set up InfluxDB on the EC2 instance&lt;/h2&gt;
+<h2 id="install-and-set-up-influxdb-on-the-ec2-instance">Install and set up InfluxDB on the EC2 instance</h2>
 
-&lt;h3 id=&quot;install-influxdb&quot;&gt;Install InfluxDB&lt;/h3&gt;
+<h3 id="install-influxdb">Install InfluxDB</h3>
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget https://dl.influxdata.com/influxdb/releases/influxdb_2.0.2_amd64.deb
-&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;dpkg &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; influxdb_2.0.2_amd64.deb
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://dl.influxdata.com/influxdb/releases/influxdb_2.0.2_amd64.deb
+<span class="nb">sudo </span>dpkg <span class="nt">-i</span> influxdb_2.0.2_amd64.deb
+</code></pre></div></div>
 
-&lt;p&gt;Start the influxdb service.&lt;/p&gt;
+<p>Start the influxdb service.</p>
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl start influxdb
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>systemctl start influxdb
+</code></pre></div></div>
 
-&lt;p&gt;Setup InfluxDB configuration settings&lt;/p&gt;
+<p>Setup InfluxDB configuration settings</p>
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;influx setup
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>influx setup
+</code></pre></div></div>
 
-&lt;p&gt;Here you need to add a username, a password, and name your organization and your primary bucket. You can skip on the retention period question.&lt;/p&gt;
+<p>Here you need to add a username, a password, and name your organization and your primary bucket. You can skip on the retention period question.</p>
 
-&lt;h2 id=&quot;try-out-influxdb&quot;&gt;Try out InfluxDB&lt;/h2&gt;
+<h2 id="try-out-influxdb">Try out InfluxDB</h2>
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;influx bucket list
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>influx bucket list
 ID   Name  Retention Organization ID
 61003b98acb988da _monitoring 168h0m0s aca7861debe89fb5
 62a458b6d3091276 _tasks  72h0m0s  aca7861debe89fb5
 d4e2f2ae14c34289 test_bucket 1h0m0s  aca7861debe89fb5
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</code></pre></div></div>
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;date&lt;/span&gt; +%s
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">date</span> +%s
 1606723341
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</code></pre></div></div>
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;influx write &lt;span class=&quot;nt&quot;&gt;-b&lt;/span&gt; test_bucket &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; nocibambi@gmail.com &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; s &lt;span class=&quot;s1&quot;&gt;'test_measurement,host=testHost testField=&quot;testFieldValue&quot; 1606723341'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>influx write <span class="nt">-b</span> test_bucket <span class="nt">-o</span> nocibambi@gmail.com <span class="nt">-p</span> s <span class="s1">'test_measurement,host=testHost testField="testFieldValue" 1606723341'</span>
+</code></pre></div></div>
 
-&lt;p&gt;Use Ctrl-D to execute the query.&lt;/p&gt;
+<p>Use Ctrl-D to execute the query.</p>
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;influx query
-from&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;bucket: &lt;span class=&quot;s2&quot;&gt;&quot;test_bucket&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; |&amp;gt; range&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;start:-1h&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>influx query
+from<span class="o">(</span>bucket: <span class="s2">"test_bucket"</span><span class="o">)</span> |&gt; range<span class="o">(</span>start:-1h<span class="o">)</span>
 Result: _result
-Table: keys: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;_start, _stop, _field, _measurement, host]
+Table: keys: <span class="o">[</span>_start, _stop, _field, _measurement, host]
                    _start:time                      _stop:time           _field:string     _measurement:string             host:string                      _time:time           _value:string  
-&lt;span class=&quot;nt&quot;&gt;------------------------------&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;------------------------------&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;----------------------&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;----------------------&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;----------------------&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;------------------------------&lt;/span&gt;  &lt;span class=&quot;nt&quot;&gt;----------------------&lt;/span&gt;  
+<span class="nt">------------------------------</span>  <span class="nt">------------------------------</span>  <span class="nt">----------------------</span>  <span class="nt">----------------------</span>  <span class="nt">----------------------</span>  <span class="nt">------------------------------</span>  <span class="nt">----------------------</span>  
 2020-11-30T07:03:07.010273692Z  2020-11-30T08:03:07.010273692Z               testField        test_measurement                testHost  2020-11-30T08:02:21.000000000Z          testFieldValue  
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">In this post you can learn the steps you need to set up InfluxDB on an AWS EC2 instance.</summary></entry><entry><title type="html">Grouping data with Flux in InfluxDB</title><link href="https://andrasnovoszath.com/influxdb/flux/time-series/2020/11/17/influxdb-flux-group.html" rel="alternate" type="text/html" title="Grouping data with Flux in InfluxDB" /><published>2020-11-17T00:00:00-06:00</published><updated>2020-11-17T00:00:00-06:00</updated><id>https://andrasnovoszath.com/influxdb/flux/time-series/2020/11/17/influxdb-flux-group</id><content type="html" xml:base="https://andrasnovoszath.com/influxdb/flux/time-series/2020/11/17/influxdb-flux-group.html">&lt;p&gt;Grouping happens based on &lt;strong&gt;group keys&lt;/strong&gt; which effectilve are the name of columns used for the grouping. A group then consists of rows having identical values in the group key columns.&lt;/p&gt;
+</code></pre></div></div>]]></content><author><name></name></author><category term="AWS" /><category term="EC2" /><category term="InfluxDB" /><summary type="html"><![CDATA[How to set up AWS Cloud for InfluxDB?]]></summary></entry><entry><title type="html">Grouping data with Flux in InfluxDB</title><link href="https://andrasnovoszath.com/influxdb/flux/time-series/2020/11/17/influxdb-flux-group.html" rel="alternate" type="text/html" title="Grouping data with Flux in InfluxDB" /><published>2020-11-17T00:00:00-06:00</published><updated>2020-11-17T00:00:00-06:00</updated><id>https://andrasnovoszath.com/influxdb/flux/time-series/2020/11/17/influxdb-flux-group</id><content type="html" xml:base="https://andrasnovoszath.com/influxdb/flux/time-series/2020/11/17/influxdb-flux-group.html"><![CDATA[<p>Grouping happens based on <strong>group keys</strong> which effectilve are the name of columns used for the grouping. A group then consists of rows having identical values in the group key columns.</p>
 
-&lt;h2 id=&quot;example&quot;&gt;Example&lt;/h2&gt;
+<h2 id="example">Example</h2>
 
-&lt;p&gt;Let’s consider the http api request duration data.&lt;/p&gt;
+<p>Let’s consider the http api request duration data.</p>
 
-&lt;pre&gt;&lt;code class=&quot;language-flux&quot;&gt;from(bucket: &quot;trial_bucket&quot;)
-  |&amp;gt; range(start: -15m)
-  |&amp;gt; filter(fn: (r) =&amp;gt; r._measurement == &quot;http_api_request_duration_seconds&quot;)
-&lt;/code&gt;&lt;/pre&gt;
+<pre><code class="language-flux">from(bucket: "trial_bucket")
+  |&gt; range(start: -15m)
+  |&gt; filter(fn: (r) =&gt; r._measurement == "http_api_request_duration_seconds")
+</code></pre>
 
-&lt;p&gt;In respect to the time columns, it is ‘grouped’, by default, by its ‘start’ and ‘end’ times.&lt;/p&gt;
+<p>In respect to the time columns, it is ‘grouped’, by default, by its ‘start’ and ‘end’ times.</p>
 
-&lt;p&gt;&lt;img src=&quot;/images/influxdb/influxdb-group-default-data.png&quot; alt=&quot;default grouping&quot; /&gt; “Default grouping”&lt;/p&gt;
+<p><img src="/images/influxdb/influxdb-group-default-data.png" alt="default grouping" /> “Default grouping”</p>
 
-&lt;p&gt;&lt;img src=&quot;/images/influxdb/influxdb-group-default-chart.png&quot; alt=&quot;default chart&quot; /&gt; “Default grouping as chart”&lt;/p&gt;
+<p><img src="/images/influxdb/influxdb-group-default-chart.png" alt="default chart" /> “Default grouping as chart”</p>
 
-&lt;h2 id=&quot;grouping&quot;&gt;Grouping&lt;/h2&gt;
+<h2 id="grouping">Grouping</h2>
 
-&lt;p&gt;Now, with the following snippet, we group data along the &lt;code class=&quot;highlighter-rouge&quot;&gt;_measurement&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;_field&lt;/code&gt; columns.&lt;/p&gt;
+<p>Now, with the following snippet, we group data along the <code class="highlighter-rouge">_measurement</code> and <code class="highlighter-rouge">_field</code> columns.</p>
 
-&lt;pre&gt;&lt;code class=&quot;language-flux&quot;&gt;from(bucket: &quot;trial_bucket&quot;)
-  |&amp;gt; range(start: -15m)
-  |&amp;gt; filter(fn: (r) =&amp;gt; r._measurement == &quot;http_api_request_duration_seconds&quot;)
-  |&amp;gt; group(columns: [&quot;_measurement&quot;, &quot;_field&quot;])
-&lt;/code&gt;&lt;/pre&gt;
+<pre><code class="language-flux">from(bucket: "trial_bucket")
+  |&gt; range(start: -15m)
+  |&gt; filter(fn: (r) =&gt; r._measurement == "http_api_request_duration_seconds")
+  |&gt; group(columns: ["_measurement", "_field"])
+</code></pre>
 
-&lt;p&gt;This will change the group keys:&lt;/p&gt;
+<p>This will change the group keys:</p>
 
-&lt;p&gt;&lt;img src=&quot;/images/influxdb/influxdb-group-time-data.png&quot; alt=&quot;grouped keys&quot; /&gt;&lt;/p&gt;
+<p><img src="/images/influxdb/influxdb-group-time-data.png" alt="grouped keys" /></p>
 
-&lt;p&gt;And will also shape the charts:&lt;/p&gt;
+<p>And will also shape the charts:</p>
 
-&lt;p&gt;&lt;img src=&quot;/images/influxdb/influxdb-group-time-chart.png&quot; alt=&quot;grouped by time chart&quot; /&gt;&lt;/p&gt;
+<p><img src="/images/influxdb/influxdb-group-time-chart.png" alt="grouped by time chart" /></p>
 
-&lt;p&gt;As observations of the same time now belong to the same data, plotting them as a line chart on the time axis produces vertical lines.&lt;/p&gt;
+<p>As observations of the same time now belong to the same data, plotting them as a line chart on the time axis produces vertical lines.</p>
 
-&lt;h2 id=&quot;aggregate-and-ungroup&quot;&gt;Aggregate and ungroup&lt;/h2&gt;
+<h2 id="aggregate-and-ungroup">Aggregate and ungroup</h2>
 
-&lt;p&gt;For the next step let’s calculate the mean values of the request durations.&lt;/p&gt;
+<p>For the next step let’s calculate the mean values of the request durations.</p>
 
-&lt;pre&gt;&lt;code class=&quot;language-flux&quot;&gt;from(bucket: &quot;trial_bucket&quot;)
-  |&amp;gt; range(start: -15m)
-  |&amp;gt; filter(fn: (r) =&amp;gt; r._measurement == &quot;http_api_request_duration_seconds&quot;)
-  |&amp;gt; group(columns: [&quot;_time&quot;])
-  |&amp;gt; mean()
-  |&amp;gt; group()  
-&lt;/code&gt;&lt;/pre&gt;
+<pre><code class="language-flux">from(bucket: "trial_bucket")
+  |&gt; range(start: -15m)
+  |&gt; filter(fn: (r) =&gt; r._measurement == "http_api_request_duration_seconds")
+  |&gt; group(columns: ["_time"])
+  |&gt; mean()
+  |&gt; group()  
+</code></pre>
 
-&lt;p&gt;While we calucalted the mean values for each timestamp, this also resulted in separate tables consisting of a single value. We can use the &lt;code class=&quot;highlighter-rouge&quot;&gt;group()&lt;/code&gt; function to ungroup data, that is, to merge all tables into a single table.&lt;/p&gt;
+<p>While we calucalted the mean values for each timestamp, this also resulted in separate tables consisting of a single value. We can use the <code class="highlighter-rouge">group()</code> function to ungroup data, that is, to merge all tables into a single table.</p>
 
-&lt;p&gt;This will generate the following chart.&lt;/p&gt;
+<p>This will generate the following chart.</p>
 
-&lt;p&gt;&lt;img src=&quot;/images/influxdb/influxdb-group-degroup-chart.png&quot; alt=&quot;mean data&quot; /&gt;&lt;/p&gt;
+<p><img src="/images/influxdb/influxdb-group-degroup-chart.png" alt="mean data" /></p>
 
-&lt;p&gt;We can produce the same result by explicitly turning off grouping on specific columns with the &lt;code class=&quot;highlighter-rouge&quot;&gt;mode&lt;/code&gt; parameter.&lt;/p&gt;
+<p>We can produce the same result by explicitly turning off grouping on specific columns with the <code class="highlighter-rouge">mode</code> parameter.</p>
 
-&lt;h2 id=&quot;mode&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mode&lt;/code&gt;&lt;/h2&gt;
+<h2 id="mode"><code class="highlighter-rouge">mode</code></h2>
 
-&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;group()&lt;/code&gt; function also accepts a &lt;code class=&quot;highlighter-rouge&quot;&gt;mode&lt;/code&gt; parameter with the following values:&lt;/p&gt;
+<p>The <code class="highlighter-rouge">group()</code> function also accepts a <code class="highlighter-rouge">mode</code> parameter with the following values:</p>
 
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;by&lt;/code&gt;: Group by the columns defined in the &lt;code class=&quot;highlighter-rouge&quot;&gt;columns&lt;/code&gt; parameter.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;except&lt;/code&gt;: Group by the columns &lt;strong&gt;not defined&lt;/strong&gt; in the &lt;code class=&quot;highlighter-rouge&quot;&gt;columns&lt;/code&gt; parameter.&lt;/li&gt;
-&lt;/ul&gt;
+<ul>
+  <li><code class="highlighter-rouge">by</code>: Group by the columns defined in the <code class="highlighter-rouge">columns</code> parameter.</li>
+  <li><code class="highlighter-rouge">except</code>: Group by the columns <strong>not defined</strong> in the <code class="highlighter-rouge">columns</code> parameter.</li>
+</ul>
 
-&lt;p&gt;Accordingly, we can modify the above code to get the same result:&lt;/p&gt;
+<p>Accordingly, we can modify the above code to get the same result:</p>
 
-&lt;pre&gt;&lt;code class=&quot;language-flux&quot;&gt;from(bucket: &quot;trial_bucket&quot;)
-  |&amp;gt; range(start: -15m)
-  |&amp;gt; filter(fn: (r) =&amp;gt; r._measurement == &quot;http_api_request_duration_seconds&quot;)
-  |&amp;gt; group(columns: [&quot;_time&quot;])
-  |&amp;gt; mean()
-  |&amp;gt; group(columns: [&quot;_time&quot;, &quot;_value&quot;], mode: &quot;except&quot;)
-&lt;/code&gt;&lt;/pre&gt;</content><author><name></name></author><summary type="html">Grouping happens based on group keys which effectilve are the name of columns used for the grouping. A group then consists of rows having identical values in the group key columns.</summary></entry><entry><title type="html">Filtering with Flux in InfluxDB</title><link href="https://andrasnovoszath.com/influxdb/flux/filtering/querying/2020/11/15/influxdb-flux-filter.html" rel="alternate" type="text/html" title="Filtering with Flux in InfluxDB" /><published>2020-11-15T00:00:00-06:00</published><updated>2020-11-15T00:00:00-06:00</updated><id>https://andrasnovoszath.com/influxdb/flux/filtering/querying/2020/11/15/influxdb-flux-filter</id><content type="html" xml:base="https://andrasnovoszath.com/influxdb/flux/filtering/querying/2020/11/15/influxdb-flux-filter.html">&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;filter()&lt;/code&gt; function behaves similarly to the &lt;code class=&quot;highlighter-rouge&quot;&gt;WHERE&lt;/code&gt; command in SQL.&lt;/p&gt;
+<pre><code class="language-flux">from(bucket: "trial_bucket")
+  |&gt; range(start: -15m)
+  |&gt; filter(fn: (r) =&gt; r._measurement == "http_api_request_duration_seconds")
+  |&gt; group(columns: ["_time"])
+  |&gt; mean()
+  |&gt; group(columns: ["_time", "_value"], mode: "except")
+</code></pre>]]></content><author><name></name></author><category term="InfluxDB" /><category term="Flux" /><category term="time-series" /><summary type="html"><![CDATA[How can you group data with Flux in InfluxDB?]]></summary></entry><entry><title type="html">Filtering with Flux in InfluxDB</title><link href="https://andrasnovoszath.com/influxdb/flux/filtering/querying/2020/11/15/influxdb-flux-filter.html" rel="alternate" type="text/html" title="Filtering with Flux in InfluxDB" /><published>2020-11-15T00:00:00-06:00</published><updated>2020-11-15T00:00:00-06:00</updated><id>https://andrasnovoszath.com/influxdb/flux/filtering/querying/2020/11/15/influxdb-flux-filter</id><content type="html" xml:base="https://andrasnovoszath.com/influxdb/flux/filtering/querying/2020/11/15/influxdb-flux-filter.html"><![CDATA[<p>The <code class="highlighter-rouge">filter()</code> function behaves similarly to the <code class="highlighter-rouge">WHERE</code> command in SQL.</p>
 
-&lt;pre&gt;&lt;code class=&quot;language-flux&quot;&gt;from(bucket: &quot;trial_bucket&quot;)
-  |&amp;gt; range(start: v.timeRangeStart, stop: v.timeRangeStop)
-  |&amp;gt; filter(fn: (r) =&amp;gt; r[&quot;_measurement&quot;] == &quot;service_org_duration&quot;)
-&lt;/code&gt;&lt;/pre&gt;
+<pre><code class="language-flux">from(bucket: "trial_bucket")
+  |&gt; range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |&gt; filter(fn: (r) =&gt; r["_measurement"] == "service_org_duration")
+</code></pre>
 
-&lt;ul&gt;
-  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;fn&lt;/code&gt; parameter expects a &lt;code class=&quot;highlighter-rouge&quot;&gt;predicate function&lt;/code&gt;, that is an anonymous function producing a boolean (&lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;/&lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;) output. The filtering will include rows for which &lt;code class=&quot;highlighter-rouge&quot;&gt;fn&lt;/code&gt; returns &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt; based on the expression.&lt;/li&gt;
-  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;r&lt;/code&gt; argument of the &lt;code class=&quot;highlighter-rouge&quot;&gt;fn&lt;/code&gt; parameter stands for the rows.&lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><summary type="html">The filter() function behaves similarly to the WHERE command in SQL.</summary></entry><entry><title type="html">Writing data to InfluxDB with Telegraf</title><link href="https://andrasnovoszath.com/influxdb/time-series/database/2020/11/14/influxdb-telegraf.html" rel="alternate" type="text/html" title="Writing data to InfluxDB with Telegraf" /><published>2020-11-14T00:00:00-06:00</published><updated>2020-11-14T00:00:00-06:00</updated><id>https://andrasnovoszath.com/influxdb/time-series/database/2020/11/14/influxdb-telegraf</id><content type="html" xml:base="https://andrasnovoszath.com/influxdb/time-series/database/2020/11/14/influxdb-telegraf.html">&lt;h2 id=&quot;what-is-telegraf&quot;&gt;What is Telegraf?&lt;/h2&gt;
+<ul>
+  <li>The <code class="highlighter-rouge">fn</code> parameter expects a <code class="highlighter-rouge">predicate function</code>, that is an anonymous function producing a boolean (<code class="highlighter-rouge">true</code>/<code class="highlighter-rouge">false</code>) output. The filtering will include rows for which <code class="highlighter-rouge">fn</code> returns <code class="highlighter-rouge">true</code> based on the expression.</li>
+  <li>The <code class="highlighter-rouge">r</code> argument of the <code class="highlighter-rouge">fn</code> parameter stands for the rows.</li>
+</ul>]]></content><author><name></name></author><category term="InfluxDB" /><category term="Flux" /><category term="filtering" /><category term="querying" /><summary type="html"><![CDATA[How does filtering works with Flux in InfluxDB?]]></summary></entry><entry><title type="html">Writing data to InfluxDB with Telegraf</title><link href="https://andrasnovoszath.com/influxdb/time-series/database/2020/11/14/influxdb-telegraf.html" rel="alternate" type="text/html" title="Writing data to InfluxDB with Telegraf" /><published>2020-11-14T00:00:00-06:00</published><updated>2020-11-14T00:00:00-06:00</updated><id>https://andrasnovoszath.com/influxdb/time-series/database/2020/11/14/influxdb-telegraf</id><content type="html" xml:base="https://andrasnovoszath.com/influxdb/time-series/database/2020/11/14/influxdb-telegraf.html"><![CDATA[<h2 id="what-is-telegraf">What is Telegraf?</h2>
 
-&lt;p&gt;&lt;a href=&quot;https://www.influxdata.com/time-series-platform/telegraf/&quot;&gt;Telegraf&lt;/a&gt; is InfluxData’s time series data collection and reporting agent. Its main functionality is to collect data with the help of its plugins from a wide range of sources and to feed it to an InfluxDB database. It also can ingest data from InfluxDB databases and generate reports on them.&lt;/p&gt;
+<p><a href="https://www.influxdata.com/time-series-platform/telegraf/">Telegraf</a> is InfluxData’s time series data collection and reporting agent. Its main functionality is to collect data with the help of its plugins from a wide range of sources and to feed it to an InfluxDB database. It also can ingest data from InfluxDB databases and generate reports on them.</p>
 
-&lt;p&gt;At the time of writing, it has more than 200 integrations, like Amazon ECS and Docker. You can see the full list &lt;a href=&quot;https://www.influxdata.com/products/integrations/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+<p>At the time of writing, it has more than 200 integrations, like Amazon ECS and Docker. You can see the full list <a href="https://www.influxdata.com/products/integrations/">here</a>.</p>
 
-&lt;p&gt;Using Telegraf with InfluxDB most importantly consists of configuring Telegraf either automatically or manually. Configurations are stored in &lt;code class=&quot;highlighter-rouge&quot;&gt;telegraf.conf&lt;/code&gt;.&lt;/p&gt;
+<p>Using Telegraf with InfluxDB most importantly consists of configuring Telegraf either automatically or manually. Configurations are stored in <code class="highlighter-rouge">telegraf.conf</code>.</p>
 
-&lt;p&gt;The following steps assume that you have Telegraf installed and running. If this is not the case, you can follow the instructions &lt;a href=&quot;https://docs.influxdata.com/telegraf/v1.16/introduction/installation/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+<p>The following steps assume that you have Telegraf installed and running. If this is not the case, you can follow the instructions <a href="https://docs.influxdata.com/telegraf/v1.16/introduction/installation/">here</a>.</p>
 
-&lt;h2 id=&quot;automatic-configuration&quot;&gt;Automatic configuration&lt;/h2&gt;
+<h2 id="automatic-configuration">Automatic configuration</h2>
 
-&lt;p&gt;You can set up a subset of Telegraf plugins automatically (for the rest, do manual configuration).&lt;/p&gt;
+<p>You can set up a subset of Telegraf plugins automatically (for the rest, do manual configuration).</p>
 
-&lt;p&gt;Steps in the InfluxDB UI:&lt;/p&gt;
+<p>Steps in the InfluxDB UI:</p>
 
-&lt;ol&gt;
-  &lt;li&gt;Open the &lt;strong&gt;Data&lt;/strong&gt; screen from the navigation menu&lt;/li&gt;
-  &lt;li&gt;Select the &lt;strong&gt;Telegraf&lt;/strong&gt; tab&lt;/li&gt;
-  &lt;li&gt;Select &lt;strong&gt;Create Configuration&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;In the &lt;strong&gt;Bucket&lt;/strong&gt; dropdown, choose the bucket to where you want to write the data&lt;/li&gt;
-  &lt;li&gt;Select the plugin groups you would like to use and click &lt;strong&gt;Continue&lt;/strong&gt;. This will open a new window&lt;/li&gt;
-  &lt;li&gt;In the window, add a name and description (optional)&lt;/li&gt;
-  &lt;li&gt;If needed, configure the individual plugins within the group. (A green checkmark denotes plugins with no need of configuration)&lt;/li&gt;
-  &lt;li&gt;Click &lt;strong&gt;Create and Verify&lt;/strong&gt;. This opens a test page.&lt;/li&gt;
-  &lt;li&gt;In the test page, follow the instructions to set up telegraf and click &lt;strong&gt;Listen to Data&lt;/strong&gt;. This should result in a &lt;strong&gt;Connection Found!&lt;/strong&gt; message.&lt;/li&gt;
-  &lt;li&gt;You can close the screen with the &lt;strong&gt;Finish&lt;/strong&gt; button.&lt;/li&gt;
-&lt;/ol&gt;
+<ol>
+  <li>Open the <strong>Data</strong> screen from the navigation menu</li>
+  <li>Select the <strong>Telegraf</strong> tab</li>
+  <li>Select <strong>Create Configuration</strong></li>
+  <li>In the <strong>Bucket</strong> dropdown, choose the bucket to where you want to write the data</li>
+  <li>Select the plugin groups you would like to use and click <strong>Continue</strong>. This will open a new window</li>
+  <li>In the window, add a name and description (optional)</li>
+  <li>If needed, configure the individual plugins within the group. (A green checkmark denotes plugins with no need of configuration)</li>
+  <li>Click <strong>Create and Verify</strong>. This opens a test page.</li>
+  <li>In the test page, follow the instructions to set up telegraf and click <strong>Listen to Data</strong>. This should result in a <strong>Connection Found!</strong> message.</li>
+  <li>You can close the screen with the <strong>Finish</strong> button.</li>
+</ol>
 
-&lt;p&gt;For using Telegraf with Window host monitoring, you may need to do some following configuration, see &lt;a href=&quot;https://docs.influxdata.com/influxdb/v2.0/write-data/no-code/use-telegraf/auto-config/#windows&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><summary type="html">What is Telegraf?</summary></entry><entry><title type="html">Notifications in InfluxDB</title><link href="https://andrasnovoszath.com/influxdb/monitoring/time-series/notification/2020/11/13/influxdb-notifications.html" rel="alternate" type="text/html" title="Notifications in InfluxDB" /><published>2020-11-13T00:00:00-06:00</published><updated>2020-11-13T00:00:00-06:00</updated><id>https://andrasnovoszath.com/influxdb/monitoring/time-series/notification/2020/11/13/influxdb-notifications</id><content type="html" xml:base="https://andrasnovoszath.com/influxdb/monitoring/time-series/notification/2020/11/13/influxdb-notifications.html">&lt;h2 id=&quot;notification-endpoints&quot;&gt;Notification endpoints&lt;/h2&gt;
+<p>For using Telegraf with Window host monitoring, you may need to do some following configuration, see <a href="https://docs.influxdata.com/influxdb/v2.0/write-data/no-code/use-telegraf/auto-config/#windows">here</a>.</p>]]></content><author><name></name></author><category term="InfluxDB" /><category term="time-series" /><category term="database" /><summary type="html"><![CDATA[How to use Telegraf to write data to InfluxDB?]]></summary></entry><entry><title type="html">Notifications in InfluxDB</title><link href="https://andrasnovoszath.com/influxdb/monitoring/time-series/notification/2020/11/13/influxdb-notifications.html" rel="alternate" type="text/html" title="Notifications in InfluxDB" /><published>2020-11-13T00:00:00-06:00</published><updated>2020-11-13T00:00:00-06:00</updated><id>https://andrasnovoszath.com/influxdb/monitoring/time-series/notification/2020/11/13/influxdb-notifications</id><content type="html" xml:base="https://andrasnovoszath.com/influxdb/monitoring/time-series/notification/2020/11/13/influxdb-notifications.html"><![CDATA[<h2 id="notification-endpoints">Notification endpoints</h2>
 
-&lt;p&gt;Notification endpoints define connections to third party services.&lt;/p&gt;
+<p>Notification endpoints define connections to third party services.</p>
 
-&lt;h3 id=&quot;create-notification-endpoints&quot;&gt;Create notification endpoints&lt;/h3&gt;
+<h3 id="create-notification-endpoints">Create notification endpoints</h3>
 
-&lt;ol&gt;
-  &lt;li&gt;Select the &lt;strong&gt;Alerts&lt;/strong&gt; screen from the navigation menu;&lt;/li&gt;
-  &lt;li&gt;At the top of the &lt;strong&gt;Notification Endpoints&lt;/strong&gt; section click the &lt;strong&gt;Create&lt;/strong&gt; button;&lt;/li&gt;
-  &lt;li&gt;Select a &lt;strong&gt;Destination&lt;/strong&gt; from the drop-down menu;&lt;/li&gt;
-  &lt;li&gt;Add a name and a description (optional);&lt;/li&gt;
-  &lt;li&gt;Add the destination-specific configurations;&lt;/li&gt;
-  &lt;li&gt;Click &lt;strong&gt;Create&lt;/strong&gt;.&lt;/li&gt;
-&lt;/ol&gt;
+<ol>
+  <li>Select the <strong>Alerts</strong> screen from the navigation menu;</li>
+  <li>At the top of the <strong>Notification Endpoints</strong> section click the <strong>Create</strong> button;</li>
+  <li>Select a <strong>Destination</strong> from the drop-down menu;</li>
+  <li>Add a name and a description (optional);</li>
+  <li>Add the destination-specific configurations;</li>
+  <li>Click <strong>Create</strong>.</li>
+</ol>
 
-&lt;p&gt;For specific details for the different endpoints, see the &lt;a href=&quot;https://docs.influxdata.com/influxdb/v2.0/monitor-alert/notification-endpoints/create/&quot;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
+<p>For specific details for the different endpoints, see the <a href="https://docs.influxdata.com/influxdb/v2.0/monitor-alert/notification-endpoints/create/">documentation</a>.</p>
 
-&lt;h3 id=&quot;manage-notification-endpoints&quot;&gt;Manage notification endpoints&lt;/h3&gt;
+<h3 id="manage-notification-endpoints">Manage notification endpoints</h3>
 
-&lt;p&gt;In the &lt;strong&gt;Alerts&lt;/strong&gt; menu, under the &lt;strong&gt;Notification Endpoints&lt;/strong&gt; section, you can manage notifications. In particular, you can:&lt;/p&gt;
+<p>In the <strong>Alerts</strong> menu, under the <strong>Notification Endpoints</strong> section, you can manage notifications. In particular, you can:</p>
 
-&lt;ul&gt;
-  &lt;li&gt;Review the &lt;strong&gt;list&lt;/strong&gt; of the existing notification endpoints;&lt;/li&gt;
-  &lt;li&gt;Review their &lt;strong&gt;history&lt;/strong&gt; (eye icon);&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Update&lt;/strong&gt; a notification behavior (by clicking on their name);&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Rename&lt;/strong&gt; them (pen icon next to their name);&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Turn them on/off&lt;/strong&gt; (toggle button);&lt;/li&gt;
-  &lt;li&gt;Add &lt;strong&gt;labels&lt;/strong&gt; to them;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Delete&lt;/strong&gt; them (trash icon).&lt;/li&gt;
-&lt;/ul&gt;
+<ul>
+  <li>Review the <strong>list</strong> of the existing notification endpoints;</li>
+  <li>Review their <strong>history</strong> (eye icon);</li>
+  <li><strong>Update</strong> a notification behavior (by clicking on their name);</li>
+  <li><strong>Rename</strong> them (pen icon next to their name);</li>
+  <li><strong>Turn them on/off</strong> (toggle button);</li>
+  <li>Add <strong>labels</strong> to them;</li>
+  <li><strong>Delete</strong> them (trash icon).</li>
+</ul>
 
-&lt;h2 id=&quot;notification-rules&quot;&gt;Notification rules&lt;/h2&gt;
+<h2 id="notification-rules">Notification rules</h2>
 
-&lt;p&gt;Notification rules generate notifications by triggering notificaton endpoints based on a given condition regarding the outcome of checks.&lt;/p&gt;
+<p>Notification rules generate notifications by triggering notificaton endpoints based on a given condition regarding the outcome of checks.</p>
 
-&lt;h3 id=&quot;create-notification-rules&quot;&gt;Create notification rules&lt;/h3&gt;
+<h3 id="create-notification-rules">Create notification rules</h3>
 
-&lt;p&gt;Before your first notification rule, you need to have at least one notification endpoint in place.&lt;/p&gt;
+<p>Before your first notification rule, you need to have at least one notification endpoint in place.</p>
 
-&lt;ol&gt;
-  &lt;li&gt;Select the &lt;strong&gt;Alerts&lt;/strong&gt; screen from the navigation menu.&lt;/li&gt;
-  &lt;li&gt;At the top of the &lt;strong&gt;Notification Rules&lt;/strong&gt; section click the &lt;strong&gt;Create&lt;/strong&gt; button;&lt;/li&gt;
-  &lt;li&gt;In the &lt;strong&gt;About&lt;/strong&gt; section add
-    &lt;ol&gt;
-      &lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;Schedule&lt;/strong&gt;: how often you would like the notification to review checks and trigger a message&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;Offset&lt;/strong&gt;: the delay relative to the start time of the intervals set under &lt;strong&gt;Schedule&lt;/strong&gt;.&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;In the &lt;strong&gt;Conditions&lt;/strong&gt; section, define the rule that will trigger the notification based on check statuses and (optionally) on tag values.&lt;/li&gt;
-  &lt;li&gt;In the &lt;strong&gt;Messages&lt;/strong&gt; section select which endpoint should the rule trigger.&lt;/li&gt;
-  &lt;li&gt;Click &lt;strong&gt;Create Notification Rule&lt;/strong&gt;.&lt;/li&gt;
-&lt;/ol&gt;
+<ol>
+  <li>Select the <strong>Alerts</strong> screen from the navigation menu.</li>
+  <li>At the top of the <strong>Notification Rules</strong> section click the <strong>Create</strong> button;</li>
+  <li>In the <strong>About</strong> section add
+    <ol>
+      <li><strong>Name</strong></li>
+      <li><strong>Schedule</strong>: how often you would like the notification to review checks and trigger a message</li>
+      <li><strong>Offset</strong>: the delay relative to the start time of the intervals set under <strong>Schedule</strong>.</li>
+    </ol>
+  </li>
+  <li>In the <strong>Conditions</strong> section, define the rule that will trigger the notification based on check statuses and (optionally) on tag values.</li>
+  <li>In the <strong>Messages</strong> section select which endpoint should the rule trigger.</li>
+  <li>Click <strong>Create Notification Rule</strong>.</li>
+</ol>
 
-&lt;h3 id=&quot;manage-notification-rules&quot;&gt;Manage notification rules&lt;/h3&gt;
+<h3 id="manage-notification-rules">Manage notification rules</h3>
 
-&lt;p&gt;In the &lt;strong&gt;Alerts&lt;/strong&gt; screen, under the &lt;strong&gt;Notification Rules&lt;/strong&gt; section, you can manage notifications. In particular, you can:&lt;/p&gt;
+<p>In the <strong>Alerts</strong> screen, under the <strong>Notification Rules</strong> section, you can manage notifications. In particular, you can:</p>
 
-&lt;ul&gt;
-  &lt;li&gt;Review the &lt;strong&gt;list&lt;/strong&gt; of the existing notification rules;&lt;/li&gt;
-  &lt;li&gt;Review their &lt;strong&gt;history&lt;/strong&gt; (eye icon, &lt;strong&gt;View History&lt;/strong&gt;);&lt;/li&gt;
-  &lt;li&gt;Create a &lt;strong&gt;clone&lt;/strong&gt; of an existing notification (clone icon)&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Update&lt;/strong&gt; a notification behavior (by clicking on their name);&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Rename&lt;/strong&gt; them (pen icon next to their name);&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Turn them on/off&lt;/strong&gt; (toggle button);&lt;/li&gt;
-  &lt;li&gt;Add &lt;strong&gt;labels&lt;/strong&gt; to them;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Delete&lt;/strong&gt; them (trash icon).&lt;/li&gt;
-&lt;/ul&gt;</content><author><name></name></author><summary type="html">Notification endpoints</summary></entry><entry><title type="html">Checks in InlfuxDB</title><link href="https://andrasnovoszath.com/2020/11/12/influxdb-check.html" rel="alternate" type="text/html" title="Checks in InlfuxDB" /><published>2020-11-12T00:00:00-06:00</published><updated>2020-11-12T00:00:00-06:00</updated><id>https://andrasnovoszath.com/2020/11/12/influxdb-check</id><content type="html" xml:base="https://andrasnovoszath.com/2020/11/12/influxdb-check.html">&lt;!--
+<ul>
+  <li>Review the <strong>list</strong> of the existing notification rules;</li>
+  <li>Review their <strong>history</strong> (eye icon, <strong>View History</strong>);</li>
+  <li>Create a <strong>clone</strong> of an existing notification (clone icon)</li>
+  <li><strong>Update</strong> a notification behavior (by clicking on their name);</li>
+  <li><strong>Rename</strong> them (pen icon next to their name);</li>
+  <li><strong>Turn them on/off</strong> (toggle button);</li>
+  <li>Add <strong>labels</strong> to them;</li>
+  <li><strong>Delete</strong> them (trash icon).</li>
+</ul>]]></content><author><name></name></author><category term="InfluxDB" /><category term="monitoring" /><category term="time-series" /><category term="notification" /><summary type="html"><![CDATA[How to create and manage notifications in InfluxDB?]]></summary></entry><entry><title type="html">Checks in InlfuxDB</title><link href="https://andrasnovoszath.com/2020/11/12/influxdb-check.html" rel="alternate" type="text/html" title="Checks in InlfuxDB" /><published>2020-11-12T00:00:00-06:00</published><updated>2020-11-12T00:00:00-06:00</updated><id>https://andrasnovoszath.com/2020/11/12/influxdb-check</id><content type="html" xml:base="https://andrasnovoszath.com/2020/11/12/influxdb-check.html"><![CDATA[<!--
 #################################################
 ### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
 #################################################
 # file to edit: _notebooks/2020-11-12-influxdb-check.ipynb
---&gt;
+-->
 
-&lt;div class=&quot;container&quot; id=&quot;notebook-container&quot;&gt;
+<div class="container" id="notebook-container">
         
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
 
-&lt;/div&gt;
+</div>
     
 
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;p&gt;You can use InfluxDB to monitor your data and generate notifications reporting its status.&lt;/p&gt;
-&lt;h2 id=&quot;Concepts&quot;&gt;Concepts&lt;a class=&quot;anchor-link&quot; href=&quot;#Concepts&quot;&gt; &lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Check&lt;/strong&gt;: generate statuses based on a queries expressing a conditino. It stores them in the &lt;code&gt;_monitoring&lt;/code&gt; bucket (under &lt;code&gt;statuses&lt;/code&gt; measurement)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Notification rule&lt;/strong&gt;: check the &lt;code&gt;statuses&lt;/code&gt; measurement and, based on its own conditions, triggers the notification endpoint. It also stores notifications in the &lt;code&gt;_monitoring&lt;/code&gt; bucket (under &lt;code&gt;notifications&lt;/code&gt; measurement)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Notification endpoint&lt;/strong&gt;: &lt;/li&gt;
-&lt;/ul&gt;
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>You can use InfluxDB to monitor your data and generate notifications reporting its status.</p>
+<h2 id="Concepts">Concepts<a class="anchor-link" href="#Concepts"> </a></h2><ul>
+<li><strong>Check</strong>: generate statuses based on a queries expressing a conditino. It stores them in the <code>_monitoring</code> bucket (under <code>statuses</code> measurement)</li>
+<li><strong>Notification rule</strong>: check the <code>statuses</code> measurement and, based on its own conditions, triggers the notification endpoint. It also stores notifications in the <code>_monitoring</code> bucket (under <code>notifications</code> measurement)</li>
+<li><strong>Notification endpoint</strong>: </li>
+</ul>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;h2 id=&quot;Checks&quot;&gt;Checks&lt;a class=&quot;anchor-link&quot; href=&quot;#Checks&quot;&gt; &lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The elements of a check:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Query: Defines what to monitor.&lt;/li&gt;
-&lt;li&gt;Configuration: defines check interval, messages, and status.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Check types&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Threshold check&lt;/strong&gt;: monitors a value against (high/low) thresholds and assigns one of the following values: &lt;strong&gt;CRIT&lt;/strong&gt;, &lt;strong&gt;WARN&lt;/strong&gt;, &lt;strong&gt;INFO&lt;/strong&gt;, &lt;strong&gt;OK&lt;/strong&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Deadman check&lt;/strong&gt;: monitors if a series or group responds within a given amount of time.&lt;/li&gt;
-&lt;/ul&gt;
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Checks">Checks<a class="anchor-link" href="#Checks"> </a></h2><p>The elements of a check:</p>
+<ol>
+<li>Query: Defines what to monitor.</li>
+<li>Configuration: defines check interval, messages, and status.</li>
+</ol>
+<p>Check types</p>
+<ul>
+<li><strong>Threshold check</strong>: monitors a value against (high/low) thresholds and assigns one of the following values: <strong>CRIT</strong>, <strong>WARN</strong>, <strong>INFO</strong>, <strong>OK</strong>.</li>
+<li><strong>Deadman check</strong>: monitors if a series or group responds within a given amount of time.</li>
+</ul>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;h2 id=&quot;Create-a-check&quot;&gt;Create a check&lt;a class=&quot;anchor-link&quot; href=&quot;#Create-a-check&quot;&gt; &lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;Select the &lt;strong&gt;Alerts&lt;/strong&gt; menu in the navigation pane.&lt;/li&gt;
-&lt;li&gt;Click on &lt;strong&gt;Create&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;Select the check type.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&quot;Query&quot;&gt;Query&lt;a class=&quot;anchor-link&quot; href=&quot;#Query&quot;&gt; &lt;/a&gt;&lt;/h2&gt;&lt;p&gt;By default, you will find yourself in the &lt;strong&gt;Define Query&lt;/strong&gt; screen.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Select the &lt;strong&gt;bucket&lt;/strong&gt;, the &lt;strong&gt;measurement&lt;/strong&gt;, the &lt;strong&gt;field&lt;/strong&gt;, and the &lt;strong&gt;tag sets&lt;/strong&gt;.&lt;/li&gt;
-&lt;li&gt;For threshold check: Select an &lt;strong&gt;aggregate function&lt;/strong&gt; (e.g. mean, median, std, etc.).&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;You can preview the results of the query by clicking on &lt;strong&gt;Submit&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;After these steps, select the &lt;strong&gt;Configure Check&lt;/strong&gt; screen.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Define the check schedule interval (this updates the aggregate function interval).&lt;/li&gt;
-&lt;li&gt;Filter the check based on tags (Optional).&lt;/li&gt;
-&lt;li&gt;Edit the status message template (Optional).&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;For threshold check: define the thresholds and rules that will trigger the specific statuses. You can also set them with the mouse by moving their respective labels on the preview screen.&lt;/li&gt;
-&lt;li&gt;For deadman check: specify the duration to check for, the status the lack of series or groups should trigger, and time after which it should stop checking the series / group.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Finally, name the check at the top of the screen.&lt;/p&gt;
-&lt;p&gt;Click the green checkmark to save the check.&lt;/p&gt;
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Create-a-check">Create a check<a class="anchor-link" href="#Create-a-check"> </a></h2><ol>
+<li>Select the <strong>Alerts</strong> menu in the navigation pane.</li>
+<li>Click on <strong>Create</strong></li>
+<li>Select the check type.</li>
+</ol>
+<h2 id="Query">Query<a class="anchor-link" href="#Query"> </a></h2><p>By default, you will find yourself in the <strong>Define Query</strong> screen.</p>
+<ol>
+<li>Select the <strong>bucket</strong>, the <strong>measurement</strong>, the <strong>field</strong>, and the <strong>tag sets</strong>.</li>
+<li>For threshold check: Select an <strong>aggregate function</strong> (e.g. mean, median, std, etc.).</li>
+</ol>
+<p>You can preview the results of the query by clicking on <strong>Submit</strong>.</p>
+<p>After these steps, select the <strong>Configure Check</strong> screen.</p>
+<ol>
+<li>Define the check schedule interval (this updates the aggregate function interval).</li>
+<li>Filter the check based on tags (Optional).</li>
+<li>Edit the status message template (Optional).</li>
+</ol>
+<ul>
+<li>For threshold check: define the thresholds and rules that will trigger the specific statuses. You can also set them with the mouse by moving their respective labels on the preview screen.</li>
+<li>For deadman check: specify the duration to check for, the status the lack of series or groups should trigger, and time after which it should stop checking the series / group.</li>
+</ul>
+<p>Finally, name the check at the top of the screen.</p>
+<p>Click the green checkmark to save the check.</p>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;</content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">InfluxDB tasks</title><link href="https://andrasnovoszath.com/2020/11/05/influxdb-tasks.html" rel="alternate" type="text/html" title="InfluxDB tasks" /><published>2020-11-05T00:00:00-06:00</published><updated>2020-11-05T00:00:00-06:00</updated><id>https://andrasnovoszath.com/2020/11/05/influxdb-tasks</id><content type="html" xml:base="https://andrasnovoszath.com/2020/11/05/influxdb-tasks.html">&lt;!--
+</div>
+</div>
+</div>
+</div>]]></content><author><name></name></author><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">InfluxDB tasks</title><link href="https://andrasnovoszath.com/2020/11/05/influxdb-tasks.html" rel="alternate" type="text/html" title="InfluxDB tasks" /><published>2020-11-05T00:00:00-06:00</published><updated>2020-11-05T00:00:00-06:00</updated><id>https://andrasnovoszath.com/2020/11/05/influxdb-tasks</id><content type="html" xml:base="https://andrasnovoszath.com/2020/11/05/influxdb-tasks.html"><![CDATA[<!--
 #################################################
 ### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
 #################################################
 # file to edit: _notebooks/2020-11-05-influxdb-tasks.ipynb
---&gt;
+-->
 
-&lt;div class=&quot;container&quot; id=&quot;notebook-container&quot;&gt;
+<div class="container" id="notebook-container">
         
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
 
-&lt;/div&gt;
+</div>
     
 
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;p&gt;Tasks are scheduled Flux queries that allow you to process data with InfluxDB.&lt;/p&gt;
-&lt;h3 id=&quot;Task-components&quot;&gt;Task components&lt;a class=&quot;anchor-link&quot; href=&quot;#Task-components&quot;&gt; &lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Tasks should have the following components:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Options&lt;/li&gt;
-&lt;li&gt;Data source&lt;/li&gt;
-&lt;li&gt;Processing steps&lt;/li&gt;
-&lt;li&gt;Destination&lt;/li&gt;
-&lt;/ul&gt;
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Tasks are scheduled Flux queries that allow you to process data with InfluxDB.</p>
+<h3 id="Task-components">Task components<a class="anchor-link" href="#Task-components"> </a></h3><p>Tasks should have the following components:</p>
+<ul>
+<li>Options</li>
+<li>Data source</li>
+<li>Processing steps</li>
+<li>Destination</li>
+</ul>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;h2 id=&quot;Task-Options&quot;&gt;Task Options&lt;a class=&quot;anchor-link&quot; href=&quot;#Task-Options&quot;&gt; &lt;/a&gt;&lt;/h2&gt;&lt;p&gt;You can specify options that tasks will use. This makes it easier to reuse and modify your tasks.&lt;/p&gt;
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Task-Options">Task Options<a class="anchor-link" href="#Task-Options"> </a></h2><p>You can specify options that tasks will use. This makes it easier to reuse and modify your tasks.</p>
 
-&lt;pre&gt;&lt;code&gt;option task = {
+<pre><code>option task = {
     // Task name
-    name: &quot;monitor task&quot;,
+    name: "monitor task",
 
     // Run interval
     every: 5m,
 
     // Cron job
-    cron : &quot;0 * * * * *&quot;
+    cron : "0 * * * * *"
 
     // Task start delay
     offset: 10m,
@@ -605,327 +605,327 @@ Table: keys: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;_start, _stop, _field
 
     // Number of tries before getting failed status
     retry: 5,
-}&lt;/code&gt;&lt;/pre&gt;
+}</code></pre>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;h2 id=&quot;Task-data-source&quot;&gt;Task data source&lt;a class=&quot;anchor-link&quot; href=&quot;#Task-data-source&quot;&gt; &lt;/a&gt;&lt;/h2&gt;&lt;p&gt;You can use the &lt;code&gt;from()&lt;/code&gt; function to specify the data you try to get.&lt;/p&gt;
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Task-data-source">Task data source<a class="anchor-link" href="#Task-data-source"> </a></h2><p>You can use the <code>from()</code> function to specify the data you try to get.</p>
 
-&lt;pre&gt;&lt;code&gt;data = from(bucket: &quot;status info&quot;)
+<pre><code>data = from(bucket: "status info")
   // `-task.every` is a task option passed here
-  |&amp;gt; range(start: -task.every)
-  |&amp;gt; filter(fn: (r) =&amp;gt;
-    r._measurement == &quot;temperature&quot; and
-    r.host == &quot;dataSource&quot;
-  )&lt;/code&gt;&lt;/pre&gt;
+  |&gt; range(start: -task.every)
+  |&gt; filter(fn: (r) =&gt;
+    r._measurement == "temperature" and
+    r.host == "dataSource"
+  )</code></pre>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;h2 id=&quot;Data-processing-and-destination&quot;&gt;Data processing and destination&lt;a class=&quot;anchor-link&quot; href=&quot;#Data-processing-and-destination&quot;&gt; &lt;/a&gt;&lt;/h2&gt;&lt;p&gt;You can use the &lt;code&gt;to()&lt;/code&gt; function to store the results in another bucket.&lt;/p&gt;
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Data-processing-and-destination">Data processing and destination<a class="anchor-link" href="#Data-processing-and-destination"> </a></h2><p>You can use the <code>to()</code> function to store the results in another bucket.</p>
 
-&lt;pre&gt;&lt;code&gt;data
+<pre><code>data
   // Process
-  |&amp;gt; aggregateWindow(
+  |&gt; aggregateWindow(
       every: 1h,
       fn: sum
   )
 
   // Store results
-  |&amp;gt; to(bucket: &quot;status_log&quot;, org: &quot;logger&quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;You can learn more about data processing in the &lt;a href=&quot;https://docs.influxdata.com/influxdb/v2.0/process-data/common-tasks/&quot;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
+  |&gt; to(bucket: "status_log", org: "logger")</code></pre>
+<p>You can learn more about data processing in the <a href="https://docs.influxdata.com/influxdb/v2.0/process-data/common-tasks/">documentation</a>.</p>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;h2 id=&quot;Create-a-task-in-the-UI&quot;&gt;Create a task in the UI&lt;a class=&quot;anchor-link&quot; href=&quot;#Create-a-task-in-the-UI&quot;&gt; &lt;/a&gt;&lt;/h2&gt;&lt;p&gt;In the UI, you can create tasks by the following ways&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The &lt;strong&gt;Data Explorer&lt;/strong&gt; screen&lt;/li&gt;
-&lt;li&gt;The &lt;strong&gt;Task&lt;/strong&gt; screen&lt;/li&gt;
-&lt;li&gt;Import (in the &lt;strong&gt;Task&lt;/strong&gt; screen)&lt;/li&gt;
-&lt;li&gt;Create from template (in the &lt;strong&gt;Settings&lt;/strong&gt; screen)&lt;/li&gt;
-&lt;li&gt;Clone a taks (in the &lt;strong&gt;Task&lt;/strong&gt; screen)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;Data-Explorer&quot;&gt;Data Explorer&lt;a class=&quot;anchor-link&quot; href=&quot;#Data-Explorer&quot;&gt; &lt;/a&gt;&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;Open the &lt;strong&gt;Data Explorer&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;Select &lt;strong&gt;Task&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;Define the task options.&lt;/li&gt;
-&lt;li&gt;Select a token.&lt;/li&gt;
-&lt;li&gt;Click &lt;strong&gt;Save as Task&lt;/strong&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&quot;Task-UI&quot;&gt;Task UI&lt;a class=&quot;anchor-link&quot; href=&quot;#Task-UI&quot;&gt; &lt;/a&gt;&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;Open the &lt;strong&gt;Task&lt;/strong&gt; screen&lt;/li&gt;
-&lt;li&gt;Select &lt;strong&gt;Create Task&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;Click &lt;strong&gt;New Task&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;Define the task options.&lt;/li&gt;
-&lt;li&gt;Select a token.&lt;/li&gt;
-&lt;li&gt;Enter your script&lt;/li&gt;
-&lt;li&gt;Click &lt;strong&gt;Save&lt;/strong&gt;&lt;/li&gt;
-&lt;/ol&gt;
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Create-a-task-in-the-UI">Create a task in the UI<a class="anchor-link" href="#Create-a-task-in-the-UI"> </a></h2><p>In the UI, you can create tasks by the following ways</p>
+<ul>
+<li>The <strong>Data Explorer</strong> screen</li>
+<li>The <strong>Task</strong> screen</li>
+<li>Import (in the <strong>Task</strong> screen)</li>
+<li>Create from template (in the <strong>Settings</strong> screen)</li>
+<li>Clone a taks (in the <strong>Task</strong> screen)</li>
+</ul>
+<h3 id="Data-Explorer">Data Explorer<a class="anchor-link" href="#Data-Explorer"> </a></h3><ol>
+<li>Open the <strong>Data Explorer</strong></li>
+<li>Select <strong>Task</strong></li>
+<li>Define the task options.</li>
+<li>Select a token.</li>
+<li>Click <strong>Save as Task</strong></li>
+</ol>
+<h3 id="Task-UI">Task UI<a class="anchor-link" href="#Task-UI"> </a></h3><ol>
+<li>Open the <strong>Task</strong> screen</li>
+<li>Select <strong>Create Task</strong></li>
+<li>Click <strong>New Task</strong></li>
+<li>Define the task options.</li>
+<li>Select a token.</li>
+<li>Enter your script</li>
+<li>Click <strong>Save</strong></li>
+</ol>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;</content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">Custom dashboard variables in InfluxDB</title><link href="https://andrasnovoszath.com/2020/11/04/influxdb-custom-dashboard-variables.html" rel="alternate" type="text/html" title="Custom dashboard variables in InfluxDB" /><published>2020-11-04T00:00:00-06:00</published><updated>2020-11-04T00:00:00-06:00</updated><id>https://andrasnovoszath.com/2020/11/04/influxdb-custom-dashboard-variables</id><content type="html" xml:base="https://andrasnovoszath.com/2020/11/04/influxdb-custom-dashboard-variables.html">&lt;!--
+</div>
+</div>
+</div>
+</div>]]></content><author><name></name></author><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Custom dashboard variables in InfluxDB</title><link href="https://andrasnovoszath.com/2020/11/04/influxdb-custom-dashboard-variables.html" rel="alternate" type="text/html" title="Custom dashboard variables in InfluxDB" /><published>2020-11-04T00:00:00-06:00</published><updated>2020-11-04T00:00:00-06:00</updated><id>https://andrasnovoszath.com/2020/11/04/influxdb-custom-dashboard-variables</id><content type="html" xml:base="https://andrasnovoszath.com/2020/11/04/influxdb-custom-dashboard-variables.html"><![CDATA[<!--
 #################################################
 ### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
 #################################################
 # file to edit: _notebooks/2020-11-04-influxdb-custom-dashboard-variables.ipynb
---&gt;
+-->
 
-&lt;div class=&quot;container&quot; id=&quot;notebook-container&quot;&gt;
+<div class="container" id="notebook-container">
         
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
 
-&lt;/div&gt;
+</div>
     
 
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;p&gt;You can create a new variable in the &lt;strong&gt;Data Explorer&lt;/strong&gt;, in the &lt;strong&gt;Settings&lt;/strong&gt; or import from InfluxDB in JSON. Here we review the steps to create a variable in the &lt;strong&gt;Data Explorer&lt;/strong&gt;&lt;/p&gt;
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>You can create a new variable in the <strong>Data Explorer</strong>, in the <strong>Settings</strong> or import from InfluxDB in JSON. Here we review the steps to create a variable in the <strong>Data Explorer</strong></p>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;h2 id=&quot;Dashboard-variable-types&quot;&gt;Dashboard variable types&lt;a class=&quot;anchor-link&quot; href=&quot;#Dashboard-variable-types&quot;&gt; &lt;/a&gt;&lt;/h2&gt;&lt;p&gt;There are three types of dashboard variables. The types refert to the structuring of the variable's possible values.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Map: stores values as key/value pairs in a comma separated format. The UI presents the keys but works with the values.&lt;/li&gt;
-&lt;li&gt;Query: uses values from a Flux query's &lt;code&gt;_value&lt;/code&gt; column. (If the values are in another colum, you can first rename that column to &lt;code&gt;_value&lt;/code&gt;)&lt;/li&gt;
-&lt;li&gt;CSV: uses a CSV-formatted list.&lt;/li&gt;
-&lt;/ul&gt;
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Dashboard-variable-types">Dashboard variable types<a class="anchor-link" href="#Dashboard-variable-types"> </a></h2><p>There are three types of dashboard variables. The types refert to the structuring of the variable's possible values.</p>
+<ul>
+<li>Map: stores values as key/value pairs in a comma separated format. The UI presents the keys but works with the values.</li>
+<li>Query: uses values from a Flux query's <code>_value</code> column. (If the values are in another colum, you can first rename that column to <code>_value</code>)</li>
+<li>CSV: uses a CSV-formatted list.</li>
+</ul>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;h2 id=&quot;Create-variable-in-Data-Explorer&quot;&gt;Create variable in Data Explorer&lt;a class=&quot;anchor-link&quot; href=&quot;#Create-variable-in-Data-Explorer&quot;&gt; &lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;Open the &lt;strong&gt;Data Explorer&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;Build a query with the &lt;strong&gt;Query Builder&lt;/strong&gt; or the &lt;strong&gt;Script Editor&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;Select &lt;strong&gt;Save As&lt;/strong&gt; at the top right corner&lt;/li&gt;
-&lt;li&gt;Select the &lt;strong&gt;Variable&lt;/strong&gt; tab.&lt;/li&gt;
-&lt;li&gt;Add a name for the variable and click &lt;strong&gt;Save as Variable&lt;/strong&gt;&lt;/li&gt;
-&lt;/ol&gt;
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Create-variable-in-Data-Explorer">Create variable in Data Explorer<a class="anchor-link" href="#Create-variable-in-Data-Explorer"> </a></h2><ol>
+<li>Open the <strong>Data Explorer</strong></li>
+<li>Build a query with the <strong>Query Builder</strong> or the <strong>Script Editor</strong></li>
+<li>Select <strong>Save As</strong> at the top right corner</li>
+<li>Select the <strong>Variable</strong> tab.</li>
+<li>Add a name for the variable and click <strong>Save as Variable</strong></li>
+</ol>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;h2 id=&quot;Viewing-dashboard-variables&quot;&gt;Viewing dashboard variables&lt;a class=&quot;anchor-link&quot; href=&quot;#Viewing-dashboard-variables&quot;&gt; &lt;/a&gt;&lt;/h2&gt;&lt;p&gt;You can view variables which belong to your &lt;strong&gt;organization&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;You can review them in two places:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;In the &lt;strong&gt;Settings&lt;/strong&gt; menu on the &lt;strong&gt;Variables&lt;/strong&gt; tab&lt;/li&gt;
-&lt;li&gt;In the &lt;strong&gt;Data Explorer&lt;/strong&gt;, in &lt;strong&gt;Script Editor&lt;/strong&gt; mode under the &lt;strong&gt;Variables&lt;/strong&gt; tab.&lt;/li&gt;
-&lt;/ol&gt;
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Viewing-dashboard-variables">Viewing dashboard variables<a class="anchor-link" href="#Viewing-dashboard-variables"> </a></h2><p>You can view variables which belong to your <strong>organization</strong>.</p>
+<p>You can review them in two places:</p>
+<ol>
+<li>In the <strong>Settings</strong> menu on the <strong>Variables</strong> tab</li>
+<li>In the <strong>Data Explorer</strong>, in <strong>Script Editor</strong> mode under the <strong>Variables</strong> tab.</li>
+</ol>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;h2 id=&quot;Update,-export,-or-delete-a-dashboard-variable&quot;&gt;Update, export, or delete a dashboard variable&lt;a class=&quot;anchor-link&quot; href=&quot;#Update,-export,-or-delete-a-dashboard-variable&quot;&gt; &lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;Open the &lt;strong&gt;Settings&lt;/strong&gt; menu in the navigation bar&lt;/li&gt;
-&lt;li&gt;Select the &lt;strong&gt;Variables&lt;/strong&gt; tab.&lt;/li&gt;
-&lt;li&gt;For update, click on a variable's name in the list. To rename, export, or delete, select the appropriate icon in the top right corner of their card.&lt;/li&gt;
-&lt;/ol&gt;
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Update,-export,-or-delete-a-dashboard-variable">Update, export, or delete a dashboard variable<a class="anchor-link" href="#Update,-export,-or-delete-a-dashboard-variable"> </a></h2><ol>
+<li>Open the <strong>Settings</strong> menu in the navigation bar</li>
+<li>Select the <strong>Variables</strong> tab.</li>
+<li>For update, click on a variable's name in the list. To rename, export, or delete, select the appropriate icon in the top right corner of their card.</li>
+</ol>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;h2 id=&quot;Variable-queries&quot;&gt;Variable queries&lt;a class=&quot;anchor-link&quot; href=&quot;#Variable-queries&quot;&gt; &lt;/a&gt;&lt;/h2&gt;&lt;h3 id=&quot;List-buckets&quot;&gt;List buckets&lt;a class=&quot;anchor-link&quot; href=&quot;#List-buckets&quot;&gt; &lt;/a&gt;&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;// List buckets in the current organization
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Variable-queries">Variable queries<a class="anchor-link" href="#Variable-queries"> </a></h2><h3 id="List-buckets">List buckets<a class="anchor-link" href="#List-buckets"> </a></h3>
+<pre><code>// List buckets in the current organization
 buckets()
 
 // Rename the `name` column to `_value`
-  |&amp;gt; rename(columns: {&quot;name&quot;: &quot;_value&quot;})
+  |&gt; rename(columns: {"name": "_value"})
 
 // Return a table only with the specific columns
-  |&amp;gt; keep(columns: [&quot;_value&quot;])&lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id=&quot;List-measurements&quot;&gt;List measurements&lt;a class=&quot;anchor-link&quot; href=&quot;#List-measurements&quot;&gt; &lt;/a&gt;&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;// List all measurements in the bucket
+  |&gt; keep(columns: ["_value"])</code></pre>
+<h3 id="List-measurements">List measurements<a class="anchor-link" href="#List-measurements"> </a></h3>
+<pre><code>// List all measurements in the bucket
 
 // Import the schema package
-import &quot;influxdata/influxdb/schema&quot;
+import "influxdata/influxdb/schema"
 
 // List the measurements of the specified bucket
-schema.measurements(bucket: &quot;bucket-name&quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;h3 id=&quot;List-fields-in-a-measurement&quot;&gt;List fields in a measurement&lt;a class=&quot;anchor-link&quot; href=&quot;#List-fields-in-a-measurement&quot;&gt; &lt;/a&gt;&lt;/h3&gt;&lt;p&gt;List field in the specified bucket + measurement.&lt;/p&gt;
+schema.measurements(bucket: "bucket-name")</code></pre>
+<h3 id="List-fields-in-a-measurement">List fields in a measurement<a class="anchor-link" href="#List-fields-in-a-measurement"> </a></h3><p>List field in the specified bucket + measurement.</p>
 
-&lt;pre&gt;&lt;code&gt;// Import the schema package
-import &quot;influxdata/influxdb/schema&quot;
+<pre><code>// Import the schema package
+import "influxdata/influxdb/schema"
 
 schema.measurementTagValues(
-  bucket: &quot;bucket-name&quot;,
-  measurement: &quot;measurement-name&quot;,
-  tag: &quot;_field&quot;
-)&lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&quot;List-unique-tag-values&quot;&gt;List unique tag values&lt;a class=&quot;anchor-link&quot; href=&quot;#List-unique-tag-values&quot;&gt; &lt;/a&gt;&lt;/h2&gt;&lt;p&gt;List the unique values of the &lt;code&gt;host&lt;/code&gt; tag.&lt;/p&gt;
+  bucket: "bucket-name",
+  measurement: "measurement-name",
+  tag: "_field"
+)</code></pre>
+<h2 id="List-unique-tag-values">List unique tag values<a class="anchor-link" href="#List-unique-tag-values"> </a></h2><p>List the unique values of the <code>host</code> tag.</p>
 
-&lt;pre&gt;&lt;code&gt;import &quot;influxdata/influxdb/schema&quot;
+<pre><code>import "influxdata/influxdb/schema"
 
-schame.measurementTagValues(bucket: &quot;bucket-name&quot;, tag: &quot;host&quot;)&lt;/code&gt;&lt;/pre&gt;
+schame.measurementTagValues(bucket: "bucket-name", tag: "host")</code></pre>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;</content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">Dashboard variables in InfluxDB</title><link href="https://andrasnovoszath.com/2020/11/03/influxdb-dashboard-variables.html" rel="alternate" type="text/html" title="Dashboard variables in InfluxDB" /><published>2020-11-03T00:00:00-06:00</published><updated>2020-11-03T00:00:00-06:00</updated><id>https://andrasnovoszath.com/2020/11/03/influxdb-dashboard-variables</id><content type="html" xml:base="https://andrasnovoszath.com/2020/11/03/influxdb-dashboard-variables.html">&lt;!--
+</div>
+</div>
+</div>
+</div>]]></content><author><name></name></author><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Dashboard variables in InfluxDB</title><link href="https://andrasnovoszath.com/2020/11/03/influxdb-dashboard-variables.html" rel="alternate" type="text/html" title="Dashboard variables in InfluxDB" /><published>2020-11-03T00:00:00-06:00</published><updated>2020-11-03T00:00:00-06:00</updated><id>https://andrasnovoszath.com/2020/11/03/influxdb-dashboard-variables</id><content type="html" xml:base="https://andrasnovoszath.com/2020/11/03/influxdb-dashboard-variables.html"><![CDATA[<!--
 #################################################
 ### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
 #################################################
 # file to edit: _notebooks/2020-11-03-influxdb-dashboard-variables.ipynb
---&gt;
+-->
 
-&lt;div class=&quot;container&quot; id=&quot;notebook-container&quot;&gt;
+<div class="container" id="notebook-container">
         
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
 
-&lt;/div&gt;
+</div>
     
 
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;h2 id=&quot;Variables&quot;&gt;Variables&lt;a class=&quot;anchor-link&quot; href=&quot;#Variables&quot;&gt; &lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Dashboard variables are useful when you would like to modify dashboard cells without editing the original queries based on which the dashboard is built. You can also use Flux to build queries for dashboard cells.&lt;/p&gt;
-&lt;p&gt;Dashboard variables can be&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Predefined: &lt;code&gt;v.timeRangeStart&lt;/code&gt;, &lt;code&gt;v.timeRangeStop&lt;/code&gt;, &lt;code&gt;v.windowPeriod&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;Custom: defined in the user interface&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&quot;Quering-a-variable&quot;&gt;Quering a variable&lt;a class=&quot;anchor-link&quot; href=&quot;#Quering-a-variable&quot;&gt; &lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Variables are stored in a &lt;code&gt;v&lt;/code&gt; standing for a particular dashboard&lt;/p&gt;
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Variables">Variables<a class="anchor-link" href="#Variables"> </a></h2><p>Dashboard variables are useful when you would like to modify dashboard cells without editing the original queries based on which the dashboard is built. You can also use Flux to build queries for dashboard cells.</p>
+<p>Dashboard variables can be</p>
+<ul>
+<li>Predefined: <code>v.timeRangeStart</code>, <code>v.timeRangeStop</code>, <code>v.windowPeriod</code></li>
+<li>Custom: defined in the user interface</li>
+</ul>
+<h2 id="Quering-a-variable">Quering a variable<a class="anchor-link" href="#Quering-a-variable"> </a></h2><p>Variables are stored in a <code>v</code> standing for a particular dashboard</p>
 
-&lt;pre&gt;&lt;code&gt;from(bucket: v.bucket)
-  |&amp;gt; range(start: v.timeRangeStart, stop: v.timeRangeStop)
-  |&amp;gt; filter(fn: (r) =&amp;gt; r._measurement == v._measurement and r.field == v.field)
-  |&amp;gt; aggregateWindow(every: v.windowPeriod, fn: mean)&lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&quot;Adding-a-variable&quot;&gt;Adding a variable&lt;a class=&quot;anchor-link&quot; href=&quot;#Adding-a-variable&quot;&gt; &lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;Check available variables on the right hand side under the &lt;strong&gt;Variables&lt;/strong&gt; tab&lt;/li&gt;
-&lt;li&gt;Select the name of the variable you would like to add&lt;/li&gt;
-&lt;li&gt;Select a value from the &lt;strong&gt;Value&lt;/strong&gt; dropdown&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&quot;Linking-a-dashboard-with-variables&quot;&gt;Linking a dashboard with variables&lt;a class=&quot;anchor-link&quot; href=&quot;#Linking-a-dashboard-with-variables&quot;&gt; &lt;/a&gt;&lt;/h2&gt;&lt;p&gt;After adding the variable, the dashboard's url will have the following structure appended to its end &lt;code&gt;&amp;amp;vars[variable_name]=value&lt;/code&gt;. This allows you to directly share the dashboard with the variable included with a simple url.&lt;/p&gt;
-&lt;h2 id=&quot;Custom-variables&quot;&gt;Custom variables&lt;a class=&quot;anchor-link&quot; href=&quot;#Custom-variables&quot;&gt; &lt;/a&gt;&lt;/h2&gt;&lt;p&gt;You can create variables for your dashboard in the following ways:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;in the &lt;strong&gt;Data Explorer&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;in &lt;strong&gt;Settings&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;via import&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&quot;Naming-restrictions&quot;&gt;Naming restrictions&lt;a class=&quot;anchor-link&quot; href=&quot;#Naming-restrictions&quot;&gt; &lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Variable names has to&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;be unique&lt;/li&gt;
-&lt;li&gt;start with and underscore '&lt;code&gt;_&lt;/code&gt;'&lt;/li&gt;
-&lt;li&gt;they cannot be one of the Flux reserved keywords: and, import, not, return, option, test, empty, in, or, package, and builtin.&lt;/li&gt;
-&lt;/ul&gt;
+<pre><code>from(bucket: v.bucket)
+  |&gt; range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |&gt; filter(fn: (r) =&gt; r._measurement == v._measurement and r.field == v.field)
+  |&gt; aggregateWindow(every: v.windowPeriod, fn: mean)</code></pre>
+<h2 id="Adding-a-variable">Adding a variable<a class="anchor-link" href="#Adding-a-variable"> </a></h2><ol>
+<li>Check available variables on the right hand side under the <strong>Variables</strong> tab</li>
+<li>Select the name of the variable you would like to add</li>
+<li>Select a value from the <strong>Value</strong> dropdown</li>
+</ol>
+<h2 id="Linking-a-dashboard-with-variables">Linking a dashboard with variables<a class="anchor-link" href="#Linking-a-dashboard-with-variables"> </a></h2><p>After adding the variable, the dashboard's url will have the following structure appended to its end <code>&amp;vars[variable_name]=value</code>. This allows you to directly share the dashboard with the variable included with a simple url.</p>
+<h2 id="Custom-variables">Custom variables<a class="anchor-link" href="#Custom-variables"> </a></h2><p>You can create variables for your dashboard in the following ways:</p>
+<ul>
+<li>in the <strong>Data Explorer</strong></li>
+<li>in <strong>Settings</strong></li>
+<li>via import</li>
+</ul>
+<h3 id="Naming-restrictions">Naming restrictions<a class="anchor-link" href="#Naming-restrictions"> </a></h3><p>Variable names has to</p>
+<ul>
+<li>be unique</li>
+<li>start with and underscore '<code>_</code>'</li>
+<li>they cannot be one of the Flux reserved keywords: and, import, not, return, option, test, empty, in, or, package, and builtin.</li>
+</ul>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;</content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">Data visualization and dashboards with InfluxDB</title><link href="https://andrasnovoszath.com/2020/11/02/influxdb-visualization-dashboard.html" rel="alternate" type="text/html" title="Data visualization and dashboards with InfluxDB" /><published>2020-11-02T00:00:00-06:00</published><updated>2020-11-02T00:00:00-06:00</updated><id>https://andrasnovoszath.com/2020/11/02/influxdb-visualization-dashboard</id><content type="html" xml:base="https://andrasnovoszath.com/2020/11/02/influxdb-visualization-dashboard.html">&lt;!--
+</div>
+</div>
+</div>
+</div>]]></content><author><name></name></author><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Data visualization and dashboards with InfluxDB</title><link href="https://andrasnovoszath.com/2020/11/02/influxdb-visualization-dashboard.html" rel="alternate" type="text/html" title="Data visualization and dashboards with InfluxDB" /><published>2020-11-02T00:00:00-06:00</published><updated>2020-11-02T00:00:00-06:00</updated><id>https://andrasnovoszath.com/2020/11/02/influxdb-visualization-dashboard</id><content type="html" xml:base="https://andrasnovoszath.com/2020/11/02/influxdb-visualization-dashboard.html"><![CDATA[<!--
 #################################################
 ### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
 #################################################
 # file to edit: _notebooks/2020-11-02-influxdb-visualization-dashboard.ipynb
---&gt;
+-->
 
-&lt;div class=&quot;container&quot; id=&quot;notebook-container&quot;&gt;
+<div class="container" id="notebook-container">
         
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
 
-&lt;/div&gt;
+</div>
     
 
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;h2 id=&quot;Visualizations&quot;&gt;Visualizations&lt;a class=&quot;anchor-link&quot; href=&quot;#Visualizations&quot;&gt; &lt;/a&gt;&lt;/h2&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;ol&gt;
-&lt;li&gt;Open &lt;strong&gt;Data Explorer&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;Create a flux query (either with the panel at the bottom, or writing manually in the &lt;strong&gt;Script Editor&lt;/strong&gt;)&lt;/li&gt;
-&lt;li&gt;Press &lt;strong&gt;Submit&lt;/strong&gt; to run the query. This will generate the graph preview.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;You can add further queries with the &lt;code&gt;+&lt;/code&gt; button&lt;/li&gt;
-&lt;li&gt;You an hide/show the visualizations by clicking on the eye icon&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;You can choose a different graph type from the left menu.&lt;/p&gt;
-&lt;p&gt;To see you data in a tablet format, turn on the &lt;strong&gt;View Raw Data&lt;/strong&gt; switch.&lt;/p&gt;
-&lt;p&gt;You can refresh the dashboard with the refresh button. 
-You can change the auto-refresh interval (by default it is stopped and shows a pause sign).&lt;/p&gt;
-&lt;p&gt;You can save your query as a dashboard cell by clicking on the &lt;strong&gt;Save as&lt;/strong&gt;&lt;/p&gt;
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Visualizations">Visualizations<a class="anchor-link" href="#Visualizations"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ol>
+<li>Open <strong>Data Explorer</strong></li>
+<li>Create a flux query (either with the panel at the bottom, or writing manually in the <strong>Script Editor</strong>)</li>
+<li>Press <strong>Submit</strong> to run the query. This will generate the graph preview.</li>
+</ol>
+<ul>
+<li>You can add further queries with the <code>+</code> button</li>
+<li>You an hide/show the visualizations by clicking on the eye icon</li>
+</ul>
+<p>You can choose a different graph type from the left menu.</p>
+<p>To see you data in a tablet format, turn on the <strong>View Raw Data</strong> switch.</p>
+<p>You can refresh the dashboard with the refresh button. 
+You can change the auto-refresh interval (by default it is stopped and shows a pause sign).</p>
+<p>You can save your query as a dashboard cell by clicking on the <strong>Save as</strong></p>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;h2 id=&quot;Dashboards&quot;&gt;Dashboards&lt;a class=&quot;anchor-link&quot; href=&quot;#Dashboards&quot;&gt; &lt;/a&gt;&lt;/h2&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;ol&gt;
-&lt;li&gt;Select the &lt;strong&gt;Boards&lt;/strong&gt; menu item in the navigation menu.&lt;/li&gt;
-&lt;li&gt;Select &lt;strong&gt;Create Dashboard&lt;/strong&gt; menu in the middle and select &lt;strong&gt;New Dashboard&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;Name the dashboard at the top field (saying &lt;strong&gt;Name this dashboard&lt;/strong&gt;)&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;You can also import a dashboard from a file or simply pasting a JSON file.&lt;/p&gt;
-&lt;p&gt;You can also create a new dashboard from templates.&lt;/p&gt;
-&lt;p&gt;You can also clone your dashboard and change it for another need.&lt;/p&gt;
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Dashboards">Dashboards<a class="anchor-link" href="#Dashboards"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ol>
+<li>Select the <strong>Boards</strong> menu item in the navigation menu.</li>
+<li>Select <strong>Create Dashboard</strong> menu in the middle and select <strong>New Dashboard</strong></li>
+<li>Name the dashboard at the top field (saying <strong>Name this dashboard</strong>)</li>
+</ol>
+<p>You can also import a dashboard from a file or simply pasting a JSON file.</p>
+<p>You can also create a new dashboard from templates.</p>
+<p>You can also clone your dashboard and change it for another need.</p>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;p&gt;For these operations you need to open a dashboard (e.g. by clicking on its name in the &lt;strong&gt;Boards&lt;/strong&gt; screen).&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;You can add further data to your dashboard with the &lt;strong&gt;Add cell&lt;/strong&gt; button at the top left corner.&lt;/li&gt;
-&lt;li&gt;You can add notes to your dashboard with the &lt;strong&gt;Add Note&lt;/strong&gt; buttom at the top left corner.&lt;/li&gt;
-&lt;li&gt;Change time zone&lt;/li&gt;
-&lt;li&gt;Manually refresh&lt;/li&gt;
-&lt;li&gt;Set automatic refresh interval&lt;/li&gt;
-&lt;li&gt;Select time range&lt;/li&gt;
-&lt;/ul&gt;
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>For these operations you need to open a dashboard (e.g. by clicking on its name in the <strong>Boards</strong> screen).</p>
+<ul>
+<li>You can add further data to your dashboard with the <strong>Add cell</strong> button at the top left corner.</li>
+<li>You can add notes to your dashboard with the <strong>Add Note</strong> buttom at the top left corner.</li>
+<li>Change time zone</li>
+<li>Manually refresh</li>
+<li>Set automatic refresh interval</li>
+<li>Select time range</li>
+</ul>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;h2 id=&quot;Further-operations&quot;&gt;Further operations&lt;a class=&quot;anchor-link&quot; href=&quot;#Further-operations&quot;&gt; &lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Export&lt;/strong&gt;: Click on the gear icon and select &lt;strong&gt;Export&lt;/strong&gt;. You can export the dashboard as&lt;ul&gt;
-&lt;li&gt;JSON file&lt;/li&gt;
-&lt;li&gt;A template
-Or you can copy the JSON to the clipboard.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Delete&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Further-operations">Further operations<a class="anchor-link" href="#Further-operations"> </a></h2><ul>
+<li><strong>Export</strong>: Click on the gear icon and select <strong>Export</strong>. You can export the dashboard as<ul>
+<li>JSON file</li>
+<li>A template
+Or you can copy the JSON to the clipboard.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>Delete</strong></li>
+</ul>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;</content><author><name></name></author><summary type="html"></summary></entry></feed>
+</div>
+</div>
+</div>
+</div>]]></content><author><name></name></author><summary type="html"><![CDATA[]]></summary></entry></feed>
