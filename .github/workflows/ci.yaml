@@ -26,7 +26,7 @@ jobs:
         sudo chmod -R 777 .
 
     - name: Jekyll build
-      uses: docker://jekyll/jekyll:4.3.2
+      uses: docker://jekyll/jekyll:latest
       with:
         args: bash -c "gem install bundler && jekyll build -V"
       env:
