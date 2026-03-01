@@ -139,6 +139,7 @@ DEPENDENCIES
   jekyll-twitter-plugin
   kramdown-math-katex
   minima
+  nokogiri (< 1.19)
   tzinfo (~> 1.2)
   tzinfo-data
   wdm (~> 0.1.1)
