@@ -79,14 +79,14 @@ GEM
       rb-inotify (~> 0.9, >= 0.9.10)
     logger (1.7.0)
     mercenary (0.3.6)
-    mini_portile2 (2.8.8)
+    mini_portile2 (2.8.9)
     minima (2.5.1)
       jekyll (>= 3.5, < 5.0)
       jekyll-feed (~> 0.9)
       jekyll-seo-tag (~> 2.1)
     net-http (0.9.1)
       uri (>= 0.11.1)
-    nokogiri (1.18.4)
+    nokogiri (1.19.1)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     octicons (9.5.0)
@@ -139,7 +139,7 @@ DEPENDENCIES
   jekyll-twitter-plugin
   kramdown-math-katex
   minima
-  nokogiri (< 1.19)
+  nokogiri (>= 1.19.1)
   tzinfo (~> 1.2)
   tzinfo-data
   wdm (~> 0.1.1)
