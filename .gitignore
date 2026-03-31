@@ -14,3 +14,7 @@ __pycache__
 archive
 drafts
 blog_notes.md
+.quarto/
+_freeze/
+
+/.quarto/

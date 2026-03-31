@@ -1,0 +1,27 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - index.qmd
+    - about.qmd
+    - posts/**
+
+website:
+  title: "Value this"
+  site-url: https://nocibambi.github.io/ds_blog
+  google-analytics: "UA-178880214-1"
+  navbar:
+    left:
+      - text: Posts
+        href: index.qmd
+      - text: About
+        href: about.qmd
+
+format:
+  html:
+    theme: default
+    toc: true
+    code-copy: true
+
+execute:
+  freeze: auto
