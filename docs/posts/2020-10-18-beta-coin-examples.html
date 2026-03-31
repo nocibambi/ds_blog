@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.40">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2020-10-18">
+
+<title>Using the Beta distribution – Value this</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-de0050a023a7e76282e48ca5112642df.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+<script type="text/javascript">
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-178880214-1', 'auto');
+
+ga('send', {
+  hitType: 'pageview',
+  'anonymizeIp': true,
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Value this</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Posts</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#using-the-beta-distribution" id="toc-using-the-beta-distribution" class="nav-link active" data-scroll-target="#using-the-beta-distribution">Using the Beta distribution</a>
+  <ul class="collapse">
+  <li><a href="#libraries-and-helper-functions" id="toc-libraries-and-helper-functions" class="nav-link" data-scroll-target="#libraries-and-helper-functions">Libraries and helper functions</a></li>
+  <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1">Example 1</a></li>
+  <li><a href="#example-2" id="toc-example-2" class="nav-link" data-scroll-target="#example-2">Example 2</a></li>
+  <li><a href="#example-3" id="toc-example-3" class="nav-link" data-scroll-target="#example-3">Example 3</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Using the Beta distribution</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">fastai</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 18, 2020</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="using-the-beta-distribution" class="level1">
+<h1>Using the Beta distribution</h1>
+<p>We try to use beta distributions to estimate if our coin is fair.</p>
+<p>From the <a href="https://www.oreilly.com/library/view/data-science-from/9781492041122/">Data Science from Scratch book</a>.</p>
+<section id="libraries-and-helper-functions" class="level2">
+<h2 class="anchored" data-anchor-id="libraries-and-helper-functions">Libraries and helper functions</h2>
+<div id="cell-4" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math <span class="im">as</span> m</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> altair <span class="im">as</span> alt</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-5" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> B(alpha: <span class="bu">float</span>, beta: <span class="bu">float</span>) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"This scales the parameters between 0 and 1"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> m.gamma(alpha) <span class="op">*</span> m.gamma(beta) <span class="op">/</span> m.gamma(alpha <span class="op">+</span> beta)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> beta_pdf(x: <span class="bu">float</span>, alpha: <span class="bu">float</span>, beta:<span class="bu">float</span>) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> x <span class="op">&lt;=</span> <span class="dv">0</span> <span class="kw">or</span> x <span class="op">&gt;=</span><span class="dv">1</span>: <span class="cf">return</span> <span class="dv">0</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x <span class="op">**</span> (alpha <span class="op">-</span> <span class="dv">1</span>) <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> x) <span class="op">**</span> (beta <span class="op">-</span> <span class="dv">1</span>) <span class="op">/</span> B(alpha, beta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="example-1" class="level2">
+<h2 class="anchored" data-anchor-id="example-1">Example 1</h2>
+<ol type="1">
+<li>We do not want to make assumptions beforehand, so we choose both <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> to be 1: <span class="math inline">\(B(1, 1)\)</span></li>
+<li>We flip the coin 10 times and get 3 heads</li>
+<li>Our new posterior distribution becomes <span class="math inline">\(B(4, 8)\)</span> centered around 0.33</li>
+<li>We have to assume that the observed probabilty is the real</li>
+</ol>
+</section>
+<section id="example-2" class="level2">
+<h2 class="anchored" data-anchor-id="example-2">Example 2</h2>
+<ol type="1">
+<li>We have a strong assumption that the coin is fair so we choose a $B(20, 20)</li>
+<li>Again, we got 3 heads out of 10</li>
+<li>Our new Beta is <span class="math inline">\(B(23, 27)\)</span> centered around 0.46</li>
+<li>It suggest that the coin is slightly biased toward tails</li>
+</ol>
+</section>
+<section id="example-3" class="level2">
+<h2 class="anchored" data-anchor-id="example-3">Example 3</h2>
+<ol type="1">
+<li>We believe that the coin is biased toward head by 75% of the time, so we choose <span class="math inline">\(B(30, 10)\)</span></li>
+<li>Again, we got 3 heads out of 10</li>
+<li>Our poseterior distribution is <span class="math inline">\(B(33, 17)\)</span> centered around 0.66</li>
+<li>It suggest that the coin is biased toward the head, although less strongly as we believed</li>
+</ol>
+<div id="cell-12" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame()</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>Beta_combinations <span class="op">=</span> [(<span class="dv">1</span>, <span class="dv">1</span>), (<span class="dv">4</span>, <span class="dv">8</span>), (<span class="dv">20</span>, <span class="dv">20</span>), (<span class="dv">23</span>, <span class="dv">27</span>), (<span class="dv">30</span>, <span class="dv">10</span>), (<span class="dv">33</span>, <span class="dv">17</span>)]</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> Beta <span class="kw">in</span> Beta_combinations:</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    alpha, beta <span class="op">=</span> Beta</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    df_B <span class="op">=</span> pd.DataFrame()</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    df_B[<span class="st">'x'</span>] <span class="op">=</span> pd.Series(np.arange(<span class="fl">0.01</span>, <span class="dv">1</span>, <span class="fl">.01</span>))    </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    df_B[<span class="st">'y'</span>] <span class="op">=</span> df_B[<span class="st">'x'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: beta_pdf(x, alpha, beta))</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    df_B[<span class="st">'Beta'</span>] <span class="op">=</span> <span class="ss">f'(</span><span class="sc">{</span>alpha<span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>beta<span class="sc">}</span><span class="ss">)'</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.concat([df, df_B])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-13" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>alt.Chart(df).mark_line().encode(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    alt.X(<span class="st">'x:Q'</span>), alt.Y(<span class="st">'y:Q'</span>), alt.Color(<span class="st">'Beta'</span>), tooltip<span class="op">=</span>[<span class="st">'x'</span>, <span class="st">'y'</span>, <span class="st">'Beta'</span>], strokeDash<span class="op">=</span><span class="st">'Beta'</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>).properties(width<span class="op">=</span><span class="dv">600</span>, title<span class="op">=</span><span class="st">'Beta distributions'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+
+<div id="altair-viz-70d66d1bef694276a81f968327588be3"></div>
+<script type="text/javascript">
+  (function(spec, embedOpt){
+    let outputDiv = document.currentScript.previousElementSibling;
+    if (outputDiv.id !== "altair-viz-70d66d1bef694276a81f968327588be3") {
+      outputDiv = document.getElementById("altair-viz-70d66d1bef694276a81f968327588be3");
+    }
+    const paths = {
+      "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
+      "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
+      "vega-lite": "https://cdn.jsdelivr.net/npm//vega-lite@4.8.1?noext",
+      "vega-embed": "https://cdn.jsdelivr.net/npm//vega-embed@6?noext",
+    };
+
+    function loadScript(lib) {
+      return new Promise(function(resolve, reject) {
+        var s = document.createElement('script');
+        s.src = paths[lib];
+        s.async = true;
+        s.onload = () => resolve(paths[lib]);
+        s.onerror = () => reject(`Error loading script: ${paths[lib]}`);
+        document.getElementsByTagName("head")[0].appendChild(s);
+      });
+    }
+
+    function showError(err) {
+      outputDiv.innerHTML = `<div class="error" style="color:red;">${err}</div>`;
+      throw err;
+    }
+
+    function displayChart(vegaEmbed) {
+      vegaEmbed(outputDiv, spec, embedOpt)
+        .catch(err => showError(`Javascript Error: ${err.message}<br>This usually means there's a typo in your chart specification. See the javascript console for the full traceback.`));
+    }
+
+    if(typeof define === "function" && define.amd) {
+      requirejs.config({paths});
+      require(["vega-embed"], displayChart, err => showError(`Error loading script: ${err.message}`));
+    } else if (typeof vegaEmbed === "function") {
+      displayChart(vegaEmbed);
+    } else {
+      loadScript("vega")
+        .then(() => loadScript("vega-lite"))
+        .then(() => loadScript("vega-embed"))
+        .catch(showError)
+        .then(() => displayChart(vegaEmbed));
+    }
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-230ee3cc0ac215fa8467ee1b1d9d0e89"}, "mark": "line", "encoding": {"color": {"type": "nominal", "field": "Beta"}, "strokeDash": {"type": "nominal", "field": "Beta"}, "tooltip": [{"type": "quantitative", "field": "x"}, {"type": "quantitative", "field": "y"}, {"type": "nominal", "field": "Beta"}], "x": {"type": "quantitative", "field": "x"}, "y": {"type": "quantitative", "field": "y"}}, "title": "Beta distributions", "width": 600, "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json", "datasets": {"data-230ee3cc0ac215fa8467ee1b1d9d0e89": [{"x": 0.01, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.02, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.03, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.04, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.05, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.060000000000000005, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.06999999999999999, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.08, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.09, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.09999999999999999, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.11, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.12, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.13, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.14, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.15000000000000002, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.16, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.17, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.18000000000000002, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.19, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.2, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.21000000000000002, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.22, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.23, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.24000000000000002, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.25, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.26, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.27, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.28, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.29000000000000004, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.3, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.31, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.32, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.33, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.34, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.35000000000000003, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.36000000000000004, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.37, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.38, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.39, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.4, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.41000000000000003, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.42000000000000004, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.43, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.44, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.45, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.46, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.47000000000000003, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.48000000000000004, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.49, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.5, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.51, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.52, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.53, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.54, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.55, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.56, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.5700000000000001, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.5800000000000001, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.59, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.6, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.61, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.62, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.63, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.64, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.65, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.66, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.67, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.68, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.6900000000000001, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.7000000000000001, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.7100000000000001, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.72, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.73, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.74, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.75, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.76, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.77, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.78, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.79, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.8, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.81, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.8200000000000001, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.8300000000000001, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.8400000000000001, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.85, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.86, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.87, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.88, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.89, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.9, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.91, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.92, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.93, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.9400000000000001, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.9500000000000001, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.9600000000000001, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.97, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.98, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.99, "y": 1.0, "Beta": "(1, 1)"}, {"x": 0.01, "y": 0.0012303262592372269, "Beta": "(4, 8)"}, {"x": 0.02, "y": 0.009167405631085363, "Beta": "(4, 8)"}, {"x": 0.03, "y": 0.028796508587999464, "Beta": "(4, 8)"}, {"x": 0.04, "y": 0.06348228295057735, "Beta": "(4, 8)"}, {"x": 0.05, "y": 0.11522565385546873, "Beta": "(4, 8)"}, {"x": 0.060000000000000005, "y": 0.1848939316562055, "Beta": "(4, 8)"}, {"x": 0.06999999999999999, "y": 0.27242608617628344, "Beta": "(4, 8)"}, {"x": 0.08, "y": 0.37701504697966287, "Beta": "(4, 8)"}, {"x": 0.09, "y": 0.4972687937071523, "Beta": "(4, 8)"}, {"x": 0.09999999999999999, "y": 0.631351908, "Beta": "(4, 8)"}, {"x": 0.11, "y": 0.7771091690465282, "Beta": "(4, 8)"}, {"x": 0.12, "y": 0.9321726882959326, "Beta": "(4, 8)"}, {"x": 0.13, "y": 1.0940539953375021, "Beta": "(4, 8)"}, {"x": 0.14, "y": 1.2602224062956067, "Beta": "(4, 8)"}, {"x": 0.15000000000000002, "y": 1.4281709282929693, "Beta": "(4, 8)"}, {"x": 0.16, "y": 1.595470878539042, "Beta": "(4, 8)"}, {"x": 0.17, "y": 1.759816324358894, "Beta": "(4, 8)"}, {"x": 0.18000000000000002, "y": 1.9190593809429368, "Beta": "(4, 8)"}, {"x": 0.19, "y": 2.0712373367212242, "Beta": "(4, 8)"}, {"x": 0.2, "y": 2.214592512000001, "Beta": "(4, 8)"}, {"x": 0.21000000000000002, "y": 2.3475856947948057, "Beta": "(4, 8)"}, {"x": 0.22, "y": 2.4689039386057594, "Beta": "(4, 8)"}, {"x": 0.23, "y": 2.5774634501589664, "Beta": "(4, 8)"}, {"x": 0.24000000000000002, "y": 2.6724082408350553, "Beta": "(4, 8)"}, {"x": 0.25, "y": 2.7531051635742188, "Beta": "(4, 8)"}, {"x": 0.26, "y": 2.819135907438442, "Beta": "(4, 8)"}, {"x": 0.27, "y": 2.8702864746782986, "Beta": "(4, 8)"}, {"x": 0.28, "y": 2.906534620045718, "Beta": "(4, 8)"}, {"x": 0.29000000000000004, "y": 2.928035689167575, "Beta": "(4, 8)"}, {"x": 0.3, "y": 2.9351072519999986, "Beta": "(4, 8)"}, {"x": 0.31, "y": 2.9282128886719994, "Beta": "(4, 8)"}, {"x": 0.32, "y": 2.9079454483514118, "Beta": "(4, 8)"}, {"x": 0.33, "y": 2.875010067078501, "Beta": "(4, 8)"}, {"x": 0.34, "y": 2.830207197764824, "Beta": "(4, 8)"}, {"x": 0.35000000000000003, "y": 2.7744158746992165, "Beta": "(4, 8)"}, {"x": 0.36000000000000004, "y": 2.7085774058912984, "Beta": "(4, 8)"}, {"x": 0.37, "y": 2.6336796593675835, "Beta": "(4, 8)"}, {"x": 0.38, "y": 2.550742084068359, "Beta": "(4, 8)"}, {"x": 0.39, "y": 2.460801582227072, "Beta": "(4, 8)"}, {"x": 0.4, "y": 2.364899328, "Beta": "(4, 8)"}, {"x": 0.41000000000000003, "y": 2.2640686066047757, "Beta": "(4, 8)"}, {"x": 0.42000000000000004, "y": 2.1593237292738214, "Beta": "(4, 8)"}, {"x": 0.43, "y": 2.051650061885107, "Beta": "(4, 8)"}, {"x": 0.44, "y": 1.9419951891499463, "Beta": "(4, 8)"}, {"x": 0.45, "y": 1.83126122166797, "Beta": "(4, 8)"}, {"x": 0.46, "y": 1.7202982399548354, "Beta": "(4, 8)"}, {"x": 0.47000000000000003, "y": 1.6098988576611193, "Beta": "(4, 8)"}, {"x": 0.48000000000000004, "y": 1.5007938755828913, "Beta": "(4, 8)"}, {"x": 0.49, "y": 1.3936489886680983, "Beta": "(4, 8)"}, {"x": 0.5, "y": 1.2890625, "Beta": "(4, 8)"}, {"x": 0.51, "y": 1.1875639886417038, "Beta": "(4, 8)"}, {"x": 0.52, "y": 1.089613872206394, "Beta": "(4, 8)"}, {"x": 0.53, "y": 0.9956038000282443, "Beta": "(4, 8)"}, {"x": 0.54, "y": 0.9058578088013546, "Beta": "(4, 8)"}, {"x": 0.55, "y": 0.8206341694804685, "Beta": "(4, 8)"}, {"x": 0.56, "y": 0.7401278520497796, "Beta": "(4, 8)"}, {"x": 0.5700000000000001, "y": 0.6644735334169498, "Beta": "(4, 8)"}, {"x": 0.5800000000000001, "y": 0.5937490731306253, "Beta": "(4, 8)"}, {"x": 0.59, "y": 0.5279793818033581, "Beta": "(4, 8)"}, {"x": 0.6, "y": 0.4671406080000001, "Beta": "(4, 8)"}, {"x": 0.61, "y": 0.4111645708764805, "Beta": "(4, 8)"}, {"x": 0.62, "y": 0.35994336797741755, "Beta": "(4, 8)"}, {"x": 0.63, "y": 0.3133340902754733, "Beta": "(4, 8)"}, {"x": 0.64, "y": 0.27116357971272004, "Beta": "(4, 8)"}, {"x": 0.65, "y": 0.23323316813671865, "Beta": "(4, 8)"}, {"x": 0.66, "y": 0.1993233405635923, "Beta": "(4, 8)"}, {"x": 0.67, "y": 0.16919827009920704, "Beta": "(4, 8)"}, {"x": 0.68, "y": 0.14261017655975594, "Beta": "(4, 8)"}, {"x": 0.6900000000000001, "y": 0.11930346580667447, "Beta": "(4, 8)"}, {"x": 0.7000000000000001, "y": 0.09901861199999987, "Beta": "(4, 8)"}, {"x": 0.7100000000000001, "y": 0.08149575033112245, "Beta": "(4, 8)"}, {"x": 0.72, "y": 0.06647795327246013, "Beta": "(4, 8)"}, {"x": 0.73, "y": 0.053714168930023176, "Beta": "(4, 8)"}, {"x": 0.74, "y": 0.0429618056572244, "Beta": "(4, 8)"}, {"x": 0.75, "y": 0.03398895263671875, "Beta": "(4, 8)"}, {"x": 0.76, "y": 0.026576231613648072, "Beta": "(4, 8)"}, {"x": 0.77, "y": 0.0205182803204973, "Beta": "(4, 8)"}, {"x": 0.78, "y": 0.015624873322953512, "Beta": "(4, 8)"}, {"x": 0.79, "y": 0.011721690989792494, "Beta": "(4, 8)"}, {"x": 0.8, "y": 0.008650751999999989, "Beta": "(4, 8)"}, {"x": 0.81, "y": 0.006270529199165855, "Beta": "(4, 8)"}, {"x": 0.8200000000000001, "y": 0.004455772656769833, "Beta": "(4, 8)"}, {"x": 0.8300000000000001, "y": 0.003097067408406185, "Beta": "(4, 8)"}, {"x": 0.8400000000000001, "y": 0.0021001565443719097, "Beta": "(4, 8)"}, {"x": 0.85, "y": 0.0013850629804687512, "Beta": "(4, 8)"}, {"x": 0.86, "y": 0.0008850453704429573, "Beta": "(4, 8)"}, {"x": 0.87, "y": 0.0005454251443086733, "Beta": "(4, 8)"}, {"x": 0.88, "y": 0.0003223225349701631, "Beta": "(4, 8)"}, {"x": 0.89, "y": 0.00018133963917562666, "Beta": "(4, 8)"}, {"x": 0.9, "y": 9.622799999999988e-05, "Beta": "(4, 8)"}, {"x": 0.91, "y": 4.7576848866346694e-05, "Beta": "(4, 8)"}, {"x": 0.92, "y": 2.1555957674803127e-05, "Beta": "(4, 8)"}, {"x": 0.93, "y": 8.743978014433158e-06, "Beta": "(4, 8)"}, {"x": 0.9400000000000001, "y": 3.06913678663678e-06, "Beta": "(4, 8)"}, {"x": 0.9500000000000001, "y": 8.841679687499921e-07, "Beta": "(4, 8)"}, {"x": 0.9600000000000001, "y": 1.913407930367975e-07, "Beta": "(4, 8)"}, {"x": 0.97, "y": 2.6347409233200163e-08, "Beta": "(4, 8)"}, {"x": 0.98, "y": 1.5902380032000097e-09, "Beta": "(4, 8)"}, {"x": 0.99, "y": 1.280794680000008e-11, "Beta": "(4, 8)"}, {"x": 0.01, "y": 1.13884477015732e-26, "Beta": "(20, 20)"}, {"x": 0.02, "y": 4.923355434603437e-21, "Beta": "(20, 20)"}, {"x": 0.03, "y": 8.98178438233645e-18, "Beta": "(20, 20)"}, {"x": 0.04, "y": 1.7445728014749746e-15, "Beta": "(20, 20)"}, {"x": 0.05, "y": 9.921433305208993e-14, "Beta": "(20, 20)"}, {"x": 0.060000000000000005, "y": 2.5923808824613925e-12, "Beta": "(20, 20)"}, {"x": 0.06999999999999999, "y": 3.957624785192521e-11, "Beta": "(20, 20)"}, {"x": 0.08, "y": 4.07449985620262e-10, "Beta": "(20, 20)"}, {"x": 0.09, "y": 3.103058533637234e-09, "Beta": "(20, 20)"}, {"x": 0.09999999999999999, "y": 1.8621022023175647e-08, "Beta": "(20, 20)"}, {"x": 0.11, "y": 9.21015583877204e-08, "Beta": "(20, 20)"}, {"x": 0.12, "y": 3.8815955398332115e-07, "Beta": "(20, 20)"}, {"x": 0.13, "y": 1.4295038454850152e-06, "Beta": "(20, 20)"}, {"x": 0.14, "y": 4.691363514145685e-06, "Beta": "(20, 20)"}, {"x": 0.15000000000000002, "y": 1.393443438962525e-05, "Beta": "(20, 20)"}, {"x": 0.16, "y": 3.792992116406635e-05, "Beta": "(20, 20)"}, {"x": 0.17, "y": 9.558925916020792e-05, "Beta": "(20, 20)"}, {"x": 0.18000000000000002, "y": 0.00022492442900747618, "Beta": "(20, 20)"}, {"x": 0.19, "y": 0.0004976564201782332, "Beta": "(20, 20)"}, {"x": 0.2, "y": 0.0010415389239671908, "Beta": "(20, 20)"}, {"x": 0.21000000000000002, "y": 0.002072417108435345, "Beta": "(20, 20)"}, {"x": 0.22, "y": 0.003937533131987561, "Beta": "(20, 20)"}, {"x": 0.23, "y": 0.0071704844283142, "Beta": "(20, 20)"}, {"x": 0.24000000000000002, "y": 0.012556473379548969, "Beta": "(20, 20)"}, {"x": 0.25, "y": 0.02120410780648395, "Beta": "(20, 20)"}, {"x": 0.26, "y": 0.034617214629038294, "Beta": "(20, 20)"}, {"x": 0.27, "y": 0.054757258408504955, "Beta": "(20, 20)"}, {"x": 0.28, "y": 0.08408448374813494, "Beta": "(20, 20)"}, {"x": 0.29000000000000004, "y": 0.12556436946777041, "Beta": "(20, 20)"}, {"x": 0.3, "y": 0.18262592739530611, "Beta": "(20, 20)"}, {"x": 0.31, "y": 0.2590602267145753, "Beta": "(20, 20)"}, {"x": 0.32, "y": 0.3588514983252814, "Beta": "(20, 20)"}, {"x": 0.33, "y": 0.4859392100962605, "Beta": "(20, 20)"}, {"x": 0.34, "y": 0.6439172112547195, "Beta": "(20, 20)"}, {"x": 0.35000000000000003, "y": 0.8356847043126086, "Beta": "(20, 20)"}, {"x": 0.36000000000000004, "y": 1.0630724287361728, "Beta": "(20, 20)"}, {"x": 0.37, "y": 1.326474883995912, "Beta": "(20, 20)"}, {"x": 0.38, "y": 1.6245245191340043, "Beta": "(20, 20)"}, {"x": 0.39, "y": 1.953845563570253, "Beta": "(20, 20)"}, {"x": 0.4, "y": 2.308922877707875, "Beta": "(20, 20)"}, {"x": 0.41000000000000003, "y": 2.6821146188671046, "Beta": "(20, 20)"}, {"x": 0.42000000000000004, "y": 3.0638269335751867, "Beta": "(20, 20)"}, {"x": 0.43, "y": 3.4428551263413394, "Beta": "(20, 20)"}, {"x": 0.44, "y": 3.80688011835901, "Beta": "(20, 20)"}, {"x": 0.45, "y": 4.143093138399571, "Beta": "(20, 20)"}, {"x": 0.46, "y": 4.438907274072127, "Beta": "(20, 20)"}, {"x": 0.47000000000000003, "y": 4.682703474696223, "Beta": "(20, 20)"}, {"x": 0.48000000000000004, "y": 4.8645522623317845, "Beta": "(20, 20)"}, {"x": 0.49, "y": 4.9768517109248105, "Beta": "(20, 20)"}, {"x": 0.5, "y": 5.014827504783172, "Beta": "(20, 20)"}, {"x": 0.51, "y": 4.9768517109248105, "Beta": "(20, 20)"}, {"x": 0.52, "y": 4.864552262331774, "Beta": "(20, 20)"}, {"x": 0.53, "y": 4.682703474696213, "Beta": "(20, 20)"}, {"x": 0.54, "y": 4.4389072740721165, "Beta": "(20, 20)"}, {"x": 0.55, "y": 4.143093138399561, "Beta": "(20, 20)"}, {"x": 0.56, "y": 3.806880118359001, "Beta": "(20, 20)"}, {"x": 0.5700000000000001, "y": 3.442855126341331, "Beta": "(20, 20)"}, {"x": 0.5800000000000001, "y": 3.0638269335751827, "Beta": "(20, 20)"}, {"x": 0.59, "y": 2.6821146188671046, "Beta": "(20, 20)"}, {"x": 0.6, "y": 2.308922877707875, "Beta": "(20, 20)"}, {"x": 0.61, "y": 1.953845563570253, "Beta": "(20, 20)"}, {"x": 0.62, "y": 1.6245245191340043, "Beta": "(20, 20)"}, {"x": 0.63, "y": 1.326474883995912, "Beta": "(20, 20)"}, {"x": 0.64, "y": 1.063072428736173, "Beta": "(20, 20)"}, {"x": 0.65, "y": 0.8356847043126086, "Beta": "(20, 20)"}, {"x": 0.66, "y": 0.6439172112547197, "Beta": "(20, 20)"}, {"x": 0.67, "y": 0.4859392100962605, "Beta": "(20, 20)"}, {"x": 0.68, "y": 0.3588514983252814, "Beta": "(20, 20)"}, {"x": 0.6900000000000001, "y": 0.25906022671457524, "Beta": "(20, 20)"}, {"x": 0.7000000000000001, "y": 0.18262592739530603, "Beta": "(20, 20)"}, {"x": 0.7100000000000001, "y": 0.12556436946776983, "Beta": "(20, 20)"}, {"x": 0.72, "y": 0.08408448374813494, "Beta": "(20, 20)"}, {"x": 0.73, "y": 0.054757258408504955, "Beta": "(20, 20)"}, {"x": 0.74, "y": 0.034617214629038294, "Beta": "(20, 20)"}, {"x": 0.75, "y": 0.02120410780648395, "Beta": "(20, 20)"}, {"x": 0.76, "y": 0.012556473379548941, "Beta": "(20, 20)"}, {"x": 0.77, "y": 0.007170484428314183, "Beta": "(20, 20)"}, {"x": 0.78, "y": 0.003937533131987552, "Beta": "(20, 20)"}, {"x": 0.79, "y": 0.002072417108435334, "Beta": "(20, 20)"}, {"x": 0.8, "y": 0.0010415389239671852, "Beta": "(20, 20)"}, {"x": 0.81, "y": 0.0004976564201782305, "Beta": "(20, 20)"}, {"x": 0.8200000000000001, "y": 0.00022492442900747477, "Beta": "(20, 20)"}, {"x": 0.8300000000000001, "y": 9.558925916020727e-05, "Beta": "(20, 20)"}, {"x": 0.8400000000000001, "y": 3.792992116406608e-05, "Beta": "(20, 20)"}, {"x": 0.85, "y": 1.393443438962525e-05, "Beta": "(20, 20)"}, {"x": 0.86, "y": 4.691363514145685e-06, "Beta": "(20, 20)"}, {"x": 0.87, "y": 1.4295038454850152e-06, "Beta": "(20, 20)"}, {"x": 0.88, "y": 3.8815955398332115e-07, "Beta": "(20, 20)"}, {"x": 0.89, "y": 9.210155838772016e-08, "Beta": "(20, 20)"}, {"x": 0.9, "y": 1.8621022023175598e-08, "Beta": "(20, 20)"}, {"x": 0.91, "y": 3.103058533637216e-09, "Beta": "(20, 20)"}, {"x": 0.92, "y": 4.074499856202581e-10, "Beta": "(20, 20)"}, {"x": 0.93, "y": 3.957624785192476e-11, "Beta": "(20, 20)"}, {"x": 0.9400000000000001, "y": 2.592380882461347e-12, "Beta": "(20, 20)"}, {"x": 0.9500000000000001, "y": 9.921433305208756e-14, "Beta": "(20, 20)"}, {"x": 0.9600000000000001, "y": 1.7445728014749152e-15, "Beta": "(20, 20)"}, {"x": 0.97, "y": 8.981784382336609e-18, "Beta": "(20, 20)"}, {"x": 0.98, "y": 4.923355434603518e-21, "Beta": "(20, 20)"}, {"x": 0.99, "y": 1.138844770157339e-26, "Beta": "(20, 20)"}, {"x": 0.01, "y": 1.0333187464720023e-29, "Beta": "(23, 27)"}, {"x": 0.02, "y": 3.328565607503069e-23, "Beta": "(23, 27)"}, {"x": 0.03, "y": 1.9074446462519528e-19, "Beta": "(23, 27)"}, {"x": 0.04, "y": 8.167537123710209e-17, "Beta": "(23, 27)"}, {"x": 0.05, "y": 8.430883376585244e-15, "Beta": "(23, 27)"}, {"x": 0.060000000000000005, "y": 3.5348496868322805e-13, "Beta": "(23, 27)"}, {"x": 0.06999999999999999, "y": 7.951202087490115e-12, "Beta": "(23, 27)"}, {"x": 0.08, "y": 1.1328762539328616e-10, "Beta": "(23, 27)"}, {"x": 0.09, "y": 1.1379695909483623e-09, "Beta": "(23, 27)"}, {"x": 0.09999999999999999, "y": 8.670107740064187e-09, "Beta": "(23, 27)"}, {"x": 0.11, "y": 5.278353777988588e-08, "Beta": "(23, 27)"}, {"x": 0.12, "y": 2.6684319861790824e-07, "Beta": "(23, 27)"}, {"x": 0.13, "y": 1.1533830578518535e-06, "Beta": "(23, 27)"}, {"x": 0.14, "y": 4.360093134124118e-06, "Beta": "(23, 27)"}, {"x": 0.15000000000000002, "y": 1.4676382322812963e-05, "Beta": "(23, 27)"}, {"x": 0.16, "y": 4.462932361978903e-05, "Beta": "(23, 27)"}, {"x": 0.17, "y": 0.00012405832724167695, "Beta": "(23, 27)"}, {"x": 0.18000000000000002, "y": 0.0003183277672654494, "Beta": "(23, 27)"}, {"x": 0.19, "y": 0.0007601669096957921, "Beta": "(23, 27)"}, {"x": 0.2, "y": 0.0017010567996455623, "Beta": "(23, 27)"}, {"x": 0.21000000000000002, "y": 0.0035879642454809033, "Beta": "(23, 27)"}, {"x": 0.22, "y": 0.007169318869894884, "Beta": "(23, 27)"}, {"x": 0.23, "y": 0.013629831779442408, "Beta": "(23, 27)"}, {"x": 0.24000000000000002, "y": 0.024746852276048562, "Beta": "(23, 27)"}, {"x": 0.25, "y": 0.04305189653341838, "Beta": "(23, 27)"}, {"x": 0.26, "y": 0.07197101329598922, "Beta": "(23, 27)"}, {"x": 0.27, "y": 0.11590880371229656, "Beta": "(23, 27)"}, {"x": 0.28, "y": 0.18023571163842914, "Beta": "(23, 27)"}, {"x": 0.29000000000000004, "y": 0.2711391744306056, "Beta": "(23, 27)"}, {"x": 0.3, "y": 0.39530826367851796, "Beta": "(23, 27)"}, {"x": 0.31, "y": 0.5594391719554321, "Beta": "(23, 27)"}, {"x": 0.32, "y": 0.7695742048892078, "Beta": "(23, 27)"}, {"x": 0.33, "y": 1.0303168357939263, "Beta": "(23, 27)"}, {"x": 0.34, "y": 1.3439952936171697, "Beta": "(23, 27)"}, {"x": 0.35000000000000003, "y": 1.7098715934287798, "Beta": "(23, 27)"}, {"x": 0.36000000000000004, "y": 2.1235064739115193, "Beta": "(23, 27)"}, {"x": 0.37, "y": 2.5763891655946876, "Beta": "(23, 27)"}, {"x": 0.38, "y": 3.0559222561284733, "Beta": "(23, 27)"}, {"x": 0.39, "y": 3.5458169665356105, "Beta": "(23, 27)"}, {"x": 0.4, "y": 4.026906705522662, "Beta": "(23, 27)"}, {"x": 0.41000000000000003, "y": 4.478333161917996, "Beta": "(23, 27)"}, {"x": 0.42000000000000004, "y": 4.8790073267343255, "Beta": "(23, 27)"}, {"x": 0.43, "y": 5.209205844332609, "Beta": "(23, 27)"}, {"x": 0.44, "y": 5.4521379240450445, "Beta": "(23, 27)"}, {"x": 0.45, "y": 5.595314197762655, "Beta": "(23, 27)"}, {"x": 0.46, "y": 5.631567595327694, "Beta": "(23, 27)"}, {"x": 0.47000000000000003, "y": 5.559615193447238, "Beta": "(23, 27)"}, {"x": 0.48000000000000004, "y": 5.384103572075789, "Beta": "(23, 27)"}, {"x": 0.49, "y": 5.115140745979393, "Beta": "(23, 27)"}, {"x": 0.5, "y": 4.767376562145216, "Beta": "(23, 27)"}, {"x": 0.51, "y": 4.358742406554182, "Beta": "(23, 27)"}, {"x": 0.52, "y": 3.9089937912035033, "Beta": "(23, 27)"}, {"x": 0.53, "y": 3.438212274609841, "Beta": "(23, 27)"}, {"x": 0.54, "y": 2.965415742187923, "Beta": "(23, 27)"}, {"x": 0.55, "y": 2.5074008914364225, "Beta": "(23, 27)"}, {"x": 0.56, "y": 2.077903773061829, "Beta": "(23, 27)"}, {"x": 0.5700000000000001, "y": 1.687119786158612, "Beta": "(23, 27)"}, {"x": 0.5800000000000001, "y": 1.3415802543976392, "Beta": "(23, 27)"}, {"x": 0.59, "y": 1.04434449002176, "Beta": "(23, 27)"}, {"x": 0.6, "y": 0.7954383615847237, "Beta": "(23, 27)"}, {"x": 0.61, "y": 0.5924550447227519, "Beta": "(23, 27)"}, {"x": 0.62, "y": 0.4312309566765875, "Beta": "(23, 27)"}, {"x": 0.63, "y": 0.3065181266544178, "Beta": "(23, 27)"}, {"x": 0.64, "y": 0.2125904232076033, "Beta": "(23, 27)"}, {"x": 0.65, "y": 0.1437415250104164, "Beta": "(23, 27)"}, {"x": 0.66, "y": 0.09465371716851266, "Beta": "(23, 27)"}, {"x": 0.67, "y": 0.06063555333827675, "Beta": "(23, 27)"}, {"x": 0.68, "y": 0.03774111832025711, "Beta": "(23, 27)"}, {"x": 0.6900000000000001, "y": 0.02279309417033827, "Beta": "(23, 27)"}, {"x": 0.7000000000000001, "y": 0.013336097191986635, "Beta": "(23, 27)"}, {"x": 0.7100000000000001, "y": 0.007546591916939774, "Beta": "(23, 27)"}, {"x": 0.72, "y": 0.004122332186822403, "Beta": "(23, 27)"}, {"x": 0.73, "y": 0.002169102324107561, "Beta": "(23, 27)"}, {"x": 0.74, "y": 0.0010967916367626627, "Beta": "(23, 27)"}, {"x": 0.75, "y": 0.000531504895474301, "Beta": "(23, 27)"}, {"x": 0.76, "y": 0.0002460994049290509, "Beta": "(23, 27)"}, {"x": 0.77, "y": 0.00010850229870556378, "Beta": "(23, 27)"}, {"x": 0.78, "y": 4.537223883130395e-05, "Beta": "(23, 27)"}, {"x": 0.79, "y": 1.7915004449550873e-05, "Beta": "(23, 27)"}, {"x": 0.8, "y": 6.644753123615429e-06, "Beta": "(23, 27)"}, {"x": 0.81, "y": 2.3013532630851155e-06, "Beta": "(23, 27)"}, {"x": 0.8200000000000001, "y": 7.391100949544551e-07, "Beta": "(23, 27)"}, {"x": 0.8300000000000001, "y": 2.183278997491716e-07, "Beta": "(23, 27)"}, {"x": 0.8400000000000001, "y": 5.874664798446056e-08, "Beta": "(23, 27)"}, {"x": 0.85, "y": 1.4233390023441421e-08, "Beta": "(23, 27)"}, {"x": 0.86, "y": 3.0620628738063463e-09, "Beta": "(23, 27)"}, {"x": 0.87, "y": 5.750028092333425e-10, "Beta": "(23, 27)"}, {"x": 0.88, "y": 9.226785690889693e-11, "Beta": "(23, 27)"}, {"x": 0.89, "y": 1.2317121038684395e-11, "Beta": "(23, 27)"}, {"x": 0.9, "y": 1.3214613229788376e-12, "Beta": "(23, 27)"}, {"x": 0.91, "y": 1.0887674418381577e-13, "Beta": "(23, 27)"}, {"x": 0.92, "y": 6.47725675041382e-15, "Beta": "(23, 27)"}, {"x": 0.93, "y": 2.5520733795051846e-16, "Beta": "(23, 27)"}, {"x": 0.9400000000000001, "y": 5.867654558431336e-18, "Beta": "(23, 27)"}, {"x": 0.9500000000000001, "y": 6.469320659437055e-20, "Beta": "(23, 27)"}, {"x": 0.9600000000000001, "y": 2.4617624914731105e-22, "Beta": "(23, 27)"}, {"x": 0.97, "y": 1.745219373761907e-25, "Beta": "(23, 27)"}, {"x": 0.98, "y": 5.773947110235278e-30, "Beta": "(23, 27)"}, {"x": 0.99, "y": 1.0757058489885106e-37, "Beta": "(23, 27)"}, {"x": 0.01, "y": 5.8076438425431764e-49, "Beta": "(30, 10)"}, {"x": 0.02, "y": 2.845691254817871e-40, "Beta": "(30, 10)"}, {"x": 0.03, "y": 3.316998071426498e-35, "Beta": "(30, 10)"}, {"x": 0.04, "y": 1.2690071516181612e-31, "Beta": "(30, 10)"}, {"x": 0.05, "y": 7.463212321775753e-29, "Beta": "(30, 10)"}, {"x": 0.060000000000000005, "y": 1.342209063898247e-26, "Beta": "(30, 10)"}, {"x": 0.06999999999999999, "y": 1.0653024385298622e-24, "Beta": "(30, 10)"}, {"x": 0.08, "y": 4.644974055891141e-23, "Beta": "(30, 10)"}, {"x": 0.09, "y": 1.2814112378000286e-21, "Beta": "(30, 10)"}, {"x": 0.09999999999999999, "y": 2.4630079219781813e-20, "Beta": "(30, 10)"}, {"x": 0.11, "y": 3.533305204668625e-19, "Beta": "(30, 10)"}, {"x": 0.12, "y": 3.98000308290462e-18, "Beta": "(30, 10)"}, {"x": 0.13, "y": 3.658589757566235e-17, "Beta": "(30, 10)"}, {"x": 0.14, "y": 2.828018978321987e-16, "Beta": "(30, 10)"}, {"x": 0.15000000000000002, "y": 1.8823486539166516e-15, "Beta": "(30, 10)"}, {"x": 0.16, "y": 1.099705242251466e-14, "Beta": "(30, 10)"}, {"x": 0.17, "y": 5.728023289548054e-14, "Beta": "(30, 10)"}, {"x": 0.18000000000000002, "y": 2.6947007497346257e-13, "Beta": "(30, 10)"}, {"x": 0.19, "y": 1.1574515511609e-12, "Beta": "(30, 10)"}, {"x": 0.2, "y": 4.581028365644983e-12, "Beta": "(30, 10)"}, {"x": 0.21000000000000002, "y": 1.6837848307849303e-11, "Beta": "(30, 10)"}, {"x": 0.22, "y": 5.7861860218751366e-11, "Beta": "(30, 10)"}, {"x": 0.23, "y": 1.8698509735750867e-10, "Beta": "(30, 10)"}, {"x": 0.24000000000000002, "y": 5.711255166165076e-10, "Beta": "(30, 10)"}, {"x": 0.25, "y": 1.6561316072752132e-09, "Beta": "(30, 10)"}, {"x": 0.26, "y": 4.577156822524017e-09, "Beta": "(30, 10)"}, {"x": 0.27, "y": 1.2098683768875232e-08, "Beta": "(30, 10)"}, {"x": 0.28, "y": 3.068022925774803e-08, "Beta": "(30, 10)"}, {"x": 0.29000000000000004, "y": 7.484284729455923e-08, "Beta": "(30, 10)"}, {"x": 0.3, "y": 1.7606862422983829e-07, "Beta": "(30, 10)"}, {"x": 0.31, "y": 4.00326335898345e-07, "Beta": "(30, 10)"}, {"x": 0.32, "y": 8.814807030584979e-07, "Beta": "(30, 10)"}, {"x": 0.33, "y": 1.8830450252947408e-06, "Beta": "(30, 10)"}, {"x": 0.34, "y": 3.909014108022674e-06, "Beta": "(30, 10)"}, {"x": 0.35000000000000003, "y": 7.897265150562277e-06, "Beta": "(30, 10)"}, {"x": 0.36000000000000004, "y": 1.554803508075945e-05, "Beta": "(30, 10)"}, {"x": 0.37, "y": 2.986745147454645e-05, "Beta": "(30, 10)"}, {"x": 0.38, "y": 5.604446543461999e-05, "Beta": "(30, 10)"}, {"x": 0.39, "y": 0.00010283130388127623, "Beta": "(30, 10)"}, {"x": 0.4, "y": 0.00018466484494538782, "Beta": "(30, 10)"}, {"x": 0.41000000000000003, "y": 0.0003248502261153795, "Beta": "(30, 10)"}, {"x": 0.42000000000000004, "y": 0.000560227711605941, "Beta": "(30, 10)"}, {"x": 0.43, "y": 0.0009478555046998548, "Beta": "(30, 10)"}, {"x": 0.44, "y": 0.0015743565121439343, "Beta": "(30, 10)"}, {"x": 0.45, "y": 0.0025686819187464393, "Beta": "(30, 10)"}, {"x": 0.46, "y": 0.0041191175028934815, "Beta": "(30, 10)"}, {"x": 0.47000000000000003, "y": 0.006495370526071855, "Beta": "(30, 10)"}, {"x": 0.48000000000000004, "y": 0.01007648819301843, "Beta": "(30, 10)"}, {"x": 0.49, "y": 0.015385128554239213, "Beta": "(30, 10)"}, {"x": 0.5, "y": 0.02312828277354129, "Beta": "(30, 10)"}, {"x": 0.51, "y": 0.03424388665081806, "Beta": "(30, 10)"}, {"x": 0.52, "y": 0.049951821048681025, "Beta": "(30, 10)"}, {"x": 0.53, "y": 0.07180656692556642, "Beta": "(30, 10)"}, {"x": 0.54, "y": 0.10174726492266165, "Beta": "(30, 10)"}, {"x": 0.55, "y": 0.14213919223551927, "Beta": "(30, 10)"}, {"x": 0.56, "y": 0.19579883133514403, "Beta": "(30, 10)"}, {"x": 0.5700000000000001, "y": 0.26599295760782243, "Beta": "(30, 10)"}, {"x": 0.5800000000000001, "y": 0.3564007839484486, "Beta": "(30, 10)"}, {"x": 0.59, "y": 0.4710275092836657, "Beta": "(30, 10)"}, {"x": 0.6, "y": 0.6140580184637648, "Beta": "(30, 10)"}, {"x": 0.61, "y": 0.7896413863121698, "Beta": "(30, 10)"}, {"x": 0.62, "y": 1.001600629333461, "Beta": "(30, 10)"}, {"x": 0.63, "y": 1.2530681012541656, "Beta": "(30, 10)"}, {"x": 0.64, "y": 1.546055130132042, "Beta": "(30, 10)"}, {"x": 0.65, "y": 1.8809747494483215, "Beta": "(30, 10)"}, {"x": 0.66, "y": 2.25614811695281, "Beta": "(30, 10)"}, {"x": 0.67, "y": 2.667337440005342, "Beta": "(30, 10)"}, {"x": 0.68, "y": 3.1073594719232864, "Beta": "(30, 10)"}, {"x": 0.6900000000000001, "y": 3.565842030028549, "Beta": "(30, 10)"}, {"x": 0.7000000000000001, "y": 4.029189343388217, "Beta": "(30, 10)"}, {"x": 0.7100000000000001, "y": 4.4808181383573995, "Beta": "(30, 10)"}, {"x": 0.72, "y": 4.9017132599310855, "Beta": "(30, 10)"}, {"x": 0.73, "y": 5.271328052557403, "Beta": "(30, 10)"}, {"x": 0.74, "y": 5.568820605090682, "Beta": "(30, 10)"}, {"x": 0.75, "y": 5.774573854250272, "Beta": "(30, 10)"}, {"x": 0.76, "y": 5.871898978801341, "Beta": "(30, 10)"}, {"x": 0.77, "y": 5.848773159735425, "Beta": "(30, 10)"}, {"x": 0.78, "y": 5.6994221930933575, "Beta": "(30, 10)"}, {"x": 0.79, "y": 5.425534429370916, "Beta": "(30, 10)"}, {"x": 0.8, "y": 5.036893955198332, "Beta": "(30, 10)"}, {"x": 0.81, "y": 4.551255112593535, "Beta": "(30, 10)"}, {"x": 0.8200000000000001, "y": 3.993351038040087, "Beta": "(30, 10)"}, {"x": 0.8300000000000001, "y": 3.393033871306277, "Beta": "(30, 10)"}, {"x": 0.8400000000000001, "y": 2.7826742130290008, "Beta": "(30, 10)"}, {"x": 0.85, "y": 2.194084760536019, "Beta": "(30, 10)"}, {"x": 0.86, "y": 1.65535304071987, "Beta": "(30, 10)"}, {"x": 0.87, "y": 1.1880417981901525, "Beta": "(30, 10)"}, {"x": 0.88, "y": 0.8052151371156004, "Beta": "(30, 10)"}, {"x": 0.89, "y": 0.5106549932734399, "Beta": "(30, 10)"}, {"x": 0.9, "y": 0.2994442633841775, "Beta": "(30, 10)"}, {"x": 0.91, "y": 0.15983290245327791, "Beta": "(30, 10)"}, {"x": 0.92, "y": 0.07602214157500661, "Beta": "(30, 10)"}, {"x": 0.93, "y": 0.031273111404120466, "Beta": "(30, 10)"}, {"x": 0.9400000000000001, "y": 0.010650064342763771, "Beta": "(30, 10)"}, {"x": 0.9500000000000001, "y": 0.0028054195308357737, "Beta": "(30, 10)"}, {"x": 0.9600000000000001, "y": 0.0005101394432363972, "Beta": "(30, 10)"}, {"x": 0.97, "y": 5.173146886349959e-05, "Beta": "(30, 10)"}, {"x": 0.98, "y": 1.811796347494299e-06, "Beta": "(30, 10)"}, {"x": 0.99, "y": 4.750112189909938e-09, "Beta": "(30, 10)"}, {"x": 0.01, "y": 9.407552287830927e-51, "Beta": "(33, 17)"}, {"x": 0.02, "y": 3.434714152739101e-41, "Beta": "(33, 17)"}, {"x": 0.03, "y": 1.257596808533696e-35, "Beta": "(33, 17)"}, {"x": 0.04, "y": 1.0606521543115924e-31, "Beta": "(33, 17)"}, {"x": 0.05, "y": 1.1322213777608443e-28, "Beta": "(33, 17)"}, {"x": 0.060000000000000005, "y": 3.2673766204432e-26, "Beta": "(33, 17)"}, {"x": 0.06999999999999999, "y": 3.821008331070041e-24, "Beta": "(33, 17)"}, {"x": 0.08, "y": 2.3056763693447916e-22, "Beta": "(33, 17)"}, {"x": 0.09, "y": 8.389500542605648e-21, "Beta": "(33, 17)"}, {"x": 0.09999999999999999, "y": 2.0473574743012754e-19, "Beta": "(33, 17)"}, {"x": 0.11, "y": 3.615093702972299e-18, "Beta": "(33, 17)"}, {"x": 0.12, "y": 4.8846804190606565e-17, "Beta": "(33, 17)"}, {"x": 0.13, "y": 5.269978494832696e-16, "Beta": "(33, 17)"}, {"x": 0.14, "y": 4.692301276351331e-15, "Beta": "(33, 17)"}, {"x": 0.15000000000000002, "y": 3.539456901615371e-14, "Beta": "(33, 17)"}, {"x": 0.16, "y": 2.3100508997376327e-13, "Beta": "(33, 17)"}, {"x": 0.17, "y": 1.3271759079548615e-12, "Beta": "(33, 17)"}, {"x": 0.18000000000000002, "y": 6.8085609361581955e-12, "Beta": "(33, 17)"}, {"x": 0.19, "y": 3.1563783789728845e-11, "Beta": "(33, 17)"}, {"x": 0.2, "y": 1.3357130848085525e-10, "Beta": "(33, 17)"}, {"x": 0.21000000000000002, "y": 5.204325117736839e-10, "Beta": "(33, 17)"}, {"x": 0.22, "y": 1.880844782236409e-09, "Beta": "(33, 17)"}, {"x": 0.23, "y": 6.3453543901550316e-09, "Beta": "(33, 17)"}, {"x": 0.24000000000000002, "y": 2.009512622676913e-08, "Beta": "(33, 17)"}, {"x": 0.25, "y": 6.00307845231998e-08, "Beta": "(33, 17)"}, {"x": 0.26, "y": 1.6989014148912635e-07, "Beta": "(33, 17)"}, {"x": 0.27, "y": 4.5721423389053376e-07, "Beta": "(33, 17)"}, {"x": 0.28, "y": 1.174060489727677e-06, "Beta": "(33, 17)"}, {"x": 0.29000000000000004, "y": 2.885247275156489e-06, "Beta": "(33, 17)"}, {"x": 0.3, "y": 6.803968879460796e-06, "Beta": "(33, 17)"}, {"x": 0.31, "y": 1.5433811146571684e-05, "Beta": "(33, 17)"}, {"x": 0.32, "y": 3.374857476001681e-05, "Beta": "(33, 17)"}, {"x": 0.33, "y": 7.127815449240765e-05, "Beta": "(33, 17)"}, {"x": 0.34, "y": 0.00014566051505980786, "Beta": "(33, 17)"}, {"x": 0.35000000000000003, "y": 0.00028847265574506357, "Beta": "(33, 17)"}, {"x": 0.36000000000000004, "y": 0.000554463721496628, "Beta": "(33, 17)"}, {"x": 0.37, "y": 0.0010356606814004138, "Beta": "(33, 17)"}, {"x": 0.38, "y": 0.0018821561494409402, "Beta": "(33, 17)"}, {"x": 0.39, "y": 0.0033316418769611246, "Beta": "(33, 17)"}, {"x": 0.4, "y": 0.005749806849780302, "Beta": "(33, 17)"}, {"x": 0.41000000000000003, "y": 0.009683428018421925, "Beta": "(33, 17)"}, {"x": 0.42000000000000004, "y": 0.01592717372061909, "Beta": "(33, 17)"}, {"x": 0.43, "y": 0.025603644976628533, "Beta": "(33, 17)"}, {"x": 0.44, "y": 0.040253866962394934, "Beta": "(33, 17)"}, {"x": 0.45, "y": 0.06193227021722002, "Beta": "(33, 17)"}, {"x": 0.46, "y": 0.09329627372177474, "Beta": "(33, 17)"}, {"x": 0.47000000000000003, "y": 0.13767620770557004, "Beta": "(33, 17)"}, {"x": 0.48000000000000004, "y": 0.1991070424882852, "Beta": "(33, 17)"}, {"x": 0.49, "y": 0.28230001794658705, "Beta": "(33, 17)"}, {"x": 0.5, "y": 0.39253079637796506, "Beta": "(33, 17)"}, {"x": 0.51, "y": 0.5354222846497261, "Beta": "(33, 17)"}, {"x": 0.52, "y": 0.7166058044577136, "Beta": "(33, 17)"}, {"x": 0.53, "y": 0.9412545345935461, "Beta": "(33, 17)"}, {"x": 0.54, "y": 1.2134982336532227, "Beta": "(33, 17)"}, {"x": 0.55, "y": 1.535747480486057, "Beta": "(33, 17)"}, {"x": 0.56, "y": 1.907977352005846, "Beta": "(33, 17)"}, {"x": 0.5700000000000001, "y": 2.3270418728876736, "Beta": "(33, 17)"}, {"x": 0.5800000000000001, "y": 2.78610813060995, "Beta": "(33, 17)"}, {"x": 0.59, "y": 3.274308589119938, "Beta": "(33, 17)"}, {"x": 0.6, "y": 3.7767079355832083, "Beta": "(33, 17)"}, {"x": 0.61, "y": 4.274663767169588, "Beta": "(33, 17)"}, {"x": 0.62, "y": 4.746627347674601, "Beta": "(33, 17)"}, {"x": 0.63, "y": 5.1693828165836955, "Beta": "(33, 17)"}, {"x": 0.64, "y": 5.519664831575476, "Beta": "(33, 17)"}, {"x": 0.65, "y": 5.776032782481494, "Beta": "(33, 17)"}, {"x": 0.66, "y": 5.920823804765585, "Beta": "(33, 17)"}, {"x": 0.67, "y": 5.94196722196825, "Beta": "(33, 17)"}, {"x": 0.68, "y": 5.834429373150367, "Beta": "(33, 17)"}, {"x": 0.6900000000000001, "y": 5.601076859509028, "Beta": "(33, 17)"}, {"x": 0.7000000000000001, "y": 5.25280021604542, "Beta": "(33, 17)"}, {"x": 0.7100000000000001, "y": 4.807825014070202, "Beta": "(33, 17)"}, {"x": 0.72, "y": 4.290243228864857, "Beta": "(33, 17)"}, {"x": 0.73, "y": 3.727908787078237, "Beta": "(33, 17)"}, {"x": 0.74, "y": 3.149938874088323, "Beta": "(33, 17)"}, {"x": 0.75, "y": 2.5841284327813, "Beta": "(33, 17)"}, {"x": 0.76, "y": 2.0546050330580576, "Beta": "(33, 17)"}, {"x": 0.77, "y": 1.5800182710142254, "Beta": "(33, 17)"}, {"x": 0.78, "y": 1.1724753111413946, "Beta": "(33, 17)"}, {"x": 0.79, "y": 0.8373155647244097, "Beta": "(33, 17)"}, {"x": 0.8, "y": 0.5736844016091982, "Beta": "(33, 17)"}, {"x": 0.81, "y": 0.3757437337637868, "Beta": "(33, 17)"}, {"x": 0.8200000000000001, "y": 0.23427011201739054, "Beta": "(33, 17)"}, {"x": 0.8300000000000001, "y": 0.13835511681173024, "Beta": "(33, 17)"}, {"x": 0.8400000000000001, "y": 0.07694322825479248, "Beta": "(33, 17)"}, {"x": 0.85, "y": 0.04001098978599518, "Beta": "(33, 17)"}, {"x": 0.86, "y": 0.019289125464111604, "Beta": "(33, 17)"}, {"x": 0.87, "y": 0.00853145782078641, "Beta": "(33, 17)"}, {"x": 0.88, "y": 0.0034171101059894066, "Beta": "(33, 17)"}, {"x": 0.89, "y": 0.0012192049084543196, "Beta": "(33, 17)"}, {"x": 0.9, "y": 0.0003793794733676976, "Beta": "(33, 17)"}, {"x": 0.91, "y": 0.00010011939868511034, "Beta": "(33, 17)"}, {"x": 0.92, "y": 2.1575645321400913e-05, "Beta": "(33, 17)"}, {"x": 0.93, "y": 3.6002820170896567e-06, "Beta": "(33, 17)"}, {"x": 0.9400000000000001, "y": 4.3035301369165826e-07, "Beta": "(33, 17)"}, {"x": 0.9500000000000001, "y": 3.265795346728109e-08, "Beta": "(33, 17)"}, {"x": 0.9600000000000001, "y": 1.2851471154893101e-09, "Beta": "(33, 17)"}, {"x": 0.97, "y": 1.7945232906934957e-11, "Beta": "(33, 17)"}, {"x": 0.98, "y": 3.793393363402374e-14, "Beta": "(33, 17)"}, {"x": 0.99, "y": 8.010133502455125e-19, "Beta": "(33, 17)"}]}}, {"mode": "vega-lite"});
+</script>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/nocibambi\.github\.io\/ds_blog");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,9 @@
+---
+title: "Value this"
+listing:
+  contents: posts
+  sort: "date desc"
+  categories: true
+---
+
+Welcome to my data science blog.
